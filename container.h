@@ -6,7 +6,7 @@
 
 namespace	ft 
 {
-	template <typename T, typename Container = std::vector<T> >
+	template <class T, class Container = std::vector<T> >
 	class	stack;
 }
 
