@@ -2,7 +2,7 @@ NAME	= container
 
 SRCS	= main.cpp
 
-INCLUDE	= container.h stack.hpp
+INCLUDE	= containers.h stack.hpp vector.hpp iterator.hpp
 
 OBJS	= $(SRCS:.cpp=.o)
 
