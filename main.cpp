@@ -4,8 +4,8 @@
 
 int	main()
 {
-	ft::vector<int>	vec(10, 1);
+	ft::vector<int>	vec(10);
 
-	(void)vec;
+	std::cout << vec.size() << std::endl;
 	return (0);
 }

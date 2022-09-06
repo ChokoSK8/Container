@@ -2,47 +2,40 @@
 # define ITERATOR_HPP
 # include "containers.h"
 
-template < class Category, class T, class Distance, class Pointer,
-		class Reference >
+template < class Category >
 class ft::iterator
 {
 	public:
-		typedef T		value_type;
-		typedef Distance	difference_type;
-		typedef Pointer		pointer;
-		typedef Reference	reference;
-		typedef Category	iterator_category;
+		typedef typename Category::value_type	value_type;
+		typedef std::ptrdiff_t			difference_type;
+		typedef value_type*			pointer;
+		typedef value_type&			reference;
+		typedef Category			iterator_category;
 
 	protected:
-		T*	p;
+		pointer	p;
 
 	public:
-		iterator(T* x) : p(x) {};
-		iterator(const ft::iterator<Category, T, Distance, Pointer, Reference>& mit) : p(mit.p) {};
+		iterator(pointer x) : p(x) {};
+		iterator(const ft::iterator<Category>& mit) : p(mit.p) {};
 		~iterator() {delete p;};
-		bool	operator==(const ft::iterator<Category, T, Distance, Pointer, Reference>& rhs) {
+		bool	operator==(const ft::iterator<Category>& rhs) {
 			return (p == rhs.p);
 		};
-		bool	operator!=(const ft::iterator<Category, T, Distance, Pointer, Reference>& rhs) {
+		bool	operator!=(const ft::iterator<Category>& rhs) {
 			return (p != rhs.p);
 		};
-		T	operator&(void) {
+		reference	operator&(void) {
 			return (&p);
 		};
-		ft::iterator<Category, T, Distance, Pointer, Reference>	operator++(void) {
+		ft::iterator<Category>	operator++(void) {
 			p++;
 			return (*this);
 		};
-		ft::iterator<Category, T, Distance, Pointer, Reference>	operator++(const ft::iterator<Category, T, Distance, Pointer, Reference>& lhs) {
-			ft::iterator<Category, T, Distance, Pointer, Reference>	tmp(lhs);
+		ft::iterator<Category>	operator++(const ft::iterator<Category>& lhs) {
+			ft::iterator<Category>	tmp(lhs);
 			lhs.p++;
 			return (tmp);
 		};
-	//	T	operator++(void) {
-	//		return (*p);
-	//	};
-	//	ft::iterator<Category, T, Distance, Pointer, Reference>	operator=(const ft::iterator<Category, T, Distance, Pointer, Reference>& lhs) {
-	//		return (p);
-	//	};
 };
 #endif
