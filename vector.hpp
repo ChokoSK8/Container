@@ -26,36 +26,50 @@ class ft::vector
 	protected:
 		pointer		_first;
 		size_type	_size;
+		size_type	_allocSize;
 		allocator_type	_c;
 
 	public:
 		explicit vector(const allocator_type& alloc =
 				allocator_type()) {
+			_allocSize = 0;
 			_c = alloc;
 			_size = 0;
 			_first = 0;
 		};
+		~vector() {};
 		explicit vector(size_type n,
 				const value_type& val = value_type(),
 				const allocator_type& alloc =
 				allocator_type()) {
-			std::cout << "HEY" << std::endl;
-			_size = 0;
+			_size = n;
 			_c = alloc;
+			_allocSize = 0;
 			_first = _c.allocate(n);
+			while (n--)
+			{
+				_c.construct(_first + _allocSize, val);
+				_allocSize++;
+			}
 		};
-//		template < class InputIterator >
-//		vector(InputIterator first, InputIterator last,
-//				const allocator_type& alloc =
-//				allocator_type()) {
-//			_c = alloc;
-//			_c.allocate(first);
-//			while (first--)
-//			{
-//				_c.construct(_c.pointer, last);
-//				_c.pointer++;
-//			}
-//		};
+
+		// ITERATORS
+		iterator	begin(void) {
+			disp("FIRST", _first);
+			return (_first);
+		};
+
+	//	const_iterator	begin(void) const {
+	//		return (_first);
+	//	};
+
+		iterator	end(void) {
+			return (_first + _size);
+		};
+
+	//	const_iterator	end(void) const {
+	//		return (_first + _size);
+	//	};
 
 		// CAPACITY
 		size_type	size(void) const {
@@ -71,8 +85,58 @@ class ft::vector
 	//	};
 
 		// MODIFIERS
+		template < class InputIterator >
+		void	assign(InputIterator first, InputIterator last) {
+			size_type	distance = last - first;
+
+			std::cout << "DISTANCE OF ITS: " << distance << std::endl;
+			if (last - first < 0)
+				throw std::length_error("cannot create std::vector larger than max_size()");
+
+			allocator_type	res;
+			pointer		resFirst = res.allocate(distance);
+			size_type	c = 0;
+
+			while (first != last)
+			{
+				std::cout << "VAL: " << *first << std::endl;
+				res.construct(resFirst + c, *first);
+				first++;
+				c++; 
+			}
+			_size = distance;
+			_c.deallocate(_first, _size);
+			_c = res;
+			_allocSize = distance;
+			_first = resFirst;
+		}
 		void	push_back(const value_type& val)
 		{
+			if (_size + 1 > _allocSize)
+			{
+				allocator_type	res;
+				if (!_allocSize)
+					_allocSize++;
+				_allocSize = _size * 2;
+				pointer	resFirst = res.allocate(_allocSize);
+				size_type	c = 0;
+				iterator	it = begin();
+				while (c < _size)
+				{
+					res.construct(resFirst + c, *it);
+					c++;
+					it++;
+				}
+				res.construct(resFirst + c, val);
+				_c.deallocate(_first, _size);
+				_c = res;
+				_first = resFirst;
+			}
+			else
+			{
+				_c.construct(_first + _size, val);
+			}
+			_size++;
 		}
 
 		// ALLOCATOR

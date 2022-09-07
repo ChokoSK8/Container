@@ -6,6 +6,12 @@
 # include <memory>
 # include <limits>
 
+template < typename T >
+void	disp(std::string str, T val)
+{
+	std::cout << str << ": " << val << std::endl;
+}
+
 namespace	ft 
 {
 	template < class Category >
