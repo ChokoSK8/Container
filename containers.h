@@ -15,6 +15,8 @@ void	disp(std::string str, T val)
 namespace	ft 
 {
 	template < class Category >
+	class	const_iterator;
+	template < class Category >
 	class	iterator;
 	template < class T, class Container = std::vector<T> >
 	class	stack;

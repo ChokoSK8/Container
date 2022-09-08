@@ -25,16 +25,14 @@ class ft::iterator
 		bool	operator!=(const ft::iterator<Category>& rhs) {
 			return (p != rhs.p);
 		};
-		reference	operator&(void) {
-			return (&p);
+		pointer	operator&(void) {
+			return (p);
 		};
 		ft::iterator<Category>	operator++(void) {
-			disp("HEY", 2);
 			p++;
 			return (*this);
 		};
 		ft::iterator<Category>	operator++(value_type) {
-			disp("HEY", 3);
 			ft::iterator<Category>	tmp(*this);
 			p++;
 			return (tmp);
@@ -44,17 +42,17 @@ class ft::iterator
 		};
 
 		//	SUP
-		pointer	operator+(int n) {
+		ft::iterator<Category>	operator+(int n) {
 			pointer	tmp = p;
-			disp("P", *p);
 			while (n--)
 				tmp++;
-			disp("TMP", *tmp);
 			return (tmp);
 		};
 		ft::iterator<Category>	operator-(int n) {
-			p -= n;
-			return (*this);
+			pointer	tmp = p;
+			while (n--)
+				tmp--;
+			return (tmp);
 		};
 		int	operator+(ft::iterator<Category> rhs) {
 			int res = p + rhs.get_pointer();
