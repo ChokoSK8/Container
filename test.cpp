@@ -27,7 +27,7 @@ void	displayVec(std::vector<int> vec)
 	std::vector<int>::iterator	it = vec.begin();
 	std::vector<int>::iterator	ite = vec.end();
 
-	std::cout << "BEGIN ADDR:" << &it << std::endl;
+	std::cout << "BEGIN ADDR DISPLAY:" << &it << std::endl;
 	while (it != ite)
 	{
 		std::cout << *it << std::endl;
@@ -67,13 +67,10 @@ int	main()
 
 	vector<int>::iterator	it3 = v3.begin();
 	vector<int>::iterator	it1 = v1.begin();
-	vector<int>::iterator	er = it3 - 2;
+	vector<int>::iterator	er = it3 + 5;
 	vector<int>::iterator	ere = it3 + 3;
 	
-	disp("AFTER ERASE: ", 0);
-	disp("ER", *er);
-	disp("ER + 1", *(er + 1));
-	v3.erase(ere, er);
+	v3.erase(er, ere);
 	std::cout << "VEC3: " << std::endl;
 	displayVec(v3);
 

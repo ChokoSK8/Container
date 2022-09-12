@@ -23,7 +23,7 @@ FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98
 RM	= rm -rf
 
 %.o: %.cpp
-	@c++ $(FLAGS) $(INC) -c $< -I .
+	c++ $(FLAGS) $(INC) -c $< -I .
 	@echo "\t$(C_GREEN)COMPILING $<$(C_END)"
 
 all:	$(NAME)

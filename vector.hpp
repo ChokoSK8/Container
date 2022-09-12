@@ -193,6 +193,7 @@ class ft::vector
 			_size++;
 		}
 		iterator	erase(iterator position) {
+			iterator	it = begin();
 			iterator	ite = end();
 			size_type	c = 1;
 
@@ -203,38 +204,15 @@ class ft::vector
 				_c.destroy(&(position + c));
 				c++;
 			}
-			_size--;
+			--_size;
 			return (position + 1);
 		};
 		iterator	erase(iterator first, iterator last) {
-			iterator	ite = end();
-			iterator	retf = first;
-			iterator	retl = last;
-			int		count = last - first;
+			int		distance = last - first;
+			int		incr = 0;	
 
-			_size -= count;
-			while (first != last && count > 0)
-			{
-				disp("COUNT in loop", count);
-				_c.destroy(&first);
-				first++;
-			}
-			if (count < 0)
-			{
-				first = retl;
-				last = retf;
-			}
-			else
-				first = retf;
-			while (last != ite && first != ite)
-			{
-				disp("VAL", *last);
-				_c.construct(&(first), *last);
-				_c.destroy(&last);
-				first++;
-				last++;
-			}
-			return (retf);
+			
+			return (first);
 		};
 		void	clear(void) {
 			iterator	it = begin();
@@ -252,5 +230,29 @@ class ft::vector
 		allocator_type	get_allocator() const {
 			return (_c);
 		};
+
+		private:
+			void	moveContentForward(int n) {
+				size_type	value;
+				size_type	ret;
+				size_type	x = 0;
+				size_type	y = 0;
+
+				while (n-- > 0)
+				{
+					x = y;
+					++y;
+					value = *(_first + x);
+					_c.destroy(_first + x);
+					while (x < _size + y)
+					{
+						ret = *(_first + x + 1);
+						_c.destroy(_first + x + 1);
+						_c.construct(_first + x + 1, value);
+						value = ret;
+						++x;
+					}
+				}
+			};
 };
 #endif

@@ -20,9 +20,18 @@ void	displayVec(vector<T> vec)
 
 int	main()
 {
-	vector<int>	vec1;
+	vector<int>	vec2;
 
-	std::cout << vec1.size() << std::endl;
+	vec2.push_back(11);
+	vec2.push_back(12);
+	vec2.push_back(13);
+	vec2.push_back(14);
+	vec2.push_back(15);
+	vec2.push_back(16);
+	vec2.push_back(17);
+	vec2.push_back(18);
+
+/*	std::cout << vec1.size() << std::endl;
 
 	//	PUSH_BACK
 	std::cout << "\n\t-----PUSH_BACK TESTS-----\n" << std::endl;
@@ -54,24 +63,24 @@ int	main()
 
 //	vec2.assign(it1 + 2, it1 + 50);
 
-	vec2.assign(it1 + 1, it1 + 9);
+//	vec2.assign(it1 + 1, it1 + 9);
 	std::cout << "VEC2: " << std::endl;
-	displayVec(vec2);
+	displayVec(vec2);*/
 
 	//	ERASE
 	std::cout << "\n\n\t-----ERASE TESTS-----\n" << std::endl;
 
-	vec2.erase(vec2.begin() + 2);
+//	vector<int>::iterator	it2 = vec2.begin();
+//	vector<int>::iterator	erP = it2 - 2;
+//	vector<int>::iterator	ret = vec2.erase(it2 - 2);
+
 	std::cout << "VEC2: " << std::endl;
 	displayVec(vec2);
 
-//	vec2.erase(vec2.begin() - 2);
-//	std::cout << "VEC2: " << std::endl;
-//	displayVec(vec2);
-
-	vec2.erase(vec2.begin(), vec2.begin() - 1);
+	vec2.erase(vec2.begin() + 6, vec2.begin() + 4);
 	std::cout << "VEC2: " << std::endl;
 	displayVec(vec2);
+	disp("FIRST:", *(vec2.begin() - 4));
 
 	disp("END TESTS", 1);
 	return (0);
