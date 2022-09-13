@@ -97,10 +97,25 @@ class ft::vector
 		size_type	max_size(void) const {
 			return (std::numeric_limits<size_type>::max() * 2 + 1);
 		};
-		// TODO
 		void	resize(size_type n, value_type val = value_type()) {
-			(void)val;
-			_size = n;
+			size_type	i = _size;
+
+			if (_size < n)
+			{
+				while (i < n)
+				{
+					push_back(val);
+					++i;
+				}
+			}
+			else if (_size > n)
+			{
+				while (i > n)
+				{
+					pop_back();
+					--i;
+				}
+			}
 		};
 		size_type	capacity() const {
 			return (_capacity);
@@ -194,6 +209,13 @@ class ft::vector
 			}
 			_size++;
 		}
+		void	pop_back(void) {
+			if (_size)
+			{
+				_c.destroy(&(end() - 1));
+				--_size;
+			}
+		};
 		iterator	erase(iterator position) {
 			iterator	it = begin();
 			iterator	ite = end();
@@ -271,7 +293,9 @@ class ft::vector
 			{
 				while (it2 != ite2)
 				{
+					disp("HEY", 2);
 					_c.construct(&it1, *it2);
+					disp("HEY", 3);
 					++it1;
 					++it2;
 				}

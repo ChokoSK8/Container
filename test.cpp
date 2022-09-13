@@ -38,17 +38,20 @@ int	main()
 {
 	std::vector<int>	v3;
 	std::vector<int>	v1;
+	vector<int>::iterator	it1 = v1.begin();
 
+	disp("BEGIN 1 BEFORE PUSH", &it1);
 	v1.push_back(10);
-//	v1.push_back(11);
-//	v1.push_back(12);
-//	v1.push_back(13);
-//	v1.push_back(14);
-//	v1.push_back(15);
-//	v1.push_back(16);
-//	v1.push_back(17);
-//	v1.push_back(18);
-//	v1.push_back(19);
+	v1.push_back(11);
+	v1.push_back(12);
+	v1.push_back(13);
+	v1.push_back(14);
+	v1.push_back(15);
+	v1.push_back(16);
+	v1.push_back(17);
+	v1.push_back(18);
+	v1.push_back(19);
+	disp("BEGIN 1 AFTER PUSH", &it1);
 
 //	v3.push_back(30);
 	v3.push_back(31);
@@ -65,12 +68,15 @@ int	main()
 	displayVec(v3);
 
 	vector<int>::iterator	it3 = v3.begin();
-	vector<int>::iterator	it1 = v1.begin();
 
-	disp("BEGIN BEFORE", &v3);
-//	v3.swap(v1);
+	disp("BEGIN 3 BEFORE", &it3);
+	disp("BEGIN 1 BEFORE", &it1);
+	v1.swap(v3);
 	disp("VEC3", 1);
 	displayVec(v3);
-	disp("BEGIN AFTER", &v3);
+	disp("BEGIN 3 AFTER", &it3);
+	disp("BEGIN 1 AFTER", &it1);
+	disp("VEC1", 1);
+	displayVec(v1);
 	return (0);
 }
