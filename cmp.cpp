@@ -85,7 +85,7 @@ int	main()
 	std::cout << "VEC2: " << std::endl;
 	displayVec(vec2);
 
-	vec2.erase(vec2.begin() + 6, vec2.begin() + 4);
+	vec2.erase(vec2.begin() + 3, vec2.begin() + 1);
 	std::cout << "VEC2: " << std::endl;
 	displayVec(vec2);
 	disp("FIRST:", *(vec2.begin() - 4));

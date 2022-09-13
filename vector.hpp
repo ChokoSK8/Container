@@ -202,17 +202,40 @@ class ft::vector
 			{
 				_c.construct(&(position + c - 1), *(position + c));
 				_c.destroy(&(position + c));
-				c++;
+				++c;
 			}
 			--_size;
 			return (position + 1);
 		};
 		iterator	erase(iterator first, iterator last) {
-			int		distance = last - first;
-			int		incr = 0;	
+			int			distance = last - first;
+			int			i = 0;	
+			iterator	ite = end();
+			size_type	value;
+			pointer		addr;
 
-			
-			return (first);
+			_size -= distance;
+			while (i < distance)
+			{
+				addr = &(first + i);
+				_c.destroy(addr);
+				++i;
+			}
+			if (distance < 0)
+				moveContentForward(first, distance * (-1));
+			disp("VEC IN ERASE", 1);
+			displayVec();
+			i = 0;
+			while (last + i != ite && i != distance * (-1))
+			{
+				addr = &(first + i);
+				value = *(last + i);
+				disp("VALUE IN ERASE", value);
+				_c.destroy(addr);
+				_c.construct(addr, value);
+				++i;
+			}
+			return (last);
 		};
 		void	clear(void) {
 			iterator	it = begin();
@@ -232,27 +255,58 @@ class ft::vector
 		};
 
 		private:
-			void	moveContentForward(int n) {
+			void	moveContentFrom(iterator from, int n) {
+				int	i = 0;
+				pointer	addr;
+				size_type	value;
+
+				while (i < n)
+				{
+					addr = &(from + i + n);
+				//	disp("ADDR", addr);
+					value = *(from + i);
+				//	disp("VALUE", value);
+				//	_c.destroy(addr);
+					_c.construct(addr, value);
+					++i;
+				}
+			};
+			void	moveContentForward(iterator from, int n) {
 				size_type	value;
 				size_type	ret;
 				size_type	x = 0;
 				size_type	y = 0;
+				pointer	addr;
 
 				while (n-- > 0)
 				{
 					x = y;
 					++y;
-					value = *(_first + x);
-					_c.destroy(_first + x);
+					value = *(from + x);
+					addr = &(from + x);
+					_c.destroy(addr);
 					while (x < _size + y)
 					{
-						ret = *(_first + x + 1);
-						_c.destroy(_first + x + 1);
-						_c.construct(_first + x + 1, value);
+						ret = *(from + x + 1);
+						addr = &(from + x + 1);
+						_c.destroy(addr);
+						_c.construct(addr, value);
 						value = ret;
 						++x;
 					}
 				}
 			};
+			void	displayVec(void)
+			{
+				iterator	it = begin();
+				iterator	ite = end();
+
+				disp("SIZE", size());
+				while (it != ite)
+				{
+					std::cout << " - " << *it << std::endl;
+					it++;
+				}
+			}
 };
 #endif

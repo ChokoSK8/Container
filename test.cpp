@@ -67,8 +67,8 @@ int	main()
 
 	vector<int>::iterator	it3 = v3.begin();
 	vector<int>::iterator	it1 = v1.begin();
-	vector<int>::iterator	er = it3 + 5;
-	vector<int>::iterator	ere = it3 + 3;
+	vector<int>::iterator	er = it1 + 5;
+	vector<int>::iterator	ere = it1 + 3;
 	
 	v3.erase(er, ere);
 	std::cout << "VEC3: " << std::endl;
