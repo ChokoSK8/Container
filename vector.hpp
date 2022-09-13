@@ -120,6 +120,43 @@ class ft::vector
 		size_type	capacity() const {
 			return (_capacity);
 		};
+		bool	empty(void) const {
+			return (_size == 0);
+		};
+		void	reserve(size_type n) {
+			if (_capacity < n)
+				replaceAllocator(begin(), end(), n);
+		};
+
+		//	ELEMENT ACCESS
+		reference	operator[](size_type n) {
+			return (*(_first + n));
+		};
+		const_reference	operator[](size_type n) const {
+			return (*(_first + n));
+		};
+		reference	at(size_type n) {
+			if (n > _size - 1)
+				throw std::out_of_range("vector");
+			return (*(_first + n));
+		};
+		const_reference	at(size_type n) const {
+			if (n > _size - 1)
+				throw std::out_of_range("vector");
+			return (*(_first + n));
+		};
+		reference	front(void) {
+			return (*(_first));
+		};
+		const_reference	front(void) const {
+			return (*(_first));
+		};
+		reference	back(void) {
+			return (*(end()));
+		};
+		const_reference	back(void) const {
+			return (*(end()));
+		};
 
 		// MODIFIERS
 		void	assign(iterator first, iterator last) {
@@ -128,80 +165,29 @@ class ft::vector
 			if (last - first < 0)
 				throw std::length_error("cannot create ft::vector larger than max_size()");
 
-			allocator_type	res;
-			pointer		resFirst = res.allocate(distance);
-			size_type	c = 0;
-
-			while (first != last)
-			{
-				res.construct(resFirst + c, *first);
-				first++;
-				c++; 
-			}
-			_size = distance;
-			_c.deallocate(_first, _size);
-			_c = res;
-			_capacity = distance;
-			_first = resFirst;
+			if (_capacity < distance)
+				replaceAllocator(first, last, last - first);
+			else
+				replaceElements(first, last);
 		}
 		void	assign(size_type n, const value_type& val) {
 			if (n > _capacity)
-			{
-				allocator_type	res;
-
-				pointer	resFirst = res.allocate(n);
-				size_type	c = 0;
-
-				while (c < n)
-				{
-					res.construct(resFirst + c, val);
-					c++;
-				}
-				_c.deallocate(_first, _size);
-				_size = c;
-				_c = res;
-				_capacity = n;
-				_first = resFirst;
-			}
+				replaceAllocator(n, val);
 			else
 			{
-				iterator	it = begin();
-				size_type	c = 0;
-
-				clear();
-				while (c < n)
-				{
-					_c.construct(&(it + c), val);
-					c++;
-					_size++;
-				}
+				replaceElements(n, val);
 			}
 		};
 		void	push_back(const value_type& val)
 		{
 			if (_size + 1 > _capacity)
 			{
-				allocator_type	res;
-
 				if (!_capacity)
 					_capacity++;
 				else
 					_capacity *= 2;
-
-				pointer	resFirst = res.allocate(_capacity);
-				size_type	c = 0;
-				iterator	it = begin();
-
-				while (c < _size)
-				{
-					res.construct(resFirst + c, *it);
-					c++;
-					it++;
-				}
-				res.construct(resFirst + c, val);
-				_c.deallocate(_first, _size);
-				_c = res;
-				_first = resFirst;
+				replaceAllocator(begin(), end(), _capacity);
+				_c.construct(&end(), val);
 			}
 			else
 			{
@@ -375,13 +361,61 @@ class ft::vector
 					it++;
 				}
 			}
-			/*void	swap(iterator x, iterator y) {
-				size_type	val1 = *x;
-				pointer	ptr1 = &x;
-				size_type	val2 = *y;
-				pointer	ptr2 = &y;
+			void	replaceAllocator(iterator first, iterator last, size_type capacity) {
+				allocator_type	res;
+				pointer		resFirst = res.allocate(capacity);
+				size_type	i = 0;
 
+				while (first + i != last)
+				{
+					res.construct(resFirst + i, *(first + i));
+					++i; 
+				}
+				_c.deallocate(_first, _size);
+				_size = last - first;
+				_c = res;
+				_capacity = capacity;
+				_first = resFirst;
+			};
+			void	replaceAllocator(size_type n, value_type val) {
+				allocator_type	res;
+				pointer	resFirst = res.allocate(n);
+				size_type	i = 0;
 
-			};*/
+				while (i < n)
+				{
+					res.construct(resFirst + i, val);
+					++i;
+				}
+				_c.deallocate(_first, _size);
+				_size = n;
+				_c = res;
+				_capacity = n;
+				_first = resFirst;
+			};
+			void	replaceElements(size_type n, value_type val) {
+				iterator	it = begin();
+				size_type	i = 0;
+
+				clear();
+				while (i < n)
+				{
+					_c.construct(&(it + i), val);
+					++i;
+					++_size;
+				}
+			};
+			void	replaceElements(iterator first, iterator last) {
+				size_type	i = 0;
+
+				clear();
+				while (first != last)
+				{
+					_c.construct(_first + i, *first);
+					++first;
+					++i;
+					++_size;
+				}
+			};
 };
 #endif

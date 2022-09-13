@@ -69,14 +69,8 @@ int	main()
 
 	vector<int>::iterator	it3 = v3.begin();
 
-	disp("BEGIN 3 BEFORE", &it3);
-	disp("BEGIN 1 BEFORE", &it1);
-	v1.swap(v3);
-	disp("VEC3", 1);
+	v3.assign(v1.end(), v1.end() - 2);
+	std::cout << "VEC3: " << std::endl;
 	displayVec(v3);
-	disp("BEGIN 3 AFTER", &it3);
-	disp("BEGIN 1 AFTER", &it1);
-	disp("VEC1", 1);
-	displayVec(v1);
 	return (0);
 }

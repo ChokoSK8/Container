@@ -43,30 +43,43 @@ int	main()
 	vec3.push_back(38);
 	vec3.push_back(39);
 
-/*	std::cout << vec1.size() << std::endl;
+/*	//	ASSIGN
+	std::cout << "\n\n\t-----ASSIGN TESTS-----\n" << std::endl;
+
+	vector<int>::iterator	it3 = vec3.begin();
+
+	disp("BEFORE", 1);
+	disp("capacity", vec2.capacity());
+	disp("size", vec2.size());
+	disp("vec2", 1);
+	displayVec(vec2);
+
+	vec2.assign(10, 55);
+	disp("capacity", vec2.capacity());
+	disp("size", vec2.size());
+	disp("vec2", 1);
+	displayVec(vec2);
+
+	vec2.assign(it3 + 2, it3 + 50);
+	disp("capacity", vec2.capacity());
+	disp("size", vec2.size());
+	disp("vec2", 1);
+	displayVec(vec2);
+
+//	vec2.assign(it1 + 1, it1 + 9);
 
 	//	PUSH_BACK
 	std::cout << "\n\t-----PUSH_BACK TESTS-----\n" << std::endl;
 
-	std::cout << vec1.size() << std::endl;
 
-	std::cout << "VEC1: " << std::endl;
-	displayVec(vec1);
-
-	//	ASSIGN
-	std::cout << "\n\n\t-----ASSIGN TESTS-----\n" << std::endl;
-
-	vector<int>	vec2;
-	vector<int>::iterator	it1 = vec1.begin();
-
-	vec2.assign(10, 55);
-	std::cout << "VEC2: " << std::endl;
+	disp("CAPACITY", vec2.capacity());
+	disp("SIZE", vec2.size());
+	disp("VEC2", 1);
 	displayVec(vec2);
-
-//	vec2.assign(it1 + 2, it1 + 50);
-
-//	vec2.assign(it1 + 1, it1 + 9);
-	std::cout << "VEC2: " << std::endl;
+	vec2.push_back(19);
+	disp("CAPACITY", vec2.capacity());
+	disp("SIZE", vec2.size());
+	disp("VEC2", 1);
 	displayVec(vec2);
 
 	//	ERASE
@@ -110,7 +123,7 @@ int	main()
 	displayVec(vec2);
 	disp("VEC3", 1);
 	disp("BEGIN3", &it3);
-	displayVec(vec3); */
+	displayVec(vec3); 
 
 
 	//	RESIZE
@@ -118,9 +131,17 @@ int	main()
 
 	disp("VEC3 BEFORE", 1);
 	displayVec(vec3);
-	vec3.resize(30, 2);
+	vec3.resize(15, 2);
 	disp("VEC3 AFTER", 1);
 	displayVec(vec3);
 
+	//	OPERATOR []
+	std::cout << "\n\n\t-----OPERATOR [] TESTS-----\n" << std::endl;
+
+	disp("ELEMENT 0", vec3[0]);
+	disp("ELEMENT 1", vec3[1]);
+	disp("ELEMENT 2", vec3[2]);
+	disp("ELEMENT 3", vec3[3]);
+	disp("ELEMENT 18", vec3[18]); */
 	return (0);
 }

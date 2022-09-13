@@ -56,6 +56,7 @@ fclean:		clean
 	@$(RM) $(NAME)
 	@echo "\t$(C_RED)DELEATING EXECUTABLE$(C_END)"
 	@$(RM) $(DEP)
+	@$(RM) cmp.d cmp
 	@$(RM) f1 f2
 	@echo "\t$(C_RED)DELEATING DEPENDENCIES$(C_END)"
 
