@@ -97,9 +97,11 @@ class ft::vector
 		size_type	max_size(void) const {
 			return (std::numeric_limits<size_type>::max() * 2 + 1);
 		};
-	//	void	resize(size_type n, value_type val = value_type()) {
-	//		
-	//	};
+		// TODO
+		void	resize(size_type n, value_type val = value_type()) {
+			(void)val;
+			_size = n;
+		};
 		size_type	capacity() const {
 			return (_capacity);
 		};
@@ -109,7 +111,7 @@ class ft::vector
 			size_type	distance = last - first;
 
 			if (last - first < 0)
-				throw std::length_error("cannot create std::vector larger than max_size()");
+				throw std::length_error("cannot create ft::vector larger than max_size()");
 
 			allocator_type	res;
 			pointer		resFirst = res.allocate(distance);
@@ -237,6 +239,47 @@ class ft::vector
 			}
 			return (last);
 		};
+		void	swap(ft::vector<T, allocator_type>& x) {
+			iterator	it1 = begin();
+			iterator	it2 = x.begin();
+			iterator	ite1 = end();
+			iterator	ite2 = x.end();
+			size_type	tmp;
+			allocator_type	x_alloc = x.get_allocator();
+
+			while (it1 != ite1 && it2 != ite2)
+			{
+				tmp = *it1;
+				_c.destroy(&it1);
+				_c.construct(&it1, *it2);
+				x_alloc.destroy(&it2);
+				x_alloc.construct(&it2, tmp);
+				++it1;
+				++it2;
+			}
+			if (_size > x.size())
+			{
+				while (it1 != ite1)
+				{
+					x_alloc.construct(&it2, *it1);
+					_c.destroy(&it1);
+					++it1;
+					++it2;
+				}
+			}
+			else
+			{
+				while (it2 != ite2)
+				{
+					_c.construct(&it1, *it2);
+					++it1;
+					++it2;
+				}
+			}
+			tmp = _size;
+			_size = x.size();
+			x.resize(tmp);
+		};
 		void	clear(void) {
 			iterator	it = begin();
 			iterator	ite = end();
@@ -308,5 +351,13 @@ class ft::vector
 					it++;
 				}
 			}
+			/*void	swap(iterator x, iterator y) {
+				size_type	val1 = *x;
+				pointer	ptr1 = &x;
+				size_type	val2 = *y;
+				pointer	ptr2 = &y;
+
+
+			};*/
 };
 #endif

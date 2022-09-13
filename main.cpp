@@ -65,7 +65,7 @@ int	main()
 
 //	vec2.assign(it1 + 1, it1 + 9);
 	std::cout << "VEC2: " << std::endl;
-	displayVec(vec2);*/
+	displayVec(vec2);
 
 	//	ERASE
 	std::cout << "\n\n\t-----ERASE TESTS-----\n" << std::endl;
@@ -82,6 +82,34 @@ int	main()
 	displayVec(vec2);
 	disp("FIRST:", *(vec2.begin() - 4));
 
-	disp("END TESTS", 1);
+	disp("END TESTS", 1); */
+
+	//	SWAP
+	std::cout << "\n\n\t-----SWAP TESTS-----\n" << std::endl;
+
+	vector<int>	vec3;
+
+	vec3.push_back(44);
+	vec3.push_back(43);
+
+	vector<int>::iterator	it2 = vec2.begin();
+	vector<int>::iterator	it3 = vec3.begin();
+
+	disp("VEC2", 1);
+	disp("BEGIN2", &it2);
+	displayVec(vec2);
+	disp("VEC3", 1);
+	disp("BEGIN3", &it3);
+	displayVec(vec3);
+
+	vec2.swap(vec3);
+
+	disp("VEC2", 1);
+	disp("BEGIN2", &it2);
+	displayVec(vec2);
+	disp("VEC3", 1);
+	disp("BEGIN3", &it3);
+	displayVec(vec3);
+
 	return (0);
 }
