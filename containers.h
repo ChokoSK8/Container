@@ -5,6 +5,8 @@
 # include <vector>
 # include <memory>
 # include <limits>
+# include <cstring>
+# include <iterator>
 
 template < typename T >
 void	disp(std::string str, T val)

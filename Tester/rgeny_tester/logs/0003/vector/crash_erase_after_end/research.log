@@ -1,0 +1,2 @@
+
+v.erase(v.begin(), v.end() + 1)

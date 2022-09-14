@@ -1,0 +1,14 @@
+==458288== Memcheck, a memory error detector
+==458288== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==458288== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==458288== Command: ./exe/srcs/vector/size/std_size_sample
+==458288== 
+==458288== 
+==458288== HEAP SUMMARY:
+==458288==     in use at exit: 0 bytes in 0 blocks
+==458288==   total heap usage: 2 allocs, 2 frees, 76,800 bytes allocated
+==458288== 
+==458288== All heap blocks were freed -- no leaks are possible
+==458288== 
+==458288== For lists of detected and suppressed errors, rerun with: -s
+==458288== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -2,39 +2,48 @@
 # define CONST_ITERATOR_HPP
 # include "containers.h"
 
-template < class Category >
+template < class T >
 class ft::const_iterator
 {
 	public:
-		typedef typename Category::value_type	value_type;
+		typedef T				value_type;
 		typedef std::ptrdiff_t			difference_type;
-		typedef value_type*			pointer;
-		typedef value_type&			reference;
-		typedef Category			const_iterator_category;
+		typedef T*			pointer;
+		typedef T&			reference;
+		typedef T				const_iterator_category;
 
 	protected:
 		pointer	p;
 
 	public:
 		const_iterator(const pointer x) : p(x) {};
-		const_iterator(const ft::const_iterator<Category>& mit) : p(mit.p) {};
+		const_iterator(const ft::const_iterator<T>& mit) : p(mit.p) {};
 		~const_iterator() {};
-		bool	operator==(const ft::const_iterator<Category>& rhs) const {
+		bool	operator==(const ft::const_iterator<T>& rhs) const {
 			return (p == rhs.p);
 		};
-		bool	operator!=(const ft::const_iterator<Category>& rhs) const {
+		bool	operator!=(const ft::const_iterator<T>& rhs) const {
 			return (p != rhs.p);
 		};
 		const pointer	operator&(void) const {
 			return (p);
 		};
-		ft::const_iterator<Category>	operator++(void) {
+		ft::const_iterator<T>	operator++(void) {
 			p++;
 			return (*this);
 		};
-		ft::const_iterator<Category>	operator++(value_type) {
-			ft::const_iterator<Category>	tmp(*this);
+		ft::const_iterator<T>	operator++(int) {
+			ft::const_iterator<T>	tmp(*this);
 			p++;
+			return (tmp);
+		};
+		ft::const_iterator<T>	operator--(void) {
+			p--;
+			return (*this);
+		};
+		ft::const_iterator<T>	operator--(int) {
+			ft::const_iterator<T>	tmp(*this);
+			p--;
 			return (tmp);
 		};
 		value_type	operator*(void) const {
@@ -42,23 +51,23 @@ class ft::const_iterator
 		};
 
 		//	SUP
-		ft::const_iterator<Category>	operator+(int n) const {
+		ft::const_iterator<T>	operator+(int n) const {
 			pointer	tmp = p;
 			while (n--)
 				tmp++;
 			return (tmp);
 		};
-		ft::const_iterator<Category>	operator-(int n) const {
+		ft::const_iterator<T>	operator-(int n) const {
 			pointer	tmp = p;
 			while (n--)
 				tmp--;
 			return (tmp);
 		};
-		int	operator+(ft::const_iterator<Category> rhs) const {
+		int	operator+(ft::const_iterator<T> rhs) const {
 			int res = p + rhs.get_pointer();
 			return (res);
 		};
-		int	operator-(ft::const_iterator<Category> rhs) const {
+		int	operator-(ft::const_iterator<T> rhs) const {
 			int res = p - rhs.get_pointer();
 			return (res);
 		};

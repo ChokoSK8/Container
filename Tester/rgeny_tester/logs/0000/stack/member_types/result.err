@@ -1,0 +1,9 @@
+srcs/stack/member_types.cpp:115:26: error: no type named 'reference' in 'ft::stack<int>'
+                NAMESPACE::stack<int>::reference        ref = s.top();
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+srcs/stack/member_types.cpp:120:11: error: expression is not assignable
+                s.top() = 42;
+                ~~~~~~~ ^
+2 errors generated.
+make: *** [Makefile:61: objs/srcs/stack/ft_member_types.o] Error 1
+valgrind: ./exe/srcs/stack/ft_member_types: No such file or directory

@@ -1,0 +1,68 @@
+In file included from srcs/vector/constructor/string.cpp:13:
+In file included from includes/test_Utils.hpp:20:
+In file included from ../vector.hpp:4:
+../iterator.hpp:35:47: error: parameter of overloaded post-increment operator must have type 'int' (not 'ft::iterator<ft::vector<std::basic_string<char> > >::value_type' (aka 'std::basic_string<char>'))
+                ft::iterator<Category>  operator++(value_type) {
+                                                             ^
+srcs/vector/constructor/string.cpp:22:19: note: in instantiation of template class 'ft::iterator<ft::vector<std::basic_string<char> > >' requested here
+                std::for_each(v.begin(), v.end(), _print_val<std::string>);
+                                ^
+srcs/vector/constructor/string.cpp:49:34: error: no matching constructor for initialization of 'ft::vector<std::string>' (aka 'vector<basic_string<char> >')
+                NAMESPACE::vector<std::string>  v2(v1.begin(), v1.end());
+                                                ^  ~~~~~~~~~~~~~~~~~~~~
+../vector.hpp:61:12: note: candidate constructor not viable: no known conversion from 'ft::vector<std::basic_string<char> >::iterator' (aka 'iterator<ft::vector<basic_string<char> > >') to 'ft::vector<std::basic_string<char> >::size_type' (aka 'unsigned long') for 1st argument
+                explicit vector(size_type n,
+                         ^
+../vector.hpp:34:12: note: candidate constructor not viable: allows at most single argument 'alloc', but 2 arguments were provided
+                explicit vector(const allocator_type& alloc =
+                         ^
+../vector.hpp:41:3: note: candidate constructor not viable: requires single argument 'x', but 2 arguments were provided
+                vector(const vector<T, allocator_type>& x) {
+                ^
+srcs/vector/constructor/string.cpp:56:64: error: no matching constructor for initialization of 'ft::vector<std::string>' (aka 'vector<basic_string<char> >')
+                NAMESPACE::vector<std::string, std::allocator<std::string> >    v2(v1.begin(), v1.end(), (std::allocator<std::string>()));
+                                                                                ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../vector.hpp:61:12: note: candidate constructor not viable: no known conversion from 'ft::vector<std::basic_string<char> >::iterator' (aka 'iterator<ft::vector<basic_string<char> > >') to 'ft::vector<std::basic_string<char> >::size_type' (aka 'unsigned long') for 1st argument
+                explicit vector(size_type n,
+                         ^
+../vector.hpp:34:12: note: candidate constructor not viable: allows at most single argument 'alloc', but 3 arguments were provided
+                explicit vector(const allocator_type& alloc =
+                         ^
+../vector.hpp:41:3: note: candidate constructor not viable: requires single argument 'x', but 3 arguments were provided
+                vector(const vector<T, allocator_type>& x) {
+                ^
+srcs/vector/constructor/string.cpp:63:64: error: no matching constructor for initialization of 'ft::vector<std::string>' (aka 'vector<basic_string<char> >')
+                NAMESPACE::vector<std::string, std::allocator<std::string> >    v(l.begin(), l.end(), (std::allocator<std::string>()));
+                                                                                ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../vector.hpp:61:12: note: candidate constructor not viable: no known conversion from 'std::list<std::basic_string<char> >::iterator' (aka '_List_iterator<std::basic_string<char> >') to 'ft::vector<std::basic_string<char> >::size_type' (aka 'unsigned long') for 1st argument
+                explicit vector(size_type n,
+                         ^
+../vector.hpp:34:12: note: candidate constructor not viable: allows at most single argument 'alloc', but 3 arguments were provided
+                explicit vector(const allocator_type& alloc =
+                         ^
+../vector.hpp:41:3: note: candidate constructor not viable: requires single argument 'x', but 3 arguments were provided
+                vector(const vector<T, allocator_type>& x) {
+                ^
+In file included from srcs/vector/constructor/string.cpp:13:
+In file included from includes/test_Utils.hpp:20:
+In file included from ../vector.hpp:5:
+../const_iterator.hpp:35:53: error: parameter of overloaded post-increment operator must have type 'int' (not 'ft::const_iterator<ft::vector<std::basic_string<char> > >::value_type' (aka 'std::basic_string<char>'))
+                ft::const_iterator<Category>    operator++(value_type) {
+                                                                     ^
+../vector.hpp:42:26: note: in instantiation of template class 'ft::const_iterator<ft::vector<std::basic_string<char> > >' requested here
+                        const_iterator  it = x.begin();
+                                               ^
+srcs/vector/constructor/string.cpp:70:9: note: in instantiation of member function 'ft::vector<std::basic_string<char> >::vector' requested here
+                                                                v2(v);
+                                                                ^
+In file included from srcs/vector/constructor/string.cpp:13:
+In file included from includes/test_Utils.hpp:20:
+../vector.hpp:53:7: error: cannot increment value of type 'ft::vector<std::basic_string<char> >::const_iterator' (aka 'const_iterator<ft::vector<basic_string<char> > >')
+                                it++;
+                                ~~^
+srcs/vector/constructor/string.cpp:70:9: note: in instantiation of member function 'ft::vector<std::basic_string<char> >::vector' requested here
+                                                                v2(v);
+                                                                ^
+6 errors generated.
+make: *** [Makefile:62: objs/srcs/vector/constructor/ft_string.o] Error 1
+valgrind: ./exe/srcs/vector/constructor/ft_constructor_string: No such file or directory

@@ -12,7 +12,9 @@ NAME	= container
 
 SRCS	= main.cpp
 
-INCLUDE	= containers.h stack.hpp vector.hpp iterator.hpp const_iterator.hpp
+INCLUDE	= containers.h stack.hpp iterator.hpp const_iterator.hpp Vector/*.hpp
+
+INC	= -I $(INCLUDE)
 
 OBJS	= $(SRCS:.cpp=.o)
 
@@ -22,31 +24,34 @@ FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98
 
 RM	= rm -rf
 
-%.o: %.cpp
-	c++ $(FLAGS) $(INC) -c $< -I .
+%.o: %.cpp	$(INCLUDE)
+	c++ $(FLAGS) -c $<
 	@echo "\t$(C_GREEN)COMPILING $<$(C_END)"
 
 all:	$(NAME)
 
-$(NAME):	$(OBJS)
-	@c++ $(FLAGS) $(INC) $(OBJS) -o $(NAME)
+$(NAME):	$(OBJS) $(INCLUDE)
+	@c++ $(FLAGS) $(OBJS) -o $(NAME)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE$(C_END)"
 
 update:	main.cpp
-	@awk 'FNR > 5' main.cpp > f1 ; awk 'FNR < 14' cmp.cpp > f2; cat f2 > cmp.cpp ; cat f1 >> cmp.cpp
+	@awk 'FNR < 32' cmp.cpp > f1 ; awk 'FNR > 24' main.cpp > f2 ; cat f1 > cmp.cpp ; cat f2 >> cmp.cpp
 	@echo "\t$(C_CYAN)UPDATING CMP.CPP$(C_END)"
 	@c++ $(FLAGS) cmp.cpp -o cmp
 	@echo "\t$(C_GREEN)COMPILING CMP.CPP$(C_END)"
 
 diff:	all update
-	@./$(NAME) > f1
+ifneq ($(ARG), )
+	@./$(NAME) $(ARG) > f1
 	@echo "\t$(C_YELLOW)EXECUTING PROGRAM$(C_END)"
-	@./cmp > f2
+	@./cmp $(ARG) > f2
 	@echo "\t$(C_YELLOW)EXECUTING CMP$(C_END)"
 	@diff f1 f2
 	@echo "\t$(C_BLUE)NO DIFFERENCE$(C_END)"
+else
+	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
+endif
 
--include $(DEP)
 
 clean:
 	@$(RM) $(OBJS)

@@ -1,16 +1,21 @@
 # include "containers.h"
 # include "stack.hpp"
-# include "vector.hpp"
+# include "Vector/vector.hpp"
+# include <map>
+# include <string>
 
 using namespace ft;
+
+typedef int (*PtrFct)();
 
 template < typename T >
 void	displayVec(vector<T> vec)
 {
-	vector<int>::iterator	it = vec.begin();
-	vector<int>::iterator	ite = vec.end();
+	typename vector<T>::iterator	it = vec.begin();
+	typename vector<T>::iterator	ite = vec.end();
 
 	disp("SIZE", vec.size());
+	disp("CAPACITY", vec.capacity());
 	while (it != ite)
 	{
 		std::cout << " - " << *it << std::endl;
@@ -18,130 +23,67 @@ void	displayVec(vector<T> vec)
 	}
 }
 
-int	main()
+int	assignTester(void)
 {
-	vector<int>	vec2;
-	vector<int>	vec3;
+	vector<std::string>		v1;
+	vector<std::string>		v2;
 
-	vec2.push_back(11);
-	vec2.push_back(12);
-	vec2.push_back(13);
-	vec2.push_back(14);
-	vec2.push_back(15);
-	vec2.push_back(16);
-	vec2.push_back(17);
-	vec2.push_back(18);
+	displayVec(v1);
+	v1.assign(10, "hello");
+	displayVec(v1);
+	v2.assign(20, "byebye");
+	displayVec(v2);
+	v1.assign(v2.begin(), v2.begin() + 3);
+	displayVec(v1);
+//	v1.assign(v2.begin() + 7, v2.begin() + 5); // ERROR thrown
 
-	vec3.push_back(30);
-	vec3.push_back(31);
-	vec3.push_back(32);
-	vec3.push_back(33);
-	vec3.push_back(34);
-	vec3.push_back(35);
-	vec3.push_back(36);
-	vec3.push_back(37);
-	vec3.push_back(38);
-	vec3.push_back(39);
-
-/*	//	ASSIGN
-	std::cout << "\n\n\t-----ASSIGN TESTS-----\n" << std::endl;
-
-	vector<int>::iterator	it3 = vec3.begin();
-
-	disp("BEFORE", 1);
-	disp("capacity", vec2.capacity());
-	disp("size", vec2.size());
-	disp("vec2", 1);
-	displayVec(vec2);
-
-	vec2.assign(10, 55);
-	disp("capacity", vec2.capacity());
-	disp("size", vec2.size());
-	disp("vec2", 1);
-	displayVec(vec2);
-
-	vec2.assign(it3 + 2, it3 + 50);
-	disp("capacity", vec2.capacity());
-	disp("size", vec2.size());
-	disp("vec2", 1);
-	displayVec(vec2);
-
-//	vec2.assign(it1 + 1, it1 + 9);
-
-	//	PUSH_BACK
-	std::cout << "\n\t-----PUSH_BACK TESTS-----\n" << std::endl;
-
-
-	disp("CAPACITY", vec2.capacity());
-	disp("SIZE", vec2.size());
-	disp("VEC2", 1);
-	displayVec(vec2);
-	vec2.push_back(19);
-	disp("CAPACITY", vec2.capacity());
-	disp("SIZE", vec2.size());
-	disp("VEC2", 1);
-	displayVec(vec2);
-
-	//	ERASE
-	std::cout << "\n\n\t-----ERASE TESTS-----\n" << std::endl;
-
-//	vector<int>::iterator	it2 = vec2.begin();
-//	vector<int>::iterator	erP = it2 - 2;
-//	vector<int>::iterator	ret = vec2.erase(it2 - 2);
-
-	std::cout << "VEC2: " << std::endl;
-	displayVec(vec2);
-
-	vec2.erase(vec2.begin() + 3, vec2.begin() + 1);
-	std::cout << "VEC2: " << std::endl;
-	displayVec(vec2);
-	disp("FIRST:", *(vec2.begin() - 4));
-
-	disp("END TESTS", 1);
-
-	//	SWAP
-	std::cout << "\n\n\t-----SWAP TESTS-----\n" << std::endl;
-
-	vector<int>	vec3;
-
-
-	vector<int>::iterator	it2 = vec2.begin();
-	vector<int>::iterator	it3 = vec3.begin();
-
-	disp("VEC2", 1);
-	disp("BEGIN2", &it2);
-	displayVec(vec2);
-	disp("VEC3", 1);
-	disp("BEGIN3", &it3);
-	displayVec(vec3);
-	disp("END DISP", 1);
-
-	vec3.swap(vec2);
-
-	disp("VEC2", 1);
-	disp("BEGIN2", &it2);
-	displayVec(vec2);
-	disp("VEC3", 1);
-	disp("BEGIN3", &it3);
-	displayVec(vec3); 
-
-
-	//	RESIZE
-	std::cout << "\n\n\t-----RESIZE TESTS-----\n" << std::endl;
-
-	disp("VEC3 BEFORE", 1);
-	displayVec(vec3);
-	vec3.resize(15, 2);
-	disp("VEC3 AFTER", 1);
-	displayVec(vec3);
-
-	//	OPERATOR []
-	std::cout << "\n\n\t-----OPERATOR [] TESTS-----\n" << std::endl;
-
-	disp("ELEMENT 0", vec3[0]);
-	disp("ELEMENT 1", vec3[1]);
-	disp("ELEMENT 2", vec3[2]);
-	disp("ELEMENT 3", vec3[3]);
-	disp("ELEMENT 18", vec3[18]); */
 	return (0);
+}
+
+int	insertTester(void)
+{
+	vector<int>		v1;
+
+	displayVec(v1);
+	v1.push_back(1);;
+	v1.push_back(2);;
+	v1.push_back(3);;
+	v1.push_back(4);;
+	v1.push_back(5);;
+	v1.push_back(6);;
+	v1.push_back(7);;
+	v1.push_back(8);;
+	displayVec(v1);
+	v1.insert(v1.begin() + 3, 4, 8);
+	displayVec(v1);
+
+	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	if (ac != 2)
+	{
+		std::cout << "How to use: ./container <fct to test>"<< std::endl;
+		return (1);
+	}
+
+	std::map<std::string, PtrFct>		fcts;
+	PtrFct					fct;
+	std::map<std::string, PtrFct>::iterator	it;
+	std::map<std::string, PtrFct>::iterator	ite;
+	std::string				str = av[1];
+
+	fcts["assign"] = &assignTester;
+	fcts["insert"] = &insertTester;
+	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
+	{
+		if (!str.compare(it->first))
+		{
+			fct = it->second;
+			return (fct ());
+		}
+	}
+	std::cout << "<fct to test> not found"<< std::endl;
+	return (1);
 }

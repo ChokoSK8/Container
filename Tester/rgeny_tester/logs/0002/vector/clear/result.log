@@ -1,0 +1,8 @@
+clear empty vector<int> :
+size     : 0
+max_size : 18446744073709551615
+capacity : 0
+clear vector<int> :
+size     : 0
+max_size : 18446744073709551615
+capacity : 10000

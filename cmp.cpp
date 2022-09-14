@@ -3,8 +3,11 @@
 # include <vector>
 # include <memory>
 # include <limits>
+# include <map>
+# include <string> 
 
 using namespace std;
+typedef int (*PtrFct)();
 
 template < typename T >
 void	disp(std::string str, T val)
@@ -15,10 +18,11 @@ void	disp(std::string str, T val)
 template < typename T >
 void	displayVec(vector<T> vec)
 {
-	vector<int>::iterator	it = vec.begin();
-	vector<int>::iterator	ite = vec.end();
+	typename vector<T>::iterator	it = vec.begin();
+	typename vector<T>::iterator	ite = vec.end();
 
 	disp("SIZE", vec.size());
+	disp("CAPACITY", vec.capacity());
 	while (it != ite)
 	{
 		std::cout << " - " << *it << std::endl;
@@ -26,70 +30,67 @@ void	displayVec(vector<T> vec)
 	}
 }
 
-int	main()
+int	assignTester(void)
 {
-	vector<int>	vec2;
+	vector<std::string>		v1;
+	vector<std::string>		v2;
 
-	vec2.push_back(11);
-	vec2.push_back(12);
-	vec2.push_back(13);
-	vec2.push_back(14);
-	vec2.push_back(15);
-	vec2.push_back(16);
-	vec2.push_back(17);
-	vec2.push_back(18);
+	displayVec(v1);
+	v1.assign(10, "hello");
+	displayVec(v1);
+	v2.assign(20, "byebye");
+	displayVec(v2);
+	v1.assign(v2.begin(), v2.begin() + 3);
+	displayVec(v1);
+//	v1.assign(v2.begin() + 7, v2.begin() + 5); // ERROR thrown
 
-/*	std::cout << vec1.size() << std::endl;
-
-	//	PUSH_BACK
-	std::cout << "\n\t-----PUSH_BACK TESTS-----\n" << std::endl;
-
-	vec1.push_back(10);
-	vec1.push_back(11);
-	vec1.push_back(12);
-	vec1.push_back(13);
-	vec1.push_back(14);
-	vec1.push_back(15);
-	vec1.push_back(16);
-	vec1.push_back(17);
-	vec1.push_back(18);
-	vec1.push_back(19);
-	std::cout << vec1.size() << std::endl;
-
-	std::cout << "VEC1: " << std::endl;
-	displayVec(vec1);
-
-	//	ASSIGN
-	std::cout << "\n\n\t-----ASSIGN TESTS-----\n" << std::endl;
-
-	vector<int>	vec2;
-	vector<int>::iterator	it1 = vec1.begin();
-
-	vec2.assign(10, 55);
-	std::cout << "VEC2: " << std::endl;
-	displayVec(vec2);
-
-//	vec2.assign(it1 + 2, it1 + 50);
-
-//	vec2.assign(it1 + 1, it1 + 9);
-	std::cout << "VEC2: " << std::endl;
-	displayVec(vec2);*/
-
-	//	ERASE
-	std::cout << "\n\n\t-----ERASE TESTS-----\n" << std::endl;
-
-//	vector<int>::iterator	it2 = vec2.begin();
-//	vector<int>::iterator	erP = it2 - 2;
-//	vector<int>::iterator	ret = vec2.erase(it2 - 2);
-
-	std::cout << "VEC2: " << std::endl;
-	displayVec(vec2);
-
-	vec2.erase(vec2.begin() + 3, vec2.begin() + 1);
-	std::cout << "VEC2: " << std::endl;
-	displayVec(vec2);
-	disp("FIRST:", *(vec2.begin() - 4));
-
-	disp("END TESTS", 1);
 	return (0);
+}
+
+int	insertTester(void)
+{
+	vector<int>		v1;
+
+	displayVec(v1);
+	v1.push_back(1);;
+	v1.push_back(2);;
+	v1.push_back(3);;
+	v1.push_back(4);;
+	v1.push_back(5);;
+	v1.push_back(6);;
+	v1.push_back(7);;
+	v1.push_back(8);;
+	displayVec(v1);
+	v1.insert(v1.begin() + 3, 4, 8);
+	displayVec(v1);
+
+	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	if (ac != 2)
+	{
+		std::cout << "How to use: ./container <fct to test>"<< std::endl;
+		return (1);
+	}
+
+	std::map<std::string, PtrFct>		fcts;
+	PtrFct					fct;
+	std::map<std::string, PtrFct>::iterator	it;
+	std::map<std::string, PtrFct>::iterator	ite;
+	std::string				str = av[1];
+
+	fcts["assign"] = &assignTester;
+	fcts["insert"] = &insertTester;
+	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
+	{
+		if (!str.compare(it->first))
+		{
+			fct = it->second;
+			return (fct ());
+		}
+	}
+	std::cout << "<fct to test> not found"<< std::endl;
+	return (1);
 }
