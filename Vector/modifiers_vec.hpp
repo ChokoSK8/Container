@@ -5,11 +5,18 @@
 void	assign(iterator first, iterator last)
 {
 	size_type	dist = last - first;
+	size_type	i = 0;
 
 	if (dist > max_size())
 		throw std::length_error("cannot create ft::vector larger than max_size()");
-	insert(begin(), first, last);
 	resize(dist);
+	while (first != last)
+	{
+		_c.destroy(_first + i);
+		_c.construct(_first + i, *first);
+		++i;
+		++first;
+	}
 };
 
 void	assign(size_type n, const value_type& val)
@@ -65,10 +72,11 @@ void	insert(iterator position, size_type n, const value_type& val)
 {
 	size_type	dist = position - begin();
 	size_type	i = dist + n;
+	size_type	newCapacity = getNewCapacity(_size + n);
 
 	if (!checkPosition(position))
 		return ;
-	reserve(_size + n);
+	reserve(newCapacity);
 	moveContentForward(n, i);
 	while (dist < i)
 	{
@@ -90,8 +98,9 @@ void	insert(iterator position, iterator first, iterator last)
 	size_type	i = dist + range;
 	pointer		old_first;
 	size_type	old_capacity = _capacity;
+	size_type	newCapacity = getNewCapacity(_size + range);
 
-	old_first = copyVecAndIncreaseCapacity(_size + range);
+	old_first = copyVecAndIncreaseCapacity(newCapacity);
 	moveContentForward(range, dist + range);
 	while (dist < i)
 	{
@@ -129,7 +138,7 @@ iterator	erase(iterator first, iterator last)
 	pointer		addrF = first.base();
 	pointer		addrL = last.base();
 
-	if (distance < 0)
+	if (distance < 0 || !doesBelong(first, last))
 		throw std::out_of_range("vector::erase");
 	_size -= distance;
 	while (i < distance)
@@ -138,7 +147,7 @@ iterator	erase(iterator first, iterator last)
 		++i;
 	}
 	i = 0;
-	while (last + i != ite && i != distance * (-1))
+	while (last + i != ite)
 	{
 		_c.destroy(addrF + i);
 		_c.construct(addrF + i, *(addrL + i));

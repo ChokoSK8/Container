@@ -35,7 +35,7 @@ $(NAME):	$(OBJS) $(INCLUDE)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE$(C_END)"
 
 update:	main.cpp
-	@awk 'FNR < 32' cmp.cpp > f1 ; awk 'FNR > 24' main.cpp > f2 ; cat f1 > cmp.cpp ; cat f2 >> cmp.cpp
+	@awk 'FNR < 32' cmp.cpp > f1 ; awk 'FNR > 23' main.cpp > f2 ; cat f1 > cmp.cpp ; cat f2 >> cmp.cpp
 	@echo "\t$(C_CYAN)UPDATING CMP.CPP$(C_END)"
 	@c++ $(FLAGS) cmp.cpp -o cmp
 	@echo "\t$(C_GREEN)COMPILING CMP.CPP$(C_END)"

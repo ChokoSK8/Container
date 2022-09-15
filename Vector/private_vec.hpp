@@ -140,4 +140,21 @@ pointer	copyVecAndIncreaseCapacity(size_type newCapacity)
 	_first = resFirst;
 	return (old);
 };
+
+size_type	getNewCapacity(size_type n)
+{
+	size_type	newCapacity = _capacity;
+
+	while (newCapacity < n)
+		newCapacity *= 2;
+	return (newCapacity);
+};
+
+int	doesBelong(iterator first, iterator last)
+{
+	if (begin() - first > 0 || end() - first < 0
+			|| begin() - last > 0 || end() - last < 0)
+		return (0);
+	return (1);
+};
 #endif
