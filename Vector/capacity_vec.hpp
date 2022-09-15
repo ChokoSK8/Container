@@ -1,7 +1,9 @@
 #ifndef CAPACITY_VEC_HPP
 # define CAPACITY_VEC_HPP
+# include "vector.hpp"
 
-size_type	size(void) const {
+size_type	size(void) const
+{
 	return (_size);
 };
 

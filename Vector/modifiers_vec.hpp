@@ -1,6 +1,7 @@
 #ifndef MODIFIERS_VEC_HPP
 # define MODIFIERS_VEC_HPP
 # include "../containers.h"
+# include "vector.hpp"
 
 void	assign(iterator first, iterator last)
 {
@@ -55,10 +56,11 @@ void	push_back(const value_type& val)
 	++_size;
 };
 
-void	pop_back(void) {
+void	pop_back(void)
+{
 	if (_size)
 	{
-		_c.destroy(&(end() - 1));
+		_c.destroy(end().base() - 1);
 		--_size;
 	}
 };
@@ -156,46 +158,43 @@ iterator	erase(iterator first, iterator last)
 	return (last);
 };
 
-void	swap(ft::vector<T, allocator_type>& x) {
-	iterator	it1 = begin();
-	iterator	it2 = x.begin();
-	iterator	ite1 = end();
-	iterator	ite2 = x.end();
-	size_type	tmp;
-	allocator_type	x_alloc = x.get_allocator();
+void	swap(ft::vector<T, allocator_type>& x)
+{
+	ft::vector<T, allocator_type>	tmp(x);
 
-	while (it1 != ite1 && it2 != ite2)
-	{
-		tmp = *it1;
-		_c.destroy(&it1);
-		_c.construct(&it1, *it2);
-		x_alloc.destroy(&it2);
-		x_alloc.construct(&it2, tmp);
-		++it1;
-		++it2;
-	}
-	if (_size > x.size())
-	{
-		while (it1 != ite1)
-		{
-			x_alloc.construct(&it2, *it1);
-			_c.destroy(&it1);
-			++it1;
-			++it2;
-		}
-	}
-	else
-	{
-		while (it2 != ite2)
-		{
-			_c.construct(&it1, *it2);
-			++it1;
-			++it2;
-		}
-	}
-	tmp = _size;
-	_size = x.size();
-	x.resize(tmp);
+	x.assign(begin(), end());
+	assign(tmp.begin(), tmp.end());
+}
+//	pointer		ptr_x = x.begin().base();
+//	size_type	tmp;
+//	size_type	i = 0;
+//	allocator_type	x_alloc = x.get_allocator();
+//
+//	while (i < _size && i < x.size())
+//	{
+//		tmp = _first[i];
+//		_c.destroy(_first + i);
+//		_c.construct(_first + i, ptr_x[i]);
+//		x_alloc.destroy(ptr_x + i);
+//		x_alloc.construct(ptr_x + i, tmp);
+//		++i;
+//	}
+//	if (_size > x.size())
+//	{
+//		x.reserve(_size);
+//		tmp = x.size();
+//		x.erase(x.begin() + i, x.end());
+//		x.insert(x.begin() + i, begin() + i, end());
+//		resize(tmp);
+//	}
+//	else
+//	{
+//		reserve(x.size());
+//		tmp = size();
+//		erase(begin() + i, end());
+//		insert(begin() + i, x.begin() + i, x.end());
+//		x.resize(tmp);
+//	}
 };
 
 void	clear(void)

@@ -51,6 +51,40 @@ int	assignTester(void)
 	return (0);
 }
 
+int	push_backTester(void)
+{
+	vector<int>		v1;
+
+	displayVec(v1);
+	v1.push_back(1);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	v1.push_back(2);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	v1.push_back(3);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	v1.push_back(4);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	v1.push_back(5);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	v1.push_back(6);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	v1.push_back(7);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	for (int i = 89 ; i < 200 ; i++)
+		v1.push_back(i);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	
+	return (0);
+}
+
 int	insertTester(void)
 {
 	vector<int>		v1;
@@ -147,6 +181,56 @@ int	reserveTester(void)
 	return (0);
 }
 
+int	pop_backTester(void)
+{
+	vector<int>	v1;
+
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v1.push_back(4);
+	v1.push_back(5);
+	v1.push_back(6);
+	v1.push_back(7);
+	v1.push_back(8);
+	while (v1.size())
+	{
+		v1.pop_back();
+		disp("CAPACITY", v1.capacity());
+		displayVec(v1);
+	}
+	return (0);
+}
+
+int	swapTester(void)
+{
+	vector<int>	v1;
+	vector<int>	v2;
+
+	v1.push_back(1);
+	v1.push_back(2);
+	v1.push_back(3);
+	v1.push_back(4);
+	v1.push_back(5);
+	v1.push_back(6);
+	v1.push_back(7);
+	v1.push_back(8);
+	v2.push_back(21);
+	v2.push_back(22);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	disp("CAPACITY", v2.capacity());
+	displayVec(v2);
+	disp("------------SWAP----------", 1);
+	v1.swap(v2);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	disp("CAPACITY", v2.capacity());
+	displayVec(v2);
+
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	if (ac != 2)
@@ -165,6 +249,9 @@ int	main(int ac, char **av)
 	fcts["insert"] = &insertTester;
 	fcts["erase"] = &eraseTester;
 	fcts["reserve"] = &reserveTester;
+	fcts["push_back"] = &push_backTester;
+	fcts["pop_back"] = &pop_backTester;
+	fcts["swap"] = &swapTester;
 	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
 	{
 		if (!str.compare(it->first))
