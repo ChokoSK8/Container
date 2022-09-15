@@ -41,7 +41,9 @@ void	displayVec(std::vector<T> vec)
 int	main()
 {
 	vector<int>		v1;
+	vector<int>::iterator	it = v1.begin();
 
+	disp("BASE", it.base());
 	displayVec(v1);
 	v1.push_back(1);;
 	v1.push_back(2);;
@@ -50,8 +52,12 @@ int	main()
 	v1.push_back(5);;
 	v1.push_back(6);;
 	v1.push_back(7);;
+	it = v1.begin();
+	disp("BASE", it.base());
 	displayVec(v1);
-	v1.insert(v1.begin() + 3, 4, 8);
+//	v1.erase(v1.begin(), v1.begin() + 2);
+	it = v1.begin();
+	disp("BASE", it.base());
 	displayVec(v1);
 	return (0);
 }

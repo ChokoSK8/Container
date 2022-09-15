@@ -8,11 +8,8 @@ void	assign(iterator first, iterator last)
 
 	if (dist > max_size())
 		throw std::length_error("cannot create ft::vector larger than max_size()");
-
-//	if (_capacity < dist)
-//	{
-// RESIZE
-//	}
+	insert(begin(), first, last);
+	resize(dist);
 };
 
 void	assign(size_type n, const value_type& val)
@@ -33,20 +30,22 @@ void	assign(size_type n, const value_type& val)
 
 void	push_back(const value_type& val)
 {
+	size_type	newCapacity;
+
 	if (_size + 1 > _capacity)
 	{
 		if (!_capacity)
-			_capacity++;
+			newCapacity = 1;
 		else
-			_capacity *= 2;
-		reserve(_capacity);
+			newCapacity = _capacity * 2;
+		reserve(newCapacity);
 		_c.construct(_first + _size, val);
 	}
 	else
 	{
 		_c.construct(_first + _size, val);
 	}
-	_size++;
+	++_size;
 };
 
 void	pop_back(void) {
@@ -57,21 +56,20 @@ void	pop_back(void) {
 	}
 };
 
+void	insert(iterator position, const value_type& val)
+{
+	insert(position, 1, val);
+};
+
 void	insert(iterator position, size_type n, const value_type& val)
 {
 	size_type	dist = position - begin();
-	size_type	i = _size + n;
-	size_type	j = 1;
+	size_type	i = dist + n;
 
+	if (!checkPosition(position))
+		return ;
 	reserve(_size + n);
-	while (i > dist + n)
-	{
-		if (i < _size)
-			_c.destroy(_first + i);
-		_c.construct(_first + i - 1, _first[_size - j]);
-		--i;
-		++j;
-	}
+	moveContentForward(n, i);
 	while (dist < i)
 	{
 		_c.destroy(_first + dist);
@@ -81,7 +79,33 @@ void	insert(iterator position, size_type n, const value_type& val)
 	_size += n;
 };
 
-iterator	erase(iterator position) {
+//template < class InputIterator >
+void	insert(iterator position, iterator first, iterator last)
+{
+	if (!checkPosition(position) || !checkOrder(first, last))
+		return ;
+	
+	size_type	range = last - first;
+	size_type	dist = position - begin();
+	size_type	i = dist + range;
+	pointer		old_first;
+	size_type	old_capacity = _capacity;
+
+	old_first = copyVecAndIncreaseCapacity(_size + range);
+	moveContentForward(range, dist + range);
+	while (dist < i)
+	{
+		_c.destroy(_first + dist);
+		_c.construct(_first + dist, *first);
+		++dist;
+		++first;
+	}
+	_size += range;
+	_c.deallocate(old_first, old_capacity);
+};
+
+iterator	erase(iterator position)
+{
 	iterator	it = begin();
 	iterator	ite = end();
 	size_type	c = 1;
@@ -97,29 +121,27 @@ iterator	erase(iterator position) {
 	return (position + 1);
 };
 
-iterator	erase(iterator first, iterator last) {
+iterator	erase(iterator first, iterator last)
+{
 	int		distance = last - first;
 	int		i = 0;	
 	iterator	ite = end();
-	size_type	value;
-	pointer		addr;
+	pointer		addrF = first.base();
+	pointer		addrL = last.base();
 
 	if (distance < 0)
 		throw std::out_of_range("vector::erase");
 	_size -= distance;
 	while (i < distance)
 	{
-		addr = &(first + i);
-		_c.destroy(addr);
+		_c.destroy(addrF + i);
 		++i;
 	}
 	i = 0;
 	while (last + i != ite && i != distance * (-1))
 	{
-		addr = &(first + i);
-		value = *(last + i);
-		_c.destroy(addr);
-		_c.construct(addr, value);
+		_c.destroy(addrF + i);
+		_c.construct(addrF + i, *(addrL + i));
 		++i;
 	}
 	return (last);

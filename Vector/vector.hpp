@@ -42,7 +42,7 @@ class ft::vector
 			size_type	c = 0;
 
 			_size = x.size();
-			_capacity = x.capacity();
+			_capacity = x.capacity()  < _size ? x.capacity() : _size;
 			_c = x.get_allocator();
 			_first = _c.allocate(_capacity);
 			while (it != ite)

@@ -77,4 +77,67 @@ void	replaceElements(iterator first, iterator last)
 		++_size;
 	}
 };
+
+int	checkPosition(iterator position)
+{
+	int	distBegin = position - begin();
+	int	distEnd = end() - position;
+
+	if (distBegin < 0 || distEnd < 0)
+	{
+		std::cout << "vector::insert --> position not valid"
+			<< std::endl;
+		return (0);
+	}
+	return (1);
+};
+
+template < class InputIterator >
+int	checkOrder(InputIterator first, InputIterator last)
+{
+	int	dist = last - first;
+
+	if (dist < 0)
+	{
+		throw std::out_of_range("InputIterator's order invalid");
+		return (0);
+	}
+	return (1);
+}
+
+void	moveContentForward(size_type n_moves, size_type to)
+{
+	size_type	i = _size + n_moves;
+	size_type	j = 1;
+
+	while (i > to)
+	{
+		if (i < _size)
+			_c.destroy(_first + i);
+		_c.construct(_first + i - 1, _first[_size - j]);
+		--i;
+		++j;
+	}
+};
+
+pointer	copyVecAndIncreaseCapacity(size_type newCapacity)
+{
+	if (newCapacity < _capacity)
+		newCapacity = _capacity;
+
+	allocator_type	res;
+	pointer		resFirst = res.allocate(newCapacity);
+	size_type	i = 0;
+	pointer		old = _first;
+
+	while (i < _size)
+	{
+		res.construct(resFirst + i, *(_first + i));
+		++i;
+	}
+	_c = res;
+	_capacity = newCapacity;
+	_first = resFirst;
+	return (old);
+};
 #endif
