@@ -88,6 +88,33 @@ int	emptyTester(void)
 	return (0);
 }
 
+int	reserveTester(void)
+{
+	vector<int>		v1;
+
+	v1.reserve(5);
+	disp("CAPACITY", v1.capacity());
+	v1.push_back(1);
+	disp("CAPACITY", v1.capacity());
+	v1.push_back(2);
+	disp("CAPACITY", v1.capacity());
+	v1.push_back(3);
+	disp("CAPACITY", v1.capacity());
+	v1.push_back(4);
+	disp("CAPACITY", v1.capacity());
+	v1.push_back(5);
+	disp("CAPACITY", v1.capacity());
+	v1.push_back(6);
+	disp("CAPACITY", v1.capacity());
+	v1.push_back(7);
+	disp("CAPACITY", v1.capacity());
+	v1.push_back(8);
+	disp("CAPACITY", v1.capacity());
+	v1.reserve(9);
+	disp("CAPACITY", v1.capacity());
+	return (0);
+}
+
 
 	// ELEMENT ACCESS
 
@@ -143,6 +170,7 @@ int	backTester(void)
 //	disp("BACK V2", v2.back());
 	return (0);
 }
+
 
 	// MODIFIERS
 
@@ -240,33 +268,6 @@ int	eraseTester(void)
 	disp("RETURN", *(v1.erase(v1.begin())));
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
-	return (0);
-}
-
-int	reserveTester(void)
-{
-	vector<int>		v1;
-
-	v1.reserve(5);
-	disp("CAPACITY", v1.capacity());
-	v1.push_back(1);
-	disp("CAPACITY", v1.capacity());
-	v1.push_back(2);
-	disp("CAPACITY", v1.capacity());
-	v1.push_back(3);
-	disp("CAPACITY", v1.capacity());
-	v1.push_back(4);
-	disp("CAPACITY", v1.capacity());
-	v1.push_back(5);
-	disp("CAPACITY", v1.capacity());
-	v1.push_back(6);
-	disp("CAPACITY", v1.capacity());
-	v1.push_back(7);
-	disp("CAPACITY", v1.capacity());
-	v1.push_back(8);
-	disp("CAPACITY", v1.capacity());
-	v1.reserve(9);
-	disp("CAPACITY", v1.capacity());
 	return (0);
 }
 

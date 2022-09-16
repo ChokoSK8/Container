@@ -22,19 +22,19 @@ INC	= -I $(VECDIR)
 
 OBJS	= $(SRCS:.cpp=.o)
 
-DEP	= $(VECDIR)/*.hpp
+VECDEP	= $(VECDIR)/*.hpp
 
 FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98
 
 RM	= rm -rf
 
-%.o: %.cpp	$(DEP)
+%.o: %.cpp	$(VECDEP)
 	c++ $(FLAGS) -c $<
 	@echo "\t$(C_GREEN)COMPILING $<$(C_END)"
 
 all:	$(NAME)
 
-$(NAME):	$(OBJS) $(DEP)
+$(NAME):	$(OBJS) $(VECDEP)
 	@c++ $(FLAGS) $(OBJS) -o $(NAME)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE$(C_END)"
 
@@ -64,10 +64,9 @@ clean:
 fclean:		clean
 	@$(RM) $(NAME)
 	@echo "\t$(C_RED)DELEATING EXECUTABLE$(C_END)"
-	@$(RM) $(DEP)
 	@$(RM) cmp.d cmp
 	@$(RM) f1 f2
-	@echo "\t$(C_RED)DELEATING DEPENDENCIES$(C_END)"
+#	@echo "\t$(C_RED)DELEATING DEPENDENCIES$(C_END)"
 
 re:	fclean all
 
