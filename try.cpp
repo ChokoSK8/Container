@@ -2,6 +2,7 @@
 # include <vector>
 # include <memory>
 # include <cstring>
+# include <list>
 
 using namespace std;
 
@@ -39,16 +40,11 @@ void	displayVec(std::vector<T> vec)
 
 int	main()
 {
-	vector<int>	v1;
+	typedef std::iterator_traits<std::list<int>::iterator >	traits;
 
-	v1.push_back(1);
-	v1.push_back(2);
-	v1.push_back(3);
-	v1.push_back(4);
-	v1.push_back(5);
-	v1.push_back(6);
-	v1.push_back(7);
-	vector<int>	v2(v1.begin(), v1.end());
-	displayVec(v2);
+	if (typeid(traits::iterator_category)==typeid(std::random_access_iterator_tag))
+		std::cout << "int* is a random-access iterator" << std::endl;
+	bool	isBidirectional = typeid(traits::iterator_category) == typeid(std::bidirectional_iterator_tag);
+	std::cout << "BIDIRECTIONAL: " << isBidirectional << std::endl;
 	return (0);
 }
