@@ -66,7 +66,7 @@ fclean:		clean
 	@echo "\t$(C_RED)DELEATING EXECUTABLE$(C_END)"
 	@$(RM) cmp.d cmp
 	@$(RM) f1 f2
-#	@echo "\t$(C_RED)DELEATING DEPENDENCIES$(C_END)"
+	@echo "\t$(C_RED)DELEATING HELPERS$(C_END)"
 
 re:	fclean all
 

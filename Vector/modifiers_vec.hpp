@@ -1,6 +1,7 @@
 #ifndef MODIFIERS_VEC_HPP
 # define MODIFIERS_VEC_HPP
 
+//template < class InputIterator >
 void	assign(iterator first, iterator last)
 {
 	size_type	dist = last - first;

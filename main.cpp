@@ -1,5 +1,6 @@
 # include "Vector/vector.hpp"
 # include <map>
+# include <list>
 # include <string>
 
 using namespace ft;
@@ -225,7 +226,6 @@ int	insertTester(void)
 	vector<int>		v1 = makeVec(1, 10);
 	vector<int>		v2 = makeVec(2, 15);
 
-	displayVec(v1);
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
 	v1.insert(v1.begin() + 3, 1, 10);
@@ -345,6 +345,13 @@ int	main(int ac, char **av)
 			return (fct ());
 		}
 	}
-	std::cout << "<fct to test> not found"<< std::endl;
+	std::list<int>			lst;
+	std::list<int>::iterator	lst_it;
+	for (int i = 1; i < 5; ++i)
+		lst.push_back(i * 3);
+
+	vector<int>	vct(lst.begin(), lst.end());
+
+//	std::cout << "<fct to test> not found"<< std::endl;
 	return (1);
 }

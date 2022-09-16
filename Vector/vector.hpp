@@ -31,12 +31,14 @@ class ft::vector
 		allocator_type	_c;
 
 	public:
-		explicit vector(const allocator_type& = allocator_type()) {
+		explicit vector(const allocator_type& = allocator_type())
+		{
 			_capacity = 0;
 			_size = 0;
 			_first = _c.allocate(0);
 		};
-		vector(const vector<T, allocator_type>& x) {
+		vector(const vector<T, allocator_type>& x)
+		{
 			const_iterator	it = x.begin();
 			const_iterator	ite = x.end();
 			size_type	c = 0;
@@ -52,13 +54,13 @@ class ft::vector
 				++c;
 			}
 		};
-		~vector() {
+		~vector()
+		{
 			_c.deallocate(_first, _capacity);
 		};
-		explicit vector(size_type n,
-				const value_type& val = value_type(),
-				const allocator_type& alloc =
-				allocator_type()) {
+		explicit	vector(size_type n, const value_type& val = value_type(),
+					const allocator_type& alloc = allocator_type())
+		{
 			_size = n;
 			_c = alloc;
 			_capacity = 0;
@@ -69,6 +71,24 @@ class ft::vector
 				_capacity++;
 			}
 		};
+		template < class InputIterator >
+		explicit	vector(InputIterator start, InputIterator end)
+		{
+			size_type	i = 0;
+			size_type	dist = std::distance(start, end);
+
+			if (dist > max_size() || dist < 0)
+				throw std::out_of_range("vector(start, end)");
+			_first = _c.allocate(dist);
+			_capacity = dist;
+			_size = dist;
+			while (start != end)
+			{
+				_c.construct(_first + i, *start);
+				++start;
+				++i;
+			}
+		}
 
 		// ITERATORS
 			# include "iterator_vec.hpp"

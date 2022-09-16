@@ -40,7 +40,6 @@ void	displayVec(std::vector<T> vec)
 int	main()
 {
 	vector<int>	v1;
-	vector<int>	v2;
 
 	v1.push_back(1);
 	v1.push_back(2);
@@ -49,25 +48,7 @@ int	main()
 	v1.push_back(5);
 	v1.push_back(6);
 	v1.push_back(7);
-	v2.push_back(21);
-	v2.push_back(22);
-	disp("CAPACITY 1", v1.capacity());
-	disp("FIRST 1", v1.begin().base());
-	displayVec(v1);
-	v1.reserve(2);
-	disp("CAPACITY 1", v1.capacity());
-	disp("FIRST 1", v1.begin().base());
-	displayVec(v1);
-//	disp("CAPACITY 2", v2.capacity());
-//	disp("FIRST 2", v2.begin().base());
-//	displayVec(v2);
-//	disp("-----------SWAP------------", 1);
-//	v1.swap(v2);
-//	disp("CAPACITY 1", v1.capacity());
-//	disp("FIRST 1", v1.begin().base());
-//	displayVec(v1);
-//	disp("CAPACITY 2", v2.capacity());
-//	disp("FIRST 2", v2.begin().base());
-//	displayVec(v2);
+	vector<int>	v2(v1.begin(), v1.end());
+	displayVec(v2);
 	return (0);
 }
