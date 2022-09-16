@@ -29,6 +29,122 @@ void	displayVec(vector<T> vec)
 	}
 }
 
+vector<int>	makeVec(int start, int range)
+{
+	int		end = start + range;
+	vector<int>	vec;
+
+	while (start < end)
+	{
+		vec.push_back(start);
+		++start;
+	}
+	return (vec);
+}
+
+	// CAPACITY
+
+int	max_sizeTester(void)
+{
+	vector<int>		v1 = makeVec(1, 5);
+	vector<int>		v2;
+	vector<std::string>	v3;
+	vector<double>		v4;
+	vector<float>		v5;
+
+	disp("MAX_SIZE 1", v1.max_size());
+	disp("MAX_SIZE 2", v2.max_size());
+	disp("MAX_SIZE 3", v3.max_size());
+	disp("MAX_SIZE 4", v4.max_size());
+	disp("MAX_SIZE 5", v5.max_size());
+	return (0);
+}
+
+int	resizeTester(void)
+{
+	vector<int>	v1 = makeVec(1, 142);
+
+	v1.resize(100);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	v1.resize(120);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	v1.resize(18, 5555);
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	return (0);
+}
+
+int	emptyTester(void)
+{
+	vector<int>	v1 = makeVec(1, 1);
+
+	disp("EMPTY", v1.empty());
+	v1.clear();
+	disp("EMPTY", v1.empty());
+	v1.resize(0, 55);
+	disp("EMPTY", v1.empty());
+	return (0);
+}
+
+
+	// ELEMENT ACCESS
+
+int	operatorHookTester(void)
+{
+	vector<int>	v1 = makeVec(1, 5);
+	vector<int>	v2 = makeVec(20, 13);
+
+	disp("v1[5]", v1[5]);
+	disp("v1[4]", v1[4]);
+	disp("v1[2]", v1[2]);
+	disp("v1[0]", v1[0]);
+	disp("v2[5]", v2[5]);
+	disp("v2[12]", v2[12]);
+
+	return (0);
+}
+
+int	atTester(void)
+{
+	vector<int>	v1 = makeVec(1, 5);
+	vector<int>	v2 = makeVec(20, 13);
+
+//	disp("v1[5]", v1.at(5));
+	disp("v1[0]", v1.at(0));
+//	disp("v1[50]", v1.at(50));
+	disp("v1[1]", v1.at(1));
+	disp("v2[5]", v2.at(5));
+//	disp("v2[-10]", v2.at(-10));
+//	disp("v2[13]", v2.at(13));
+
+	return (0);
+}
+
+int	frontTester(void)
+{
+	vector<int>	v1 = makeVec(1, 5);
+	vector<int>	v2 = makeVec(0, 0);
+
+	disp("FRONT V1", v1.front());
+//	disp("ADDR BEGIN 2", v2.begin().base());
+//	disp("FRONT V2", v2.front());
+	return (0);
+}
+
+int	backTester(void)
+{
+	vector<int>	v1 = makeVec(1, 5);
+	vector<int>	v2 = makeVec(0, 0);
+
+	disp("BACK V1", v1.back());
+//	disp("ADDR BEGIN 2", v2.begin().base());
+//	disp("BACK V2", v2.back());
+	return (0);
+}
+
+	// MODIFIERS
 
 int	assignTester(void)
 {
@@ -87,18 +203,10 @@ int	push_backTester(void)
 
 int	insertTester(void)
 {
-	vector<int>		v1;
-	vector<int>		v2;
+	vector<int>		v1 = makeVec(1, 10);
+	vector<int>		v2 = makeVec(2, 15);
 
 	displayVec(v1);
-	v1.push_back(1);
-	v1.push_back(2);
-	v1.push_back(3);
-	v1.push_back(4);
-	v1.push_back(5);
-	v1.push_back(6);
-	v1.push_back(7);
-	v1.push_back(8);
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
 	v1.insert(v1.begin() + 3, 1, 10);
@@ -113,14 +221,6 @@ int	insertTester(void)
 	v1.insert(v1.begin(), v1.begin() + 2, v1.end() - 5);
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
-	v2.push_back(21);
-	v2.push_back(22);
-	v2.push_back(23);
-	v2.push_back(24);
-	v2.push_back(25);
-	v2.push_back(26);
-	v2.push_back(27);
-	v2.push_back(28);
 	v2.insert(v2.begin() + 6, v1.begin() + 2, v1.end() - 5);
 	disp("CAPACITY", v2.capacity());
 	displayVec(v2);
@@ -130,27 +230,16 @@ int	insertTester(void)
 
 int	eraseTester(void)
 {
-	vector<int>		v1;
+	vector<int>		v1 = makeVec(1, 9);
 
-	v1.push_back(1);
-	v1.push_back(2);
-	v1.push_back(3);
-	v1.push_back(4);
-	v1.push_back(5);
-	v1.push_back(6);
-	v1.push_back(7);
-	v1.push_back(8);
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
-	v1.erase(v1.begin(), v1.begin() + 2);
+	disp("RETURN", *(v1.erase(v1.begin(), v1.begin() + 2)));
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
-//	v1.erase(v1.begin() - 1, v1.begin() + 1);
-//	displayVec(v1);
-//	v1.erase(v1.begin() + 1, v1.begin() - 1);
-//	displayVec(v1);
-//	v1.erase(v1.end(), v1.end() + 2);
-//	displayVec(v1);
+	disp("RETURN", *(v1.erase(v1.begin())));
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
 	return (0);
 }
 
@@ -183,16 +272,8 @@ int	reserveTester(void)
 
 int	pop_backTester(void)
 {
-	vector<int>	v1;
+	vector<int>	v1 = makeVec(1, 9);
 
-	v1.push_back(1);
-	v1.push_back(2);
-	v1.push_back(3);
-	v1.push_back(4);
-	v1.push_back(5);
-	v1.push_back(6);
-	v1.push_back(7);
-	v1.push_back(8);
 	while (v1.size())
 	{
 		v1.pop_back();
@@ -204,19 +285,9 @@ int	pop_backTester(void)
 
 int	swapTester(void)
 {
-	vector<int>	v1;
-	vector<int>	v2;
+	vector<int>	v1 = makeVec(1, 20);
+	vector<int>	v2 = makeVec(55, 6);
 
-	v1.push_back(1);
-	v1.push_back(2);
-	v1.push_back(3);
-	v1.push_back(4);
-	v1.push_back(5);
-	v1.push_back(6);
-	v1.push_back(7);
-	v1.push_back(8);
-	v2.push_back(21);
-	v2.push_back(22);
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
 	disp("CAPACITY", v2.capacity());
@@ -227,6 +298,20 @@ int	swapTester(void)
 	displayVec(v1);
 	disp("CAPACITY", v2.capacity());
 	displayVec(v2);
+
+	return (0);
+}
+
+int	clearTester(void)
+{
+	vector<int>	v1 = makeVec(1, 50);
+
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
+	disp("-----------CLEAR----------", 1);
+	v1.clear();
+	disp("CAPACITY", v1.capacity());
+	displayVec(v1);
 
 	return (0);
 }
@@ -252,6 +337,14 @@ int	main(int ac, char **av)
 	fcts["push_back"] = &push_backTester;
 	fcts["pop_back"] = &pop_backTester;
 	fcts["swap"] = &swapTester;
+	fcts["clear"] = &clearTester;
+	fcts["operator[]"] = &operatorHookTester;
+	fcts["at"] = &atTester;
+	fcts["front"] = &frontTester;
+	fcts["back"] = &backTester;
+	fcts["max_size"] = &max_sizeTester;
+	fcts["resize"] = &resizeTester;
+	fcts["empty"] = &emptyTester;
 	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
 	{
 		if (!str.compare(it->first))

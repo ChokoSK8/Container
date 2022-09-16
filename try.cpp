@@ -54,16 +54,20 @@ int	main()
 	disp("CAPACITY 1", v1.capacity());
 	disp("FIRST 1", v1.begin().base());
 	displayVec(v1);
-	disp("CAPACITY 2", v2.capacity());
-	disp("FIRST 2", v2.begin().base());
-	displayVec(v2);
-	disp("-----------SWAP------------", 1);
-	v1.swap(v2);
+	v1.reserve(2);
 	disp("CAPACITY 1", v1.capacity());
 	disp("FIRST 1", v1.begin().base());
 	displayVec(v1);
-	disp("CAPACITY 2", v2.capacity());
-	disp("FIRST 2", v2.begin().base());
-	displayVec(v2);
+//	disp("CAPACITY 2", v2.capacity());
+//	disp("FIRST 2", v2.begin().base());
+//	displayVec(v2);
+//	disp("-----------SWAP------------", 1);
+//	v1.swap(v2);
+//	disp("CAPACITY 1", v1.capacity());
+//	disp("FIRST 1", v1.begin().base());
+//	displayVec(v1);
+//	disp("CAPACITY 2", v2.capacity());
+//	disp("FIRST 2", v2.begin().base());
+//	displayVec(v2);
 	return (0);
 }
