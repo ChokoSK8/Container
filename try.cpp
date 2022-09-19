@@ -6,6 +6,19 @@
 
 using namespace std;
 
+vector<int>	makeVec(int start, int range)
+{
+	int		end = start + range;
+	vector<int>	vec;
+
+	while (start < end)
+	{
+		vec.push_back(start);
+		++start;
+	}
+	return (vec);
+}
+
 template < typename T >
 void	disp(std::string str, T val)
 {
@@ -38,13 +51,17 @@ void	displayVec(std::vector<T> vec)
 	}
 }
 
+typedef struct	s_coordinate {
+	int	a;
+	int	b;
+}		t_coordinate;
+
 int	main()
 {
-	typedef std::iterator_traits<std::list<int>::iterator >	traits;
+	vector<int>	v1 = makeVec(1, 10);
 
-	if (typeid(traits::iterator_category)==typeid(std::random_access_iterator_tag))
-		std::cout << "int* is a random-access iterator" << std::endl;
-	bool	isBidirectional = typeid(traits::iterator_category) == typeid(std::bidirectional_iterator_tag);
-	std::cout << "BIDIRECTIONAL: " << isBidirectional << std::endl;
+	displayVec(v1);
+	v1.insert(v1.begin(), v1.begin() + 2, v1.end() - 5);
+	displayVec(v1);
 	return (0);
 }

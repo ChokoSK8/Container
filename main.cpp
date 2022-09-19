@@ -237,10 +237,10 @@ int	insertTester(void)
 	v1.insert(v1.begin(), 5, 11);
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
-	v1.insert(v1.begin(), v1.begin() + 2, v1.end() - 5);
+	v1.insert(v1.begin(), v1.begin() + 2, v1.begin() + 5);
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
-	v2.insert(v2.begin() + 6, v1.begin() + 2, v1.end() - 5);
+	v2.insert(v2.begin() + 6, v1.begin() + 2, v1.begin() + 5);
 	disp("CAPACITY", v2.capacity());
 	displayVec(v2);
 
@@ -345,13 +345,11 @@ int	main(int ac, char **av)
 			return (fct ());
 		}
 	}
-	std::list<int>			lst;
-	std::list<int>::iterator	lst_it;
-	for (int i = 1; i < 5; ++i)
-		lst.push_back(i * 3);
+	vector<int>		v1 = makeVec(1, 9);
+	vector<int>::iterator	itv = v1.begin();
 
-	vector<int>	vct(lst.begin(), lst.end());
-
+	std::cout << *(v1.begin()) << " | " << *(++itv) << std::endl;
+	std::cout << *(v1.begin()) << " | " << *itv << std::endl;
 //	std::cout << "<fct to test> not found"<< std::endl;
 	return (1);
 }

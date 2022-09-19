@@ -2,7 +2,11 @@
 # define VECTOR_HPP
 # include "../containers.h"
 # include "../iterator.hpp"
-# include "../const_iterator.hpp"
+# include "../random_access_iterator.hpp"
+# include "../const_random_access_iterator.hpp"
+# include "../reverse_iterator.hpp"
+# include "../const_reverse_iterator.hpp"
+# include "../enable_if.hpp"
 
 template < class T, class Alloc >
 class ft::vector
@@ -16,10 +20,10 @@ class ft::vector
 		typedef typename Alloc::const_pointer	const_pointer;
 
 		// ITERATOR
-		typedef ft::iterator<T >		iterator;
-		typedef ft::const_iterator<T >		const_iterator;
-		/*reverse_iterator
-		const_reverse_iterator*/
+		typedef ft::random_access_iterator<T>			iterator;
+		typedef ft::const_random_access_iterator<T>		const_iterator;
+		typedef ft::reverse_iterator<T>				reverse_iterator;
+		typedef ft::const_reverse_iterator<T>			const_reverse_iterator;
 
 		typedef typename Alloc::difference_type	difference_type;
 		typedef typename Alloc::size_type	size_type;
@@ -75,7 +79,7 @@ class ft::vector
 		explicit	vector(InputIterator start, InputIterator end)
 		{
 			size_type	i = 0;
-			size_type	dist = std::distance(start, end);
+			size_type	dist = ft::distance(start, end);
 
 			if (dist > max_size() || dist < 0)
 				throw std::out_of_range("vector(start, end)");

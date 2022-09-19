@@ -234,7 +234,6 @@ int	insertTester(void)
 	vector<int>		v1 = makeVec(1, 10);
 	vector<int>		v2 = makeVec(2, 15);
 
-	displayVec(v1);
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
 	v1.insert(v1.begin() + 3, 1, 10);
@@ -246,10 +245,10 @@ int	insertTester(void)
 	v1.insert(v1.begin(), 5, 11);
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
-	v1.insert(v1.begin(), v1.begin() + 2, v1.end() - 5);
+	v1.insert(v1.begin(), v1.begin() + 2, v1.begin() + 5);
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
-	v2.insert(v2.begin() + 6, v1.begin() + 2, v1.end() - 5);
+	v2.insert(v2.begin() + 6, v1.begin() + 2, v1.begin() + 5);
 	disp("CAPACITY", v2.capacity());
 	displayVec(v2);
 
@@ -354,6 +353,11 @@ int	main(int ac, char **av)
 			return (fct ());
 		}
 	}
-	std::cout << "<fct to test> not found"<< std::endl;
+	vector<int>		v1 = makeVec(1, 9);
+	vector<int>::iterator	itv = v1.begin();
+
+	std::cout << *(v1.begin()) << " | " << *(++itv) << std::endl;
+	std::cout << *(v1.begin()) << " | " << *itv << std::endl;
+//	std::cout << "<fct to test> not found"<< std::endl;
 	return (1);
 }

@@ -3,7 +3,7 @@
 # include "containers.h"
 
 template < class Iterator >
-class	ft::iterator_traits
+struct ft::iterator_traits
 {
 	typedef typename Iterator::difference_type	difference_type;
 	typedef typename Iterator::value_type		value_type;

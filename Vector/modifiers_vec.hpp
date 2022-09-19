@@ -1,24 +1,6 @@
 #ifndef MODIFIERS_VEC_HPP
 # define MODIFIERS_VEC_HPP
 
-//template < class InputIterator >
-void	assign(iterator first, iterator last)
-{
-	size_type	dist = last - first;
-	size_type	i = 0;
-
-	if (dist > max_size())
-		throw std::length_error("cannot create ft::vector larger than max_size()");
-	resize(dist);
-	while (first != last)
-	{
-		_c.destroy(_first + i);
-		_c.construct(_first + i, *first);
-		++i;
-		++first;
-	}
-};
-
 void	assign(size_type n, const value_type& val)
 {
 	clear();
@@ -32,6 +14,24 @@ void	assign(size_type n, const value_type& val)
 	{
 		_c.construct(&_first[_size], val);
 		++_size;
+	}
+};
+
+template < class InputIterator > 
+void	assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type = 0)
+{
+	size_type	dist = ft::distance(first, last);
+	size_type	i = 0;
+
+	if (dist > max_size())
+		throw std::length_error("cannot create ft::vector larger than max_size()");
+	resize(dist);
+	while (first != last)
+	{
+		_c.destroy(_first + i);
+		_c.construct(_first + i, *first);
+		++i;
+		++first;
 	}
 };
 
@@ -94,8 +94,8 @@ void	insert(iterator position, iterator first, iterator last)
 	if (!checkPosition(position) || !checkOrder(first, last))
 		return ;
 	
-	size_type	range = last - first;
-	size_type	dist = position - begin();
+	size_type	range = ft::distance(first, last);
+	size_type	dist = ft::distance(begin(), position);
 	size_type	i = dist + range;
 	pointer		old_first;
 	size_type	old_capacity = _capacity;
@@ -135,16 +135,16 @@ iterator	erase(iterator position)
 
 iterator	erase(iterator first, iterator last)
 {
-	int		distance = last - first;
-	int		i = 0;	
+	size_type	dist = ft::distance(first, last);
+	size_type	i = 0;
 	iterator	ite = end();
 	pointer		addrF = first.base();
 	pointer		addrL = last.base();
 
-	if (distance < 0 || !doesBelong(first, last))
+	if (dist < 0 || !doesBelong(first, last))
 		throw std::out_of_range("vector::erase");
-	_size -= distance;
-	while (i < distance)
+	_size -= dist;
+	while (i < dist)
 	{
 		_c.destroy(addrF + i);
 		++i;
