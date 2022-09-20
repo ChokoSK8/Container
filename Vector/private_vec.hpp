@@ -145,6 +145,8 @@ size_type	getNewCapacity(size_type n)
 {
 	size_type	newCapacity = _capacity;
 
+	if (!newCapacity && n)
+		++newCapacity;
 	while (newCapacity < n)
 		newCapacity *= 2;
 	return (newCapacity);

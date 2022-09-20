@@ -66,13 +66,15 @@ void	pop_back(void)
 
 iterator	insert(iterator position, const value_type& val)
 {
+	difference_type	dist = ft::distance(begin(), position);
+
 	insert(position, 1, val);
-	return (position);
+	return (begin() + dist);
 };
 
 void	insert(iterator position, size_type n, const value_type& val)
 {
-	size_type	dist = position - begin();
+	size_type	dist = ft::distance(begin(), position);
 	size_type	i = dist + n;
 	size_type	newCapacity = getNewCapacity(_size + n);
 
