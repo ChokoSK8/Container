@@ -36,7 +36,7 @@ namespace	ft
 	class	vector;
 	template < bool B >
 	struct	enable_if;
-	template < class T >
+	template < typename T >
 	struct	is_integral;
 }
 

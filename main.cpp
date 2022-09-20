@@ -169,7 +169,7 @@ int	backTester(void)
 int	assignTester(void)
 {
 	vector<std::string>		v1;
-	vector<std::string>		v2;
+	std::vector<std::string>		v2;
 
 	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
