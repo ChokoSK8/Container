@@ -1,9 +1,9 @@
 #ifndef ENABLE_IF_HPP
 # define ENABLE_IF_HPP
 
-template < bool B > struct	ft::enable_if {};
-template <> struct	ft::enable_if<true>
+template < bool B, class T = bool > struct	ft::enable_if {};
+template <class T> struct	ft::enable_if<true, T>
 {
-	typedef void	type;
+	typedef T	type;
 };
 #endif

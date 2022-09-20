@@ -20,10 +20,12 @@ class	ft::random_access_iterator : public ft::iterator<std::random_access_iterat
 
 	public:
 		random_access_iterator(void) : p(NULL) {};
-		random_access_iterator(pointer x) : p(x) {};
-		random_access_iterator(const ft::random_access_iterator<T>& mit) : p(mit.p) {};
-		random_access_iterator	operator=(const ft::random_access_iterator<T>& mit) {
-			p = mit.p;
+		explicit random_access_iterator(pointer x) : p(x) {};
+		template < class U > random_access_iterator(const ft::random_access_iterator<U>& mit) {
+			p = mit.base();
+		};
+		template < class U > random_access_iterator&	operator=(const ft::random_access_iterator<U>& mit) {
+			p = mit.base();
 			return (*this);
 		}
 		~random_access_iterator() {};
@@ -36,13 +38,13 @@ class	ft::random_access_iterator : public ft::iterator<std::random_access_iterat
 		bool	operator!=(const ft::random_access_iterator<T>& rhs) {
 			return (p != rhs.p);
 		};
-		value_type	operator*(void) {
+		reference	operator*(void) const {
 			return (*p);
 		};
 		pointer		operator->(void) const {
 			return (&(operator*()));
 		};
-		ft::random_access_iterator<T>	operator++(void) {
+		ft::random_access_iterator<T>&	operator++(void) {
 			++p;
 			return (*this);
 		};
@@ -51,7 +53,7 @@ class	ft::random_access_iterator : public ft::iterator<std::random_access_iterat
 			++p;
 			return (tmp);
 		};
-		ft::random_access_iterator<T>	operator--(void) {
+		ft::random_access_iterator<T>&	operator--(void) {
 			--p;
 			return (*this);
 		};
@@ -67,17 +69,19 @@ class	ft::random_access_iterator : public ft::iterator<std::random_access_iterat
 				++tmp;
 			return (tmp);
 		};
-		ft::random_access_iterator<T>	operator-(difference_type n) {
+		ft::random_access_iterator<T>	operator-(difference_type n) const {
 			random_access_iterator<T>	tmp(*this);
 
 			while (n--)
 				--tmp;
 			return (tmp);
 		};
-		difference_type	operator-(ft::random_access_iterator<T> rhs) {
+		difference_type	operator-(ft::random_access_iterator<T> rhs) const {
 			difference_type	res = p - rhs.base();
 			return (res);
 		};
+
+		// COMPARAISON
 		bool	operator<(const ft::random_access_iterator<T>& rhs) const {
 			return (p < rhs.base());
 		};

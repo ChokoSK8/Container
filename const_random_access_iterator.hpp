@@ -18,9 +18,11 @@ class	ft::const_random_access_iterator : public ft::iterator<std::random_access_
 	public:
 		const_random_access_iterator(void) : p(NULL) {};
 		const_random_access_iterator(pointer x) : p(x) {};
-		const_random_access_iterator(const ft::const_random_access_iterator<T>& mit) : p(mit.p) {};
-		const_random_access_iterator	operator=(const ft::const_random_access_iterator<T>& mit) {
-			p = mit.p;
+		template < class U > const_random_access_iterator(const ft::const_random_access_iterator<U>& mit) {
+			p = mit.base();
+		};
+		template < class U > const_random_access_iterator&	operator=(const ft::const_random_access_iterator<U>& mit) {
+			p = mit.base();
 			return (*this);
 		}
 		~const_random_access_iterator() {};
@@ -69,7 +71,11 @@ class	ft::const_random_access_iterator : public ft::iterator<std::random_access_
 			p -= n;
 			return (tmp);
 		};
-		difference_type	operator-(ft::const_random_access_iterator<T> rhs) {
+		difference_type	operator-(ft::random_access_iterator<T> rhs) const {
+			difference_type	res = p - rhs.base();
+			return (res);
+		};
+		difference_type	operator-(ft::const_random_access_iterator<T> rhs) const {
 			difference_type	res = p - rhs.base();
 			return (res);
 		};

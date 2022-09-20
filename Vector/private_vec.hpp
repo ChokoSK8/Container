@@ -95,11 +95,11 @@ int	checkPosition(iterator position)
 template < class InputIterator >
 int	checkOrder(InputIterator first, InputIterator last)
 {
-	int	dist = last - first;
+	size_type	dist = ft::distance(first, last);
 
-	if (dist < 0)
+	if (dist > max_size())
 	{
-		throw std::out_of_range("InputIterator's order invalid");
+		throw std::out_of_range("vector::checkOrder");
 		return (0);
 	}
 	return (1);

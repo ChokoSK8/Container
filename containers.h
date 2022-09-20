@@ -34,9 +34,9 @@ namespace	ft
 	class	stack;
 	template < class T, class Alloc = std::allocator<T> >
 	class	vector;
-	template < bool B >
+	template < bool B, class T>
 	struct	enable_if;
-	template < typename T >
+	template < class T >
 	struct	is_integral;
 }
 

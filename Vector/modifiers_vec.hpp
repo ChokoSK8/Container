@@ -64,9 +64,10 @@ void	pop_back(void)
 	}
 };
 
-void	insert(iterator position, const value_type& val)
+iterator	insert(iterator position, const value_type& val)
 {
 	insert(position, 1, val);
+	return (position);
 };
 
 void	insert(iterator position, size_type n, const value_type& val)
@@ -88,8 +89,9 @@ void	insert(iterator position, size_type n, const value_type& val)
 	_size += n;
 };
 
-//template < class InputIterator >
-void	insert(iterator position, iterator first, iterator last)
+template < class InputIterator >
+void	insert(iterator position, InputIterator first, InputIterator last, typename
+		ft::enable_if<!ft::is_integral<InputIterator>::value>::type = 0)
 {
 	if (!checkPosition(position) || !checkOrder(first, last))
 		return ;

@@ -1,49 +1,3 @@
-# include <iostream>
-# include <string>
-# include <vector>
-# include <memory>
-# include <limits>
-# include <map>
-# include <string> 
-
-using namespace std;
-typedef int (*PtrFct)();
-
-#define TESTED_NAMESPACE std
-
-template < typename T >
-void	disp(std::string str, T val)
-{
-	std::cout << str << ": " << val << std::endl;
-}
-
-template < typename T >
-void	displayVec(vector<T> vec)
-{
-	typename vector<T>::iterator	it = vec.begin();
-	typename vector<T>::iterator	ite = vec.end();
-
-	disp("SIZE", vec.size());
-	while (it != ite)
-	{
-		std::cout << " - " << *it << std::endl;
-		it++;
-	}
-}
-
-vector<int>	makeVec(int start, int range)
-{
-	int		end = start + range;
-	vector<int>	vec;
-
-	while (start < end)
-	{
-		vec.push_back(start);
-		++start;
-	}
-	return (vec);
-}
-
 	// CAPACITY
 
 int	max_sizeTester(void)
@@ -318,116 +272,43 @@ int	clearTester(void)
 	return (0);
 }
 
-template <typename T>
-void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true)
+int	main(int ac, char **av)
 {
-	const int size = vct.size();
-	const int capacity = vct.capacity();
-	const std::string isCapacityOk = (capacity >= size) ? "OK" : "KO";
-	// Cannot limit capacity's max value because it's implementation dependent
-
-	std::cout << "size: " << size << std::endl;
-	std::cout << "capacity: " << isCapacityOk << std::endl;
-	std::cout << "max_size: " << vct.max_size() << std::endl;
-	if (print_content)
+	if (ac != 2)
 	{
-		typename TESTED_NAMESPACE::vector<T>::const_iterator it = vct.begin();
-		typename TESTED_NAMESPACE::vector<T>::const_iterator ite = vct.end();
-		std::cout << std::endl << "Content is:" << std::endl;
-		for (; it != ite; ++it)
-			std::cout << "- " << *it << std::endl;
+		std::cout << "How to use: ./container <fct to test>"<< std::endl;
+		return (1);
 	}
-	std::cout << "###############################################" << std::endl;
+
+	std::map<std::string, PtrFct>		fcts;
+	PtrFct					fct;
+	std::map<std::string, PtrFct>::iterator	it;
+	std::map<std::string, PtrFct>::iterator	ite;
+	std::string				str = av[1];
+
+	fcts["assign"] = &assignTester;
+	fcts["insert"] = &insertTester;
+	fcts["erase"] = &eraseTester;
+	fcts["reserve"] = &reserveTester;
+	fcts["push_back"] = &push_backTester;
+	fcts["pop_back"] = &pop_backTester;
+	fcts["swap"] = &swapTester;
+	fcts["clear"] = &clearTester;
+	fcts["operator[]"] = &operatorHookTester;
+	fcts["at"] = &atTester;
+	fcts["front"] = &frontTester;
+	fcts["back"] = &backTester;
+	fcts["max_size"] = &max_sizeTester;
+	fcts["resize"] = &resizeTester;
+	fcts["empty"] = &emptyTester;
+	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
+	{
+		if (!str.compare(it->first))
+		{
+			fct = it->second;
+			return (fct ());
+		}
+	}
+	disp("FCT NOT FOUND", 1);
+	return (1);
 }
-
-#define TESTED_TYPE int
-
-int		main(void)
-{
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(5);
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin(), ite = vct.end();
-
-	std::cout << "len: " << (ite - it) << std::endl;
-	for (; it != ite; ++it)
-	{
-		*it = (ite - it);
-		disp("VALUE", *it);
-	}
-	disp("\n-------END------\n", 1);
-
-	it = vct.begin();
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_range(it, --(--ite));
-	for (int i = 0; it != ite; ++it)
-	{
-		*it = ++i * 5;
-		disp("VALUE", *it);
-	}
-	disp("\n-------END------\n", 1);
-
-	it = vct.begin();
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_copy(vct);
-	for (int i = 0; it != ite; ++it)
-	{
-		*it = ++i * 7;
-		disp("VALUE", *it);
-	}
-	disp("\n-------END------\n", 1);
-	vct_copy.push_back(42);
-	vct_copy.push_back(21);
-
-	std::cout << "\t-- PART ONE --" << std::endl;
-	printSize(vct);
-	printSize(vct_range);
-	printSize(vct_copy);
-
-	vct = vct_copy;
-	vct_copy = vct_range;
-	vct_range.clear();
-
-	std::cout << "\t-- PART TWO --" << std::endl;
-	printSize(vct);
-	printSize(vct_range);
-	printSize(vct_copy);
-	return (0);
-}
-
-//int	main(int ac, char **av)
-//{
-//	if (ac != 2)
-//	{
-//		std::cout << "How to use: ./container <fct to test>"<< std::endl;
-//		return (1);
-//	}
-//
-//	std::map<std::string, PtrFct>		fcts;
-//	PtrFct					fct;
-//	std::map<std::string, PtrFct>::iterator	it;
-//	std::map<std::string, PtrFct>::iterator	ite;
-//	std::string				str = av[1];
-//
-//	fcts["assign"] = &assignTester;
-//	fcts["insert"] = &insertTester;
-//	fcts["erase"] = &eraseTester;
-//	fcts["reserve"] = &reserveTester;
-//	fcts["push_back"] = &push_backTester;
-//	fcts["pop_back"] = &pop_backTester;
-//	fcts["swap"] = &swapTester;
-//	fcts["clear"] = &clearTester;
-//	fcts["operator[]"] = &operatorHookTester;
-//	fcts["at"] = &atTester;
-//	fcts["front"] = &frontTester;
-//	fcts["back"] = &backTester;
-//	fcts["max_size"] = &max_sizeTester;
-//	fcts["resize"] = &resizeTester;
-//	fcts["empty"] = &emptyTester;
-//	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
-//	{
-//		if (!str.compare(it->first))
-//		{
-//			fct = it->second;
-//			return (fct ());
-//		}
-//	}
-//	disp("FCT NOT FOUND", 1);
-//	return (1);
-//}

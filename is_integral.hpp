@@ -2,15 +2,36 @@
 # define IS_INTEGRAL_HPP
 # include "containers.h"
 
-template < class T, T v > struct	integral_constant
+template < class T > struct ft::is_integral
 {
-	static T	value = v;
-	typedef value_type	T;
-	typedef type		integral_constant;
-	operator value_type() const { return value; };
-	value_type	operator()() const { return value; };
+	static bool const	value = false;
 };
-
-template < typename T > struct ft::is_integral : public integral_constant<bool, false>;
-template < typename T > struct ft::is_integral : public integral_constant<bool, false>;
+template <> struct ft::is_integral<int>
+{
+	static bool const	value = true;
+};
+template <> struct ft::is_integral<bool>
+{
+	static bool const	value = true;
+};
+template <> struct ft::is_integral<char>
+{
+	static bool const	value = true;
+};
+template <> struct ft::is_integral<wchar_t>
+{
+	static bool const	value = true;
+};
+template <> struct ft::is_integral<short>
+{
+	static bool const	value = true;
+};
+template <> struct ft::is_integral<long>
+{
+	static bool const	value = true;
+};
+template <> struct ft::is_integral<long long>
+{
+	static bool const	value = true;
+};
 #endif

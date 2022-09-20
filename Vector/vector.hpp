@@ -3,10 +3,9 @@
 # include "../containers.h"
 # include "../iterator.hpp"
 # include "../random_access_iterator.hpp"
-# include "../const_random_access_iterator.hpp"
 # include "../reverse_iterator.hpp"
-# include "../const_reverse_iterator.hpp"
 # include "../enable_if.hpp"
+# include "../is_integral.hpp"
 
 template < class T, class Alloc >
 class ft::vector
@@ -21,7 +20,7 @@ class ft::vector
 
 		// ITERATOR
 		typedef ft::random_access_iterator<T>			iterator;
-		typedef ft::const_random_access_iterator<T>		const_iterator;
+		typedef ft::random_access_iterator<const T>		const_iterator;
 		typedef ft::reverse_iterator<T>				reverse_iterator;
 		typedef ft::const_reverse_iterator<T>			const_reverse_iterator;
 
@@ -48,7 +47,7 @@ class ft::vector
 			size_type	c = 0;
 
 			_size = x.size();
-			_capacity = x.capacity()  < _size ? x.capacity() : _size;
+			_capacity = x.capacity();
 			_c = x.get_allocator();
 			_first = _c.allocate(_capacity);
 			while (it != ite)
@@ -57,6 +56,24 @@ class ft::vector
 				++it;
 				++c;
 			}
+		};
+		vector	operator=(const vector<T, allocator_type>& x)
+		{
+			const_iterator	it = x.begin();
+			const_iterator	ite = x.end();
+			size_type	c = 0;
+
+			_size = x.size();
+			_capacity = x.capacity();
+			_c = x.get_allocator();
+			_first = _c.allocate(_capacity);
+			while (it != ite)
+			{
+				_c.construct(_first + c, *it);
+				++it;
+				++c;
+			}
+			return (*this);
 		};
 		~vector()
 		{
