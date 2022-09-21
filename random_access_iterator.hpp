@@ -10,12 +10,12 @@ template < class T >
 class	ft::random_access_iterator : public ft::iterator<std::random_access_iterator_tag, T>
 {
 	public:
-		typedef ft::iterator_traits<T>
-		typedef typename ft::iterator<random_access_iterator_tag, T>::iterator_category	iterator_category;
-		typedef typename ft::iterator<random_access_iterator_tag, T>::value_type	value_type;
-		typedef typename ft::iterator<random_access_iterator_tag, T>::difference_type	difference_type;
-		typedef typename ft::iterator<random_access_iterator_tag, T>::pointer		pointer;
-		typedef typename ft::iterator<random_access_iterator_tag, T>::reference		reference;
+		typedef ft::iterator_traits<T>			_traits;
+		typedef typename _traits::iterator_category	iterator_category;
+		typedef typename _traits::value_type		value_type;
+		typedef typename _traits::difference_type	difference_type;
+		typedef typename _traits::pointer		pointer;
+		typedef typename _traits::reference		reference;
 
 	protected:
 		pointer	p;

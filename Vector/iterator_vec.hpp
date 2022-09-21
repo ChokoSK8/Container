@@ -18,7 +18,6 @@ iterator	end(void)
 
 const_iterator	end(void) const
 {
-	disp("HEY", 10);
 	return (const_iterator(_first + _size));
 };
 
