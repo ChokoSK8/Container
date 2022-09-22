@@ -34,6 +34,10 @@ namespace	ft
 	struct	enable_if;
 	template < class T >
 	struct	is_integral;
+	template < class Iterator1, class Iterator2 >
+	bool	equal(Iterator1 first1, Iterator1 last1, Iterator2 first2,  Iterator2 last2);
+	template < class Iterator >
+	bool	equal(Iterator first1, Iterator last1, Iterator first2,  Iterator last2);
 }
 
 #endif

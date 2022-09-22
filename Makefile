@@ -39,7 +39,7 @@ $(NAME):	$(OBJS) $(VECDEP)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE$(C_END)"
 
 update:	main.cpp
-	@awk 'FNR < 45' cmp.cpp > f1 ; awk 'FNR > 36' main.cpp > f2 ; cat f1 > cmp.cpp ; cat f2 >> cmp.cpp
+	@awk 'FNR < 53' cmp.cpp > f1 ; awk 'FNR > 51' main.cpp > f2 ; cat f1 > cmp.cpp ; cat f2 >> cmp.cpp
 	@echo "\t$(C_CYAN)UPDATING CMP.CPP$(C_END)"
 	@c++ $(FLAGS) cmp.cpp -o cmp
 	@echo "\t$(C_GREEN)COMPILING CMP.CPP$(C_END)"

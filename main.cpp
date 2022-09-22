@@ -1,5 +1,6 @@
 # include "Vector/vector.hpp"
 # include "stack.hpp"
+# include "equal.hpp"
 # include <map>
 # include <list>
 # include <string>
@@ -48,11 +49,45 @@ vector<int>	makeVec(int start, int range)
 	return (vec);
 }
 
+template < class Container >
+void	equalTest(Container x, Container y, int reverse = 1)
+{
+	disp("equal(x.begin(), x.end(), y.begin(), y.end())",
+		equal(x.begin(), x.end(), y.begin(), y.end()));
+	disp("equal(x.begin() + 2, x.end() - 2, y.begin(), y.end())",
+		equal(x.begin() + 2, x.end() - 2, y.begin(), y.end()));
+	disp("equal(x.begin() + 2, x.end() - 2, y.begin() + 2, y.end() - 2)",
+		equal(x.begin() + 2, x.end() - 2, y.begin() + 2, y.end() - 2));
+	if (reverse)
+		return (equalTest(y, x, 0));
+}
+
+template < class Container1, class Container2 >
+void	equalTest(Container1 x, Container2 y, int reverse = 1)
+{
+	disp("equal(x.begin(), x.end(), y.begin(), y.end())",
+		equal(x.begin(), x.end(), y.begin(), y.end()));
+	disp("equal(x.begin() + 2, x.end() - 2, y.begin(), y.end())",
+		equal(x.begin() + 2, x.end() - 2, y.begin(), y.end()));
+	disp("equal(x.begin() + 2, x.end() - 2, y.begin() + 2, y.end() - 2)",
+		equal(x.begin() + 2, x.end() - 2, y.begin() + 2, y.end() - 2));
+	if (reverse)
+		return (equalTest(y, x, 0));
+}
+
+int	equalTester(void)
+{
+	vector<int>	v1 = makeVec(1, 10);
+	vector<int>	v2 = makeVec(1, 5);
+	vector<int>	v3 = makeVec(2, 11);
+
+	equalTest(v1, v2);
+	equalTest(v1, v3);
+	equalTest(v2, v3);
+	return (0);
+}
+
 int	main()
 {
-	stack<int>	stk1;
-
-	stk1.push(10);
-	displayStk(stk1);
-	return (0);
+	return (equalTester());
 }
