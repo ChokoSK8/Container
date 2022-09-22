@@ -92,8 +92,9 @@ class ft::vector
 				_capacity++;
 			}
 		};
-		template < class InputIterator, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type >
-		explicit	vector(InputIterator start, InputIterator end)
+		template < class InputIterator>
+		explicit	vector(InputIterator start, InputIterator end,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type = 0)
 		{
 			size_type	i = 0;
 			size_type	dist = ft::distance(start, end);

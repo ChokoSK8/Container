@@ -84,18 +84,18 @@ class	ft::random_access_iterator : public ft::iterator<std::random_access_iterat
 		};
 
 		// COMPARAISON
-		bool	operator<(const ft::random_access_iterator<T>& rhs) const {
-			return (p < rhs.base());
-		};
-		bool	operator>(const ft::random_access_iterator<T>& rhs) const {
-			return (p > rhs.base());
-		};
-		bool	operator<=(const ft::random_access_iterator<T>& rhs) const {
-			return (p <= rhs.base());
-		};
-		bool	operator>=(const ft::random_access_iterator<T>& rhs) const {
-			return (p >= rhs.base());
-		};
+//		bool	operator<(const ft::random_access_iterator<T>& rhs) const {
+//			return (p < rhs.base());
+//		};
+//		bool	operator>(const ft::random_access_iterator<T>& rhs) const {
+//			return (p > rhs.base());
+//		};
+//		bool	operator<=(const ft::random_access_iterator<T>& rhs) const {
+//			return (p <= rhs.base());
+//		};
+//		bool	operator>=(const ft::random_access_iterator<T>& rhs) const {
+//			return (p >= rhs.base());
+//		};
 
 		ft::random_access_iterator<T>	operator+=(difference_type n) {
 			p += n;

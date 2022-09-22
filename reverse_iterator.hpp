@@ -91,30 +91,30 @@ class	ft::reverse_iterator : public ft::iterator<
 		};
 };
 
-	// RELAIIONAL OPERAIORS
+	// RELATIONAL OPERAIORS
 template <class I> bool	operator==(const ft::reverse_iterator<I>& x,
 		const ft::reverse_iterator<I>& y) {
-	return (x.base() == y.base());
+	return (*(x.base()) == *(y.base()));
 };
 template <class I> bool	operator!=(const ft::reverse_iterator<I>& x,
 		const ft::reverse_iterator<I>& y) {
-	return (x.base() != y.base());
+	return (*(x.base()) != *(y.base()));
 };
 template <class I> bool	operator<=(const ft::reverse_iterator<I>& x,
 		const ft::reverse_iterator<I>& y) {
-	return (x.base() > y.base());
+	return (*(x.base()) >= *(y.base()));
 };
 template <class I> bool	operator>=(const ft::reverse_iterator<I>& x,
 		const ft::reverse_iterator<I>& y) {
-	return (x.base() < y.base());
+	return (*(x.base()) <= *(y.base()));
 };
 template <class I> bool	operator<(const ft::reverse_iterator<I>& x,
 		const ft::reverse_iterator<I>& y) {
-	return (x.base() >= y.base());
+	return (*(x.base()) > *(y.base()));
 };
 template <class I> bool	operator>(const ft::reverse_iterator<I>& x,
 		const ft::reverse_iterator<I>& y) {
-	return (x.base() <= y.base());
+	return (*(x.base()) < *(y.base()));
 };
 //-------LEFI-RIGHI---------
 template <class R, class L> bool	operator==(const ft::reverse_iterator<R>& x,
@@ -123,23 +123,23 @@ template <class R, class L> bool	operator==(const ft::reverse_iterator<R>& x,
 };
 template <class R, class L> bool	operator!=(const ft::reverse_iterator<R>& x,
 		const ft::reverse_iterator<L>& y) {
-	return (x.base() != y.base());
+	return (*(x.base()) != *(y.base()));
 };
 template <class R, class L> bool	operator<=(const ft::reverse_iterator<R>& x,
 		const ft::reverse_iterator<L>& y) {
-	return (x.base() <= y.base());
+	return (*(x.base()) >= *(y.base()));
 };
 template <class R, class L> bool	operator>=(const ft::reverse_iterator<R>& x,
 		const ft::reverse_iterator<L>& y) {
-	return (x.base() >= y.base());
+	return (*(x.base()) <= *(y.base()));
 };
 template <class R, class L> bool	operator<(const ft::reverse_iterator<R>& x,
 		const ft::reverse_iterator<L>& y) {
-	return (x.base() < y.base());
+	return (*(x.base()) > *(y.base()));
 };
 template <class R, class L> bool	operator>(const ft::reverse_iterator<R>& x,
 		const ft::reverse_iterator<L>& y) {
-	return (x.base() > y.base());
+	return (*(x.base()) < *(y.base()));
 };
 
 	// OPERAIOR +
