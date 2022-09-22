@@ -1,17 +1,14 @@
-BEGIN: 0x1ea3eb0
-BEGIN: 0x1ea3eb0
 size: 5
 capacity: OK
 max_size: 1152921504606846975
 
 Content is:
-- 5
-- 4
-- 3
-- 2
 - 1
+- 2
+- 3
+- 4
+- 5
 ###############################################
-BEGIN: 0x1ea3eb0
 true
 		ft_eq_ope:
 false

@@ -21,4 +21,24 @@ const_iterator	end(void) const
 	return (const_iterator(_first + _size));
 };
 
+reverse_iterator	rbegin(void)
+{
+	return (end());
+};
+
+const_reverse_iterator	rbegin(void) const
+{
+	return (end());
+};
+
+reverse_iterator	rend(void)
+{
+	return (begin());
+};
+
+const_reverse_iterator	rend(void) const
+{
+	return (begin());
+};
+
 #endif

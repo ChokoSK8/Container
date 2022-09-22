@@ -24,12 +24,8 @@ namespace	ft
 	class	iterator;
 	template < class T >
 	class	random_access_iterator;
-	template < class T >
-	class	const_random_access_iterator;
-	template < class T >
+	template < class I >
 	class	reverse_iterator;
-	template < class T >
-	class	const_reverse_iterator;
 	template < class T, class Container = std::vector<T> >
 	class	stack;
 	template < class T, class Alloc = std::allocator<T> >

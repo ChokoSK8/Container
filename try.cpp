@@ -59,9 +59,8 @@ typedef struct	s_coordinate {
 int	main()
 {
 	vector<int>	v1 = makeVec(1, 10);
+	vector<int>	v2 = makeVec(-1, 10);
 
-	displayVec(v1);
-	v1.insert(v1.begin(), v1.begin() + 2, v1.end() - 5);
-	displayVec(v1);
+	disp("v1 <= v2", v1 <= v2);
 	return (0);
 }
