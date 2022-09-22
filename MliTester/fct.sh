@@ -17,7 +17,7 @@ CC="clang++"
 CFLAGS="-Wall -Wextra -Werror -std=c++98"
 # CFLAGS+=" -fsanitize=address -g3"
 
-ft_compile_output=""
+ft_compile_output="/dev/null"
 std_compile_output="/dev/null"
 
 function pheader () {

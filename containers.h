@@ -26,10 +26,10 @@ namespace	ft
 	class	random_access_iterator;
 	template < class I >
 	class	reverse_iterator;
-	template < class T, class Container = std::vector<T> >
-	class	stack;
 	template < class T, class Alloc = std::allocator<T> >
 	class	vector;
+	template < class T, class Container = vector<T> >
+	class	stack;
 	template < bool B, class T>
 	struct	enable_if;
 	template < class T >
