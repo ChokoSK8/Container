@@ -272,6 +272,44 @@ int	clearTester(void)
 	return (0);
 }
 
+template < class Container >
+void	equalTest(Container x, Container y, int reverse = 1)
+{
+	disp("equal(x.begin(), x.end(), y.begin(), y.end())",
+		equal(x.begin(), x.end(), y.begin()));
+	disp("equal(x.begin() + 2, x.end() - 2, y.begin(), y.end())",
+		equal(x.begin() + 2, x.end() - 2, y.begin()));
+	disp("equal(x.begin() + 2, x.end() - 2, y.begin() + 2, y.end() - 2)",
+		equal(x.begin() + 2, x.end() - 2, y.begin() + 2));
+	if (reverse)
+		return (equalTest(y, x, 0));
+}
+
+template < class Container1, class Container2 >
+void	equalTest(Container1 x, Container2 y, int reverse = 1)
+{
+	disp("equal(x.begin(), x.end(), y.begin(), y.end())",
+		equal(x.begin(), x.end(), y.begin()));
+	disp("equal(x.begin() + 2, x.end() - 2, y.begin(), y.end())",
+		equal(x.begin() + 2, x.end() - 2, y.begin()));
+	disp("equal(x.begin() + 2, x.end() - 2, y.begin() + 2, y.end() - 2)",
+		equal(x.begin() + 2, x.end() - 2, y.begin() + 2));
+	if (reverse)
+		return (equalTest(y, x, 0));
+}
+
+int	equalTester(void)
+{
+	vector<int>	v1 = makeVec(1, 10);
+	vector<int>	v2 = makeVec(1, 5);
+	vector<int>	v3 = makeVec(2, 11);
+
+	equalTest(v1, v2);
+	equalTest(v1, v3);
+	equalTest(v2, v3);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	if (ac != 2)
@@ -301,6 +339,7 @@ int	main(int ac, char **av)
 	fcts["max_size"] = &max_sizeTester;
 	fcts["resize"] = &resizeTester;
 	fcts["empty"] = &emptyTester;
+	fcts["equal"] = &equalTester;
 	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
 	{
 		if (!str.compare(it->first))

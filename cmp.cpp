@@ -5,6 +5,7 @@
 # include <list>
 # include <string>
 # include <stack>
+# include <algorithm>
 
 using namespace std;
 
@@ -48,17 +49,21 @@ vector<int>	makeVec(int start, int range)
 	return (vec);
 }
 
-//--------UPDATE--------
+template < class T >
+bool	predicate(const T& x, const T& y)
+{
+	return (x == y);
+}
 
 template < class Container >
 void	equalTest(Container x, Container y, int reverse = 1)
 {
 	disp("equal(x.begin(), x.end(), y.begin(), y.end())",
-		equal(x.begin(), x.end(), y.begin(), y.end()));
+		equal(x.begin(), x.end(), y.begin()));
 	disp("equal(x.begin() + 2, x.end() - 2, y.begin(), y.end())",
-		equal(x.begin() + 2, x.end() - 2, y.begin(), y.end()));
+		equal(x.begin() + 2, x.end() - 2, y.begin()));
 	disp("equal(x.begin() + 2, x.end() - 2, y.begin() + 2, y.end() - 2)",
-		equal(x.begin() + 2, x.end() - 2, y.begin() + 2, y.end() - 2));
+		equal(x.begin() + 2, x.end() - 2, y.begin() + 2));
 	if (reverse)
 		return (equalTest(y, x, 0));
 }
@@ -67,11 +72,11 @@ template < class Container1, class Container2 >
 void	equalTest(Container1 x, Container2 y, int reverse = 1)
 {
 	disp("equal(x.begin(), x.end(), y.begin(), y.end())",
-		equal(x.begin(), x.end(), y.begin(), y.end()));
+		equal(x.begin(), x.end(), y.begin()));
 	disp("equal(x.begin() + 2, x.end() - 2, y.begin(), y.end())",
-		equal(x.begin() + 2, x.end() - 2, y.begin(), y.end()));
+		equal(x.begin() + 2, x.end() - 2, y.begin()));
 	disp("equal(x.begin() + 2, x.end() - 2, y.begin() + 2, y.end() - 2)",
-		equal(x.begin() + 2, x.end() - 2, y.begin() + 2, y.end() - 2));
+		equal(x.begin() + 2, x.end() - 2, y.begin() + 2));
 	if (reverse)
 		return (equalTest(y, x, 0));
 }
