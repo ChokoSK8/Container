@@ -1,6 +1,7 @@
 # include "Vector/vector.hpp"
 # include "stack.hpp"
 # include "equal.hpp"
+# include "pair.hpp"
 # include <map>
 # include <list>
 # include <string>
@@ -49,7 +50,43 @@ vector<int>	makeVec(int start, int range)
 	return (vec);
 }
 
+void	dispAct(std::string	str)
+{
+	std::cout << "------- " << str << " -------" << std::endl;
+}
+
+template < class T1, class T2 >
+void	displayPair(pair<T1, T2> p)
+{
+	std::cout << "FIRST: " << p.first  << " | SECOND: " << p.second << std::endl;
+}
+
 int	main()
 {
+	pair<int, double>	p1;
+	pair<std::string, char>	p2("hello", 'B');
+	pair<std::string, char>	p3(p2);
+	pair<float, float>	p4(21.212121, 42.42);
+
+	dispAct("CONSTRUCTOR TESTS")
+	disp("PAIR", 1);
+	displayPair(p1);
+	disp("PAIR", 2);
+	displayPair(p2);
+	disp("PAIR", 3);
+	displayPair(p3);
+	disp("PAIR", 4);
+	displayPair(p4);
+
+	dispAct("p1 == p4");
+	p1 = p4;
+	disp("PAIR", 1);
+	displayPair(p1);
+
+	dispAct("make_pair(52.3, \"coucou\") --------");
+	displayPair(make_pair(52.3, "coucou"));
+
+	dispAct("COMPARAISON");
+	pairCmpTester(p1, p2);
 	return (0);
 }

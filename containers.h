@@ -38,6 +38,10 @@ namespace	ft
 	bool	equal(Iterator1 first1, Iterator1 last1, Iterator2 first2);
 	template < class Iterator >
 	bool	equal(Iterator first1, Iterator last1, Iterator first2);
+	template < class T1, class T2 >
+	struct	pair;
+	template < class T1, class T2 >
+	pair<T1, T2>	make_pair(T1 x, T2 y);
 }
 
 #endif
