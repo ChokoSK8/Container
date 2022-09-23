@@ -1,3 +1,16 @@
+	// UTILS
+
+template < class T1, class T2 >
+void	displayPair(pair<T1, T2> p)
+{
+	std::cout << "FIRST: " << p.first  << " | SECOND: " << p.second << std::endl;
+}
+
+void	dispAct(std::string	str)
+{
+	std::cout << "------- " << str << " -------" << std::endl;
+}
+
 	// CAPACITY
 
 int	max_sizeTester(void)
@@ -307,6 +320,54 @@ int	equalTester(void)
 	equalTest(v1, v2);
 	equalTest(v1, v3);
 	equalTest(v2, v3);
+	return (0);
+}
+
+template < class T1, class T2 >
+void	pairCmpTester(pair<T1, T2>& x, pair<T1, T2>& y, int recur = 1)
+{
+	disp("PAIR X", 1);
+	displayPair(x);
+	disp("PAIR Y", 1);
+	displayPair(y);
+	disp("x == y", x == y);
+	disp("x != y", x != y);
+	disp("x <= y", x <= y);
+	disp("x >= y", x >= y);
+	disp("x < y", x < y);
+	disp("x > y", x > y);
+	if (recur)
+		return pairCmpTester(y, x, 0);
+}
+
+int	pair&make_pairTester(void)
+{
+	pair<int, double>	p1;
+	pair<std::string, char>	p2("hello", 'B');
+	pair<std::string, char>	p3(p2);
+	pair<float, float>	p4(21.212121, 42.42);
+	pair<float, float>	p5(4, 2);
+
+	dispAct("CONSTRUCTOR TESTS");
+	disp("PAIR", 1);
+	displayPair(p1);
+	disp("PAIR", 2);
+	displayPair(p2);
+	disp("PAIR", 3);
+	displayPair(p3);
+	disp("PAIR", 4);
+	displayPair(p4);
+
+	dispAct("p1 == p4");
+	p1 = p4;
+	disp("PAIR", 1);
+	displayPair(p1);
+
+	dispAct("make_pair(52.3, \"coucou\") --------");
+	displayPair(make_pair(52.3, "coucou"));
+
+	dispAct("COMPARAISON");
+	pairCmpTester(p4, p5);
 	return (0);
 }
 
