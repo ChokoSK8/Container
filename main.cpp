@@ -61,14 +61,32 @@ void	displayPair(pair<T1, T2> p)
 	std::cout << "FIRST: " << p.first  << " | SECOND: " << p.second << std::endl;
 }
 
-int	main()
+template < class T1, class T2 >
+void	pairCmpTester(pair<T1, T2>& x, pair<T1, T2>& y, int recur = 1)
+{
+	disp("PAIR X", 1);
+	displayPair(x);
+	disp("PAIR Y", 1);
+	displayPair(y);
+	disp("x == y", x == y);
+	disp("x != y", x != y);
+	disp("x <= y", x <= y);
+	disp("x >= y", x >= y);
+	disp("x < y", x < y);
+	disp("x > y", x > y);
+	if (recur)
+		return pairCmpTester(y, x, 0);
+}
+
+int	pair&make_pairTester(void)
 {
 	pair<int, double>	p1;
 	pair<std::string, char>	p2("hello", 'B');
 	pair<std::string, char>	p3(p2);
 	pair<float, float>	p4(21.212121, 42.42);
+	pair<float, float>	p5(4, 2);
 
-	dispAct("CONSTRUCTOR TESTS")
+	dispAct("CONSTRUCTOR TESTS");
 	disp("PAIR", 1);
 	displayPair(p1);
 	disp("PAIR", 2);
@@ -87,6 +105,11 @@ int	main()
 	displayPair(make_pair(52.3, "coucou"));
 
 	dispAct("COMPARAISON");
-	pairCmpTester(p1, p2);
+	pairCmpTester(p4, p5);
+	return (0);
+}
+
+int	main()
+{
 	return (0);
 }

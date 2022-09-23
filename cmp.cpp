@@ -50,10 +50,28 @@ vector<int>	makeVec(int start, int range)
 }
 
 
+void	dispAct(std::string	str)
+{
+	std::cout << "------- " << str << " -------" << std::endl;
+}
+
 template < class T1, class T2 >
 void	displayPair(pair<T1, T2> p)
 {
 	std::cout << "FIRST: " << p.first  << " | SECOND: " << p.second << std::endl;
+}
+
+template < class T1, class T2 >
+void	pairCmpTester(pair<T1, T2>& x, pair<T1, T2>& y, int recur = 1)
+{
+	disp("x == y", x == y);
+	disp("x != y", x != y);
+	disp("x <= y", x <= y);
+	disp("x >= y", x >= y);
+	disp("x < y", x < y);
+	disp("x > y", x > y);
+	if (recur)
+		return pairCmpTester(y, x, 0);
 }
 
 int	main()
@@ -62,7 +80,9 @@ int	main()
 	pair<std::string, char>	p2("hello", 'B');
 	pair<std::string, char>	p3(p2);
 	pair<float, float>	p4(21.212121, 42.42);
+	pair<float, float>	p5(4, 2);
 
+	dispAct("CONSTRUCTOR TESTS");
 	disp("PAIR", 1);
 	displayPair(p1);
 	disp("PAIR", 2);
@@ -71,10 +91,16 @@ int	main()
 	displayPair(p3);
 	disp("PAIR", 4);
 	displayPair(p4);
-	disp("-------   p1 = p4  -------", 1);
+
+	dispAct("p1 == p4");
 	p1 = p4;
 	disp("PAIR", 1);
 	displayPair(p1);
+
+	dispAct("make_pair(52.3, \"coucou\") --------");
 	displayPair(make_pair(52.3, "coucou"));
+
+	dispAct("COMPARAISON");
+	pairCmpTester(p4, p5);
 	return (0);
 }

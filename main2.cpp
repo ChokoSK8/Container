@@ -340,6 +340,7 @@ int	main(int ac, char **av)
 	fcts["resize"] = &resizeTester;
 	fcts["empty"] = &emptyTester;
 	fcts["equal"] = &equalTester;
+	fcts["pair"] = &pair&make_pairTester;
 	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
 	{
 		if (!str.compare(it->first))

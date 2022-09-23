@@ -46,27 +46,27 @@ bool	operator<=(const ft::pair<T1, T2>& lhs, const ft::pair<T1, T2>& rhs)
 {
 	if (lhs.first == rhs.first)
 		return (lhs.second <= rhs.second);
-	return (lhs.first < rhs.first)
+	return (lhs.first < rhs.first);
 };
 template < class T1, class T2 >
 bool	operator>=(const ft::pair<T1, T2>& lhs, const ft::pair<T1, T2>& rhs)
 {
 	if (lhs.first == rhs.first)
 		return (lhs.second >= rhs.second);
-	return (lhs.first > rhs.first)
+	return (lhs.first > rhs.first);
 };
 template < class T1, class T2 >
 bool	operator<(const ft::pair<T1, T2>& lhs, const ft::pair<T1, T2>& rhs)
 {
 	if (lhs.first == rhs.first)
 		return (lhs.second < rhs.second);
-	return (lhs.first < rhs.first)
+	return (lhs.first < rhs.first);
 };
 template < class T1, class T2 >
 bool	operator>(const ft::pair<T1, T2>& lhs, const ft::pair<T1, T2>& rhs)
 {
 	if (lhs.first == rhs.first)
 		return (lhs.second > rhs.second);
-	return (lhs.first > rhs.first)
+	return (lhs.first > rhs.first);
 };
 #endif
