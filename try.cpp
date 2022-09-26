@@ -1,6 +1,7 @@
 # include <iostream>
 # include <vector>
 # include <memory>
+# include <map>
 # include <cstring>
 # include <list>
 
@@ -51,6 +52,21 @@ void	displayVec(std::vector<T> vec)
 	}
 }
 
+template < typename T1, typename T2>
+void	displayMap(std::map<T1, T2> mamap)
+{
+	typename std::map<T1, T2>::iterator	it = mamap.begin();
+	typename std::map<T1, T2>::iterator	ite = mamap.end();
+
+	disp("SIZE", mamap.size());
+	while (it != ite)
+	{
+		std::cout << "FIRST:" << it->first;
+		std::cout << " | SECOND: " << it->second << std::endl;
+		it++;
+	}
+}
+
 typedef struct	s_coordinate {
 	int	a;
 	int	b;
@@ -58,9 +74,21 @@ typedef struct	s_coordinate {
 
 int	main()
 {
-	vector<int>	v1 = makeVec(1, 10);
-	vector<int>	v2 = makeVec(-1, 10);
+	std::map<int, int>	mamap;
 
-	disp("v1 <= v2", v1 <= v2);
+	mamap[7] = 7;
+	mamap[8] = 8;
+	mamap[9] = 9;
+	mamap[1] = 1;
+	mamap[2] = 2;
+	mamap[3] = 3;
+	mamap[4] = 4;
+	mamap[5] = 5;
+	mamap[6] = 6;
+	std::pair<int, float>	ten(10, 10);
+	mamap.insert(ten);
+	displayMap(mamap);
+	std::cout << "SIZE OF BOOL: " << sizeof(bool) << std::endl;
+	std::cout << "SIZE OF CHAR: " << sizeof(char) << std::endl;
 	return (0);
 }

@@ -2,6 +2,7 @@
 # include "stack.hpp"
 # include "equal.hpp"
 # include "pair.hpp"
+# include "Map/map.hpp"
 # include <map>
 # include <list>
 # include <string>
@@ -78,7 +79,7 @@ void	pairCmpTester(pair<T1, T2>& x, pair<T1, T2>& y, int recur = 1)
 		return pairCmpTester(y, x, 0);
 }
 
-int	pair&make_pairTester(void)
+int	pairANDmake_pairTester(void)
 {
 	pair<int, double>	p1;
 	pair<std::string, char>	p2("hello", 'B');
@@ -111,5 +112,13 @@ int	pair&make_pairTester(void)
 
 int	main()
 {
+	map<int, int>	mamap;
+	pair<int, int>	one(1, 1);
+	pair<int, int>	two(2, 2);
+	pair<int, int>	three(3, 3);
+
+	mamap.insert(one);
+	mamap.insert(two);
+	mamap.insert(three);
 	return (0);
 }

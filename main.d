@@ -6,7 +6,8 @@ main.o: main.cpp Vector/vector.hpp Vector/../containers.h \
   Vector/../is_integral.hpp Vector/iterator_vec.hpp \
   Vector/capacity_vec.hpp Vector/element_access_vec.hpp \
   Vector/modifiers_vec.hpp Vector/private_vec.hpp stack.hpp equal.hpp \
-  pair.hpp
+  pair.hpp Map/map.hpp Map/../pair.hpp Map/../containers.h \
+  Map/mapNode.hpp
 
 Vector/vector.hpp:
 
@@ -47,3 +48,11 @@ stack.hpp:
 equal.hpp:
 
 pair.hpp:
+
+Map/map.hpp:
+
+Map/../pair.hpp:
+
+Map/../containers.h:
+
+Map/mapNode.hpp:
