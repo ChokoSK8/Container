@@ -13,19 +13,19 @@ class	ft::map
 	public:
 		typedef	Key					key_type;
 		typedef T					mapped_type;
-		typedef ft::pair<const Key, T>			value_type;
+		typedef pair<const Key, T>			value_type;
 		typedef std::size_t				size_type;
 		typedef std::ptrdiff_t				difference_type;
 		typedef Compare					key_compare;
 		typedef Allocator				allocator_type;
 		typedef value_type&				reference;
 		typedef const value_type&			const_reference;
-		typedef typename Allocator::pointer		pointer;
-		typedef typename Allocator::const_pointer	const_pointer;
+		typedef pair<const Key, T>*			pointer;
+		typedef const pair<const Key, T>*		const_pointer;
 
 		// ITERATOR
-	//	typedef ft::random_access_iterator<pointer>		iterator;
-	//	typedef ft::random_access_iterator<const_pointer>	const_iterator;
+		typedef rbrator<pointer>		iterator;
+		typedef rbrator<const_pointer>		const_iterator;
 	//	typedef ft::reverse_iterator<iterator>			reverse_iterator;
 	//	typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
