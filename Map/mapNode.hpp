@@ -124,7 +124,7 @@ class	ft::node
 				return (_papa->getLeft());
 			return (_papa->getRight());
 		};
-		int	execBalancing()
+		int	execBalancing(void)
 		{
 			if (is_root())
 				return (setRootColor());
@@ -177,9 +177,19 @@ class	ft::node
 			node*	papaY = y->getPapa();
 
 			x->setRight(y);
+			y->setSide('r');
 			y->setLeft(rightX);
+			y->setPapa(x);
 			if (papaY)
-				papaY->setRight(x);
+			{
+				papaY->setLeft(x);
+				x->setPapa(papaY);
+			}
+			else
+			{
+				x->setPapa(NULL);
+				x->setSide('c');
+			}
 		};
 		void	rotLeft(node* x, node* y)
 		{
@@ -187,16 +197,26 @@ class	ft::node
 			node*	papaY = y->getPapa();
 
 			x->setLeft(y);
+			y->setSide('l');
 			y->setRight(leftX);
+			y->setPapa(x);
 			if (papaY)
-				papaY->setLeft(x);
+			{
+				papaY->setRight(x);
+				x->setPapa(papaY);
+			}
+			else
+			{
+				x->setPapa(NULL);
+				x->setSide('c');
+			}
 		};
-		void	swapColor(node* grandPa, node* papa)
+		void	swapColor(node* x, node* y)
 		{
-			char	tmp = grandPa->getColor();
+			char	tmp = x->getColor();
 
-			grandPa->setColor(papa->getColor());
-			papa->setColor(tmp);
+			x->setColor(y->getColor());
+			y->setColor(tmp);
 		};
 		bool	isUncleRed(void)
 		{

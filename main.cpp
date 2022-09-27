@@ -116,9 +116,18 @@ int	main()
 	pair<int, int>	one(1, 1);
 	pair<int, int>	two(2, 2);
 	pair<int, int>	three(3, 3);
+	pair<int, int>	four(4, 4);
+	pair<int, int>	five(5, 5);
+	pair<int, int>	six(6, 6);
+	pair<int, int>	seven(7, 7);
+	pair<int, int>	eight(8, 8);
+	pair<int, int>	nine(9, 9);
 
-	mamap.insert(one);
-	mamap.insert(two);
+	mamap.insert(seven);
 	mamap.insert(three);
+	mamap.insert(eight);
+	mamap.insert(nine);
+	mamap.insert(six);
+	mamap.insert(four);
 	return (0);
 }

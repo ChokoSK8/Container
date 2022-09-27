@@ -4,6 +4,9 @@
 # include "../containers.h"
 # include "mapNode.hpp"
 
+# include <sstream>
+# include <vector>
+
 template < class Key, class T, class Compare, class Allocator >
 class	ft::map
 {
@@ -72,8 +75,9 @@ class	ft::map
 				_root = newNode;
 			balanceTree(newNode);
 
-			disp("------NEW NODE-------", 1);
-			displayNode(*newNode);
+		//	disp("------NEW NODE-------", 1);
+		//	displayNode(*newNode);
+			print();
 			// RETURN THE RIGHT THING
 		};
 
@@ -119,7 +123,13 @@ class	ft::map
 		{
 			if (_node_->execBalancing())
 				return (balanceTree(_node_->getGrandPa()));
+
+			node<key_type, mapped_type>*	papa = _node_->getPapa();
+
+			if (papa && papa->is_root())
+				_root = papa;
 		};
+		# include "print.hpp"
 		
 };
 #endif
