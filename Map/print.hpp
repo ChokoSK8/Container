@@ -6,7 +6,7 @@
 /*   By: rgeny <rgeny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 10:49:44 by rgeny             #+#    #+#             */
-/*   Updated: 2022/09/27 12:51:09 by abrun            ###   ########.fr       */
+/*   Updated: 2022/09/27 14:23:58 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define NODE_LEFT getLeft()
 # define NODE_RIGHT getRight()
 
+# define DEBUG 10
+
 public:
 	void	print	(void)
 	{
@@ -42,13 +44,15 @@ public:
 	}
 
 private:
-	void	_print	(NODE_POINTER_TYPE & node,
+	void	_print	(NODE_POINTER_TYPE  node,
 					 std::vector<std::string> & tree,
 					 size_t depth,
 					 size_t pos = 0,
 					 size_t * left = NULL,
 					 size_t * right = NULL)
 	{
+		if (depth > DEBUG)
+			return ;
 //	align node
 		for (size_t i = _strsize(tree[depth]); i < pos; ++i)
 			tree[depth] += " ";
@@ -56,7 +60,7 @@ private:
 //	end of recursive function
 		if (node == SENTINEL)
 		{
-			if (node->color == 'r')
+			if (node != NULL && node->getColor() == 'r')
 				tree[depth] += RED_NODE "NIL" COLOR_TEXT;
 			else
 				tree[depth] += BLACK_NODE "NIL" COLOR_TEXT;
@@ -70,7 +74,7 @@ private:
 
 //	count size of current value
 		std::stringstream	ss;
-		ss	<< node->value;
+		ss	<< node->getContent();
 		size_t	cur_size = ss.str().size();
 
 //	execute the recursion
@@ -90,8 +94,8 @@ private:
 				tree[depth] += " ";
 		}
 
-//	add color of current node
-		if (node->color == 'r')
+//	add getColor() of current node
+		if (node->getColor() == 'r')
 			tree[depth] += RED_NODE;
 		else
 			tree[depth] += BLACK_NODE;
@@ -118,11 +122,13 @@ private:
 		}
 	}
 
-	size_t	_height	(NODE_POINTER_TYPE & node)
+	size_t	_height	(NODE_POINTER_TYPE node, size_t i = 0)
 	{
+		if (i > DEBUG)
+			return (0);
 		if (node == SENTINEL)
 			return (1);
-		return (1 + std::max(_height(node->NODE_LEFT), _height(node->NODE_RIGHT)));
+		return (1 + std::max(_height(node->NODE_LEFT, i + 1), _height(node->NODE_RIGHT, i + 1)));
 	}
 
 //	_strsize
@@ -134,7 +140,7 @@ private:
 		for (size_t i = 0; i < str.size(); ++i)
 		{
 			std::string special = str.substr(i, 3);
-			std::string	color = str.substr(i, 5);
+			std::string	col = str.substr(i, 5);
 
 			if (special == "─" ||
 				special == "┌" ||
@@ -142,10 +148,10 @@ private:
 			{
 				i += 2;
 			}
-			else if (color == COLOR_BACK ||
-					 color == COLOR_TEXT ||
-					 color == BLACK_NODE ||
-					 color == RED_NODE)
+			else if (col == COLOR_BACK ||
+					 col == COLOR_TEXT ||
+					 col == BLACK_NODE ||
+					 col == RED_NODE)
 			{
 				i += 4;
 				--count;

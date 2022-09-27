@@ -24,7 +24,7 @@ OBJS	= $(SRCS:.cpp=.o)
 
 VECDEP	= $(VECDIR)/*.hpp
 
-FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98
+FLAGS	= -g -Wall -Werror -Wextra -MMD -MP -std=c++98
 
 RM	= rm -rf
 

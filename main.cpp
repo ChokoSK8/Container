@@ -122,12 +122,26 @@ int	main()
 	pair<int, int>	seven(7, 7);
 	pair<int, int>	eight(8, 8);
 	pair<int, int>	nine(9, 9);
+	pair<int, int>	ten(10, 10);
+	pair<int, int>	eleven(11, 11);
 
 	mamap.insert(seven);
 	mamap.insert(three);
-	mamap.insert(eight);
-	mamap.insert(nine);
+	mamap.insert(ten);
+	mamap.insert(one);
+	mamap.insert(two);
+	mamap.insert(eleven);
 	mamap.insert(six);
 	mamap.insert(four);
+	mamap.insert(eight);
+	mamap.insert(nine);
+	mamap.insert(five);
+//	mamap.insert(one);
+//	mamap.insert(two);
+//	mamap.insert(three);
+//	mamap.insert(four);
+//	mamap.insert(five);
+//	mamap.insert(six);
+//	mamap.insert(seven);
 	return (0);
 }

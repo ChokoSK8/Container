@@ -28,6 +28,17 @@ class	ft::node
 			_right = NULL;
 			_papa = NULL;
 			_color = 'r';
+			_side = 'c';
+		};
+		node(const node<key_type, content_type>& mit)
+		{
+			_key = mit.getKey();
+			_content = mit.getContent();
+			_left = mit.getLeft();
+			_right = mit.getRight();
+			_papa = mit.getPapa();
+			_color = mit.getColor();
+			_side = mit.getSide();
 		};
 
 		// FCTS
@@ -164,17 +175,18 @@ class	ft::node
 		int	LRcase(void)
 		{
 			rotLeft(this, getPapa());
-			return (LLcase());
+			return (_left->LLcase());
 		};
 		int	RLcase(void)
 		{
 			rotRight(this, getPapa());
-			return (RRcase());
+			return (_right->RRcase());
 		};
 		void	rotRight(node* x, node* y)
 		{
 			node*	rightX = x->getRight();
 			node*	papaY = y->getPapa();
+			char	sideY = y->getSide();
 
 			x->setRight(y);
 			y->setSide('r');
@@ -182,8 +194,17 @@ class	ft::node
 			y->setPapa(x);
 			if (papaY)
 			{
-				papaY->setLeft(x);
 				x->setPapa(papaY);
+				if (sideY == 'r')
+				{
+					papaY->setRight(x);
+					x->setSide('r');
+				}
+				else
+				{
+					papaY->setLeft(x);
+					x->setSide('l');
+				}
 			}
 			else
 			{
@@ -195,6 +216,7 @@ class	ft::node
 		{
 			node*	leftX = x->getLeft();
 			node*	papaY = y->getPapa();
+			char	sideY = y->getSide();
 
 			x->setLeft(y);
 			y->setSide('l');
@@ -202,8 +224,17 @@ class	ft::node
 			y->setPapa(x);
 			if (papaY)
 			{
-				papaY->setRight(x);
 				x->setPapa(papaY);
+				if (sideY == 'r')
+				{
+					papaY->setRight(x);
+					x->setSide('r');
+				}
+				else
+				{
+					papaY->setLeft(x);
+					x->setSide('l');
+				}
 			}
 			else
 			{
