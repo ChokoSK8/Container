@@ -58,15 +58,16 @@ void	dispAct(std::string	str)
 }
 
 template < class T1, class T2 >
-void	displayPair(pair<T1, T2> p)
+void	displayPair(const pair<T1, T2> p)
 {
 	std::cout << "FIRST: " << p.first  << " | SECOND: " << p.second << std::endl;
 }
 
 template < class T >
-void	displayRBrator(rbrator<T> p)
+void	displayRBrator(const rbrator<T> p)
 {
-	std::cout << "FIRST: " << p->getKey()  << " | SECOND: " << p->getContent() << std::endl;
+	std::cout << "FIRST: " << p->getKey()  << " | SECOND: "
+			<< p->getContent() << " | SIDE: " << p->getSide() << std::endl;
 }
 
 template < class T1, class T2 >
@@ -137,22 +138,27 @@ int	iteratorTester(void)
 {
 	map<int, int>		mamap;
 	map<int, int>::iterator	it;
+	map<int, int>::iterator	ite;
 	int	i = 0;
 	int	n;
 	srand(time(0));
 
-	while (i < 25)
+	while (i < 185)
 	{
-		n = rand() % 200;
+		n = rand() % 1000;
 		mamap.insert(make_pair(n, n));
 		++i;
 	}
-	mamap.print();
 	it = mamap.begin();
-	disp("BEGIN", 1);
-	displayRBrator(it);
-	disp("BEGIN + 1", 1);
-	displayRBrator(++it);
+	ite = mamap.end();
+	while (it != ite)
+	{
+		n = it->getKey();
+		displayRBrator(it);
+		++it;
+		if (n > it->getKey())
+			disp("--------ERROR--------", 1);
+	}
 	return (0);
 }
 

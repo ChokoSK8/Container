@@ -50,11 +50,17 @@ class	ft::rbrator
 			}
 			else if (p->getPapa())
 			{
-				p = p->getPapa();
 				while (p->getSide() != 'l')
 					p = p->getPapa();
+				p = p->getPapa();
 			}
 			return (*this);
 		}
 };
+
+template < class R, class L >
+bool	operator!=(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
+{
+	return (lhs->getKey() != rhs->getKey());
+}
 #endif

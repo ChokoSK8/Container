@@ -75,6 +75,8 @@ class	ft::map
 				_root = newNode;
 			balanceTree(newNode);
 
+		//	disp("------NEW NODE------", val.first);
+		//	print_tree_side();
 			// RETURN THE RIGHT THING
 		};
 
@@ -84,28 +86,48 @@ class	ft::map
 	private:
 		void	positionNode(pointer newNode, pointer from)
 		{
-			if (newNode->getKey() < from->getKey())
+			while (from)
 			{
-				if (from->getLeft())
-					return (positionNode(newNode, from->getLeft()));
-				from->setNewNodeLeft(newNode, 'l');
-			}
-			else
-			{
-				if (from->getRight())
-					return (positionNode(newNode, from->getRight()));
-				from->setNewNodeRight(newNode, 'r');
+				if (newNode->getKey() < from->getKey())
+				{
+					if (!from->getLeft())
+						return (from->setNewNodeLeft(newNode, 'l'));
+					from = from->getLeft();
+				}
+				else
+				{
+					if (!from->getRight())
+						return (from->setNewNodeRight(newNode, 'r'));
+					from = from->getRight();
+				}
 			}
 		};
 		void	balanceTree(pointer _node_)
 		{
-			if (_node_->execBalancing())
-				return (balanceTree(_node_->getGrandPa()));
+			while (_node_->execBalancing())
+				_node_ = _node_->getGrandPa();
 
 			pointer	papa = _node_->getPapa();
 
 			if (papa && papa->is_root())
 				_root = papa;
+			if (_node_->is_root())
+				_root = _node_;
+		};
+		void	print_tree_side(void)
+		{
+			iterator	it = begin();
+			iterator	ite = end();
+
+			int i = 20;
+			while (it != ite && --i > 0)
+			{
+				disp("KEY", it->getKey());
+				disp("SIDE", it->getSide());
+				++it;
+			}
+			disp("KEY", it->getKey());
+			disp("SIDE", it->getSide());
 		};
 		# include "print.hpp"
 		

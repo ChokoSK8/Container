@@ -71,12 +71,12 @@ class	ft::node
 			_color = 'n';
 			return (0);
 		};
-		void	setNewNode(node* newNode, char side, void (*setter)(node*))
-		{
-			newNode->setSide(side);
-			setter(newNode);
-			newNode->setPapa(this);
-		};
+	//	void	setNewNode(node* newNode, char side, void (*setter)(node*))
+	//	{
+	//		newNode->setSide(side);
+	//		setter(newNode);
+	//		newNode->setPapa(this);
+	//	};
 		void	setNewNodeRight(node* newNode, char side)
 		{
 			newNode->setSide(side);
@@ -162,23 +162,27 @@ class	ft::node
 		};
 		int	RRcase(void)
 		{
+		//	disp("RRcase", 1);
 			rotLeft(getPapa(), getGrandPa());
 			swapColor(getPapa(), getSibling());
 			return (0);
 		};
 		int	LLcase(void)
 		{
+		//	disp("LLcase", 1);
 			rotRight(getPapa(), getGrandPa());
 			swapColor(getPapa(), getSibling());
 			return (0);
 		};
 		int	LRcase(void)
 		{
+		//	disp("LRcase for", getKey());
 			rotLeft(this, getPapa());
 			return (_left->LLcase());
 		};
 		int	RLcase(void)
 		{
+		//	disp("RLcase for", getKey());
 			rotRight(this, getPapa());
 			return (_right->RRcase());
 		};
@@ -191,6 +195,11 @@ class	ft::node
 			x->setRight(y);
 			y->setSide('r');
 			y->setLeft(rightX);
+			if (rightX)
+			{
+				rightX->setPapa(y);
+				rightX->setSide('l');
+			}
 			y->setPapa(x);
 			if (papaY)
 			{
@@ -208,7 +217,7 @@ class	ft::node
 			}
 			else
 			{
-				x->setPapa(NULL);
+				x->_papa = NULL;
 				x->setSide('c');
 			}
 		};
@@ -221,6 +230,11 @@ class	ft::node
 			x->setLeft(y);
 			y->setSide('l');
 			y->setRight(leftX);
+			if (leftX)
+			{
+				leftX->setPapa(y);
+				leftX->setSide('r');
+			}
 			y->setPapa(x);
 			if (papaY)
 			{
