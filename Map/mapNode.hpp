@@ -6,7 +6,7 @@ template < class Key, class T >
 class	ft::node
 {
 	public:
-		typedef ft::pair<const Key, T>	value_type;
+		typedef pair<const Key, T>	value_type;
 		typedef Key			key_type;
 		typedef T			content_type;
 

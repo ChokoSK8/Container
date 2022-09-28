@@ -6,6 +6,7 @@
 # include <map>
 # include <list>
 # include <string>
+# include <cstdlib>
 
 using namespace ft;
 
@@ -62,6 +63,12 @@ void	displayPair(pair<T1, T2> p)
 	std::cout << "FIRST: " << p.first  << " | SECOND: " << p.second << std::endl;
 }
 
+template < class T >
+void	displayRBrator(rbrator<T> p)
+{
+	std::cout << "FIRST: " << p->getKey()  << " | SECOND: " << p->getContent() << std::endl;
+}
+
 template < class T1, class T2 >
 void	pairCmpTester(pair<T1, T2>& x, pair<T1, T2>& y, int recur = 1)
 {
@@ -110,38 +117,69 @@ int	pairANDmake_pairTester(void)
 	return (0);
 }
 
-int	main()
+int	insertTester1(void)
 {
 	map<int, int>	mamap;
-	pair<int, int>	one(1, 1);
-	pair<int, int>	two(2, 2);
-	pair<int, int>	three(3, 3);
-	pair<int, int>	four(4, 4);
-	pair<int, int>	five(5, 5);
-	pair<int, int>	six(6, 6);
-	pair<int, int>	seven(7, 7);
-	pair<int, int>	eight(8, 8);
-	pair<int, int>	nine(9, 9);
-	pair<int, int>	ten(10, 10);
-	pair<int, int>	eleven(11, 11);
+	int	i = 0;
+	int	n;
 
-	mamap.insert(seven);
-	mamap.insert(three);
-	mamap.insert(ten);
-	mamap.insert(one);
-	mamap.insert(two);
-	mamap.insert(eleven);
-	mamap.insert(six);
-	mamap.insert(four);
-	mamap.insert(eight);
-	mamap.insert(nine);
-	mamap.insert(five);
-//	mamap.insert(one);
-//	mamap.insert(two);
-//	mamap.insert(three);
-//	mamap.insert(four);
-//	mamap.insert(five);
-//	mamap.insert(six);
-//	mamap.insert(seven);
+	while (i < 25)
+	{
+		n = rand() % 1000;
+		mamap.insert(make_pair(n, n));
+		++i;
+	}
+	mamap.print();
 	return (0);
+}
+
+int	iteratorTester(void)
+{
+	map<int, int>		mamap;
+	map<int, int>::iterator	it;
+	int	i = 0;
+	int	n;
+	srand(time(0));
+
+	while (i < 25)
+	{
+		n = rand() % 200;
+		mamap.insert(make_pair(n, n));
+		++i;
+	}
+	mamap.print();
+	it = mamap.begin();
+	disp("BEGIN", 1);
+	displayRBrator(it);
+	disp("BEGIN + 1", 1);
+	displayRBrator(++it);
+	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	if (ac != 2)
+	{
+		std::cout << "How to use: ./container <fct to test>"<< std::endl;
+		return (1);
+	}
+
+	std::map<std::string, PtrFct>		fcts;
+	PtrFct					fct;
+	std::map<std::string, PtrFct>::iterator	it;
+	std::map<std::string, PtrFct>::iterator	ite;
+	std::string				str = av[1];
+
+	fcts["insert"] = &insertTester1;
+	fcts["iterator"] = &iteratorTester;
+	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
+	{
+		if (!str.compare(it->first))
+		{
+			fct = it->second;
+			return (fct ());
+		}
+	}
+	disp("FCT NOT FOUND", 1);
+	return (1);
 }

@@ -47,7 +47,7 @@ namespace	ft
 	class	map;
 	template < class Key, class T >
 	class	node;
-	template < class I >
+	template < class T >
 	class	rbrator;
 }
 

@@ -3,6 +3,7 @@
 # include "../pair.hpp"
 # include "../containers.h"
 # include "mapNode.hpp"
+# include "rbrator.hpp"
 
 # include <sstream>
 # include <vector>
@@ -20,8 +21,8 @@ class	ft::map
 		typedef Allocator				allocator_type;
 		typedef value_type&				reference;
 		typedef const value_type&			const_reference;
-		typedef pair<const Key, T>*			pointer;
-		typedef const pair<const Key, T>*		const_pointer;
+		typedef node<key_type, mapped_type>*		pointer;
+		typedef const pointer				const_pointer;
 
 		// ITERATOR
 		typedef rbrator<pointer>		iterator;
@@ -30,9 +31,9 @@ class	ft::map
 	//	typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
 	protected:
-		size_type			_size;
-		allocator_type			_c;
-		node<key_type, mapped_type>*	_root;
+		size_type	_size;
+		allocator_type	_c;
+		pointer		_root;
 
 	public:
 		explicit map(const key_compare& comp = key_compare(),
@@ -66,8 +67,7 @@ class	ft::map
 		{
 			// check if key already exist
 
-			node<key_type, mapped_type>*	newNode =
-					new node<key_type, mapped_type>(val);
+			pointer	newNode = new node<key_type, mapped_type>(val);
 
 			if (_root)
 				positionNode(newNode, _root);
@@ -75,36 +75,14 @@ class	ft::map
 				_root = newNode;
 			balanceTree(newNode);
 
-		//	disp("------NEW NODE-------", 1);
-		//	displayNode(*newNode);
-			print();
 			// RETURN THE RIGHT THING
 		};
 
+		// ITERATOR
+		#include "iterator_map.hpp"
+
 	private:
-		void	displayNode(node<key_type, mapped_type>& _node_, int config = 1)
-		{
-			disp("key", _node_.getKey());
-			disp("content", _node_.getContent());
-			disp("left", _node_.getLeft());
-			disp("right", _node_.getRight());
-			disp("papa", _node_.getPapa());
-			disp("side", _node_.getSide());
-			disp("color", _node_.getColor());
-			disp("addr", &_node_);
-			if (config && _node_.getPapa())
-			{
-				disp("-------PAPA-----", 1);
-				displayNode(*(_node_.getPapa()), 0);
-			}
-			if (config && _node_.getSibling())
-			{
-				disp("--------SIBLING-----", 1);
-				displayNode(*(_node_.getSibling()), 0);
-			}
-		}
-		void	positionNode(node<key_type, mapped_type>* newNode,
-				node<key_type, mapped_type>* from)
+		void	positionNode(pointer newNode, pointer from)
 		{
 			if (newNode->getKey() < from->getKey())
 			{
@@ -119,12 +97,12 @@ class	ft::map
 				from->setNewNodeRight(newNode, 'r');
 			}
 		};
-		void	balanceTree(node<key_type, mapped_type>* _node_)
+		void	balanceTree(pointer _node_)
 		{
 			if (_node_->execBalancing())
 				return (balanceTree(_node_->getGrandPa()));
 
-			node<key_type, mapped_type>*	papa = _node_->getPapa();
+			pointer	papa = _node_->getPapa();
 
 			if (papa && papa->is_root())
 				_root = papa;

@@ -6,7 +6,7 @@
 /*   By: rgeny <rgeny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 10:49:44 by rgeny             #+#    #+#             */
-/*   Updated: 2022/09/27 14:23:58 by abrun            ###   ########.fr       */
+/*   Updated: 2022/09/28 10:46:31 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define ROOT _root
 # define SENTINEL NULL
-# define NODE_POINTER_TYPE node<key_type, mapped_type> *
+# define NODE_POINTER_TYPE ft::node<key_type, mapped_type> *
 # define NODE_LEFT getLeft()
 # define NODE_RIGHT getRight()
 
