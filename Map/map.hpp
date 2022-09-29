@@ -2,7 +2,7 @@
 # define MAP_HPP
 # include "../pair.hpp"
 # include "../containers.h"
-# include "mapNode.hpp"
+# include "node.hpp"
 # include "rbrator.hpp"
 
 # include <sstream>
@@ -70,37 +70,51 @@ class	ft::map
 			pointer	newNode = new node<key_type, mapped_type>(val);
 
 			if (_root)
-				positionNode(newNode, _root);
+			{
+				if (!positionNode(newNode, _root))
+				{
+					disp("KEY ALREADY IN TREE", newNode->getKey());
+					return ;
+				}
+			}
 			else
+			{
 				_root = newNode;
+			}
 			balanceTree(newNode);
-
-		//	disp("------NEW NODE------", val.first);
+		//	disp("------NEW NODE----", newNode->getKey());
 		//	print_tree_side();
+
 			// RETURN THE RIGHT THING
 		};
 
 		// ITERATOR
 		#include "iterator_map.hpp"
 
+		// OPERATIONS
+		#include "operations_map.hpp"
+
 	private:
-		void	positionNode(pointer newNode, pointer from)
+		int	positionNode(pointer newNode, pointer from)
 		{
 			while (from)
 			{
 				if (newNode->getKey() < from->getKey())
 				{
-					if (!from->getLeft())
+					if (from->getLeft()->is_nil())
 						return (from->setNewNodeLeft(newNode, 'l'));
 					from = from->getLeft();
 				}
-				else
+				else if (newNode->getKey() > from->getKey())
 				{
-					if (!from->getRight())
+					if (from->getRight()->is_nil())
 						return (from->setNewNodeRight(newNode, 'r'));
 					from = from->getRight();
 				}
+				else
+					from = NULL;
 			}
+			return (0);
 		};
 		void	balanceTree(pointer _node_)
 		{
@@ -119,15 +133,16 @@ class	ft::map
 			iterator	it = begin();
 			iterator	ite = end();
 
-			int i = 20;
+			int i = 5;
 			while (it != ite && --i > 0)
 			{
 				disp("KEY", it->getKey());
 				disp("SIDE", it->getSide());
+				disp("RIGHT", it->getRight());
+				disp("LEFT", it->getLeft());
 				++it;
 			}
-			disp("KEY", it->getKey());
-			disp("SIDE", it->getSide());
+			disp("END PRINT TREE", 1);
 		};
 		# include "print.hpp"
 		

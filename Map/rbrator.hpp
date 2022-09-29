@@ -42,11 +42,16 @@ class	ft::rbrator
 		};
 		rbrator&	operator++(void)
 		{
-			if (p->getRight())
+			if (!p->getRight()->is_nil())
 			{
 				p = p->getRight();
-				while (p->getLeft())
+				while (!p->getLeft()->is_nil())
 					p = p->getLeft();
+			}
+			else if (isEnd())
+			{
+				disp("END FOUND", 1);
+				p = p->getRight();
 			}
 			else if (p->getPapa())
 			{
@@ -56,11 +61,25 @@ class	ft::rbrator
 			}
 			return (*this);
 		}
+
+	private:
+		bool	isEnd(void)
+		{
+			pointer	tmp = p;
+
+			while (tmp->getSide() == 'r')
+			{
+				tmp = tmp->getPapa();
+			}
+			if (tmp->getSide() == 'c')
+				return (true);
+			return (false);
+		}
 };
 
 template < class R, class L >
 bool	operator!=(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
 {
-	return (lhs->getKey() != rhs->getKey());
+	return (lhs.base() != rhs.base());
 }
 #endif

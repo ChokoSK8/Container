@@ -6,7 +6,7 @@
 /*   By: rgeny <rgeny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 10:49:44 by rgeny             #+#    #+#             */
-/*   Updated: 2022/09/28 10:46:31 by abrun            ###   ########.fr       */
+/*   Updated: 2022/09/29 11:27:57 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define NODE_POINTER_TYPE ft::node<key_type, mapped_type> *
 # define NODE_LEFT getLeft()
 # define NODE_RIGHT getRight()
+# include "../containers.h"
 
 # define DEBUG 10
 
@@ -31,6 +32,7 @@ public:
 	void	print	(void)
 	{
 		size_t	height = _height(ROOT);
+		disp("HEIGHT", height);
 		std::vector<std::string>	tree;
 
 		tree.resize(height);
@@ -58,7 +60,7 @@ private:
 			tree[depth] += " ";
 
 //	end of recursive function
-		if (node == SENTINEL)
+		if (node->is_nil())
 		{
 			if (node != NULL && node->getColor() == 'r')
 				tree[depth] += RED_NODE "NIL" COLOR_TEXT;
@@ -126,7 +128,7 @@ private:
 	{
 		if (i > DEBUG)
 			return (0);
-		if (node == SENTINEL)
+		if (node->is_nil())
 			return (1);
 		return (1 + std::max(_height(node->NODE_LEFT, i + 1), _height(node->NODE_RIGHT, i + 1)));
 	}

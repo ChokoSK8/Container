@@ -139,26 +139,40 @@ int	iteratorTester(void)
 	map<int, int>		mamap;
 	map<int, int>::iterator	it;
 	map<int, int>::iterator	ite;
-	int	i = 0;
 	int	n;
-	srand(time(0));
+	int	i = 0;
+        srand(time(0));
 
-	while (i < 185)
+	while (i < 100)
 	{
-		n = rand() % 1000;
+		n = rand() % 5000;
 		mamap.insert(make_pair(n, n));
 		++i;
 	}
+//	mamap.insert(make_pair(0, 0));
+//	mamap.insert(make_pair(1, 1));
+//	mamap.insert(make_pair(2, 2));
+//	mamap.insert(make_pair(1, 1));
+//	mamap.insert(make_pair(0, 0));
+//	mamap.insert(make_pair(0, 0));
+//	mamap.insert(make_pair(2, 2));
+//	mamap.insert(make_pair(6, 6));
+//	mamap.insert(make_pair(1, 1));
+//	mamap.insert(make_pair(3, 3));
+//	mamap.print();
 	it = mamap.begin();
 	ite = mamap.end();
+	int	counter = 1;
 	while (it != ite)
 	{
 		n = it->getKey();
 		displayRBrator(it);
 		++it;
-		if (n > it->getKey())
+		if (n > it->getKey() && it != ite)
 			disp("--------ERROR--------", 1);
+		++counter;
 	}
+	disp("counter", counter);
 	return (0);
 }
 

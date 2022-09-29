@@ -5,7 +5,7 @@ iterator	begin(void)
 {
 	pointer	toFind = _root;
 
-	while (toFind->getLeft())
+	while (!toFind->getLeft()->is_nil())
 		toFind = toFind->getLeft();
 	return (iterator(toFind));
 }
@@ -14,7 +14,7 @@ const_iterator	begin(void) const
 {
 	pointer	toFind = _root;
 
-	while (toFind->getLeft())
+	while (!toFind->getLeft()->is_nil())
 		toFind = toFind->getLeft();
 	return (const_iterator(toFind));
 }

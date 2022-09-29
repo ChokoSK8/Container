@@ -11,6 +11,7 @@ class	ft::node
 		typedef T			content_type;
 
 	protected:
+//		value_type	_val;
 		key_type	_key;
 		content_type	_content;
 		node*		_left;
@@ -20,18 +21,22 @@ class	ft::node
 		char		_side;
 
 	public:
+		node(void) : _key(0), _content(0), _left(NULL), _right(NULL), _papa(NULL),
+				_color('s'), _side('s') {};
 		node(const value_type& val)
 		{
+//			_val = val;
 			_key = val.first;
 			_content = val.second;
-			_left = NULL;
-			_right = NULL;
+			_left = new node;
+			_right = new node;
 			_papa = NULL;
 			_color = 'r';
 			_side = 'c';
 		};
 		node(const node<key_type, content_type>& mit)
 		{
+//			_val = mit.getVal();
 			_key = mit.getKey();
 			_content = mit.getContent();
 			_left = mit.getLeft();
@@ -42,6 +47,10 @@ class	ft::node
 		};
 
 		// FCTS
+		bool	is_nil(void)
+		{
+			return (_color == 's');
+		};
 		bool	is_root(void)
 		{
 			return (!_papa);
@@ -77,18 +86,30 @@ class	ft::node
 	//		setter(newNode);
 	//		newNode->setPapa(this);
 	//	};
-		void	setNewNodeRight(node* newNode, char side)
+		int	setNewNodeRight(node* newNode, char side)
 		{
 			newNode->setSide(side);
+			delete _right;
 			setRight(newNode);
 			newNode->setPapa(this);
+			newNode->setRight(new node);
+			newNode->setLeft(new node);
+			return (1);
 		};
-		void	setNewNodeLeft(node* newNode, char side)
+		int	setNewNodeLeft(node* newNode, char side)
 		{
 			newNode->setSide(side);
+			delete _left;
 			setLeft(newNode);
 			newNode->setPapa(this);
+			newNode->setRight(new node);
+			newNode->setLeft(new node);
+			return (1);
 		};
+//		value_type	getVal(void) const
+//		{
+//			return (_val);
+//		};
 		node*	getRight(void)
 		{
 			return (_right);
@@ -195,7 +216,7 @@ class	ft::node
 			x->setRight(y);
 			y->setSide('r');
 			y->setLeft(rightX);
-			if (rightX)
+			if (!rightX->is_nil())
 			{
 				rightX->setPapa(y);
 				rightX->setSide('l');
@@ -230,7 +251,7 @@ class	ft::node
 			x->setLeft(y);
 			y->setSide('l');
 			y->setRight(leftX);
-			if (leftX)
+			if (!leftX->is_nil())
 			{
 				leftX->setPapa(y);
 				leftX->setSide('r');
@@ -267,7 +288,7 @@ class	ft::node
 		{
 			node*	uncle = getUncle();
 
-			if (!uncle || uncle->getColor() == 'n')
+			if (uncle->is_nil() || uncle->getColor() == 'n')
 				return (false);
 			return (true);
 		};
