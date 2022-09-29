@@ -136,43 +136,37 @@ int	insertTester1(void)
 
 int	iteratorTester(void)
 {
-	map<int, int>		mamap;
-	map<int, int>::iterator	it;
-	map<int, int>::iterator	ite;
+	map<int, int>				mamap;
+	map<int, int>::iterator			it;
+	map<int, int>::iterator			ite;
+	pair<map<int, int>::iterator, bool>	ret;
 	int	n;
 	int	i = 0;
         srand(time(0));
 
-	while (i < 100)
+	while (i < 10)
 	{
-		n = rand() % 5000;
-		mamap.insert(make_pair(n, n));
+		n = rand() % 50;
+		ret = mamap.insert(make_pair(n, n));
+		if (!ret.second)
+			disp("KEY ALREADY USED", ret.first->getContent());
 		++i;
 	}
-//	mamap.insert(make_pair(0, 0));
-//	mamap.insert(make_pair(1, 1));
-//	mamap.insert(make_pair(2, 2));
-//	mamap.insert(make_pair(1, 1));
-//	mamap.insert(make_pair(0, 0));
-//	mamap.insert(make_pair(0, 0));
-//	mamap.insert(make_pair(2, 2));
-//	mamap.insert(make_pair(6, 6));
-//	mamap.insert(make_pair(1, 1));
-//	mamap.insert(make_pair(3, 3));
-//	mamap.print();
 	it = mamap.begin();
 	ite = mamap.end();
-	int	counter = 1;
-	while (it != ite)
-	{
-		n = it->getKey();
-		displayRBrator(it);
-		++it;
-		if (n > it->getKey() && it != ite)
-			disp("--------ERROR--------", 1);
-		++counter;
-	}
-	disp("counter", counter);
+	mamap.printDownFrom(mamap.getRoot());
+	mamap.print();
+//	int	counter = 1;
+//	while (it != ite)
+//	{
+//		n = it->getKey();
+//		displayRBrator(it);
+//		++it;
+//		if (n > it->getKey() && it != ite)
+//			disp("--------ERROR--------", 1);
+//		++counter;
+//	}
+//	disp("counter", counter);
 	return (0);
 }
 

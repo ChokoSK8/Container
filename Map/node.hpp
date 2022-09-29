@@ -45,6 +45,13 @@ class	ft::node
 			_color = mit.getColor();
 			_side = mit.getSide();
 		};
+		~node(void)
+		{
+			if (_right && _right->is_nil())
+				delete _right;
+			if (_left && _left->is_nil())
+				delete _left;
+		}
 
 		// FCTS
 		bool	is_nil(void)
@@ -86,7 +93,7 @@ class	ft::node
 	//		setter(newNode);
 	//		newNode->setPapa(this);
 	//	};
-		int	setNewNodeRight(node* newNode, char side)
+		void	setNewNodeRight(node* newNode, char side)
 		{
 			newNode->setSide(side);
 			delete _right;
@@ -94,9 +101,8 @@ class	ft::node
 			newNode->setPapa(this);
 			newNode->setRight(new node);
 			newNode->setLeft(new node);
-			return (1);
 		};
-		int	setNewNodeLeft(node* newNode, char side)
+		void	setNewNodeLeft(node* newNode, char side)
 		{
 			newNode->setSide(side);
 			delete _left;
@@ -104,7 +110,6 @@ class	ft::node
 			newNode->setPapa(this);
 			newNode->setRight(new node);
 			newNode->setLeft(new node);
-			return (1);
 		};
 //		value_type	getVal(void) const
 //		{

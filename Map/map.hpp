@@ -60,32 +60,26 @@ class	ft::map
 		//		_c.const
 		//	}
 		};
+		~map(void) {};
 
 		// MODIFIERS
-	//	ft::pair<iterator, bool>	insert(const value_type& val)
-		void	insert(const value_type& val)
+		ft::pair<iterator, bool>	insert(const value_type& val)
 		{
-			// check if key already exist
-
 			pointer	newNode = new node<key_type, mapped_type>(val);
+			ft::pair<iterator, bool>	ret;
 
 			if (_root)
 			{
-				if (!positionNode(newNode, _root))
-				{
-					disp("KEY ALREADY IN TREE", newNode->getKey());
-					return ;
-				}
+				ret = positionNode(newNode, _root);
+				if (!ret.second)
+					return (ret);
 			}
 			else
 			{
 				_root = newNode;
 			}
 			balanceTree(newNode);
-		//	disp("------NEW NODE----", newNode->getKey());
-		//	print_tree_side();
-
-			// RETURN THE RIGHT THING
+			return (make_pair(iterator(newNode), true));
 		};
 
 		// ITERATOR
@@ -94,27 +88,54 @@ class	ft::map
 		// OPERATIONS
 		#include "operations_map.hpp"
 
-	private:
-		int	positionNode(pointer newNode, pointer from)
+	/*---------------TO DELETE-------------*/
+
+		// GETTER
+		pointer	getRoot(void)
 		{
-			while (from)
+			return (_root);
+		};
+
+		// PRINT
+		void	printDownFrom(pointer from)
+		{
+			if (!from->getLeft()->is_nil())
+				return (printDownFrom(from->getLeft()));
+			if (!from->getRight()->is_nil())
+				return (printDownFrom(from->getRight()));
+			disp("KEY", from->getKey());
+		};
+	/*---------------END TO DELETE-------------*/
+
+	private:
+		ft::pair<iterator, bool>	positionNode(pointer newNode, pointer from)
+		{
+			bool	loop = true;
+
+			while (loop)
 			{
 				if (newNode->getKey() < from->getKey())
 				{
 					if (from->getLeft()->is_nil())
-						return (from->setNewNodeLeft(newNode, 'l'));
+					{
+						from->setNewNodeLeft(newNode, 'l');
+						return (make_pair(iterator(newNode), true));
+					}
 					from = from->getLeft();
 				}
 				else if (newNode->getKey() > from->getKey())
 				{
 					if (from->getRight()->is_nil())
-						return (from->setNewNodeRight(newNode, 'r'));
+					{
+						from->setNewNodeRight(newNode, 'r');
+						return (make_pair(iterator(newNode), true));
+					}
 					from = from->getRight();
 				}
 				else
-					from = NULL;
+					loop = false;
 			}
-			return (0);
+			return (make_pair(iterator(from), false));
 		};
 		void	balanceTree(pointer _node_)
 		{
@@ -128,6 +149,7 @@ class	ft::map
 			if (_node_->is_root())
 				_root = _node_;
 		};
+
 		void	print_tree_side(void)
 		{
 			iterator	it = begin();
