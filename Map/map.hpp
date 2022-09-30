@@ -34,6 +34,7 @@ class	ft::map
 		size_type	_size;
 		allocator_type	_c;
 		pointer		_root;
+		key_compare	_keyComp;
 
 	public:
 		explicit map(const key_compare& comp = key_compare(),
@@ -47,6 +48,7 @@ class	ft::map
 		};
 		map(const map& x)
 		{
+			_c = x.get_allocator();
 			insert(x.begin(), x.end());
 		};
 //		template < class InputItr >
@@ -82,6 +84,12 @@ class	ft::map
 
 		// OPERATIONS
 		#include "operations_map.hpp"
+
+		// ALLOCATOR
+		allocator_type	get_allocator(void) const
+		{
+			return (_c);
+		};
 
 	/*---------------TO DELETE-------------*/
 

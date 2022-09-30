@@ -25,10 +25,11 @@ std::map<int, int>	makeMap(int n)
 	std::map<int, int>	mamap;
 	int	i = 0;
         srand(time(0));
+	int	modu = n * 10;
 
 	while (n)
 	{
-		i = rand() % 2000;
+		i = rand() % modu;
 		mamap.insert(make_pair(i, i));
 		--n;
 	}
@@ -89,7 +90,7 @@ typedef struct	s_coordinate {
 int	main()
 {
 	std::map<int, int>	mamap;
-	std::map<int, int>	mamap2 = makeMap(50);
+	std::map<int, int>	mamap2 = makeMap(10);
 
 //	mamap[7] = 7;
 //	mamap[8] = 8;
@@ -100,8 +101,7 @@ int	main()
 //	mamap[4] = 4;
 //	mamap[5] = 5;
 //	mamap[6] = 6;
-	mamap.insert(mamap2.begin(), mamap2.end());
-	displayMap(mamap);
-	disp("VAL OF -2", mamap[-2]);
+	displayMap(mamap2);
+	disp("LOWER BND", mamap2.lower_bound(20)->first);
 	return (0);
 }

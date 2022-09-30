@@ -32,4 +32,24 @@ const_iterator	find(const key_type& k) const
 	}
 	return (end());
 }
+
+size_type	count(const key_type& k) const
+{
+	if (find(k))
+		return (1);
+	return (0);
+}
+
+//iterator	lower_bound(const key_type& k)
+//{
+//	pointer	lowerBnd = _root;
+//
+//	while (lowerBnd)
+//	{
+//		if (k < lowerBnd->getKey())
+//		{
+//			lowe
+//		}
+//	}
+//}
 #endif
