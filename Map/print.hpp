@@ -6,7 +6,7 @@
 /*   By: rgeny <rgeny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 10:49:44 by rgeny             #+#    #+#             */
-/*   Updated: 2022/09/29 11:27:57 by abrun            ###   ########.fr       */
+/*   Updated: 2022/09/30 10:30:38 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ public:
 	void	print	(void)
 	{
 		size_t	height = _height(ROOT);
-		disp("HEIGHT", height);
 		std::vector<std::string>	tree;
 
 		tree.resize(height);

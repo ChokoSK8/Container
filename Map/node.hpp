@@ -47,6 +47,13 @@ class	ft::node
 		};
 		~node(void)
 		{
+			if (_papa)
+			{
+				if (_side == 'r')
+					_papa->setRight(NULL);
+				if (_side == 'l')
+					_papa->setLeft(NULL);
+			}
 			if (_right && _right->is_nil())
 				delete _right;
 			if (_left && _left->is_nil())
@@ -99,8 +106,6 @@ class	ft::node
 			delete _right;
 			setRight(newNode);
 			newNode->setPapa(this);
-			newNode->setRight(new node);
-			newNode->setLeft(new node);
 		};
 		void	setNewNodeLeft(node* newNode, char side)
 		{
@@ -108,8 +113,6 @@ class	ft::node
 			delete _left;
 			setLeft(newNode);
 			newNode->setPapa(this);
-			newNode->setRight(new node);
-			newNode->setLeft(new node);
 		};
 //		value_type	getVal(void) const
 //		{

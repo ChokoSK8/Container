@@ -144,7 +144,7 @@ int	iteratorTester(void)
 	int	i = 0;
         srand(time(0));
 
-	while (i < 10)
+	while (i < 15)
 	{
 		n = rand() % 50;
 		ret = mamap.insert(make_pair(n, n));
@@ -154,7 +154,6 @@ int	iteratorTester(void)
 	}
 	it = mamap.begin();
 	ite = mamap.end();
-	mamap.printDownFrom(mamap.getRoot());
 	mamap.print();
 //	int	counter = 1;
 //	while (it != ite)

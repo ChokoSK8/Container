@@ -39,7 +39,7 @@ class	ft::map
 		explicit map(const key_compare& comp = key_compare(),
 				const allocator_type& alloc = allocator_type())
 		{
-			_c.allocate(0);
+		//	_c.allocate(0);
 			_size = 0;
 			_root = NULL;
 			(void)comp;
@@ -60,7 +60,10 @@ class	ft::map
 		//		_c.const
 		//	}
 		};
-		~map(void) {};
+		~map(void)
+		{
+			freeNodes(_root);
+		};
 
 		// MODIFIERS
 		ft::pair<iterator, bool>	insert(const value_type& val)
@@ -72,7 +75,10 @@ class	ft::map
 			{
 				ret = positionNode(newNode, _root);
 				if (!ret.second)
+				{
+					delete newNode;
 					return (ret);
+				}
 			}
 			else
 			{
@@ -96,15 +102,6 @@ class	ft::map
 			return (_root);
 		};
 
-		// PRINT
-		void	printDownFrom(pointer from)
-		{
-			if (!from->getLeft()->is_nil())
-				return (printDownFrom(from->getLeft()));
-			if (!from->getRight()->is_nil())
-				return (printDownFrom(from->getRight()));
-			disp("KEY", from->getKey());
-		};
 	/*---------------END TO DELETE-------------*/
 
 	private:
@@ -150,6 +147,17 @@ class	ft::map
 				_root = _node_;
 		};
 
+		// FREE
+		void	freeNodes(pointer from)
+		{
+			if (from->getLeft() && !from->getLeft()->is_nil())
+				freeNodes(from->getLeft());
+			if (from->getRight() && !from->getRight()->is_nil())
+				freeNodes(from->getRight());
+			delete from;
+		};
+
+		// PRINT
 		void	print_tree_side(void)
 		{
 			iterator	it = begin();
