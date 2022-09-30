@@ -66,27 +66,7 @@ class	ft::map
 		};
 
 		// MODIFIERS
-		ft::pair<iterator, bool>	insert(const value_type& val)
-		{
-			pointer	newNode = new node<key_type, mapped_type>(val);
-			ft::pair<iterator, bool>	ret;
-
-			if (_root)
-			{
-				ret = positionNode(newNode, _root);
-				if (!ret.second)
-				{
-					delete newNode;
-					return (ret);
-				}
-			}
-			else
-			{
-				_root = newNode;
-			}
-			balanceTree(newNode);
-			return (make_pair(iterator(newNode), true));
-		};
+		#include "modifiers_map.hpp"
 
 		// ITERATOR
 		#include "iterator_map.hpp"

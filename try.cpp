@@ -20,6 +20,21 @@ vector<int>	makeVec(int start, int range)
 	return (vec);
 }
 
+std::map<int, int>	makeMap(int n)
+{
+	std::map<int, int>	mamap;
+	int	i = 0;
+        srand(time(0));
+
+	while (n)
+	{
+		i = rand() % 2000;
+		mamap.insert(make_pair(i, i));
+		--n;
+	}
+	return (mamap);
+}
+
 template < typename T >
 void	disp(std::string str, T val)
 {
@@ -32,7 +47,6 @@ struct myAlloc : allocator<type> {
 	typedef typename allocator<void>::const_pointer	const_pointer;
 	typedef typename allocator<type>::pointer	pointer;
 	pointer *	allocate(size_type size, const_pointer hint=0) {
-		cout << "HEY" << endl;
 		std::cout << "Allocation request size => " << size << std::endl;
 		return new type[size];
 	}
@@ -75,20 +89,19 @@ typedef struct	s_coordinate {
 int	main()
 {
 	std::map<int, int>	mamap;
+	std::map<int, int>	mamap2 = makeMap(50);
 
-	mamap[7] = 7;
-	mamap[8] = 8;
-	mamap[9] = 9;
-	mamap[1] = 1;
-	mamap[2] = 2;
-	mamap[3] = 3;
-	mamap[4] = 4;
-	mamap[5] = 5;
-	mamap[6] = 6;
-	std::pair<int, float>	ten(10, 10);
-	mamap.insert(ten);
+//	mamap[7] = 7;
+//	mamap[8] = 8;
+//	mamap[9] = 9;
+//	mamap[1] = 1;
+//	mamap[2] = 2;
+//	mamap[3] = 3;
+//	mamap[4] = 4;
+//	mamap[5] = 5;
+//	mamap[6] = 6;
+	mamap.insert(mamap2.begin(), mamap2.end());
 	displayMap(mamap);
-	std::cout << "SIZE OF BOOL: " << sizeof(bool) << std::endl;
-	std::cout << "SIZE OF CHAR: " << sizeof(char) << std::endl;
+	disp("PAIR", *mamap2.begin());
 	return (0);
 }

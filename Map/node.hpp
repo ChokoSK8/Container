@@ -11,7 +11,7 @@ class	ft::node
 		typedef T			content_type;
 
 	protected:
-//		value_type	_val;
+		value_type	_val;
 		key_type	_key;
 		content_type	_content;
 		node*		_left;
@@ -25,7 +25,7 @@ class	ft::node
 				_color('s'), _side('s') {};
 		node(const value_type& val)
 		{
-//			_val = val;
+			_val = val;
 			_key = val.first;
 			_content = val.second;
 			_left = new node;
@@ -36,7 +36,7 @@ class	ft::node
 		};
 		node(const node<key_type, content_type>& mit)
 		{
-//			_val = mit.getVal();
+			_val = mit.getVal();
 			_key = mit.getKey();
 			_content = mit.getContent();
 			_left = mit.getLeft();
@@ -114,10 +114,10 @@ class	ft::node
 			setLeft(newNode);
 			newNode->setPapa(this);
 		};
-//		value_type	getVal(void) const
-//		{
-//			return (_val);
-//		};
+		value_type	getVal(void) const
+		{
+			return (_val);
+		};
 		node*	getRight(void)
 		{
 			return (_right);

@@ -50,7 +50,6 @@ class	ft::rbrator
 			}
 			else if (isEnd())
 			{
-				disp("END FOUND", 1);
 				p = p->getRight();
 			}
 			else if (p->getPapa())

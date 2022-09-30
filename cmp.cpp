@@ -146,7 +146,7 @@ int	iteratorTester(void)
 
 	while (i < 100)
 	{
-		n = rand() % 5000;
+		n = rand() % 2000;
 		ret = mamap.insert(make_pair(n, n));
 		if (!ret.second)
 			disp("KEY ALREADY USED", ret.first->getContent());
@@ -154,7 +154,7 @@ int	iteratorTester(void)
 	}
 	it = mamap.begin();
 	ite = mamap.end();
-	int	counter = 1;
+	i = 0;
 	while (it != ite)
 	{
 		n = it->getKey();
@@ -162,9 +162,9 @@ int	iteratorTester(void)
 		++it;
 		if (n > it->getKey() && it != ite)
 			disp("--------ERROR--------", 1);
-		++counter;
+		++i;
 	}
-	disp("counter", counter);
+	disp("NUMBER OF ELEMENTS", i);
 	return (0);
 }
 
