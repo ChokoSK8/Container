@@ -3,7 +3,7 @@
 
 ft::pair<iterator, bool>	insert(const value_type& val)
 {
-	pointer	newNode = new node<key_type, mapped_type>(val);
+	pointer	newNode = new node<value_type>(val);
 	ft::pair<iterator, bool>	ret;
 
 	if (_root)
@@ -20,6 +20,7 @@ ft::pair<iterator, bool>	insert(const value_type& val)
 		_root = newNode;
 	}
 	balanceTree(newNode);
+	++_size;
 	return (make_pair(iterator(newNode), true));
 };
 
@@ -29,12 +30,12 @@ iterator	insert(iterator position, const value_type& val)
 	return (insert(val).first);
 };
 
-template < class InputIterator >
-void	insert(InputIterator first, InputIterator last)
+//template < class InputIterator >
+void	insert(iterator first, iterator last)
 {
 	while (first != last)
 	{
-		insert(*first);
+		insert(first->getVal());
 		++first;
 	}
 };

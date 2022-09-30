@@ -67,8 +67,27 @@ template < class T >
 void	displayRBrator(const rbrator<T> p)
 {
 	std::cout << "FIRST: " << p->getKey()  << " | SECOND: "
-			<< p->getContent() << " | SIDE: " << p->getSide() << std::endl;
+			<< p->getContent() << std::endl;
 }
+
+//template < class T1, class T2 >
+//void	displayElements(map<T1, T2> mamap)
+//{
+//	map<T1, T2>::iterator	it = mamap.begin();
+//	map<T1, T2>::iterator	ite = mamap.end();
+//	int	i = 0;
+//	int	n;
+//
+//	while (it != ite)
+//	{
+//		n = it->getKey();
+//		displayRBrator(it);
+//		++it;
+//		if (n > it->getKey() && it != ite)
+//			disp("--------ERROR--------", 1);
+//		++i;
+//	}
+//}
 
 template < class T1, class T2 >
 void	pairCmpTester(pair<T1, T2>& x, pair<T1, T2>& y, int recur = 1)
@@ -152,6 +171,37 @@ int	iteratorTester(void)
 			disp("KEY ALREADY USED", ret.first->getContent());
 		++i;
 	}
+	disp("NUMBER OF ELEMENTS", i);
+	return (0);
+}
+
+int	element_accessTester(void)
+{
+	map<int, int>	mamap;
+        srand(time(0));
+
+	for (int i = 0; i < 15; ++i)
+		mamap.insert(make_pair(i, (int)rand() % 100));
+//	displayElements(mamap);
+	map<int, int>::iterator	it = mamap.begin();
+	map<int, int>::iterator	ite = mamap.end();
+	int	i = 0;
+	int	n;
+
+	while (it != ite)
+	{
+		n = it->getKey();
+		displayRBrator(it);
+		++it;
+		if (n > it->getKey() && it != ite)
+			disp("--------ERROR--------", 1);
+		++i;
+	}
+	disp("val of -2", mamap[-2]);
+	mamap[-2] = 5;
+	disp("val of -2", mamap[-2]);
+	disp("val of 12", mamap[12]);
+
 	it = mamap.begin();
 	ite = mamap.end();
 	i = 0;
@@ -164,7 +214,45 @@ int	iteratorTester(void)
 			disp("--------ERROR--------", 1);
 		++i;
 	}
-	disp("NUMBER OF ELEMENTS", i);
+	return (0);
+}
+
+int	atTester(void)
+{
+	map<int, int>	mamap;
+        srand(time(0));
+
+	for (int i = 0; i < 15; ++i)
+		mamap.insert(make_pair(i, (int)rand() % 100));
+//	displayElements(mamap);
+	map<int, int>::iterator	it = mamap.begin();
+	map<int, int>::iterator	ite = mamap.end();
+	int	i = 0;
+	int	n;
+
+	while (it != ite)
+	{
+		n = it->getKey();
+		displayRBrator(it);
+		++it;
+		if (n > it->getKey() && it != ite)
+			disp("--------ERROR--------", 1);
+		++i;
+	}
+	disp("at(1)", mamap.at(1));
+	disp("at(4)", mamap.at(4));
+	try
+	{
+		disp("at(15)", mamap.at(15));
+	}
+	catch (std::exception& e)
+	{
+		disp("WHAT", e.what());
+	}
+
+	// CONST
+	const int	conInt = mamap.at(5);
+	disp("at(5) const", conInt);
 	return (0);
 }
 
@@ -184,6 +272,8 @@ int	main(int ac, char **av)
 
 	fcts["insert"] = &insertTester1;
 	fcts["iterator"] = &iteratorTester;
+	fcts["element_access"] = &element_accessTester;
+	fcts["at"] = &atTester;
 	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
 	{
 		if (!str.compare(it->first))

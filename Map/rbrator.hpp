@@ -2,7 +2,7 @@
 # define RBRATOR_HPP
 
 template < class T >
-class	ft::rbrator
+class	ft::rbrator : public ft::iterator<std::bidirectional_iterator_tag, T>
 {
 	public:
 		typedef ft::iterator_traits<T>			_traits;
@@ -36,7 +36,7 @@ class	ft::rbrator
 		{
 			return (*p);
 		};
-		pointer		operator->(void) const
+		pointer	operator->(void) const
 		{
 			return (&(operator*()));
 		};
@@ -77,8 +77,33 @@ class	ft::rbrator
 };
 
 template < class R, class L >
+bool	operator==(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
+{
+	return (lhs.base() == rhs.base());
+}
+template < class R, class L >
 bool	operator!=(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
 {
 	return (lhs.base() != rhs.base());
+}
+template < class R, class L >
+bool	operator<=(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
+{
+	return (lhs.base() <= rhs.base());
+}
+template < class R, class L >
+bool	operator<(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
+{
+	return (lhs.base() < rhs.base());
+}
+template < class R, class L >
+bool	operator>=(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
+{
+	return (lhs.base() >= rhs.base());
+}
+template < class R, class L >
+bool	operator>(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
+{
+	return (lhs.base() > rhs.base());
 }
 #endif

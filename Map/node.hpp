@@ -2,13 +2,13 @@
 # define NODE_HPP
 # include "../containers.h"
 
-template < class Key, class T >
+template < class T >
 class	ft::node
 {
 	public:
-		typedef pair<const Key, T>	value_type;
-		typedef Key			key_type;
-		typedef T			content_type;
+		typedef T				value_type;
+		typedef typename T::key_type		key_type;
+		typedef typename T::content_type	content_type;
 
 	protected:
 		value_type	_val;
@@ -23,9 +23,8 @@ class	ft::node
 	public:
 		node(void) : _key(0), _content(0), _left(NULL), _right(NULL), _papa(NULL),
 				_color('s'), _side('s') {};
-		node(const value_type& val) : _val(val)
+		node(const value_type& val) : _val(val), _key(val.first)
 		{
-			_key = val.first;
 			_content = val.second;
 			_left = new node;
 			_right = new node;
@@ -33,10 +32,9 @@ class	ft::node
 			_color = 'r';
 			_side = 'c';
 		};
-		node(const node<key_type, content_type>& mit) : _val(mit.getVal())
+		node(const node<value_type>& mit) : _val(mit.getVal()), _key(mit.getKey())
 		{
-			_key = mit.getKey();
-			_content = mit.getContent();
+			_content = mit.getVal().second;
 			_left = mit.getLeft();
 			_right = mit.getRight();
 			_papa = mit.getPapa();
@@ -116,31 +114,31 @@ class	ft::node
 		{
 			return (_val);
 		};
-		node*	getRight(void)
+		node*	getRight(void) const
 		{
 			return (_right);
 		};
-		node*	getLeft(void)
+		node*	getLeft(void) const
 		{
 			return (_left);
 		};
-		node*	getPapa(void)
+		node*	getPapa(void) const
 		{
 			return (_papa);
 		};
-		node*	getGrandPa(void)
+		node*	getGrandPa(void) const
 		{
 			return (_papa->getPapa());
 		};
-		char	getSide(void)
+		char	getSide(void) const
 		{
 			return (_side);
 		};
-		char	getColor(void)
+		char	getColor(void) const
 		{
 			return (_color);
 		};
-		content_type	getContent(void) const
+		content_type&	getContent(void)
 		{
 			return (_content);
 		};

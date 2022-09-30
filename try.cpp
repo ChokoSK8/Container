@@ -102,6 +102,6 @@ int	main()
 //	mamap[6] = 6;
 	mamap.insert(mamap2.begin(), mamap2.end());
 	displayMap(mamap);
-	disp("PAIR", *mamap2.begin());
+	disp("VAL OF -2", mamap[-2]);
 	return (0);
 }

@@ -3,6 +3,9 @@
 
 template < class T1, class T2 > struct	ft::pair
 {
+	typedef T1	key_type;
+	typedef T2	content_type;
+
 	T1	first;
 	T2	second;
 
