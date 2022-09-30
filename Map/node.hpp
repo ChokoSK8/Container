@@ -23,9 +23,8 @@ class	ft::node
 	public:
 		node(void) : _key(0), _content(0), _left(NULL), _right(NULL), _papa(NULL),
 				_color('s'), _side('s') {};
-		node(const value_type& val)
+		node(const value_type& val) : _val(val)
 		{
-			_val = val;
 			_key = val.first;
 			_content = val.second;
 			_left = new node;
@@ -34,9 +33,8 @@ class	ft::node
 			_color = 'r';
 			_side = 'c';
 		};
-		node(const node<key_type, content_type>& mit)
+		node(const node<key_type, content_type>& mit) : _val(mit.getVal())
 		{
-			_val = mit.getVal();
 			_key = mit.getKey();
 			_content = mit.getContent();
 			_left = mit.getLeft();
