@@ -11,6 +11,7 @@ class	ft::rbrator : public ft::iterator<std::bidirectional_iterator_tag, T>
 		typedef typename _traits::difference_type	difference_type;
 		typedef typename _traits::pointer		pointer;
 		typedef typename _traits::reference		reference;
+		typedef Node<T>				node_type;
 
 	protected:
 		pointer	p;

@@ -296,5 +296,30 @@ class	ft::node
 				return (false);
 			return (true);
 		};
+		pair<node*, bool>	FindLargestCase(node* deleted)
+		{
+			node*	substitute = findLargestFrom(deleted->getLeft());
+			node*	subPapa = substitute->getPapa();
+			char	subColor = substitute->getColor();
+			node*	subLeft = substitute->getLeft();
+
+			deleted->swapPair(substitute);
+			subPapa->setRight(subLeft);
+			substitute->setLeft(NULL);
+			delete substitute;
+			if (subColor)
+		};
+
+		void	swapPair(node* x)
+		{
+			content_type	contentTmp = _content;
+			key_type	keyTmp = _key;
+
+			_content = x->getContent();
+			_key = x->getKey();
+			x->setContent(contentTmp);
+			x->setKey(keyTmp);
+		}
+
 };
 #endif

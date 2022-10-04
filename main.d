@@ -9,7 +9,7 @@ main.o: main.cpp Vector/vector.hpp Vector/../containers.h \
   pair.hpp Map/map.hpp Map/../pair.hpp Map/../containers.h Map/node.hpp \
   Map/rbrator.hpp Map/iterator_map.hpp Map/capacity_map.hpp \
   Map/element_access_map.hpp Map/modifiers_map.hpp \
-  Map/operations_map.hpp Map/print.hpp
+  Map/operations_map.hpp Map/private_map.hpp Map/print.hpp
 
 Vector/vector.hpp:
 
@@ -70,5 +70,7 @@ Map/element_access_map.hpp:
 Map/modifiers_map.hpp:
 
 Map/operations_map.hpp:
+
+Map/private_map.hpp:
 
 Map/print.hpp:
