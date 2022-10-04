@@ -13,6 +13,6 @@ size_type	size(void) const
 
 size_type	max_size(void) const
 {
-	_c.max_size();
+	return (_c.max_size());
 };
 #endif

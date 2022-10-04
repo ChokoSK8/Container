@@ -35,7 +35,7 @@ const_iterator	find(const key_type& k) const
 
 size_type	count(const key_type& k) const
 {
-	if (find(k))
+	if (find(k) != end())
 		return (1);
 	return (0);
 }

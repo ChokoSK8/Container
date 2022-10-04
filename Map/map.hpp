@@ -40,11 +40,10 @@ class	ft::map
 		explicit map(const key_compare& comp = key_compare(),
 				const allocator_type& alloc = allocator_type())
 		{
-		//	_c.allocate(0);
+			_c = alloc;
 			_size = 0;
 			_root = NULL;
-			(void)comp;
-			(void)alloc;
+			_keyComp = comp;
 		};
 		map(const map& x)
 		{
@@ -68,13 +67,15 @@ class	ft::map
 //		};
 		~map(void)
 		{
-			freeNodes(_root);
+			if (_size)
+				freeNodes(_root);
 		};
 
 		// ITERATOR
 		#include "iterator_map.hpp"
 
 		// CAPACITY
+		#include "capacity_map.hpp"
 
 		// ELEMENT_ACCES
 		# include "element_access_map.hpp"

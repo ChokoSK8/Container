@@ -260,6 +260,20 @@ int	atTester(void)
 	return (0);
 }
 
+int	max_sizeTester(void)
+{
+	map<int, float>	mamap;
+	std::map<int, float>	stdMap;
+	map<std::string, std::string>	mamap2;
+	std::map<std::string, std::string>	stdMap2;
+
+	disp("mamap<int, float>.max_size()", mamap.max_size());
+	disp("stdMap<int, float>.max_size()", stdMap.max_size());
+	disp("mamap2<std::string, std::string>.max_size()", mamap2.max_size());
+	disp("stdMap2<std::string, std::string>.max_size()", stdMap2.max_size());
+	return (0);
+}
+
 int	lower_boundTester(void)
 {
 	int	n = 15;
@@ -370,6 +384,7 @@ int	main(int ac, char **av)
 	fcts["iterator"] = &iteratorTester;
 	fcts["element_access"] = &element_accessTester;
 	fcts["at"] = &atTester;
+	fcts["max_size"] = &max_sizeTester;
 	fcts["lower_bound"] = &lower_boundTester;
 	fcts["upper_bound"] = &upper_boundTester;
 	fcts["equal_range"] = &equal_rangeTester;
