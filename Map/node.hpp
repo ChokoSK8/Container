@@ -32,7 +32,7 @@ class	ft::node
 			_color = 'r';
 			_side = 'c';
 		};
-		node(const node<value_type>& mit) : _val(mit.getVal()), _key(mit.getKey())
+		template < class U > node(const node<U>& mit) : _val(mit.getVal()), _key(mit.getKey())
 		{
 			_content = mit.getVal().second;
 			_left = mit.getLeft();

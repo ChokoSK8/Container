@@ -40,16 +40,91 @@ size_type	count(const key_type& k) const
 	return (0);
 }
 
-//iterator	lower_bound(const key_type& k)
-//{
-//	pointer	lowerBnd = _root;
-//
-//	while (lowerBnd)
-//	{
-//		if (k < lowerBnd->getKey())
-//		{
-//			lowe
-//		}
-//	}
-//}
+iterator	lower_bound(const key_type& k)
+{
+	pointer	lowerBnd = _root;
+	pointer	favourite = NULL;
+
+	while (!lowerBnd->is_nil())
+	{
+		if (k <= lowerBnd->getKey())
+		{
+			favourite = lowerBnd;
+			lowerBnd = lowerBnd->getLeft();
+		}
+		else 
+		{
+			lowerBnd = lowerBnd->getRight();
+		}
+	}
+	if (favourite)
+		return (iterator(favourite));
+	return (end());
+}
+
+const_iterator	lower_bound(const key_type& k) const
+{
+	pointer	lowerBnd = _root;
+	pointer	favourite = NULL;
+
+	while (!lowerBnd->is_nil())
+	{
+		if (k <= lowerBnd->getKey())
+		{
+			favourite = lowerBnd;
+			lowerBnd = lowerBnd->getLeft();
+		}
+		else 
+		{
+			lowerBnd = lowerBnd->getRight();
+		}
+	}
+	if (favourite)
+		return (const_iterator(favourite));
+	return (end());
+}
+
+iterator	upper_bound(const key_type& k)
+{
+	pointer	upperBnd = _root;
+	pointer	favourite = NULL;
+
+	while (!upperBnd->is_nil())
+	{
+		if (k < upperBnd->getKey())
+		{
+			favourite = upperBnd;
+			upperBnd = upperBnd->getLeft();
+		}
+		else 
+		{
+			upperBnd = upperBnd->getRight();
+		}
+	}
+	if (favourite)
+		return (iterator(favourite));
+	return (end());
+}
+
+const_iterator	upper_bound(const key_type& k) const
+{
+	pointer	upperBnd = _root;
+	pointer	favourite = NULL;
+
+	while (!upperBnd->is_nil())
+	{
+		if (k < upperBnd->getKey())
+		{
+			favourite = upperBnd;
+			upperBnd = upperBnd->getLeft();
+		}
+		else 
+		{
+			upperBnd = upperBnd->getRight();
+		}
+	}
+	if (favourite)
+		return (const_iterator(favourite));
+	return (end());
+}
 #endif

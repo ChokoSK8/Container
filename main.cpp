@@ -140,16 +140,20 @@ int	pairANDmake_pairTester(void)
 int	insertTester1(void)
 {
 	map<int, int>	mamap;
+	std::map<int, int>	stdMap;
 	int	i = 0;
 	int	n;
+        srand(time(0));
 
-	while (i < 25)
+	while (i < 15)
 	{
-		n = rand() % 1000;
+		n = rand() % 100;
 		mamap.insert(make_pair(n, n));
+		stdMap.insert(std::make_pair(n, n));
 		++i;
 	}
 	mamap.print();
+	disp("lower_bound(50)", stdMap.lower_bound(50)->first);
 	return (0);
 }
 
@@ -256,6 +260,58 @@ int	atTester(void)
 	return (0);
 }
 
+int	lower_boundTester(void)
+{
+	int	n = 15;
+	map<int, int>	mamap;
+	int	i = 0;
+        srand(time(0));
+	int	modu = n * 10;
+	std::map<int, int>	stdMap;
+
+	while (n)
+	{
+		i = rand() % modu;
+		mamap.insert(make_pair(i, i));
+		stdMap.insert(std::make_pair(i, i));
+		--n;
+	}
+	mamap.print();
+	disp("lower_bound(50)", mamap.lower_bound(50)->getKey());
+	disp("REAL: lower_bound(50)", stdMap.lower_bound(50)->first);
+	disp("lower_bound(0)", mamap.lower_bound(0)->getKey());
+	disp("REAL: lower_bound(0)", stdMap.lower_bound(0)->first);
+	disp("lower_bound(200) is end", mamap.lower_bound(200) == mamap.end());
+	disp("REAL: lower_bound(200) is end", stdMap.lower_bound(200) == stdMap.end());
+	return (0);
+}
+
+int	upper_boundTester(void)
+{
+	int	n = 15;
+	map<int, int>	mamap;
+	int	i = 0;
+        srand(time(0));
+	int	modu = n * 10;
+	std::map<int, int>	stdMap;
+
+	while (n)
+	{
+		i = rand() % modu;
+		mamap.insert(make_pair(i, i));
+		stdMap.insert(std::make_pair(i, i));
+		--n;
+	}
+	mamap.print();
+	disp("upper_bound(50)", mamap.upper_bound(50)->getKey());
+	disp("REAL: upper_bound(50)", stdMap.upper_bound(50)->first);
+	disp("upper_bound(0)", mamap.upper_bound(0)->getKey());
+	disp("REAL: upper_bound(0)", stdMap.upper_bound(0)->first);
+	disp("upper_bound(200) is end", mamap.upper_bound(200) == mamap.end());
+	disp("REAL: upper_bound(200) is end", stdMap.upper_bound(200) == stdMap.end());
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	if (ac != 2)
@@ -274,6 +330,8 @@ int	main(int ac, char **av)
 	fcts["iterator"] = &iteratorTester;
 	fcts["element_access"] = &element_accessTester;
 	fcts["at"] = &atTester;
+	fcts["lower_bound"] = &lower_boundTester;
+	fcts["upper_bound"] = &upper_boundTester;
 	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
 	{
 		if (!str.compare(it->first))
