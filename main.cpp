@@ -10,8 +10,8 @@
 
 using namespace ft;
 
-#define TESTED_NAMESPACE ft
-
+typedef map<int, int>::iterator	map_iterator;
+typedef map<int, int>::const_iterator	map_const_iterator;
 typedef int (*PtrFct)();
 
 template < typename T >
@@ -312,6 +312,46 @@ int	upper_boundTester(void)
 	return (0);
 }
 
+int	equal_rangeTester(void)
+{
+	int	n = 15;
+	map<int, int>	mamap;
+	int	i = 0;
+        srand(time(0));
+	int	modu = n * 10;
+	std::map<int, int>	stdMap;
+	pair<map_const_iterator, map_const_iterator>	ret;
+	std::pair<std::map<int, int>::const_iterator, std::map<int, int>::const_iterator>	ret2;
+
+	while (n)
+	{
+		i = rand() % modu;
+		mamap.insert(make_pair(i, i));
+		stdMap.insert(std::make_pair(i, i));
+		--n;
+	}
+	mamap.print();
+	ret = mamap.equal_range(50);
+	ret2 = stdMap.equal_range(50);
+	disp("equal_range(50).first", ret.first->getKey());
+	disp("equal_range(50).second", ret.second->getKey());
+	disp("REAL equal_range(50).first", ret2.first->first);
+	disp("REAL equal_range(50).second", ret2.second->first);
+	ret = mamap.equal_range(0);
+	ret2 = stdMap.equal_range(0);
+	disp("equal_range(0).first", ret.first->getKey());
+	disp("equal_range(0).second", ret.second->getKey());
+	disp("REAL equal_range(0).first", ret2.first->first);
+	disp("REAL equal_range(0).second", ret2.second->first);
+	ret = mamap.equal_range(200);
+	ret2 = stdMap.equal_range(200);
+	disp("equal_range(200).first", ret.first == mamap.end());
+	disp("equal_range(200).second", ret.second == mamap.end());
+	disp("REAL equal_range(200).first == end()", ret2.first == stdMap.end());
+	disp("REAL equal_range(200).second == end()", ret2.second == stdMap.end());
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	if (ac != 2)
@@ -332,6 +372,7 @@ int	main(int ac, char **av)
 	fcts["at"] = &atTester;
 	fcts["lower_bound"] = &lower_boundTester;
 	fcts["upper_bound"] = &upper_boundTester;
+	fcts["equal_range"] = &equal_rangeTester;
 	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
 	{
 		if (!str.compare(it->first))

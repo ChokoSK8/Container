@@ -127,4 +127,9 @@ const_iterator	upper_bound(const key_type& k) const
 		return (const_iterator(favourite));
 	return (end());
 }
+
+pair<const_iterator, const_iterator>	equal_range(const key_type& k) const
+{
+	return (make_pair(lower_bound(k), upper_bound(k)));
+};
 #endif
