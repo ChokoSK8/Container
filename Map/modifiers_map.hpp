@@ -53,18 +53,9 @@ size_type	erase(const key_type& k)
 	if (toDelete->hasAlmostOneChild())
 	{
 		substitute = toDelete->swipValueCase();
-		disp("SUBSTITUTE", toDelete->getKey());
-		print();
 		child = substitute->deleteMe();
 		if (substitute->getColor() == 'n')
 		{
-			if (child->is_nil())
-				disp("CHILD IS NIL", 1);
-			else
-			{
-				disp("CHILD KEY", child->getKey());
-				disp("CHILD COLOR", child->getColor());
-			}
 			delete substitute;
 			if (child->getColor() == 'd')
 				balanceTreeErase(child);

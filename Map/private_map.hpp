@@ -46,10 +46,6 @@ void	balanceTree(pointer _node_)
 
 void	balanceTreeErase(pointer curr)
 {
-	print();
-	disp("CURR", 1);
-	disp("COLOR", curr->getColor());
-	disp("PAPA", curr->getPapa());
 	while (curr->execBalancingDelete())
 		curr = curr->getPapa();
 };

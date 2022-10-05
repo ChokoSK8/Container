@@ -383,9 +383,14 @@ int	eraseTester(void)
 		--n;
 	}
 	mamap.print();
+	dispAct("ERASE 10");
 	mamap.erase(10);
 	mamap.print();
+	dispAct("ERASE 7");
 	mamap.erase(7);
+	mamap.print();
+	dispAct("ERASE 35");
+	mamap.erase(35);
 	mamap.print();
 	return (0);
 }
