@@ -39,4 +39,37 @@ void	insert(iterator first, iterator last)
 		++first;
 	}
 };
+
+size_type	erase(const key_type& k)
+{
+	iterator	toDeleteIt = find(k);
+	pointer		toDelete;	
+	pointer		substitute;
+	pointer		child;
+
+	if (toDeleteIt == end())
+		return (0);
+	toDelete = toDeleteIt.base();
+	if (toDelete->hasAlmostOneChild())
+	{
+		substitute = toDelete->swipValueCase();
+		disp("SUBSTITUTE", toDelete->getKey());
+		print();
+		child = substitute->deleteMe();
+		if (substitute->getColor() == 'n')
+		{
+			if (child->is_nil())
+				disp("CHILD IS NIL", 1);
+			else
+			{
+				disp("CHILD KEY", child->getKey());
+				disp("CHILD COLOR", child->getColor());
+			}
+			delete substitute;
+		}
+		else
+			disp("DELETET NODE WAS RED", 1);
+	}
+	return (1);
+};
 #endif

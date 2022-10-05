@@ -59,12 +59,20 @@ class	ft::node
 		// FCTS
 		bool	is_nil(void)
 		{
-			return (_color == 's');
+			return (_left == NULL && _right == NULL);
 		};
 		bool	is_root(void)
 		{
 			return (!_papa);
 		};
+		void	setKey(const key_type& key)
+		{
+			_key = key;
+		}
+		void	setContent(const content_type& content)
+		{
+			_content = content;
+		}
 		void	setColor(const char& c)
 		{
 			_color = c;
@@ -296,20 +304,39 @@ class	ft::node
 				return (false);
 			return (true);
 		};
-		pair<node*, bool>	FindLargestCase(node* deleted)
+		node*	swipValueCase(void)
 		{
-			node*	substitute = findLargestFrom(deleted->getLeft());
-			node*	subPapa = substitute->getPapa();
-			char	subColor = substitute->getColor();
-			node*	subLeft = substitute->getLeft();
+			node*	substitute;
 
-			deleted->swapPair(substitute);
-			subPapa->setRight(subLeft);
-			substitute->setLeft(NULL);
-			delete substitute;
-			if (subColor)
+			if (hasTwoChild())
+				substitute = findLargestFrom(getLeft());
+			else
+				substitute = findOnlyChild();
+			swapPair(substitute);
+			return (substitute);
 		};
+		node*	findOnlyChild(void)
+		{
+			if (getLeft()->is_nil())
+				return (getRight());
+			return (getLeft());
+		};
+		node*	findLargestFrom(node* from)
+		{
+			node*	toFind = from;
 
+			while (!toFind->getRight()->is_nil())
+				toFind = toFind->getRight();
+			return (toFind);
+		}
+		bool	hasAlmostOneChild(void)
+		{
+			return (!getRight()->is_nil() || !getLeft()->is_nil());
+		}
+		bool	hasTwoChild(void)
+		{
+			return (!getRight()->is_nil() && !getLeft()->is_nil());
+		}
 		void	swapPair(node* x)
 		{
 			content_type	contentTmp = _content;
@@ -320,6 +347,50 @@ class	ft::node
 			x->setContent(contentTmp);
 			x->setKey(keyTmp);
 		}
+		node*	deleteMe(void)
+		{
+			node*	child;
+			node*	newPapa = getPapa();
 
+			if (hasAlmostOneChild())
+			{
+				child = findOnlyChild();
+				if (child->getSide() == 'r')
+					setRight(NULL);
+				else
+					setLeft(NULL);
+				child->setPapa(newPapa);
+				if (_side == 'r')
+				{
+					newPapa->setRight(child);
+					child->setSide('r');
+				}
+				else
+				{
+					newPapa->setLeft(child);
+					child->setSide('l');
+				}
+				if (child->getColor() == 'r')
+					child->setColor('n');
+				else
+					child->setColor('d');
+			}
+			else
+			{
+				if (_side == 'r')
+				{
+					newPapa->setRight(new node);
+					child = newPapa->getRight();
+				}
+				else
+				{
+					newPapa->setLeft(new node);
+					child = newPapa->getLeft();
+				}
+				child->setColor('d');
+			}
+			setPapa(NULL);
+			return (child);
+		}
 };
 #endif

@@ -335,7 +335,8 @@ int	equal_rangeTester(void)
 	int	modu = n * 10;
 	std::map<int, int>	stdMap;
 	pair<map_const_iterator, map_const_iterator>	ret;
-	std::pair<std::map<int, int>::const_iterator, std::map<int, int>::const_iterator>	ret2;
+	std::pair<std::map<int, int>::const_iterator, 
+				std::map<int, int>::const_iterator>	ret2;
 
 	while (n)
 	{
@@ -366,6 +367,27 @@ int	equal_rangeTester(void)
 	return (0);
 }
 
+int	eraseTester(void)
+{
+	int	n = 35;
+	map<int, int>	mamap;
+	int	i = 0;
+        srand(time(0));
+//	int	modu = n * 10;
+
+	mamap.insert(make_pair(10, 10));
+	while (n)
+	{
+		i = rand() % 20;
+		mamap.insert(make_pair(i, i));
+		--n;
+	}
+	mamap.print();
+	mamap.erase(10);
+	mamap.print();
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	if (ac != 2)
@@ -388,6 +410,7 @@ int	main(int ac, char **av)
 	fcts["lower_bound"] = &lower_boundTester;
 	fcts["upper_bound"] = &upper_boundTester;
 	fcts["equal_range"] = &equal_rangeTester;
+	fcts["erase"] = &eraseTester;
 	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
 	{
 		if (!str.compare(it->first))
