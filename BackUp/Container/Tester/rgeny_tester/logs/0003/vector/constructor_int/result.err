@@ -1,0 +1,39 @@
+srcs/vector/constructor/int.cpp:55:26: error: no matching constructor for initialization of 'ft::vector<int>'
+                NAMESPACE::vector<int>  v2(v1.begin(), v1.end());
+                                        ^  ~~~~~~~~~~~~~~~~~~~~
+../vector.hpp:61:12: note: candidate constructor not viable: no known conversion from 'ft::vector<int>::iterator' (aka 'iterator<ft::vector<int> >') to 'ft::vector<int>::size_type' (aka 'unsigned long') for 1st argument
+                explicit vector(size_type n,
+                         ^
+../vector.hpp:34:12: note: candidate constructor not viable: allows at most single argument 'alloc', but 2 arguments were provided
+                explicit vector(const allocator_type& alloc =
+                         ^
+../vector.hpp:41:3: note: candidate constructor not viable: requires single argument 'x', but 2 arguments were provided
+                vector(const vector<T, allocator_type>& x) {
+                ^
+srcs/vector/constructor/int.cpp:62:48: error: no matching constructor for initialization of 'ft::vector<int>'
+                NAMESPACE::vector<int, std::allocator<int> >    v2(v1.begin(), v1.end(), (std::allocator<int>()));
+                                                                ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../vector.hpp:61:12: note: candidate constructor not viable: no known conversion from 'ft::vector<int>::iterator' (aka 'iterator<ft::vector<int> >') to 'ft::vector<int>::size_type' (aka 'unsigned long') for 1st argument
+                explicit vector(size_type n,
+                         ^
+../vector.hpp:34:12: note: candidate constructor not viable: allows at most single argument 'alloc', but 3 arguments were provided
+                explicit vector(const allocator_type& alloc =
+                         ^
+../vector.hpp:41:3: note: candidate constructor not viable: requires single argument 'x', but 3 arguments were provided
+                vector(const vector<T, allocator_type>& x) {
+                ^
+srcs/vector/constructor/int.cpp:69:48: error: no matching constructor for initialization of 'ft::vector<int>'
+                NAMESPACE::vector<int, std::allocator<int> >    v(l.begin(), l.end(), (std::allocator<int>()));
+                                                                ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../vector.hpp:61:12: note: candidate constructor not viable: no known conversion from 'std::list<int>::iterator' (aka '_List_iterator<int>') to 'ft::vector<int>::size_type' (aka 'unsigned long') for 1st argument
+                explicit vector(size_type n,
+                         ^
+../vector.hpp:34:12: note: candidate constructor not viable: allows at most single argument 'alloc', but 3 arguments were provided
+                explicit vector(const allocator_type& alloc =
+                         ^
+../vector.hpp:41:3: note: candidate constructor not viable: requires single argument 'x', but 3 arguments were provided
+                vector(const vector<T, allocator_type>& x) {
+                ^
+3 errors generated.
+make: *** [Makefile:62: objs/srcs/vector/constructor/ft_int.o] Error 1
+valgrind: ./exe/srcs/vector/constructor/ft_constructor_int: No such file or directory

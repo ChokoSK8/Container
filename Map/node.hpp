@@ -12,8 +12,6 @@ class	ft::node
 
 	protected:
 		value_type	_val;
-		key_type	_key;
-		content_type	_content;
 		node*		_left;
 		node*		_right;
 		node*		_papa;
@@ -21,20 +19,18 @@ class	ft::node
 		char		_side;
 
 	public:
-		node(void) : _key(0), _content(0), _left(NULL), _right(NULL), _papa(NULL),
+		node(void) : _left(NULL), _right(NULL), _papa(NULL),
 				_color('s'), _side('s') {};
-		node(const value_type& val) : _val(val), _key(val.first)
+		node(const value_type& val) : _val(val)
 		{
-			_content = val.second;
 			_left = new node;
 			_right = new node;
 			_papa = NULL;
 			_color = 'r';
 			_side = 'c';
 		};
-		template < class U > node(const node<U>& mit) : _val(mit.getVal()), _key(mit.getKey())
+		template < class U > node(const node<U>& mit) : _val(mit.getVal())
 		{
-			_content = mit.getVal().second;
 			_left = mit.getLeft();
 			_right = mit.getRight();
 			_papa = mit.getPapa();
@@ -65,13 +61,9 @@ class	ft::node
 		{
 			return (!_papa);
 		};
-		void	setKey(const key_type& key)
+		void	setVal(const value_type& val)
 		{
-			_key = key;
-		}
-		void	setContent(const content_type& content)
-		{
-			_content = content;
+			_val = val;
 		}
 		void	setColor(const char& c)
 		{
@@ -148,11 +140,11 @@ class	ft::node
 		};
 		content_type&	getContent(void)
 		{
-			return (_content);
+			return (_val.second);
 		};
 		key_type	getKey(void) const
 		{
-			return (_key);
+			return (_val.first);
 		};
 		node*	getUncle(void)
 		{
@@ -488,13 +480,10 @@ class	ft::node
 		}
 		void	swapPair(node* x)
 		{
-			content_type	contentTmp = _content;
-			key_type	keyTmp = _key;
+			value_type	valTmp = getVal();
 
-			_content = x->getContent();
-			_key = x->getKey();
-			x->setContent(contentTmp);
-			x->setKey(keyTmp);
+			_val = x->getVal();
+			x->setVal(valTmp);
 		}
 		node*	deleteMe(void)
 		{

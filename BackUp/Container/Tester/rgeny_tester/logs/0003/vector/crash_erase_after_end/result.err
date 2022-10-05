@@ -1,0 +1,6 @@
+srcs/vector/crash_test/erase_after_end.cpp:20:4: error: type 'ft::vector<int>' does not provide a subscript operator
+                v[i] = i;
+                ~^~
+1 error generated.
+make: *** [Makefile:62: objs/srcs/vector/crash_test/ft_erase_after_end.o] Error 1
+valgrind: ./exe/srcs/vector/crash_test/ft_crash_erase_after_end: No such file or directory

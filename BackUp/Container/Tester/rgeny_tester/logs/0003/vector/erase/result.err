@@ -1,0 +1,57 @@
+srcs/vector/modifiers/erase.cpp:74:4: error: type 'ft::vector<std::string>' (aka 'vector<basic_string<char> >') does not provide a subscript operator
+                v[i] = i + 'a';
+                ~^~
+In file included from srcs/vector/modifiers/erase.cpp:13:
+In file included from includes/test_Utils.hpp:20:
+In file included from ../vector.hpp:4:
+../iterator.hpp:35:47: error: parameter of overloaded post-increment operator must have type 'int' (not 'ft::iterator<ft::vector<std::basic_string<char> > >::value_type' (aka 'std::basic_string<char>'))
+                ft::iterator<Category>  operator++(value_type) {
+                                                             ^
+srcs/vector/modifiers/erase.cpp:31:20: note: in instantiation of template class 'ft::iterator<ft::vector<std::basic_string<char> > >' requested here
+                                        << (v.erase(v.begin() + pos) - v.begin())
+                                                      ^
+srcs/vector/modifiers/erase.cpp:76:2: note: in instantiation of function template specialization '_test<std::basic_string<char>, ft::vector<std::basic_string<char> > >' requested here
+        _test<std::string>(v, 1);
+        ^
+In file included from srcs/vector/modifiers/erase.cpp:13:
+In file included from includes/test_Utils.hpp:20:
+In file included from ../vector.hpp:5:
+../const_iterator.hpp:35:53: error: parameter of overloaded post-increment operator must have type 'int' (not 'ft::const_iterator<ft::vector<std::basic_string<char> > >::value_type' (aka 'std::basic_string<char>'))
+                ft::const_iterator<Category>    operator++(value_type) {
+                                                                     ^
+../vector.hpp:42:26: note: in instantiation of template class 'ft::const_iterator<ft::vector<std::basic_string<char> > >' requested here
+                        const_iterator  it = x.begin();
+                                               ^
+srcs/vector/modifiers/erase.cpp:76:21: note: in instantiation of member function 'ft::vector<std::basic_string<char> >::vector' requested here
+        _test<std::string>(v, 1);
+                           ^
+In file included from srcs/vector/modifiers/erase.cpp:13:
+In file included from includes/test_Utils.hpp:20:
+../vector.hpp:53:7: error: cannot increment value of type 'ft::vector<std::basic_string<char> >::const_iterator' (aka 'const_iterator<ft::vector<basic_string<char> > >')
+                                it++;
+                                ~~^
+srcs/vector/modifiers/erase.cpp:76:21: note: in instantiation of member function 'ft::vector<std::basic_string<char> >::vector' requested here
+        _test<std::string>(v, 1);
+                           ^
+In file included from srcs/vector/modifiers/erase.cpp:13:
+In file included from includes/test_Utils.hpp:20:
+../vector.hpp:222:10: error: cannot increment value of type 'ft::vector<std::basic_string<char> >::iterator' (aka 'iterator<ft::vector<basic_string<char> > >')
+                                first++;
+                                ~~~~~^
+srcs/vector/modifiers/erase.cpp:59:5: note: in instantiation of member function 'ft::vector<std::basic_string<char> >::erase' requested here
+                v.erase(v.begin() + first, v.end() - last);
+                  ^
+srcs/vector/modifiers/erase.cpp:84:2: note: in instantiation of function template specialization '_test<std::basic_string<char>, ft::vector<std::basic_string<char> > >' requested here
+        _test<std::string>(v, 0, 0);
+        ^
+In file included from srcs/vector/modifiers/erase.cpp:13:
+In file included from includes/test_Utils.hpp:20:
+../vector.hpp:233:11: error: cannot increment value of type 'ft::vector<std::basic_string<char> >::iterator' (aka 'iterator<ft::vector<basic_string<char> > >')
+                                        first++;
+                                        ~~~~~^
+../vector.hpp:234:10: error: cannot increment value of type 'ft::vector<std::basic_string<char> >::iterator' (aka 'iterator<ft::vector<basic_string<char> > >')
+                                        last++;
+                                        ~~~~^
+7 errors generated.
+make: *** [Makefile:62: objs/srcs/vector/modifiers/ft_erase.o] Error 1
+valgrind: ./exe/srcs/vector/modifiers/ft_erase: No such file or directory

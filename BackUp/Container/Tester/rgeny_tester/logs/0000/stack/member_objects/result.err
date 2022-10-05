@@ -1,0 +1,9 @@
+srcs/stack/member_objects.cpp:28:18: error: no member named 'c' in 'Tmp<int>'
+                        while (!this->c.empty())
+                                ~~~~  ^
+srcs/stack/member_objects.cpp:45:7: note: in instantiation of member function 'Tmp<int>::print_data' requested here
+                tmp.print_data();
+                    ^
+1 error generated.
+make: *** [Makefile:62: objs/srcs/stack/ft_member_objects.o] Error 1
+valgrind: ./exe/srcs/stack/ft_member_objects: No such file or directory

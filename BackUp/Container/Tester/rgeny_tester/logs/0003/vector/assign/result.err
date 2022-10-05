@@ -1,0 +1,15 @@
+srcs/vector/modifiers/assign.cpp:59:5: error: no matching member function for call to 'assign'
+                v.assign(v2.begin() + first, v2.end() - last);
+                ~~^~~~~~
+srcs/vector/modifiers/assign.cpp:81:2: note: in instantiation of function template specialization '_test<int, ft::vector<int> >' requested here
+        _test<int>      (v2, v, 0, 0);
+        ^
+../vector.hpp:108:8: note: candidate function not viable: no known conversion from 'ft::const_iterator<vector<int> >' to 'ft::vector<int>::iterator' (aka 'iterator<ft::vector<int> >') for 1st argument
+                void    assign(iterator first, iterator last) {
+                        ^
+../vector.hpp:130:8: note: candidate function not viable: no known conversion from 'ft::const_iterator<vector<int> >' to 'ft::vector<int>::size_type' (aka 'unsigned long') for 1st argument
+                void    assign(size_type n, const value_type& val) {
+                        ^
+1 error generated.
+make: *** [Makefile:62: objs/srcs/vector/modifiers/ft_assign.o] Error 1
+valgrind: ./exe/srcs/vector/modifiers/ft_assign: No such file or directory

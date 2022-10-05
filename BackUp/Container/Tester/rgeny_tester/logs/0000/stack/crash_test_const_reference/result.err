@@ -1,0 +1,9 @@
+srcs/stack/crash_const_reference.cpp:23:26: error: no type named 'const_reference' in 'ft::stack<int>'
+                NAMESPACE::stack<int>::const_reference  ref = s.top();
+                ~~~~~~~~~~~~~~~~~~~~~~~^
+srcs/stack/crash_const_reference.cpp:28:11: error: expression is not assignable
+                s.top() = 42;
+                ~~~~~~~ ^
+2 errors generated.
+make: *** [Makefile:62: objs/srcs/stack/ft_crash_const_reference.o] Error 1
+valgrind: ./exe/srcs/stack/ft_crash_test_const_reference: No such file or directory

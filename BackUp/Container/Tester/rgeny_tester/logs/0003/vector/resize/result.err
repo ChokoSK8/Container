@@ -1,0 +1,9 @@
+srcs/vector/modifiers/resize.cpp:27:5: error: no member named 'resize' in 'ft::vector<int>'
+                v.resize(n);
+                ~ ^
+srcs/vector/modifiers/resize.cpp:41:2: note: in instantiation of function template specialization '_test<int, ft::vector<int> >' requested here
+        _test<int>      (v, 0);
+        ^
+1 error generated.
+make: *** [Makefile:62: objs/srcs/vector/modifiers/ft_resize.o] Error 1
+valgrind: ./exe/srcs/vector/modifiers/ft_resize: No such file or directory

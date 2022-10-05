@@ -1,0 +1,14 @@
+
+v.erase(v.begin() - 1)
+size     : 9
+max_size : 2305843009213693951
+capacity : 10
+1
+2
+3
+4
+5
+6
+7
+8
+9

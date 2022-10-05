@@ -1,0 +1,6 @@
+srcs/vector/crash_test/resize_max_size.cpp:22:5: error: no member named 'resize' in 'ft::vector<int>'
+                v.resize(v.max_size());
+                ~ ^
+1 error generated.
+make: *** [Makefile:62: objs/srcs/vector/crash_test/ft_resize_max_size.o] Error 1
+valgrind: ./exe/srcs/vector/crash_test/ft_crash_resize_max_size: No such file or directory

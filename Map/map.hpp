@@ -14,8 +14,8 @@ class	ft::map
 	public:
 		typedef	Key			key_type;
 		typedef T			mapped_type;
-//		typedef pair<const Key, T>	value_type;
-		typedef pair<Key, T>	value_type;
+		typedef pair<const Key, T>	value_type;
+//		typedef pair<Key, T>	value_type;
 		typedef std::size_t		size_type;
 		typedef std::ptrdiff_t		difference_type;
 		typedef Compare			key_compare;
