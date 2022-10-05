@@ -369,7 +369,7 @@ int	equal_rangeTester(void)
 
 int	eraseTester(void)
 {
-	int	n = 35;
+	int	n = 45;
 	map<int, int>	mamap;
 	int	i = 0;
         srand(time(0));
@@ -378,12 +378,14 @@ int	eraseTester(void)
 	mamap.insert(make_pair(10, 10));
 	while (n)
 	{
-		i = rand() % 20;
+		i = rand() % 40;
 		mamap.insert(make_pair(i, i));
 		--n;
 	}
 	mamap.print();
 	mamap.erase(10);
+	mamap.print();
+	mamap.erase(7);
 	mamap.print();
 	return (0);
 }

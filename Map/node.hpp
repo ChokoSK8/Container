@@ -168,6 +168,12 @@ class	ft::node
 				return (_papa->getLeft());
 			return (_papa->getRight());
 		};
+		node*	getRedChild(void)
+		{
+			if (getLeft()->getColor() == 'r')
+				return (getLeft());
+			return (getRight());
+		};
 		int	execBalancing(void)
 		{
 			if (is_root())
@@ -185,6 +191,15 @@ class	ft::node
 			if (_side == 'r')
 				return (LRcase());
 			return (LLcase());
+		};
+		int	execBalancingDelete(void)
+		{
+			if (isSiblingBlack())
+			{
+				if (siblingHasRedChild())
+					return (siblingBlackChildRedCase());
+			}
+			return (0);
 		};
 		int	pushBlackness(void)
 		{
@@ -218,6 +233,81 @@ class	ft::node
 		//	disp("RLcase for", getKey());
 			rotRight(this, getPapa());
 			return (_right->RRcase());
+		};
+		int	RRcaseDelete(void)
+		{
+			disp("RR CASE DELETE", 1);
+
+			char	colorPa;
+			bool	allBlacks = isAllBlacks();
+
+			rotLeft(getPapa(), getGrandPa());
+			if (allBlacks)
+			{
+				disp("ALL BLACK", 1);
+				setColor('n');
+				getSibling()->setColor('n');
+				getPapa()->setColor('n');
+			}
+			else
+			{
+				colorPa = getPapa()->getColor();
+				swapColor(this, getPapa());
+				if (!getSibling()->is_nil())
+					getSibling()->setColor(colorPa);
+			}
+			return (0);
+		}
+		int	LLcaseDelete(void)
+		{
+			disp("LL CASE DELETE", 1);
+
+			char	colorPa;
+			bool	allBlacks = isAllBlacks();
+
+			rotRight(getPapa(), getGrandPa());
+			if (allBlacks)
+			{
+				disp("ALL BLACK", 1);
+				setColor('n');
+				getSibling()->setColor('n');
+				getPapa()->setColor('n');
+			}
+			else
+			{
+				colorPa = getPapa()->getColor();
+				swapColor(this, getPapa());
+				if (!getSibling()->is_nil())
+					getSibling()->setColor(colorPa);
+			}
+			return (0);
+		}
+		int	RLcaseDelete(void)
+		{
+			disp("RL CASE DELETE", 1);
+			rotRight(this, getPapa());
+			return (_right->RRcaseDelete());
+		}
+		int	LRcaseDelete(void)
+		{
+			disp("LR CASE DELETE", 1);
+			rotLeft(this, getPapa());
+			return (_left->LLcaseDelete());
+		}
+		int	siblingBlackChildRedCase(void)
+		{
+			node*	sibling	= getSibling();
+			node*	redChild = sibling->getRedChild();
+
+			if (sibling->getSide() == 'r')
+			{
+				if (redChild->getSide() == 'r')
+					return (redChild->RRcaseDelete());
+				return (redChild->RLcaseDelete());
+			}
+			if (redChild->getSide() == 'r')
+				return (redChild->LRcaseDelete());
+			return (redChild->LLcaseDelete());
 		};
 		void	rotRight(node* x, node* y)
 		{
@@ -296,6 +386,10 @@ class	ft::node
 			x->setColor(y->getColor());
 			y->setColor(tmp);
 		};
+		bool	isSiblingBlack(void)
+		{
+			return (!(getSibling()->getColor() == 'r'));
+		};
 		bool	isUncleRed(void)
 		{
 			node*	uncle = getUncle();
@@ -303,6 +397,18 @@ class	ft::node
 			if (uncle->is_nil() || uncle->getColor() == 'n')
 				return (false);
 			return (true);
+		};
+		bool	siblingHasRedChild(void)
+		{
+			node*	sibling = getSibling();
+
+			return (sibling->getRight()->getColor() == 'r'
+					|| sibling->getLeft()->getColor() == 'r');
+		};
+		bool	isAllBlacks(void)
+		{
+			return (getPapa()->getColor() == 'n'
+					&& getGrandPa()->getColor() == 'n');
 		};
 		node*	swipValueCase(void)
 		{
@@ -359,7 +465,6 @@ class	ft::node
 					setRight(NULL);
 				else
 					setLeft(NULL);
-				child->setPapa(newPapa);
 				if (_side == 'r')
 				{
 					newPapa->setRight(child);
@@ -381,14 +486,17 @@ class	ft::node
 				{
 					newPapa->setRight(new node);
 					child = newPapa->getRight();
+					child->setSide('r');
 				}
 				else
 				{
 					newPapa->setLeft(new node);
 					child = newPapa->getLeft();
+					child->setSide('l');
 				}
 				child->setColor('d');
 			}
+			child->setPapa(newPapa);
 			setPapa(NULL);
 			return (child);
 		}

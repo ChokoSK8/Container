@@ -66,9 +66,11 @@ size_type	erase(const key_type& k)
 				disp("CHILD COLOR", child->getColor());
 			}
 			delete substitute;
+			if (child->getColor() == 'd')
+				balanceTreeErase(child);
 		}
 		else
-			disp("DELETET NODE WAS RED", 1);
+			disp("DELETED NODE WAS RED", 1);
 	}
 	return (1);
 };

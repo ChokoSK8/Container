@@ -44,6 +44,16 @@ void	balanceTree(pointer _node_)
 		_root = _node_;
 };
 
+void	balanceTreeErase(pointer curr)
+{
+	print();
+	disp("CURR", 1);
+	disp("COLOR", curr->getColor());
+	disp("PAPA", curr->getPapa());
+	while (curr->execBalancingDelete())
+		curr = curr->getPapa();
+};
+
 // FREE
 void	freeNodes(pointer from)
 {
@@ -71,7 +81,4 @@ void	print_tree_side(void)
 	}
 	disp("END PRINT TREE", 1);
 };
-
-
-
 #endif
