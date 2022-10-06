@@ -61,10 +61,6 @@ class	ft::node
 		{
 			return (!_papa);
 		};
-		void	setVal(const value_type& val)
-		{
-			_val = val;
-		}
 		void	setColor(const char& c)
 		{
 			_color = c;
@@ -128,7 +124,9 @@ class	ft::node
 		};
 		node*	getGrandPa(void) const
 		{
-			return (_papa->getPapa());
+			if (_papa)
+				return (_papa->getPapa());
+			return (NULL);
 		};
 		char	getSide(void) const
 		{
@@ -188,6 +186,7 @@ class	ft::node
 		{
 			node*	sibling = getSibling();
 
+			setColor('n');
 			if (!(sibling->getColor() == 'r'))
 			{
 				if (sibling->hasRedChild())
@@ -283,13 +282,19 @@ class	ft::node
 		int	RLcaseDelete(void)
 		{
 			disp("RL CASE DELETE", 1);
-			rotRight(this, getPapa());
+			node*	papa = getPapa();
+
+			rotRight(this, papa);
+			swapColor(this, papa);
 			return (_right->RRcaseDelete());
 		}
 		int	LRcaseDelete(void)
 		{
 			disp("LR CASE DELETE", 1);
+			node*	papa = getPapa();
+
 			rotLeft(this, getPapa());
+			swapColor(this, papa);
 			return (_left->LLcaseDelete());
 		}
 		int	siblingBlackChildRedCase(void)
@@ -315,11 +320,15 @@ class	ft::node
 			getSibling()->setColor('r');
 			if (papa->getColor() == 'r')
 			{
-				papa->setColor('b');
+				papa->setColor('n');
+				disp("papa return 0", papa->getKey());
 				return (0);
 			}
 			else
 			{
+				disp("papa return 1", papa->getKey());
+				if (papa->is_root())
+					return (0);
 				papa->setColor('d');
 				return (1);
 			}
@@ -332,8 +341,7 @@ class	ft::node
 
 			rotRight(sibling, papa);
 			swapColor(sibling, papa);
-			swapColor(getSibling(), papa);
-			return (0);
+			return (2);
 		};
 		int	siblingRedRightCase(void)
 		{
@@ -343,8 +351,7 @@ class	ft::node
 
 			rotLeft(sibling, papa);
 			swapColor(sibling, papa);
-			swapColor(getSibling(), papa);
-			return (0);
+			return (2);
 		};
 		void	rotRight(node* x, node* y)
 		{
@@ -445,16 +452,50 @@ class	ft::node
 			return (getPapa()->getColor() == 'n'
 					&& getGrandPa()->getColor() == 'n');
 		};
-		node*	swipValueCase(void)
+		pair<node*, node*>	swipValueCase(void)
 		{
 			node*	substitute;
+			node*	copy;
 
 			if (hasTwoChild())
 				substitute = findLargestFrom(getLeft());
 			else
 				substitute = findOnlyChild();
-			swapPair(substitute);
-			return (substitute);
+			copy = buildCopy(substitute->getVal());
+			return (make_pair(copy, substitute));
+		};
+		node*	buildCopy(const value_type& val)
+		{
+			node*	copy = new node(val);
+			node*	papa = getPapa();
+			node*	left = getLeft();
+			node*	right = getRight();
+
+			if (papa)
+			{
+				copy->setPapa(papa);
+				if (_side == 'r')
+				{
+					papa->setRight(copy);
+					copy->setSide('r');
+				}
+				else
+				{
+					papa->setLeft(copy);
+					copy->setSide('l');
+				}
+			}
+			delete copy->getLeft();
+			delete copy->getRight();
+			left->setPapa(copy);
+			right->setPapa(copy);
+			copy->setLeft(left);
+			copy->setRight(right);
+			copy->setColor(_color);
+			setPapa(NULL);
+			setRight(NULL);
+			setLeft(NULL);
+			return (copy);
 		};
 		node*	findOnlyChild(void)
 		{
@@ -477,13 +518,6 @@ class	ft::node
 		bool	hasTwoChild(void)
 		{
 			return (!getRight()->is_nil() && !getLeft()->is_nil());
-		}
-		void	swapPair(node* x)
-		{
-			value_type	valTmp = getVal();
-
-			_val = x->getVal();
-			x->setVal(valTmp);
 		}
 		node*	deleteMe(void)
 		{
@@ -530,7 +564,36 @@ class	ft::node
 			}
 			child->setPapa(newPapa);
 			setPapa(NULL);
+			if (getColor() == 'r' && child->getColor() == 'd')
+				child->setColor('n');
+			delete this;
 			return (child);
 		}
+		node*	deleteLeaf(void)
+		{
+			node*	papa = getPapa();
+			node*	newChild = new node();
+
+			if (newChild->getRight() || newChild->getLeft())
+				disp("ERRORRRRRRRR", 1);
+			if (papa)
+			{
+				if (_side == 'r')
+				{
+					papa->setRight(newChild);
+					newChild->setSide('r');
+				}
+				else
+				{
+					papa->setLeft(newChild);
+					newChild->setSide('l');
+				}
+				setPapa(NULL);
+				newChild->setPapa(papa);
+			}
+			else
+				disp("PAS PAPA DELETE LEAF", 1);
+			return (newChild);
+		};
 };
 #endif

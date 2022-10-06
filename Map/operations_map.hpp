@@ -5,7 +5,7 @@ iterator	find(const key_type& k)
 {
 	pointer	toFind = _root;
 
-	while (toFind)
+	while (toFind && !toFind->is_nil())
 	{
 		if (k < toFind->getKey())
 			toFind = toFind->getLeft();
@@ -21,7 +21,7 @@ const_iterator	find(const key_type& k) const
 {
 	pointer	toFind = _root;
 
-	while (toFind)
+	while (toFind && !toFind->is_nil())
 	{
 		if (k < toFind->getKey())
 			toFind = toFind->getLeft();

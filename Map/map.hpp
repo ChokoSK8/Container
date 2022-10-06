@@ -93,16 +93,6 @@ class	ft::map
 			return (_c);
 		};
 
-	/*---------------TO DELETE-------------*/
-
-		// GETTER
-		pointer	getRoot(void)
-		{
-			return (_root);
-		};
-
-	/*---------------END TO DELETE-------------*/
-
 	private:
 		# include "private_map.hpp"
 		# include "print.hpp"

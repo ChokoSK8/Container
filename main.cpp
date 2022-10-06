@@ -369,8 +369,10 @@ int	equal_rangeTester(void)
 
 int	eraseTester(void)
 {
-	int	n = 45;
+	int	n = 25;
 	map<int, int>	mamap;
+	map_iterator	it;
+	map_iterator	ite;
 	int	i = 0;
         srand(time(0));
 //	int	modu = n * 10;
@@ -378,22 +380,82 @@ int	eraseTester(void)
 	mamap.insert(make_pair(10, 10));
 	while (n)
 	{
-		i = rand() % 40;
+		i = rand() % 100;
+		mamap.insert(make_pair(i, i));
+		--n;
+	}
+	mamap.countElements();
+	n = 15;
+	while (n)
+	{
+		i = rand() % 100;
+		while (mamap.find(i) == mamap.end())
+			i = rand() % 100;
+		disp("ERASE", i);
+		mamap.erase(i);
+		it = mamap.begin();
+		ite = mamap.end();
+		i = 0;
+
+		while (it != ite)
+		{
+			n = it->getKey();
+			displayRBrator(it);
+			++it;
+			if (n > it->getKey() && it != ite)
+				disp("--------ERROR--------", 1);
+			++i;
+		}
+		mamap.print();
+		mamap.countElements();
+		//mamap.countHeight(NULL, 0);
+		--n;
+	}
+	it = mamap.begin();
+	ite = mamap.end();
+	i = 0;
+
+	while (it != ite)
+	{
+		n = it->getKey();
+		displayRBrator(it);
+		++it;
+		if (n > it->getKey() && it != ite)
+			disp("--------ERROR--------", 1);
+		++i;
+	}
+	disp("NUMBER OF ELEMENTS", i);
+	mamap.print();
+	return (0);
+}
+
+int	findTester(void)
+{
+	map<int, int>	mamap;
+	map_iterator	it;
+	int	n = 20;
+	int	i;
+	srand(time(0));
+
+	while (n)
+	{
+		i = rand() % 50;
 		mamap.insert(make_pair(i, i));
 		--n;
 	}
 	mamap.print();
-	dispAct("ERASE 10");
-	mamap.erase(10);
-	mamap.print();
-	dispAct("ERASE 7");
-	mamap.erase(7);
-	mamap.print();
-	dispAct("ERASE 35");
-	mamap.erase(35);
-	mamap.print();
+	n = 20;
+	while (--n)
+	{
+		i = rand() % 50;
+		it = mamap.find(i);
+		if (it != mamap.end())
+			disp("FOUND", i);
+		else
+			disp("NOT FOUND", i);
+	}
 	return (0);
-}
+};
 
 int	main(int ac, char **av)
 {
@@ -418,6 +480,7 @@ int	main(int ac, char **av)
 	fcts["upper_bound"] = &upper_boundTester;
 	fcts["equal_range"] = &equal_rangeTester;
 	fcts["erase"] = &eraseTester;
+	fcts["find"] = &findTester;
 	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
 	{
 		if (!str.compare(it->first))

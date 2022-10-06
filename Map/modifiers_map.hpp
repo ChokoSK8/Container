@@ -43,25 +43,37 @@ void	insert(iterator first, iterator last)
 size_type	erase(const key_type& k)
 {
 	iterator	toDeleteIt = find(k);
-	pointer		toDelete;	
-	pointer		substitute;
+	pointer		toDelete;
 	pointer		child;
+	pair<pointer, pointer>	pairOfP;
+	char	colorSub;
 
 	if (toDeleteIt == end())
 		return (0);
 	toDelete = toDeleteIt.base();
 	if (toDelete->hasAlmostOneChild())
 	{
-		substitute = toDelete->swipValueCase();
-		child = substitute->deleteMe();
-		if (substitute->getColor() == 'n')
+		pairOfP = toDelete->swipValueCase();
+		if (_root == toDelete)
+			_root = pairOfP.first;
+		colorSub = pairOfP.second->getColor();
+		child = pairOfP.second->deleteMe();
+		if (colorSub == 'n')
 		{
-			delete substitute;
 			if (child->getColor() == 'd')
 				balanceTreeErase(child);
 		}
 		else
 			disp("DELETED NODE WAS RED", 1);
+		delete toDelete;
+	}
+	else
+	{
+		disp("DELETE LEAF", 1);
+		child = toDelete->deleteLeaf();
+		if (toDelete->getColor() == 'n')
+			balanceTreeErase(child);
+		delete toDelete;
 	}
 	return (1);
 };
