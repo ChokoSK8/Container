@@ -3,7 +3,7 @@
 
 ft::pair<iterator, bool>	insert(const value_type& val)
 {
-	pointer	newNode = new node<value_type>(val);
+	nodePtr	newNode = new node<value_type>(val);
 	ft::pair<iterator, bool>	ret;
 
 	if (!_root->is_nil())
@@ -44,9 +44,9 @@ void	insert(iterator first, iterator last)
 size_type	erase(const key_type& k)
 {
 	iterator	toDeleteIt = find(k);
-	pointer		toDelete;
-	pointer		child;
-	pair<pointer, pointer>	pairOfP;
+	nodePtr		toDelete;
+	nodePtr		child;
+	pair<nodePtr, nodePtr>	pairOfP;
 	char	colorSub;
 
 	if (toDeleteIt == end())

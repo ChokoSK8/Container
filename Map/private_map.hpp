@@ -1,7 +1,7 @@
 #ifndef PRIVATE_MAP_HPP
 # define PRIVATE_MAP_HPP
 
-ft::pair<iterator, bool>	positionNode(pointer newNode, pointer from)
+ft::pair<iterator, bool>	positionNode(nodePtr newNode, nodePtr from)
 {
 	bool	loop = true;
 
@@ -31,24 +31,26 @@ ft::pair<iterator, bool>	positionNode(pointer newNode, pointer from)
 	return (make_pair(iterator(from), false));
 };
 
-void	balanceTree(pointer _node_)
+void	balanceTree(nodePtr _node_)
 {
+	disp("ROOT", _root->getKey());
 	while (_node_->execBalancing())
 		_node_ = _node_->getGrandPa();
 
-	pointer	papa = _node_->getPapa();
+	nodePtr	papa = _node_->getPapa();
 
 	if (papa && papa->is_root())
 		_root = papa;
 	if (_node_->is_root())
 		_root = _node_;
+	disp("NEWROOT", _root->getKey());
 };
 
-void	balanceTreeErase(pointer curr)
+void	balanceTreeErase(nodePtr curr)
 {
 	int	ret;
-	pointer	papa;
-	pointer	grandPa;
+	nodePtr	papa;
+	nodePtr	grandPa;
 
 	while ((ret = curr->execBalancingDelete()))
 	{
@@ -70,7 +72,7 @@ void	balanceTreeErase(pointer curr)
 };
 
 // FREE
-void	freeNodes(pointer from)
+void	freeNodes(nodePtr from)
 {
 	if (from->getLeft() && !from->getLeft()->is_nil())
 		freeNodes(from->getLeft());
@@ -99,12 +101,12 @@ void	print_tree_side(void)
 
 // COUNTER
 public:
-	pointer	getRoot(void)
+	nodePtr	getRoot(void)
 	{
 		return (_root);
 	};
 
-	void	countHeight(pointer from, int height)
+	void	countHeight(nodePtr from, int height)
 	{
 		if (from == NULL)
 			from = getRoot();

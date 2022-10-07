@@ -3,7 +3,7 @@
 
 iterator	begin(void)
 {
-	pointer	toFind = _root;
+	nodePtr	toFind = _root;
 
 	if (toFind->is_nil())
 		return (iterator(toFind));
@@ -14,7 +14,7 @@ iterator	begin(void)
 
 const_iterator	begin(void) const
 {
-	pointer	toFind = _root;
+	nodePtr	toFind = _root;
 
 	if (toFind->is_nil())
 		return (const_iterator(toFind));
@@ -25,7 +25,7 @@ const_iterator	begin(void) const
 
 iterator	end(void)
 {
-	pointer	toFind = _root;
+	nodePtr	toFind = _root;
 
 	if (toFind->is_nil())
 		return (iterator(toFind));
@@ -36,7 +36,7 @@ iterator	end(void)
 
 const_iterator	end(void) const
 {
-	pointer	toFind = _root;
+	nodePtr	toFind = _root;
 
 	if (toFind->is_nil())
 		return (const_iterator(toFind));

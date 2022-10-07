@@ -4,6 +4,10 @@
 # include <map>
 # include <cstring>
 # include <list>
+# include <cstdlib>
+# include <fstream>
+# include <string>
+# include <sstream>
 
 using namespace std;
 
@@ -89,11 +93,18 @@ typedef struct	s_coordinate {
 
 int	main()
 {
-	std::map<int, int>	mamap;
-	std::map<int, int>	mamap2 = makeMap(10);
-	std::map<int, int>::iterator	it = mamap.begin();
+	std::stringstream	ss;
+	std::string	line;
+	int		i;
+	std::fstream	file;
 
-	std::cout << "It" << it->first << std::endl;
-	std::cout << "It" << it->second << std::endl;
+	file.open("rand.txt", std::ios::in);
+	while (std::getline(file, line))
+	{
+		ss << line;
+		ss >> i;
+		std::cout << "i: " << i << " | line:" << line << std::endl;
+		ss.clear();
+	}
 	return (0);
 }

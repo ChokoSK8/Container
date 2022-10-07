@@ -3,7 +3,7 @@
 
 iterator	find(const key_type& k)
 {
-	pointer	toFind = _root;
+	nodePtr	toFind = _root;
 
 	while (toFind && !toFind->is_nil())
 	{
@@ -19,7 +19,7 @@ iterator	find(const key_type& k)
 
 const_iterator	find(const key_type& k) const
 {
-	pointer	toFind = _root;
+	nodePtr	toFind = _root;
 
 	while (toFind && !toFind->is_nil())
 	{
@@ -28,7 +28,7 @@ const_iterator	find(const key_type& k) const
 		else if (k > toFind->getKey())
 			toFind = toFind->getRight();
 		else
-			return (iterator(toFind));
+			return (const_iterator(toFind));
 	}
 	return (end());
 }
@@ -42,8 +42,8 @@ size_type	count(const key_type& k) const
 
 iterator	lower_bound(const key_type& k)
 {
-	pointer	lowerBnd = _root;
-	pointer	favourite = NULL;
+	nodePtr	lowerBnd = _root;
+	nodePtr	favourite = NULL;
 
 	while (!lowerBnd->is_nil())
 	{
@@ -64,8 +64,8 @@ iterator	lower_bound(const key_type& k)
 
 const_iterator	lower_bound(const key_type& k) const
 {
-	pointer	lowerBnd = _root;
-	pointer	favourite = NULL;
+	nodePtr	lowerBnd = _root;
+	nodePtr	favourite = NULL;
 
 	while (!lowerBnd->is_nil())
 	{
@@ -86,8 +86,8 @@ const_iterator	lower_bound(const key_type& k) const
 
 iterator	upper_bound(const key_type& k)
 {
-	pointer	upperBnd = _root;
-	pointer	favourite = NULL;
+	nodePtr	upperBnd = _root;
+	nodePtr	favourite = NULL;
 
 	while (!upperBnd->is_nil())
 	{
@@ -108,8 +108,8 @@ iterator	upper_bound(const key_type& k)
 
 const_iterator	upper_bound(const key_type& k) const
 {
-	pointer	upperBnd = _root;
-	pointer	favourite = NULL;
+	nodePtr	upperBnd = _root;
+	nodePtr	favourite = NULL;
 
 	while (!upperBnd->is_nil())
 	{
@@ -128,8 +128,8 @@ const_iterator	upper_bound(const key_type& k) const
 	return (end());
 }
 
-pair<const_iterator, const_iterator>	equal_range(const key_type& k) const
-{
-	return (make_pair(lower_bound(k), upper_bound(k)));
-};
+//pair<const_iterator, const_iterator>	equal_range(const key_type& k) const
+//{
+//	return (make_pair(lower_bound(k), upper_bound(k)));
+//};
 #endif

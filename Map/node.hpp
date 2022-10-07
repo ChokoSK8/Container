@@ -39,7 +39,7 @@ class	ft::node
 		};
 		~node(void)
 		{
-			if (!is_nil() && _papa)
+			if (_papa)
 			{
 				if (_side == 'r')
 					_papa->setRight(NULL);
@@ -47,17 +47,23 @@ class	ft::node
 					_papa->setLeft(NULL);
 			}
 			if (_right && _right->is_nil())
+			{
+				_right->setPapa(NULL);
 				delete _right;
+			}
 			if (_left && _left->is_nil())
+			{
+				_left->setPapa(NULL);
 				delete _left;
+			}
 		}
 
 		// FCTS
-		bool	is_nil(void)
+		bool	is_nil(void) const
 		{
 			return (_left == NULL && _right == NULL);
 		};
-		bool	is_root(void)
+		bool	is_root(void) const
 		{
 			return (!_papa);
 		};
@@ -106,7 +112,7 @@ class	ft::node
 			setLeft(newNode);
 			newNode->setPapa(this);
 		};
-		value_type	getVal(void) const
+		value_type&	getVal(void)
 		{
 			return (_val);
 		};
@@ -202,6 +208,7 @@ class	ft::node
 		};
 		int	pushBlackness(void)
 		{
+			disp("PUSH BLACKNESS", 1);
 			getGrandPa()->setColor('r');
 			getUncle()->setColor('n');
 			_papa->setColor('n');
@@ -209,27 +216,27 @@ class	ft::node
 		};
 		int	RRcase(void)
 		{
-		//	disp("RRcase", 1);
+			disp("RRcase", 1);
 			rotLeft(getPapa(), getGrandPa());
 			swapColor(getPapa(), getSibling());
 			return (0);
 		};
 		int	LLcase(void)
 		{
-		//	disp("LLcase", 1);
+			disp("LLcase", 1);
 			rotRight(getPapa(), getGrandPa());
 			swapColor(getPapa(), getSibling());
 			return (0);
 		};
 		int	LRcase(void)
 		{
-		//	disp("LRcase for", getKey());
+			disp("LRcase for", getKey());
 			rotLeft(this, getPapa());
 			return (_left->LLcase());
 		};
 		int	RLcase(void)
 		{
-		//	disp("RLcase for", getKey());
+			disp("RLcase for", getKey());
 			rotRight(this, getPapa());
 			return (_right->RRcase());
 		};

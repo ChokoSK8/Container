@@ -15,26 +15,27 @@ class	ft::map
 		typedef	Key			key_type;
 		typedef T			mapped_type;
 		typedef pair<const Key, T>	value_type;
-//		typedef pair<Key, T>	value_type;
 		typedef std::size_t		size_type;
 		typedef std::ptrdiff_t		difference_type;
 		typedef Compare			key_compare;
 		typedef Allocator		allocator_type;
 		typedef value_type&		reference;
 		typedef const value_type&	const_reference;
-		typedef node<value_type>*	pointer;
-		typedef const node<value_type>*	const_pointer;
+		typedef value_type*		pointer;
+		typedef const value_type*	const_pointer;
+		typedef node<value_type>*	nodePtr;
+		typedef node<const value_type>*	const_nodePtr;
 
 		// ITERATOR
-		typedef rbrator<pointer>		iterator;
-		typedef rbrator<const_pointer>		const_iterator;
-	//	typedef ft::reverse_iterator<iterator>			reverse_iterator;
+		typedef rbrator<value_type>		iterator;
+		typedef rbrator<const value_type>	const_iterator;
+	//	typedef ft::reverse_iterator<iterator>		reverse_iterator;
 	//	typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
 	protected:
 		size_type	_size;
 		allocator_type	_c;
-		pointer		_root;
+		nodePtr		_root;
 		key_compare	_keyComp;
 
 	public:

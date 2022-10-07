@@ -7,6 +7,9 @@
 # include <list>
 # include <string>
 # include <cstdlib>
+# include <fstream>
+# include <string>
+# include <sstream>
 
 using namespace ft;
 
@@ -63,27 +66,25 @@ void	displayPair(const pair<T1, T2> p)
 	std::cout << "FIRST: " << p.first  << " | SECOND: " << p.second << std::endl;
 }
 
-template < class T >
-void	displayRBrator(const rbrator<T> p)
+void	displayMapIterator(const map_iterator p)
 {
-	std::cout << "FIRST: " << p->getKey()  << " | SECOND: "
-			<< p->getContent() << std::endl;
+	std::cout << "FIRST: " << p->first  << " | SECOND: "
+			<< p->second << std::endl;
 }
 
-//template < class T1, class T2 >
-//void	displayElements(map<T1, T2> mamap)
+//void	displayElements(map<int, int> mamap)
 //{
-//	map<T1, T2>::iterator	it = mamap.begin();
-//	map<T1, T2>::iterator	ite = mamap.end();
+//	map_iterator	it = mamap.begin();
+//	map_iterator	ite = mamap.end();
 //	int	i = 0;
 //	int	n;
 //
 //	while (it != ite)
 //	{
-//		n = it->getKey();
-//		displayRBrator(it);
+//		n = it->first;
+//		displayMapIterator(it);
 //		++it;
-//		if (n > it->getKey() && it != ite)
+//		if (n > it->first && it != ite)
 //			disp("--------ERROR--------", 1);
 //		++i;
 //	}
@@ -140,20 +141,32 @@ int	pairANDmake_pairTester(void)
 int	insertTester1(void)
 {
 	map<int, int>	mamap;
-	std::map<int, int>	stdMap;
-	int	i = 0;
-	int	n;
-        srand(time(0));
+	std::stringstream	ss;
+	std::string	line;
+	int		i;
+	std::fstream	file;
+	map_iterator	it;
+	map_iterator	ite;
 
-	while (i < 15)
+	file.open("rand.txt", std::ios::in);
+	if (!file)
+		disp("ERROR: rand.txt couldn't open", 0);
+	while (std::getline(file, line))
 	{
-		n = rand() % 100;
-		mamap.insert(make_pair(n, n));
-		stdMap.insert(std::make_pair(n, n));
-		++i;
+		ss << line;
+		ss >> i;
+		mamap.insert(make_pair(i, i));
+		ss.clear();
 	}
-	mamap.print();
-	disp("lower_bound(50)", stdMap.lower_bound(50)->first);
+	file.close();
+	it = mamap.begin();
+	ite = mamap.end();
+	while (it != ite)
+	{
+		displayMapIterator(it);
+		++it;
+	}
+	disp("SIZE", mamap.size());
 	return (0);
 }
 
@@ -172,7 +185,7 @@ int	iteratorTester(void)
 		n = rand() % 2000;
 		ret = mamap.insert(make_pair(n, n));
 		if (!ret.second)
-			disp("KEY ALREADY USED", ret.first->getContent());
+			disp("KEY ALREADY USED", ret.first->second);
 		++i;
 	}
 	disp("NUMBER OF ELEMENTS", i);
@@ -186,7 +199,6 @@ int	element_accessTester(void)
 
 	for (int i = 0; i < 15; ++i)
 		mamap.insert(make_pair(i, (int)rand() % 100));
-//	displayElements(mamap);
 	map<int, int>::iterator	it = mamap.begin();
 	map<int, int>::iterator	ite = mamap.end();
 	int	i = 0;
@@ -194,10 +206,9 @@ int	element_accessTester(void)
 
 	while (it != ite)
 	{
-		n = it->getKey();
-		displayRBrator(it);
+		n = it->first;
 		++it;
-		if (n > it->getKey() && it != ite)
+		if (n > it->first && it != ite)
 			disp("--------ERROR--------", 1);
 		++i;
 	}
@@ -211,10 +222,10 @@ int	element_accessTester(void)
 	i = 0;
 	while (it != ite)
 	{
-		n = it->getKey();
-		displayRBrator(it);
+		n = it->first;
+		displayMapIterator(it);
 		++it;
-		if (n > it->getKey() && it != ite)
+		if (n > it->first && it != ite)
 			disp("--------ERROR--------", 1);
 		++i;
 	}
@@ -228,7 +239,6 @@ int	atTester(void)
 
 	for (int i = 0; i < 15; ++i)
 		mamap.insert(make_pair(i, (int)rand() % 100));
-//	displayElements(mamap);
 	map<int, int>::iterator	it = mamap.begin();
 	map<int, int>::iterator	ite = mamap.end();
 	int	i = 0;
@@ -236,10 +246,9 @@ int	atTester(void)
 
 	while (it != ite)
 	{
-		n = it->getKey();
-		displayRBrator(it);
+		n = it->first;
 		++it;
-		if (n > it->getKey() && it != ite)
+		if (n > it->first && it != ite)
 			disp("--------ERROR--------", 1);
 		++i;
 	}
@@ -290,10 +299,9 @@ int	lower_boundTester(void)
 		stdMap.insert(std::make_pair(i, i));
 		--n;
 	}
-	mamap.print();
-	disp("lower_bound(50)", mamap.lower_bound(50)->getKey());
+	disp("lower_bound(50)", mamap.lower_bound(50)->first);
 	disp("REAL: lower_bound(50)", stdMap.lower_bound(50)->first);
-	disp("lower_bound(0)", mamap.lower_bound(0)->getKey());
+	disp("lower_bound(0)", mamap.lower_bound(0)->first);
 	disp("REAL: lower_bound(0)", stdMap.lower_bound(0)->first);
 	disp("lower_bound(200) is end", mamap.lower_bound(200) == mamap.end());
 	disp("REAL: lower_bound(200) is end", stdMap.lower_bound(200) == stdMap.end());
@@ -316,66 +324,64 @@ int	upper_boundTester(void)
 		stdMap.insert(std::make_pair(i, i));
 		--n;
 	}
-	mamap.print();
-	disp("upper_bound(50)", mamap.upper_bound(50)->getKey());
+	disp("upper_bound(50)", mamap.upper_bound(50)->first);
 	disp("REAL: upper_bound(50)", stdMap.upper_bound(50)->first);
-	disp("upper_bound(0)", mamap.upper_bound(0)->getKey());
+	disp("upper_bound(0)", mamap.upper_bound(0)->first);
 	disp("REAL: upper_bound(0)", stdMap.upper_bound(0)->first);
 	disp("upper_bound(200) is end", mamap.upper_bound(200) == mamap.end());
 	disp("REAL: upper_bound(200) is end", stdMap.upper_bound(200) == stdMap.end());
 	return (0);
 }
 
-int	equal_rangeTester(void)
-{
-	int	n = 15;
-	map<int, int>	mamap;
-	int	i = 0;
-        srand(time(0));
-	int	modu = n * 10;
-	std::map<int, int>	stdMap;
-	pair<map_const_iterator, map_const_iterator>	ret;
-	std::pair<std::map<int, int>::const_iterator, 
-				std::map<int, int>::const_iterator>	ret2;
-
-	while (n)
-	{
-		i = rand() % modu;
-		mamap.insert(make_pair(i, i));
-		stdMap.insert(std::make_pair(i, i));
-		--n;
-	}
-	mamap.print();
-	ret = mamap.equal_range(50);
-	ret2 = stdMap.equal_range(50);
-	disp("equal_range(50).first", ret.first->getKey());
-	disp("equal_range(50).second", ret.second->getKey());
-	disp("REAL equal_range(50).first", ret2.first->first);
-	disp("REAL equal_range(50).second", ret2.second->first);
-	ret = mamap.equal_range(0);
-	ret2 = stdMap.equal_range(0);
-	disp("equal_range(0).first", ret.first->getKey());
-	disp("equal_range(0).second", ret.second->getKey());
-	disp("REAL equal_range(0).first", ret2.first->first);
-	disp("REAL equal_range(0).second", ret2.second->first);
-	ret = mamap.equal_range(200);
-	ret2 = stdMap.equal_range(200);
-	disp("equal_range(200).first", ret.first == mamap.end());
-	disp("equal_range(200).second", ret.second == mamap.end());
-	disp("REAL equal_range(200).first == end()", ret2.first == stdMap.end());
-	disp("REAL equal_range(200).second == end()", ret2.second == stdMap.end());
-	return (0);
-}
+//int	equal_rangeTester(void)
+//{
+//	int	n = 15;
+//	map<int, int>	mamap;
+//	int	i = 0;
+//        srand(time(0));
+//	int	modu = n * 10;
+//	std::map<int, int>	stdMap;
+//	pair<map_const_iterator, map_const_iterator>	ret;
+//	std::pair<std::map<int, int>::const_iterator, 
+//				std::map<int, int>::const_iterator>	ret2;
+//
+//	while (n)
+//	{
+//		i = rand() % modu;
+//		mamap.insert(make_pair(i, i));
+//		stdMap.insert(std::make_pair(i, i));
+//		--n;
+//	}
+//	mamap.print();
+//	ret = mamap.equal_range(50);
+//	ret2 = stdMap.equal_range(50);
+//	disp("equal_range(50).first", ret.first->first);
+//	disp("equal_range(50).second", ret.second->first);
+//	disp("REAL equal_range(50).first", ret2.first->first);
+//	disp("REAL equal_range(50).second", ret2.second->first);
+//	ret = mamap.equal_range(0);
+//	ret2 = stdMap.equal_range(0);
+//	disp("equal_range(0).first", ret.first->first);
+//	disp("equal_range(0).second", ret.second->first);
+//	disp("REAL equal_range(0).first", ret2.first->first);
+//	disp("REAL equal_range(0).second", ret2.second->first);
+//	ret = mamap.equal_range(200);
+//	ret2 = stdMap.equal_range(200);
+//	disp("equal_range(200).first", ret.first == mamap.end());
+//	disp("equal_range(200).second", ret.second == mamap.end());
+//	disp("REAL equal_range(200).first == end()", ret2.first == stdMap.end());
+//	disp("REAL equal_range(200).second == end()", ret2.second == stdMap.end());
+//	return (0);
+//}
 
 int	eraseTester(void)
 {
-	int	n = 105;
+	int	n = 30;
 	map<int, int>	mamap;
 	map_iterator	it;
 	map_iterator	ite;
 	int	i = 0;
         srand(time(0));
-//	int	modu = n * 10;
 
 	mamap.insert(make_pair(10, 10));
 	while (n)
@@ -384,7 +390,6 @@ int	eraseTester(void)
 		mamap.insert(make_pair(i, i));
 		--n;
 	}
-	mamap.countElements();
 	while (!mamap.empty())
 	{
 		i = rand() % 5000;
@@ -392,22 +397,6 @@ int	eraseTester(void)
 			i = rand() % 5000;
 		disp("ERASE", i);
 		mamap.erase(i);
-		it = mamap.begin();
-		ite = mamap.end();
-		i = 0;
-
-		while (it != ite)
-		{
-			n = it->getKey();
-		//	displayRBrator(it);
-			++it;
-			if (n > it->getKey() && it != ite)
-				disp("--------ERROR--------", 1);
-			++i;
-		}
-	//	mamap.print();
-		mamap.countElements();
-		mamap.countHeight(NULL, 0);
 		--n;
 	}
 	it = mamap.begin();
@@ -416,15 +405,15 @@ int	eraseTester(void)
 
 	while (it != ite)
 	{
-		n = it->getKey();
-		displayRBrator(it);
+		n = it->first;
+//		displayRBrator(it);
 		++it;
-		if (n > it->getKey() && it != ite)
+		if (n > it->first && it != ite)
 			disp("--------ERROR--------", 1);
 		++i;
 	}
 	disp("NUMBER OF ELEMENTS", i);
-	mamap.print();
+//	mamap.print();
 	return (0);
 }
 
@@ -442,7 +431,7 @@ int	findTester(void)
 		mamap.insert(make_pair(i, i));
 		--n;
 	}
-	mamap.print();
+//	mamap.print();
 	n = 20;
 	while (--n)
 	{
@@ -477,7 +466,7 @@ int	main(int ac, char **av)
 	fcts["max_size"] = &max_sizeTester;
 	fcts["lower_bound"] = &lower_boundTester;
 	fcts["upper_bound"] = &upper_boundTester;
-	fcts["equal_range"] = &equal_rangeTester;
+//	fcts["equal_range"] = &equal_rangeTester;
 	fcts["erase"] = &eraseTester;
 	fcts["find"] = &findTester;
 	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)

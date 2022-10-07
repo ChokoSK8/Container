@@ -3,7 +3,7 @@
 
 mapped_type&	operator[](const key_type& k)
 {
-	return (insert(make_pair(k, mapped_type())).first->getContent());
+	return (insert(make_pair(k, mapped_type())).first->second);
 };
 mapped_type&	at(const key_type& k)
 {
@@ -11,7 +11,7 @@ mapped_type&	at(const key_type& k)
 
 	if (found == end())
 		throw std::out_of_range("map::at");
-	return (found->getContent());
+	return (found->second);
 };
 //const mapped_type&	at(const key_type& k) const
 //{
@@ -20,6 +20,6 @@ mapped_type&	at(const key_type& k)
 //	disp("HEY", 1);
 //	if (found == end())
 //		throw std::out_of_range("map::at");
-//	return (found->getContent());
+//	return (found->second);
 //};
 #endif

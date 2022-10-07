@@ -6,7 +6,7 @@
 /*   By: rgeny <rgeny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 10:49:44 by rgeny             #+#    #+#             */
-/*   Updated: 2022/10/06 15:17:58 by abrun            ###   ########.fr       */
+/*   Updated: 2022/10/07 12:07:53 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define ROOT _root
 # define SENTINEL NULL
-# define NODE_POINTER_TYPE pointer
+# define NODE_POINTER_TYPE nodePtr
 # define NODE_LEFT getLeft()
 # define NODE_RIGHT getRight()
 # include "../containers.h"
