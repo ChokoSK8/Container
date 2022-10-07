@@ -22,32 +22,32 @@ INC	= -I $(VECDIR)
 
 OBJS	= $(SRCS:.cpp=.o)
 
-VECDEP	= $(VECDIR)/*.hpp
+#VECDEP	= $(VECDIR)/*.hpp
 
 FLAGS	= -g -Wall -Werror -Wextra -MMD -MP -std=c++98
 
 RM	= rm -rf
 
-%.o: %.cpp	$(VECDEP)
+%.o: %.cpp	#$(VECDEP)
 	c++ $(FLAGS) -c $<
 	@echo "\t$(C_GREEN)COMPILING $<$(C_END)"
 
 all:	$(NAME)
 
-$(NAME):	$(OBJS) $(VECDEP)
+$(NAME):	$(OBJS) #$(VECDEP)
 ifeq ($(ARG), )
-	@./randScript.sh 200
+	@bash Utils/randScript.sh 200
 else
-	@./randScript.sh $(ARG)
+	@bash Utils/randScript.sh $(ARG)
 endif
 	@echo "\t$(C_PURPLE)GENERATING RANDOM NUMBER FILE$(C_END)"
 	@c++ $(FLAGS) $(OBJS) -o $(NAME)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE$(C_END)"
 
 update:	main.cpp
-	@awk 'FNR < 93' cmp.cpp > f1 ; awk 'FNR > 92' main.cpp > f2 ; cat f1 > cmp.cpp ; cat f2 >> cmp.cpp
+	@bash buildCmp.sh
 	@echo "\t$(C_CYAN)UPDATING CMP.CPP$(C_END)"
-	@c++ $(FLAGS) cmp.cpp -o cmp
+	@c++ $(FLAGS) Utils/cmp.cpp -o cmp
 	@echo "\t$(C_GREEN)COMPILING CMP.CPP$(C_END)"
 
 diff:	all update

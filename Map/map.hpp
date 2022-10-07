@@ -1,9 +1,9 @@
 #ifndef MAP_HPP
 # define MAP_HPP
-# include "../pair.hpp"
+# include "../ExtraClass/pair.hpp"
 # include "../containers.h"
-# include "node.hpp"
-# include "rbrator.hpp"
+# include "Node/node.hpp"
+# include "Iterators/rbrator.hpp"
 
 # include <sstream>
 # include <vector>
@@ -73,19 +73,19 @@ class	ft::map
 		};
 
 		// ITERATOR
-		#include "iterator_map.hpp"
+		#include "MemberFonctions/iterator_map.hpp"
 
 		// CAPACITY
-		#include "capacity_map.hpp"
+		#include "MemberFonctions/capacity_map.hpp"
 
 		// ELEMENT_ACCES
-		# include "element_access_map.hpp"
+		# include "MemberFonctions/element_access_map.hpp"
 
 		// MODIFIERS
-		#include "modifiers_map.hpp"
+		#include "MemberFonctions/modifiers_map.hpp"
 
 		// OPERATIONS
-		#include "operations_map.hpp"
+		#include "MemberFonctions/operations_map.hpp"
 
 		// ALLOCATOR
 		allocator_type	get_allocator(void) const
@@ -94,7 +94,7 @@ class	ft::map
 		};
 
 	private:
-		# include "private_map.hpp"
+		# include "MemberFonctions/private_map.hpp"
 		# include "print.hpp"
 		
 };

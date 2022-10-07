@@ -1,95 +1,95 @@
-# include "Vector/vector.hpp"
-# include "stack.hpp"
-# include "equal.hpp"
-# include <map>
-# include <list>
-# include <string>
-# include <stack>
-# include <algorithm>
-# include <fstream>
-# include <string>
-# include <sstream>
-
-using namespace std;
-
-typedef map<int, int>::iterator	map_iterator;
-typedef map<int, int>::const_iterator	const_map_iterator;
-typedef int (*PtrFct)();
-
-template < typename T >
-void	displayVec(vector<T> vec)
+template < class T1, class T2 >
+void	pairCmpTester(pair<T1, T2>& x, pair<T1, T2>& y, int recur = 1)
 {
-	typename vector<T>::iterator	it = vec.begin();
-	typename vector<T>::iterator	ite = vec.end();
+	disp("PAIR X", 1);
+	displayPair(x);
+	disp("PAIR Y", 1);
+	displayPair(y);
+	disp("x == y", x == y);
+	disp("x != y", x != y);
+	disp("x <= y", x <= y);
+	disp("x >= y", x >= y);
+	disp("x < y", x < y);
+	disp("x > y", x > y);
+	if (recur)
+		return pairCmpTester(y, x, 0);
+}
 
-	disp("SIZE", vec.size());
+int	pairANDmake_pairTester(void)
+{
+	pair<int, double>	p1;
+	pair<std::string, char>	p2("hello", 'B');
+	pair<std::string, char>	p3(p2);
+	pair<float, float>	p4(21.212121, 42.42);
+	pair<float, float>	p5(4, 2);
+
+	dispAct("CONSTRUCTOR TESTS");
+	disp("PAIR", 1);
+	displayPair(p1);
+	disp("PAIR", 2);
+	displayPair(p2);
+	disp("PAIR", 3);
+	displayPair(p3);
+	disp("PAIR", 4);
+	displayPair(p4);
+
+	dispAct("p1 == p4");
+	p1 = p4;
+	disp("PAIR", 1);
+	displayPair(p1);
+
+	dispAct("make_pair(52.3, \"coucou\") --------");
+	displayPair(make_pair(52.3, "coucou"));
+
+	dispAct("COMPARAISON");
+	pairCmpTester(p4, p5);
+	return (0);
+}
+
+int	insertTester1(void)
+{
+	map<int, int>	mamap;
+	std::stringstream	ss;
+	std::string	line;
+	int		i;
+	std::fstream	file;
+	map_iterator	it;
+	map_iterator	ite;
+
+	file.open("rand.txt", std::ios::in);
+	if (!file)
+		disp("ERROR: rand.txt couldn't open", 0);
+	while (std::getline(file, line))
+	{
+		ss << line;
+		ss >> i;
+		mamap.insert(make_pair(i, i));
+		ss.clear();
+	}
+	file.close();
+	it = mamap.begin();
+	ite = mamap.end();
 	while (it != ite)
 	{
-		std::cout << " - " << *it << std::endl;
-		it++;
+		displayMapIterator(it);
+		++it;
 	}
+	disp("SIZE", mamap.size());
+	return (0);
 }
 
-template < typename T >
-void	displayStk(stack<T> stk)
+int	iteratorTester(void)
 {
-	disp("SIZE", stk.size());
-	while (!stk.empty())
+	map<int, int>				mamap;
+	map<int, int>::iterator			it;
+	map<int, int>::iterator			ite;
+	pair<map<int, int>::iterator, bool>	ret;
+	int	n;
+	int	i = 0;
+        srand(time(0));
+
+	while (i < 100)
 	{
-		std::cout << " - " << stk.top() << std::endl;
-		stk.pop();
-	}		
-}
-
-vector<int>	makeVec(int start, int range)
-{
-	int		end = start + range;
-	vector<int>	vec;
-
-	while (start < end)
-	{
-		vec.push_back(start);
-		++start;
-	}
-	return (vec);
-}
-
-void	dispAct(std::string	str)
-{
-	std::cout << "------- " << str << " -------" << std::endl;
-}
-
-template < class T1, class T2 >
-void	displayPair(const pair<T1, T2> p)
-{
-	std::cout << "FIRST: " << p.first  << " | SECOND: " << p.second << std::endl;
-}
-
-void	displayMapIterator(const map_iterator p)
-{
-	std::cout << "FIRST: " << p->first  << " | SECOND: "
-			<< p->second << std::endl;
-}
-
-//template < class T1, class T2 >
-//void	displayElements(map<T1, T2> mamap)
-//{
-//	map<T1, T2>::iterator	it = mamap.begin();
-//	map<T1, T2>::iterator	ite = mamap.end();
-//	int	i = 0;
-//	int	n;
-//
-//	while (it != ite)
-//	{
-//		n = it->first;
-//		displayMapIterator(it);
-//		++it;
-//		if (n > it->first && it != ite)
-//			disp("--------ERROR--------", 1);
-//		++i;
-//	}
-//}
-
 template < class T1, class T2 >
 void	pairCmpTester(pair<T1, T2>& x, pair<T1, T2>& y, int recur = 1)
 {
