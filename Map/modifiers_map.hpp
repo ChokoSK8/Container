@@ -63,9 +63,11 @@ size_type	erase(const key_type& k)
 		{
 			if (child->getColor() == 'd')
 				balanceTreeErase(child);
+			else
+				disp("CHILD NODE WAS RED", 1);
 		}
 		else
-			disp("DELETED NODE WAS RED", 1);
+			disp("SUBSTITUTE NODE WAS RED", 1);
 		delete toDelete;
 	}
 	else if (_size > 1)
@@ -82,7 +84,6 @@ size_type	erase(const key_type& k)
 		_root = new node<value_type>;
 	}
 	--_size;
-	disp("SIZE", _size);
 	return (1);
 };
 #endif

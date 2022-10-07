@@ -369,7 +369,7 @@ int	equal_rangeTester(void)
 
 int	eraseTester(void)
 {
-	int	n = 25;
+	int	n = 105;
 	map<int, int>	mamap;
 	map_iterator	it;
 	map_iterator	ite;
@@ -380,17 +380,16 @@ int	eraseTester(void)
 	mamap.insert(make_pair(10, 10));
 	while (n)
 	{
-		i = rand() % 100;
+		i = rand() % 5000;
 		mamap.insert(make_pair(i, i));
 		--n;
 	}
 	mamap.countElements();
-	n = 15;
-	while (n && !mamap.empty())
+	while (!mamap.empty())
 	{
-		i = rand() % 100;
+		i = rand() % 5000;
 		while (mamap.find(i) == mamap.end())
-			i = rand() % 100;
+			i = rand() % 5000;
 		disp("ERASE", i);
 		mamap.erase(i);
 		it = mamap.begin();
@@ -400,15 +399,15 @@ int	eraseTester(void)
 		while (it != ite)
 		{
 			n = it->getKey();
-			displayRBrator(it);
+		//	displayRBrator(it);
 			++it;
 			if (n > it->getKey() && it != ite)
 				disp("--------ERROR--------", 1);
 			++i;
 		}
-		mamap.print();
+	//	mamap.print();
 		mamap.countElements();
-		//mamap.countHeight(NULL, 0);
+		mamap.countHeight(NULL, 0);
 		--n;
 	}
 	it = mamap.begin();

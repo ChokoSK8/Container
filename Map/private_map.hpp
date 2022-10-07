@@ -112,8 +112,6 @@ public:
 			++height;
 		if (from->getColor() == 'd')
 			disp("COLOR IS D", from->getKey());
-		if (from->getPapa() && from->getPapa()->getColor() == 'r' && from->getColor() == 'r')
-			disp("-------DOUBLE RED------", 1);
 		if (from->getLeft())
 			countHeight(from->getLeft(), height);
 		if (from->getRight())

@@ -328,9 +328,10 @@ class	ft::node
 			}
 			else
 			{
-				disp("papa return 1", papa->getKey());
+				disp("papa is root", papa->getKey());
 				if (papa->is_root())
 					return (0);
+				disp("papa return 1", papa->getKey());
 				papa->setColor('d');
 				return (1);
 			}
@@ -487,6 +488,8 @@ class	ft::node
 					copy->setSide('l');
 				}
 			}
+			else
+				disp("SUBSTITUTE NO PAPA", 1);
 			delete copy->getLeft();
 			delete copy->getRight();
 			left->setPapa(copy);
@@ -576,7 +579,6 @@ class	ft::node
 			node*	papa = getPapa();
 			node*	newChild = new node();
 
-			displayNode("toDelete");
 			if (papa)
 			{
 				if (_side == 'r')
@@ -592,8 +594,6 @@ class	ft::node
 				setPapa(NULL);
 				newChild->setPapa(papa);
 			}
-			else
-				disp("PAS PAPA DELETE LEAF", 1);
 			return (newChild);
 		};
 		void	displayNode(std::string name)
