@@ -386,7 +386,7 @@ int	eraseTester(void)
 	}
 	mamap.countElements();
 	n = 15;
-	while (n)
+	while (n && !mamap.empty())
 	{
 		i = rand() % 100;
 		while (mamap.find(i) == mamap.end())

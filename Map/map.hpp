@@ -43,7 +43,7 @@ class	ft::map
 		{
 			_c = alloc;
 			_size = 0;
-			_root = NULL;
+			_root = new node<value_type>;
 			_keyComp = comp;
 		};
 		map(const map& x)
@@ -68,8 +68,7 @@ class	ft::map
 //		};
 		~map(void)
 		{
-			if (_size)
-				freeNodes(_root);
+			freeNodes(_root);
 		};
 
 		// ITERATOR

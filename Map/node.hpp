@@ -39,7 +39,7 @@ class	ft::node
 		};
 		~node(void)
 		{
-			if (_papa)
+			if (!is_nil() && _papa)
 			{
 				if (_side == 'r')
 					_papa->setRight(NULL);
@@ -187,6 +187,8 @@ class	ft::node
 			node*	sibling = getSibling();
 
 			setColor('n');
+			if (!sibling)
+				return (0);
 			if (!(sibling->getColor() == 'r'))
 			{
 				if (sibling->hasRedChild())
@@ -574,8 +576,7 @@ class	ft::node
 			node*	papa = getPapa();
 			node*	newChild = new node();
 
-			if (newChild->getRight() || newChild->getLeft())
-				disp("ERRORRRRRRRR", 1);
+			displayNode("toDelete");
 			if (papa)
 			{
 				if (_side == 'r')
@@ -595,5 +596,10 @@ class	ft::node
 				disp("PAS PAPA DELETE LEAF", 1);
 			return (newChild);
 		};
+		void	displayNode(std::string name)
+		{
+			std::cout << "NAME: " << name << " | KEY " << getKey()  << " | SIDE: "
+					<< getSide() << std::endl;
+		}
 };
 #endif

@@ -91,17 +91,9 @@ int	main()
 {
 	std::map<int, int>	mamap;
 	std::map<int, int>	mamap2 = makeMap(10);
+	std::map<int, int>::iterator	it = mamap.begin();
 
-//	mamap[7] = 7;
-//	mamap[8] = 8;
-//	mamap[9] = 9;
-//	mamap[1] = 1;
-//	mamap[2] = 2;
-//	mamap[3] = 3;
-//	mamap[4] = 4;
-//	mamap[5] = 5;
-//	mamap[6] = 6;
-	displayMap(mamap2);
-	disp("LOWER BND", mamap2.lower_bound(20)->first);
+	std::cout << "It" << it->first << std::endl;
+	std::cout << "It" << it->second << std::endl;
 	return (0);
 }

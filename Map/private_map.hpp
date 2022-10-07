@@ -47,37 +47,22 @@ void	balanceTree(pointer _node_)
 void	balanceTreeErase(pointer curr)
 {
 	int	ret;
-	pointer	papa = curr->getPapa();
-	pointer	grandPa = curr->getGrandPa();
+	pointer	papa;
+	pointer	grandPa;
 
-	disp("CURR", curr->getKey());
-	disp("IS NIL", curr->is_nil());
-	disp("PRINT IN PRIVATE", 2);
-	print();
 	while ((ret = curr->execBalancingDelete()))
 	{
 		papa = curr->getPapa();
 		grandPa = curr->getGrandPa();
-		if (grandPa)
-			disp("GRAND PA", grandPa->getKey());
-		if (papa)
-			disp("PAPA", papa->getKey());
 		if (grandPa && grandPa->is_root())
 			_root = grandPa;
 		if (papa && papa->is_root())
 			_root = papa;
-		disp("PRINT IN PRIVATE", 1);
-		print();
 		if (ret != 2)
 			curr = papa;
-		disp("CURR", curr->getKey());
 	}
 	papa = curr->getPapa();
 	grandPa = curr->getGrandPa();
-	if (grandPa)
-		disp("GRAND PA", grandPa->getKey());
-	if (papa)
-		disp("PAPA", papa->getKey());
 	if (grandPa && grandPa->is_root())
 		_root = grandPa;
 	if (papa && papa->is_root())

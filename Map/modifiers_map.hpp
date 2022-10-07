@@ -6,7 +6,7 @@ ft::pair<iterator, bool>	insert(const value_type& val)
 	pointer	newNode = new node<value_type>(val);
 	ft::pair<iterator, bool>	ret;
 
-	if (_root)
+	if (!_root->is_nil())
 	{
 		ret = positionNode(newNode, _root);
 		if (!ret.second)
@@ -17,6 +17,7 @@ ft::pair<iterator, bool>	insert(const value_type& val)
 	}
 	else
 	{
+		delete _root;
 		_root = newNode;
 	}
 	balanceTree(newNode);
@@ -67,7 +68,7 @@ size_type	erase(const key_type& k)
 			disp("DELETED NODE WAS RED", 1);
 		delete toDelete;
 	}
-	else
+	else if (_size > 1)
 	{
 		disp("DELETE LEAF", 1);
 		child = toDelete->deleteLeaf();
@@ -75,6 +76,13 @@ size_type	erase(const key_type& k)
 			balanceTreeErase(child);
 		delete toDelete;
 	}
+	else
+	{
+		delete toDelete;
+		_root = new node<value_type>;
+	}
+	--_size;
+	disp("SIZE", _size);
 	return (1);
 };
 #endif
