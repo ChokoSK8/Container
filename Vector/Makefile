@@ -1,0 +1,61 @@
+C_GREY		=	\e[1;30m
+C_RED		=	\e[1;31m
+C_GREEN		=	\e[1;32m
+C_YELLOW	=	\e[1;33m
+C_BLUE		=	\e[1;34m
+C_PURPLE	=	\e[1;35m
+C_CYAN		=	\e[1;36m
+C_WHITE		=	\e[1;37m
+C_END		=	\e[0m
+
+NAME	= vectorExec
+
+HELPER_DIR	= Helpers
+
+FLAGS	= -g -Wall -Werror -Wextra -std=c++98
+
+CC	= c++
+
+RM	= rm -rf
+
+HELPERS	= $(addprefix $(HELPER_DIR)/, f1 f2)
+
+HELPER_DIR = Helpers
+
+all:
+ifeq ($(NUM), )
+	@bash $(HELPER_DIR)/randScript.sh 200
+else
+	@bash $(HELPER_DIR)/randScript.sh $(NUM)
+endif
+	@echo "\t$(C_BLUE)GENERATING RANDOM NUMBER FILE$(C_END)"
+	@$(CC) main.cpp -D NAMESPACE=ft -o $(NAME)
+	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=FT$(C_END)"
+
+diff:	all
+ifneq ($(ARG), )
+	@./$(NAME) $(ARG) > $(HELPER_DIR)/f1
+	@echo "\t$(C_YELLOW)EXECUTING PROGRAM WITH NAMESPACE=FT$(C_END)"
+	@$(CC) main.cpp -D NAMESPACE=ft -o $(NAME)
+	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=STD$(C_END)"
+	@./$(NAME) $(ARG) > $(HELPER_DIR)/f2
+	@echo "\t$(C_YELLOW)EXECUTING PROGRAM WITH NAMESPACE=STD$(C_END)"
+	@diff $(HELPER_DIR)/f1 $(HELPER_DIR)/f2
+	@echo "\t$(C_BLUE)NO DIFFERENCE$(C_END)"
+else
+	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
+
+clean:
+	@$(RM) $(OBJS)
+	@echo "\t$(C_RED)DELEATING OBJECTS$(C_END)"
+
+fclean:		clean
+	@$(RM) $(NAME)
+	@echo "\t$(C_RED)DELEATING EXECUTABLE$(C_END)"
+	@$(RM) $(HELPERS)
+	@echo "\t$(C_RED)DELEATING HELPERS$(C_END)"
+
+re:	fclean all
+
+.PHONY:		all clean fclean re
+endif

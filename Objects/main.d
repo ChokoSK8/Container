@@ -1,4 +1,4 @@
-Objects/main.o: main.cpp Vector/vector.hpp Vector/../containers.h \
+Objects/main.o: main.cpp Stack/stack.hpp Stack/../containers.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/iostream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/x86_64-linux-gnu/c++/11/bits/c++config.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -137,6 +137,7 @@ Objects/main.o: main.cpp Vector/vector.hpp Vector/../containers.h \
   /usr/include/string.h /usr/include/strings.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/iterator \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stream_iterator.h \
+  Stack/../Vector/vector.hpp Vector/../containers.h \
   Vector/../Iterators/iterator.hpp \
   Vector/Iterators/random_access_iterator.hpp \
   Vector/Iterators/../../Iterators/iterator.hpp \
@@ -150,11 +151,10 @@ Objects/main.o: main.cpp Vector/vector.hpp Vector/../containers.h \
   Vector/MemberFonctions/element_access_vec.hpp \
   Vector/MemberFonctions/modifiers_vec.hpp \
   Vector/MemberFonctions/private_vec.hpp \
-  Vector/NonMemberFonctions/comparaison_operator_vec.hpp Stack/stack.hpp \
-  Stack/../containers.h Stack/../Vector/vector.hpp ExtraClass/equal.hpp \
-  ExtraClass/pair.hpp Map/map.hpp Map/../ExtraClass/pair.hpp \
-  Map/../containers.h Map/Node/node.hpp Map/Node/../../containers.h \
-  Map/Iterators/rbrator.hpp \
+  Vector/NonMemberFonctions/comparaison_operator_vec.hpp \
+  Vector/vector.hpp ExtraClass/equal.hpp ExtraClass/pair.hpp Map/map.hpp \
+  Map/../ExtraClass/pair.hpp Map/../containers.h Map/Node/node.hpp \
+  Map/Node/../../containers.h Map/Iterators/rbrator.hpp \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/sstream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/sstream.tcc \
   Map/MemberFonctions/iterator_map.hpp \
@@ -203,9 +203,9 @@ Objects/main.o: main.cpp Vector/vector.hpp Vector/../containers.h \
   /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/ctime
 
-Vector/vector.hpp:
+Stack/stack.hpp:
 
-Vector/../containers.h:
+Stack/../containers.h:
 
 /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/iostream:
 
@@ -497,6 +497,10 @@ Vector/../containers.h:
 
 /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stream_iterator.h:
 
+Stack/../Vector/vector.hpp:
+
+Vector/../containers.h:
+
 Vector/../Iterators/iterator.hpp:
 
 Vector/Iterators/random_access_iterator.hpp:
@@ -525,11 +529,7 @@ Vector/MemberFonctions/private_vec.hpp:
 
 Vector/NonMemberFonctions/comparaison_operator_vec.hpp:
 
-Stack/stack.hpp:
-
-Stack/../containers.h:
-
-Stack/../Vector/vector.hpp:
+Vector/vector.hpp:
 
 ExtraClass/equal.hpp:
 

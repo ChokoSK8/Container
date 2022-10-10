@@ -70,6 +70,8 @@ else
 	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
 endif
 
+vec:
+	make -C Vector/
 
 clean:
 	@$(RM) $(OBJS)

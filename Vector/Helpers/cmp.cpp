@@ -1,23 +1,22 @@
-# include "Stack/stack.hpp"
-# include "Vector/vector.hpp"
-# include "ExtraClass/equal.hpp"
-# include "ExtraClass/pair.hpp"
-# include "Map/map.hpp"
+# include "../Vector/vector.hpp"
+# include "../Stack/stack.hpp"
+# include "../ExtraClass/equal.hpp"
 # include <map>
 # include <list>
 # include <string>
-# include <cstdlib>
+# include <stack>
+# include <algorithm>
 # include <fstream>
 # include <string>
 # include <sstream>
+# define PROG	"STD<container>"
 # include <ctime>
-# define PROG	"FT<container>"
 # define RAND_TXT "rand.txt"
 
-using namespace ft;
+using namespace std;
 
 typedef map<int, int>::iterator	map_iterator;
-typedef map<int, int>::const_iterator	map_const_iterator;
+typedef map<int, int>::const_iterator	const_map_iterator;
 typedef int (*PtrFct)();
 
 template < typename T >
@@ -75,10 +74,11 @@ void	displayMapIterator(const map_iterator p)
 			<< p->second << std::endl;
 }
 
-//void	displayElements(map<int, int> mamap)
+//template < class T1, class T2 >
+//void	displayElements(map<T1, T2> mamap)
 //{
-//	map_iterator	it = mamap.begin();
-//	map_iterator	ite = mamap.end();
+//	map<T1, T2>::iterator	it = mamap.begin();
+//	map<T1, T2>::iterator	ite = mamap.end();
 //	int	i = 0;
 //	int	n;
 //
