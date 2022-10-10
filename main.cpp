@@ -10,6 +10,7 @@
 # include <fstream>
 # include <string>
 # include <sstream>
+# define RAND_TXT "rand.txt"
 
 using namespace ft;
 
@@ -148,9 +149,9 @@ int	insertTester1(void)
 	map_iterator	it;
 	map_iterator	ite;
 
-	file.open("rand.txt", std::ios::in);
+	file.open(RAND_TXT, std::ios::in);
 	if (!file)
-		disp("ERROR: rand.txt couldn't open", 0);
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
 	while (std::getline(file, line))
 	{
 		ss << line;

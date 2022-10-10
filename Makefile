@@ -12,51 +12,59 @@ NAME	= container
 
 SRCS	= main.cpp
 
-#INCDIR	= Includes/
+INC_DIRS	= $(VEC) $(MAP) $(STK)
 
-VECDIR	= Vector/
+OBJS_DIR	= Objects
 
-#STADIR	= Stack/
+VEC	= Vector/ $(addprefix Vector/, Iterators/ MemberFonctions/ NonMemberFonctions/)
 
-INC	= -I $(VECDIR)
+MAP	= Map/ $(addprefix Map/, Iterators/ MemberFonctions/ Node/)
 
-OBJS	= $(SRCS:.cpp=.o)
+STK	= Stack/
 
-#VECDEP	= $(VECDIR)/*.hpp
+OBJS	= $(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS))
 
-FLAGS	= -g -Wall -Werror -Wextra -MMD -MP -std=c++98
+HELPERS	= $(addprefix $(HELPER_DIR)/, f1 f2 cmp cmp.d)
+
+HELPER_DIR = Helpers
+
+FLAGS	= -g -Wall -Werror -Wextra -std=c++98 $(foreach D, $(INC_DIRS), -I$(D)) $(DEPFLAGS)
+
+DEPFLAGS	= -MP -MD
+
+CC	= c++
 
 RM	= rm -rf
 
-%.o: %.cpp	#$(VECDEP)
-	c++ $(FLAGS) -c $<
+$(OBJS_DIR)/%.o: %.cpp
+	$(CC) $(FLAGS) -c -o $@ $<
 	@echo "\t$(C_GREEN)COMPILING $<$(C_END)"
 
 all:	$(NAME)
 
-$(NAME):	$(OBJS) #$(VECDEP)
+$(NAME):	$(OBJS)
 ifeq ($(ARG), )
-	@bash Utils/randScript.sh 200
+	@bash $(HELPER_DIR)/randScript.sh 200
 else
-	@bash Utils/randScript.sh $(ARG)
+	@bash $(HELPER_DIR)/randScript.sh $(ARG)
 endif
 	@echo "\t$(C_PURPLE)GENERATING RANDOM NUMBER FILE$(C_END)"
-	@c++ $(FLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(OBJS) -o $(NAME)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE$(C_END)"
 
 update:	main.cpp
 	@bash buildCmp.sh
 	@echo "\t$(C_CYAN)UPDATING CMP.CPP$(C_END)"
-	@c++ $(FLAGS) Utils/cmp.cpp -o cmp
+	@$(CC) $(FLAGS) $(HELPER_DIR)/cmp.cpp -o $(HELPER_DIR)/cmp
 	@echo "\t$(C_GREEN)COMPILING CMP.CPP$(C_END)"
 
 diff:	all update
 ifneq ($(ARG), )
-	@./$(NAME) $(ARG) > f1
+	@./$(NAME) $(ARG) > $(HELPER_DIR)/f1
 	@echo "\t$(C_YELLOW)EXECUTING PROGRAM$(C_END)"
-	@./cmp $(ARG) > f2
+	@./$(HELPER_DIR)/cmp $(ARG) > $(HELPER_DIR)/f2
 	@echo "\t$(C_YELLOW)EXECUTING CMP$(C_END)"
-	@diff f1 f2
+	@diff $(HELPER_DIR)/f1 $(HELPER_DIR)/f2
 	@echo "\t$(C_BLUE)NO DIFFERENCE$(C_END)"
 else
 	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
@@ -70,8 +78,7 @@ clean:
 fclean:		clean
 	@$(RM) $(NAME)
 	@echo "\t$(C_RED)DELEATING EXECUTABLE$(C_END)"
-	@$(RM) cmp.d cmp
-	@$(RM) f1 f2
+	@$(RM) $(HELPERS)
 	@echo "\t$(C_RED)DELEATING HELPERS$(C_END)"
 
 re:	fclean all
