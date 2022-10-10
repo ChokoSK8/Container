@@ -7,9 +7,9 @@ iterator	find(const key_type& k)
 
 	while (toFind && !toFind->is_nil())
 	{
-		if (k < toFind->getKey())
+		if (_keyComp(k, toFind->getKey()))
 			toFind = toFind->getLeft();
-		else if (k > toFind->getKey())
+		else if (_keyComp(toFind->getKey(), k))
 			toFind = toFind->getRight();
 		else
 			return (iterator(toFind));
@@ -23,9 +23,9 @@ const_iterator	find(const key_type& k) const
 
 	while (toFind && !toFind->is_nil())
 	{
-		if (k < toFind->getKey())
+		if (_keyComp(k, toFind->getKey()))
 			toFind = toFind->getLeft();
-		else if (k > toFind->getKey())
+		else if (_keyComp(toFind->getKey(), k))
 			toFind = toFind->getRight();
 		else
 			return (const_iterator(toFind));
@@ -47,14 +47,14 @@ iterator	lower_bound(const key_type& k)
 
 	while (!lowerBnd->is_nil())
 	{
-		if (k <= lowerBnd->getKey())
+		if (_keyComp(lowerBnd->getKey(), k))
 		{
-			favourite = lowerBnd;
-			lowerBnd = lowerBnd->getLeft();
+			lowerBnd = lowerBnd->getRight();
 		}
 		else 
 		{
-			lowerBnd = lowerBnd->getRight();
+			favourite = lowerBnd;
+			lowerBnd = lowerBnd->getLeft();
 		}
 	}
 	if (favourite)
@@ -69,14 +69,14 @@ const_iterator	lower_bound(const key_type& k) const
 
 	while (!lowerBnd->is_nil())
 	{
-		if (k <= lowerBnd->getKey())
+		if (_keyComp(lowerBnd->getKey(), k))
 		{
-			favourite = lowerBnd;
-			lowerBnd = lowerBnd->getLeft();
+			lowerBnd = lowerBnd->getRight();
 		}
 		else 
 		{
-			lowerBnd = lowerBnd->getRight();
+			favourite = lowerBnd;
+			lowerBnd = lowerBnd->getLeft();
 		}
 	}
 	if (favourite)
@@ -91,7 +91,7 @@ iterator	upper_bound(const key_type& k)
 
 	while (!upperBnd->is_nil())
 	{
-		if (k < upperBnd->getKey())
+		if (_keyComp(k, upperBnd->getKey()))
 		{
 			favourite = upperBnd;
 			upperBnd = upperBnd->getLeft();
@@ -113,7 +113,7 @@ const_iterator	upper_bound(const key_type& k) const
 
 	while (!upperBnd->is_nil())
 	{
-		if (k < upperBnd->getKey())
+		if (_keyComp(k, upperBnd->getKey()))
 		{
 			favourite = upperBnd;
 			upperBnd = upperBnd->getLeft();

@@ -5,6 +5,8 @@ template < class T >
 class	ft::rbrator
 {
 	public:
+		typedef std::random_access_iterator_tag	iterator_category;
+		typedef std::ptrdiff_t	difference_type;
 		typedef T*	pointer;
 		typedef T&	reference;
 		typedef T	value_type;
@@ -58,8 +60,41 @@ class	ft::rbrator
 			}
 			return (*this);
 		}
+		rbrator&	operator--(void)
+		{
+			disp("HEY", 2);
+			if (!p->getLeft()->is_nil())
+			{
+				p = p->getLeft();
+				while (!p->getRight()->is_nil())
+					p = p->getRight();
+			}
+			else if (isBeg())
+			{
+				p = p->getLeft();
+			}
+			else if (p->getPapa())
+			{
+				while (p->getSide() != 'r')
+					p = p->getPapa();
+				p = p->getPapa();
+			}
+			return (*this);
+		}
 
 	private:
+		bool	isBeg(void)
+		{
+			node_type	tmp = p;
+
+			while (tmp->getSide() == 'l')
+			{
+				tmp = tmp->getPapa();
+			}
+			if (tmp->getSide() == 'c')
+				return (true);
+			return (false);
+		}
 		bool	isEnd(void)
 		{
 			node_type	tmp = p;

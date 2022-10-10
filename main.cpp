@@ -18,45 +18,11 @@ using namespace ft;
 
 typedef map<int, int>::iterator	map_iterator;
 typedef map<int, int>::const_iterator	map_const_iterator;
+typedef map<int, int>::reverse_iterator	map_reverse_iterator;
+typedef map<int, int>::const_reverse_iterator	map_const_reverse_iterator;
 typedef int (*PtrFct)();
 
-template < typename T >
-void	displayVec(vector<T> vec)
-{
-	typename vector<T>::iterator	it = vec.begin();
-	typename vector<T>::iterator	ite = vec.end();
-
-	disp("SIZE", vec.size());
-	while (it != ite)
-	{
-		std::cout << " - " << *it << std::endl;
-		it++;
-	}
-}
-
-template < typename T >
-void	displayStk(stack<T> stk)
-{
-	disp("SIZE", stk.size());
-	while (!stk.empty())
-	{
-		std::cout << " - " << stk.top() << std::endl;
-		stk.pop();
-	}		
-}
-
-vector<int>	makeVec(int start, int range)
-{
-	int		end = start + range;
-	vector<int>	vec;
-
-	while (start < end)
-	{
-		vec.push_back(start);
-		++start;
-	}
-	return (vec);
-}
+	// UTILS
 
 void	dispAct(std::string	str)
 {
@@ -75,74 +41,15 @@ void	displayMapIterator(const map_iterator p)
 			<< p->second << std::endl;
 }
 
-//void	displayElements(map<int, int> mamap)
-//{
-//	map_iterator	it = mamap.begin();
-//	map_iterator	ite = mamap.end();
-//	int	i = 0;
-//	int	n;
-//
-//	while (it != ite)
-//	{
-//		n = it->first;
-//		displayMapIterator(it);
-//		++it;
-//		if (n > it->first && it != ite)
-//			disp("--------ERROR--------", 1);
-//		++i;
-//	}
-//}
-
-template < class T1, class T2 >
-void	pairCmpTester(pair<T1, T2>& x, pair<T1, T2>& y, int recur = 1)
+void	displayMapReverseIterator(const map_reverse_iterator p)
 {
-	disp("PAIR X", 1);
-	displayPair(x);
-	disp("PAIR Y", 1);
-	displayPair(y);
-	disp("x == y", x == y);
-	disp("x != y", x != y);
-	disp("x <= y", x <= y);
-	disp("x >= y", x >= y);
-	disp("x < y", x < y);
-	disp("x > y", x > y);
-	if (recur)
-		return pairCmpTester(y, x, 0);
+	std::cout << "FIRST: " << p->first  << " | SECOND: "
+			<< p->second << std::endl;
 }
 
-int	pairANDmake_pairTester(void)
-{
-	pair<int, double>	p1;
-	pair<std::string, char>	p2("hello", 'B');
-	pair<std::string, char>	p3(p2);
-	pair<float, float>	p4(21.212121, 42.42);
-	pair<float, float>	p5(4, 2);
+	// MODIFIERS
 
-	dispAct("CONSTRUCTOR TESTS");
-	disp("PAIR", 1);
-	displayPair(p1);
-	disp("PAIR", 2);
-	displayPair(p2);
-	disp("PAIR", 3);
-	displayPair(p3);
-	disp("PAIR", 4);
-	displayPair(p4);
-
-	dispAct("p1 == p4");
-	p1 = p4;
-	disp("PAIR", 1);
-	displayPair(p1);
-
-	dispAct("make_pair(52.3, \"coucou\") --------");
-	displayPair(make_pair(52.3, "coucou"));
-
-	dispAct("COMPARAISON");
-	pairCmpTester(p4, p5);
-	return (0);
-}
-	int		i;
-
-int	insertTester1(void)
+int	insertTester(void)
 {
 	map<int, int>	mamap;
 	std::stringstream	ss;
@@ -150,8 +57,8 @@ int	insertTester1(void)
 	int		i;
 	int		c = 0;
 	std::fstream	file;
-	map_iterator	it;
-	map_iterator	ite;
+	map_reverse_iterator	it;
+	map_reverse_iterator	ite;
 	clock_t		t;
 
 	file.open(RAND_TXT, std::ios::in);
@@ -170,16 +77,61 @@ int	insertTester1(void)
 	std::cout << PROG << ": INSERTING " << c << " elements took " <<
 		(float)t/CLOCKS_PER_SEC << " seconds" << std::endl;
 	file.close();
-	it = mamap.begin();
-	ite = mamap.end();
+	it = mamap.rbegin();
+	ite = mamap.rend();
 	while (it != ite)
 	{
-		displayMapIterator(it);
+		disp("HEY", 1);
+		displayMapReverseIterator(it);
 		++it;
 	}
 	disp("SIZE", mamap.size());
 	return (0);
 }
+
+int	eraseTester(void)
+{
+	std::stringstream	ss;
+	std::fstream	file;
+	std::string	line;
+	map<int, int>	mamap;
+	int		i = 0;
+	int		eraseNum = 0;
+	int		beginFile;
+	clock_t		t;
+
+	file.open(RAND_TXT, std::ios::in);
+	if (!file)
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	std::getline(file, line);
+	beginFile = file.tellg();
+	while (std::getline(file, line))
+	{
+		ss << line;
+		ss >> i;
+		mamap.insert(make_pair(i, i));
+		ss.clear();
+	}
+	file.close();
+	file.open(RAND_TXT, std::ios::in);
+	if (!file)
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	t = clock();
+	while (std::getline(file, line))
+	{
+		ss << line;
+		ss >> i;
+		if (mamap.erase(i))
+			++eraseNum;
+		ss.clear();
+	}
+	t = clock() - t;
+	std::cout << PROG << ": ERASING " << eraseNum << " elements took " <<
+		(float)t/CLOCKS_PER_SEC << " seconds" << std::endl;
+	return (0);
+}
+
+	// ITERATOR
 
 int	iteratorTester(void)
 {
@@ -202,6 +154,8 @@ int	iteratorTester(void)
 	disp("NUMBER OF ELEMENTS", i);
 	return (0);
 }
+
+	// ELEMENT_ACCESS
 
 int	element_accessTester(void)
 {
@@ -280,6 +234,8 @@ int	atTester(void)
 	return (0);
 }
 
+	// CAPACITY
+
 int	max_sizeTester(void)
 {
 	map<int, float>	mamap;
@@ -293,6 +249,8 @@ int	max_sizeTester(void)
 	disp("stdMap2<std::string, std::string>.max_size()", stdMap2.max_size());
 	return (0);
 }
+
+	// OPERATIONS
 
 int	lower_boundTester(void)
 {
@@ -385,48 +343,6 @@ int	upper_boundTester(void)
 //	return (0);
 //}
 
-int	eraseTester(void)
-{
-	std::stringstream	ss;
-	std::fstream	file;
-	std::string	line;
-	map<int, int>	mamap;
-	int		i = 0;
-	int		eraseNum = 0;
-	int		beginFile;
-	clock_t		t;
-
-	file.open(RAND_TXT, std::ios::in);
-	if (!file)
-		disp("ERROR: 'RAND_TXT' couldn't open", 0);
-	std::getline(file, line);
-	beginFile = file.tellg();
-	while (std::getline(file, line))
-	{
-		ss << line;
-		ss >> i;
-		mamap.insert(make_pair(i, i));
-		ss.clear();
-	}
-	file.close();
-	file.open(RAND_TXT, std::ios::in);
-	if (!file)
-		disp("ERROR: 'RAND_TXT' couldn't open", 0);
-	t = clock();
-	while (std::getline(file, line))
-	{
-		ss << line;
-		ss >> i;
-		if (mamap.erase(i))
-			++eraseNum;
-		ss.clear();
-	}
-	t = clock() - t;
-	std::cout << PROG << ": ERASING " << eraseNum << " elements took " <<
-		(float)t/CLOCKS_PER_SEC << " seconds" << std::endl;
-	return (0);
-}
-
 int	findTester(void)
 {
 	map<int, int>	mamap;
@@ -469,7 +385,7 @@ int	main(int ac, char **av)
 	std::map<std::string, PtrFct>::iterator	ite;
 	std::string				str = av[1];
 
-	fcts["insert"] = &insertTester1;
+	fcts["insert"] = &insertTester;
 	fcts["iterator"] = &iteratorTester;
 	fcts["element_access"] = &element_accessTester;
 	fcts["at"] = &atTester;

@@ -4,6 +4,7 @@
 # include "../containers.h"
 # include "Node/node.hpp"
 # include "Iterators/rbrator.hpp"
+# include "Iterators/reverse_rbrator.hpp"
 
 # include <sstream>
 # include <vector>
@@ -27,10 +28,10 @@ class	ft::map
 		typedef node<const value_type>*	const_nodePtr;
 
 		// ITERATOR
-		typedef rbrator<value_type>		iterator;
-		typedef rbrator<const value_type>	const_iterator;
-	//	typedef ft::reverse_iterator<iterator>		reverse_iterator;
-	//	typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
+		typedef rbrator<value_type>			iterator;
+		typedef rbrator<const value_type>		const_iterator;
+		typedef ft::reverse_rbrator<iterator>		reverse_iterator;
+		typedef ft::reverse_rbrator<const_iterator>	const_reverse_iterator;
 
 	protected:
 		size_type	_size;

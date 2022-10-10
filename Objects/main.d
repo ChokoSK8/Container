@@ -155,6 +155,9 @@ Objects/main.o: main.cpp Stack/stack.hpp Stack/../containers.h \
   Vector/vector.hpp ExtraClass/equal.hpp ExtraClass/pair.hpp Map/map.hpp \
   Map/../ExtraClass/pair.hpp Map/../containers.h Map/Node/node.hpp \
   Map/Node/../../containers.h Map/Iterators/rbrator.hpp \
+  Map/Iterators/reverse_rbrator.hpp \
+  Map/Iterators/../../Iterators/iterator_traits.hpp \
+  Map/Iterators/../../Iterators/iterator.hpp \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/sstream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/sstream.tcc \
   Map/MemberFonctions/iterator_map.hpp \
@@ -546,6 +549,12 @@ Map/Node/node.hpp:
 Map/Node/../../containers.h:
 
 Map/Iterators/rbrator.hpp:
+
+Map/Iterators/reverse_rbrator.hpp:
+
+Map/Iterators/../../Iterators/iterator_traits.hpp:
+
+Map/Iterators/../../Iterators/iterator.hpp:
 
 /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/sstream:
 

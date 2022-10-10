@@ -7,7 +7,7 @@ ft::pair<iterator, bool>	positionNode(nodePtr newNode, nodePtr from)
 
 	while (loop)
 	{
-		if (newNode->getKey() < from->getKey())
+		if (_keyComp(newNode->getKey(), from->getKey()))
 		{
 			if (from->getLeft()->is_nil())
 			{
@@ -16,7 +16,7 @@ ft::pair<iterator, bool>	positionNode(nodePtr newNode, nodePtr from)
 			}
 			from = from->getLeft();
 		}
-		else if (newNode->getKey() > from->getKey())
+		else if (_keyComp(from->getKey(), newNode->getKey()))
 		{
 			if (from->getRight()->is_nil())
 			{

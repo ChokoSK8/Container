@@ -11,6 +11,9 @@
 
 using namespace std;
 
+typedef typename map<int, int>::iterator	map_it;
+typedef typename map<int, int>::reverse_iterator	map_rit;
+
 vector<int>	makeVec(int start, int range)
 {
 	int		end = start + range;
@@ -93,18 +96,15 @@ typedef struct	s_coordinate {
 
 int	main()
 {
-	std::stringstream	ss;
-	std::string	line;
-	int		i;
-	std::fstream	file;
+	std::map<int, int>	mamap = makeMap(20);
+	map_it	it = mamap.begin();
 
-	file.open("rand.txt", std::ios::in);
-	while (std::getline(file, line))
-	{
-		ss << line;
-		ss >> i;
-		std::cout << "i: " << i << " | line:" << line << std::endl;
-		ss.clear();
-	}
+	disp("begin", it->first);
+	--it;
+	disp("begin - 1", it->first);
+	--it;
+	disp("begin - 2", it->first);
+	--it;
+	disp("begin - 3", it->first);
 	return (0);
 }
