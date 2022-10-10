@@ -81,7 +81,6 @@ int	insertTester(void)
 	ite = mamap.rend();
 	while (it != ite)
 	{
-		disp("HEY", 1);
 		displayMapReverseIterator(it);
 		++it;
 	}

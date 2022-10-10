@@ -59,11 +59,10 @@ class	ft::rbrator
 				p = p->getPapa();
 			}
 			return (*this);
-		}
+		};
 		rbrator&	operator--(void)
 		{
-			disp("HEY", 2);
-			if (!p->getLeft()->is_nil())
+			if (p->getLeft() && !p->getLeft()->is_nil())
 			{
 				p = p->getLeft();
 				while (!p->getRight()->is_nil())
@@ -80,8 +79,22 @@ class	ft::rbrator
 				p = p->getPapa();
 			}
 			return (*this);
-		}
+		};
+		ft::rbrator<T>	operator+(difference_type n) const {
+			ft::rbrator<T>	tmp(*this);
 
+			while (n--)
+				++tmp;
+			return (tmp);
+		};
+		ft::rbrator<T>	operator-(difference_type n) const {
+			ft::rbrator<T>	tmp(*this);
+
+			while (n--)
+				--tmp;
+			return (tmp);
+		};
+		
 	private:
 		bool	isBeg(void)
 		{

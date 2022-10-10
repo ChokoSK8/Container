@@ -94,17 +94,23 @@ typedef struct	s_coordinate {
 	int	b;
 }		t_coordinate;
 
+
+void	displayMapReverseIterator(const map_rit p)
+{
+	std::cout << "FIRST: " << p->first  << " | SECOND: "
+			<< p->second << std::endl;
+}
+
 int	main()
 {
 	std::map<int, int>	mamap = makeMap(20);
-	map_it	it = mamap.begin();
+	map_rit	it = mamap.rbegin();
+	map_rit	ite = mamap.rend();
 
-	disp("begin", it->first);
-	--it;
-	disp("begin - 1", it->first);
-	--it;
-	disp("begin - 2", it->first);
-	--it;
-	disp("begin - 3", it->first);
+	while (it != ite)
+	{
+		displayMapReverseIterator(it);
+		++it;
+	}
 	return (0);
 }

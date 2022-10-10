@@ -23,8 +23,13 @@ class	ft::node
 				_color('s'), _side('s') {};
 		node(const value_type& val) : _val(val)
 		{
-			_left = new node;
-			_right = new node;
+			node*	left = new node;
+			node*	right = new node;
+
+			_left = left;
+			_right = right;
+			left->setPapa(this);
+			right->setPapa(this);
 			_papa = NULL;
 			_color = 'r';
 			_side = 'c';

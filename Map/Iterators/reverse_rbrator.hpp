@@ -88,7 +88,7 @@ class	ft::reverse_rbrator : public ft::iterator<
 		};
 		pointer	operator->(void) const
 		{
-			return (&(operator*()));
+			return (&(*p));
 		};
 		reference	operator[](difference_type n)
 		{
