@@ -37,19 +37,19 @@ CC	= c++
 RM	= rm -rf
 
 $(OBJS_DIR)/%.o: %.cpp
-	$(CC) $(FLAGS) -c -o $@ $<
+	@$(CC) $(FLAGS) -c -o $@ $<
 	@echo "\t$(C_GREEN)COMPILING $<$(C_END)"
 
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
-ifeq ($(ARG), )
+ifeq ($(NUM), )
 	@bash $(HELPER_DIR)/randScript.sh 200
 else
-	@bash $(HELPER_DIR)/randScript.sh $(ARG)
+	@bash $(HELPER_DIR)/randScript.sh $(NUM)
 endif
 	@echo "\t$(C_PURPLE)GENERATING RANDOM NUMBER FILE$(C_END)"
-	$(CC) $(OBJS) -o $(NAME)
+	@$(CC) $(OBJS) -o $(NAME)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE$(C_END)"
 
 update:	main.cpp

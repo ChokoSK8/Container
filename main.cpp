@@ -10,6 +10,8 @@
 # include <fstream>
 # include <string>
 # include <sstream>
+# include <ctime>
+# define PROG	"FT<container>"
 # define RAND_TXT "rand.txt"
 
 using namespace ft;
@@ -138,6 +140,7 @@ int	pairANDmake_pairTester(void)
 	pairCmpTester(p4, p5);
 	return (0);
 }
+	int		i;
 
 int	insertTester1(void)
 {
@@ -145,20 +148,27 @@ int	insertTester1(void)
 	std::stringstream	ss;
 	std::string	line;
 	int		i;
+	int		c = 0;
 	std::fstream	file;
 	map_iterator	it;
 	map_iterator	ite;
+	clock_t		t;
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
 		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	t = clock();
 	while (std::getline(file, line))
 	{
 		ss << line;
 		ss >> i;
-		mamap.insert(make_pair(i, i));
+		if (mamap.insert(make_pair(i, i)).second)
+			++c;
 		ss.clear();
 	}
+	t = clock() - t;
+	std::cout << PROG << ": INSERTING " << c << " elements took " <<
+		(float)t/CLOCKS_PER_SEC << " seconds" << std::endl;
 	file.close();
 	it = mamap.begin();
 	ite = mamap.end();
@@ -377,44 +387,43 @@ int	upper_boundTester(void)
 
 int	eraseTester(void)
 {
-	int	n = 30;
+	std::stringstream	ss;
+	std::fstream	file;
+	std::string	line;
 	map<int, int>	mamap;
-	map_iterator	it;
-	map_iterator	ite;
-	int	i = 0;
-        srand(time(0));
+	int		i = 0;
+	int		eraseNum = 0;
+	int		beginFile;
+	clock_t		t;
 
-	mamap.insert(make_pair(10, 10));
-	while (n)
+	file.open(RAND_TXT, std::ios::in);
+	if (!file)
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	std::getline(file, line);
+	beginFile = file.tellg();
+	while (std::getline(file, line))
 	{
-		i = rand() % 5000;
+		ss << line;
+		ss >> i;
 		mamap.insert(make_pair(i, i));
-		--n;
+		ss.clear();
 	}
-	while (!mamap.empty())
+	file.close();
+	file.open(RAND_TXT, std::ios::in);
+	if (!file)
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	t = clock();
+	while (std::getline(file, line))
 	{
-		i = rand() % 5000;
-		while (mamap.find(i) == mamap.end())
-			i = rand() % 5000;
-		disp("ERASE", i);
-		mamap.erase(i);
-		--n;
+		ss << line;
+		ss >> i;
+		if (mamap.erase(i))
+			++eraseNum;
+		ss.clear();
 	}
-	it = mamap.begin();
-	ite = mamap.end();
-	i = 0;
-
-	while (it != ite)
-	{
-		n = it->first;
-//		displayRBrator(it);
-		++it;
-		if (n > it->first && it != ite)
-			disp("--------ERROR--------", 1);
-		++i;
-	}
-	disp("NUMBER OF ELEMENTS", i);
-//	mamap.print();
+	t = clock() - t;
+	std::cout << PROG << ": ERASING " << eraseNum << " elements took " <<
+		(float)t/CLOCKS_PER_SEC << " seconds" << std::endl;
 	return (0);
 }
 
