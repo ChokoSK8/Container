@@ -104,13 +104,8 @@ void	displayMapReverseIterator(const map_rit p)
 int	main()
 {
 	std::map<int, int>	mamap = makeMap(20);
-	map_rit	it = mamap.rbegin();
-	map_rit	ite = mamap.rend();
+	map_it	it = mamap.begin();
 
-	while (it != ite)
-	{
-		displayMapReverseIterator(it);
-		++it;
-	}
+	disp("MAMAP", it.base());
 	return (0);
 }

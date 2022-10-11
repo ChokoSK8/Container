@@ -31,6 +31,31 @@ ft::pair<iterator, bool>	positionNode(nodePtr newNode, nodePtr from)
 	return (make_pair(iterator(from), false));
 };
 
+iterator	insertFrom(iterator from, const value_type& val)
+{
+//	disp("INSERTED FROM", 1);
+	nodePtr	newNode = new node<value_type>(val);
+	ft::pair<iterator, bool>	ret;
+
+	if (!_root->is_nil())
+	{
+		ret = positionNode(newNode, from.base());
+		if (!ret.second)
+		{
+			delete newNode;
+			return (ret.first);
+		}
+	}
+	else
+	{
+		delete _root;
+		_root = newNode;
+	}
+	balanceTree(newNode);
+	++_size;
+	return (iterator(newNode));
+};
+
 void	balanceTree(nodePtr _node_)
 {
 	while (_node_->execBalancing())
@@ -67,6 +92,13 @@ void	balanceTreeErase(nodePtr curr)
 		_root = grandPa;
 	if (papa && papa->is_root())
 		_root = papa;
+};
+
+bool	doesBelong(iterator pos)
+{
+	if (begin() - pos > 0 || end() - pos < 0)
+		return (false);
+	return (true);
 };
 
 // FREE

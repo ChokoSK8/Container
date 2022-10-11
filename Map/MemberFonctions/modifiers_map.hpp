@@ -27,7 +27,17 @@ ft::pair<iterator, bool>	insert(const value_type& val)
 
 iterator	insert(iterator position, const value_type& val)
 {
-	(void)position;
+	iterator	next;
+
+	if (_keyComp(position->first, val.first))
+	{
+		if (position == end())
+			return (insertFrom(position, val));
+		++position;
+		if (_keyComp(val.first, position->first))
+			return (insertFrom(--position, val));
+		--position;
+	}
 	return (insert(val).first);
 };
 

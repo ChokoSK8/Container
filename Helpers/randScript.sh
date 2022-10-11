@@ -7,5 +7,5 @@ fi
 truncate -s 0 ./rand.txt
 for (( c=0; c < $1; ++c ))
 do
-	echo $(( $RANDOM)) >> rand.txt
+	echo $(( $RANDOM))
 done

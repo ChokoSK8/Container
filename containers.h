@@ -49,6 +49,8 @@ namespace	ft
 	class	node;
 	template < class T >
 	class	rbrator;
+	template < class T >
+	class	const_rbrator;
 	template < class I >
 	class	reverse_rbrator;
 }

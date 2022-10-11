@@ -57,8 +57,8 @@ int	insertTester(void)
 	int		i;
 	int		c = 0;
 	std::fstream	file;
-	map_reverse_iterator	it;
-	map_reverse_iterator	ite;
+	map_iterator	it;
+	map_iterator	ite;
 	clock_t		t;
 
 	file.open(RAND_TXT, std::ios::in);
@@ -77,11 +77,31 @@ int	insertTester(void)
 	std::cout << PROG << ": INSERTING " << c << " elements took " <<
 		(float)t/CLOCKS_PER_SEC << " seconds" << std::endl;
 	file.close();
-	it = mamap.rbegin();
-	ite = mamap.rend();
+	i = c / 2;
+	it = mamap.begin();
+	while (c > i)
+	{
+		--c;
+		++it;
+	}
+	t = clock();
+	i = 10;
+	c = it->first + i;
+	while (i > 0)
+	{
+		mamap.insert(it, make_pair(c, c));
+		--c;
+		--i;
+	}
+	t = clock() - t;
+	std::cout << PROG << ": INSERTING WITH ITERATOR " << 10
+		<< " elements took " << (float)t/CLOCKS_PER_SEC
+		<< " seconds" << std::endl;
+	it = mamap.begin();
+	ite = mamap.end();
 	while (it != ite)
 	{
-		displayMapReverseIterator(it);
+		displayMapIterator(it);
 		++it;
 	}
 	disp("SIZE", mamap.size());

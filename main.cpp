@@ -47,6 +47,26 @@ void	displayMapReverseIterator(const map_reverse_iterator p)
 			<< p->second << std::endl;
 }
 
+void	insertWithIterator(map<int, int> mamap, int c, int div)
+{
+	int	i = c / div;
+	map_iterator	it = mamap.begin();
+
+	while (c > i)
+	{
+		--c;
+		++it;
+	}
+	i = 10;
+	c = it->first + i;
+	while (i > 0)
+	{
+		mamap.insert(it, make_pair(c, c));
+		--c;
+		--i;
+	}
+}
+
 	// MODIFIERS
 
 int	insertTester(void)
@@ -57,8 +77,8 @@ int	insertTester(void)
 	int		i;
 	int		c = 0;
 	std::fstream	file;
-	map_reverse_iterator	it;
-	map_reverse_iterator	ite;
+	map_iterator	it;
+	map_iterator	ite;
 	clock_t		t;
 
 	file.open(RAND_TXT, std::ios::in);
@@ -77,11 +97,27 @@ int	insertTester(void)
 	std::cout << PROG << ": INSERTING " << c << " elements took " <<
 		(float)t/CLOCKS_PER_SEC << " seconds" << std::endl;
 	file.close();
-	it = mamap.rbegin();
-	ite = mamap.rend();
+	t = clock();
+	insertWithIterator(mamap, c, 1);
+	insertWithIterator(mamap, c, 2);
+	insertWithIterator(mamap, c, 3);
+	insertWithIterator(mamap, c, 4);
+	insertWithIterator(mamap, c, 5);
+	insertWithIterator(mamap, c, 6);
+	insertWithIterator(mamap, c, 7);
+	insertWithIterator(mamap, c, 8);
+	insertWithIterator(mamap, c, 9);
+	insertWithIterator(mamap, c, 10);
+	insertWithIterator(mamap, c, 11);
+	t = clock() - t;
+	std::cout << PROG << ": INSERTING WITH ITERATOR " << 10
+		<< " elements took " << (float)t/CLOCKS_PER_SEC
+		<< " seconds" << std::endl;
+	it = mamap.begin();
+	ite = mamap.end();
 	while (it != ite)
 	{
-		displayMapReverseIterator(it);
+		displayMapIterator(it);
 		++it;
 	}
 	disp("SIZE", mamap.size());

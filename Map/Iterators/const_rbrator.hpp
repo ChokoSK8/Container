@@ -2,7 +2,7 @@
 # define RBRATOR_HPP
 
 template < class T >
-class	ft::rbrator
+class	ft::const_rbrator
 {
 	public:
 		typedef std::random_access_iterator_tag	iterator_category;
@@ -10,24 +10,24 @@ class	ft::rbrator
 		typedef T*	pointer;
 		typedef T&	reference;
 		typedef T	value_type;
-		typedef node<T>*	nodePtr;
+		typedef const node<T>*	nodePtr;
 
 	protected:
 		nodePtr	p;
 
 	public:
-		rbrator(void) : p(NULL) {};
-		rbrator(nodePtr x) : p(x) {};
-		template < class U > rbrator(const ft::rbrator<U>& mit)
+		const_rbrator(void) : p(NULL) {};
+		const_rbrator(nodePtr x) : p(x) {};
+		template < class U > const_rbrator(const ft::const_rbrator<U>& mit)
 		{
 			p = mit.base();
 		};
-		template < class U > rbrator&	operator=(const ft::rbrator<U>& mit)
+		template < class U > const_rbrator&	operator=(const ft::const_rbrator<U>& mit)
 		{
 			p = mit.base();
 			return (*this);
 		}
-		~rbrator() {};
+		~const_rbrator() {};
 		nodePtr	base(void) const
 		{
 			return (p);
@@ -40,7 +40,7 @@ class	ft::rbrator
 		{
 			return (&(operator*()));
 		};
-		rbrator&	operator++(void)
+		const_rbrator&	operator++(void)
 		{
 			if (!p->getRight()->is_nil())
 			{
@@ -60,7 +60,7 @@ class	ft::rbrator
 			}
 			return (*this);
 		};
-		rbrator&	operator--(void)
+		const_rbrator&	operator--(void)
 		{
 			if (p->getLeft() && !p->getLeft()->is_nil())
 			{

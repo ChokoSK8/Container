@@ -43,12 +43,6 @@ $(OBJS_DIR)/%.o: %.cpp
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
-ifeq ($(NUM), )
-	@bash $(HELPER_DIR)/randScript.sh 200
-else
-	@bash $(HELPER_DIR)/randScript.sh $(NUM)
-endif
-	@echo "\t$(C_PURPLE)GENERATING RANDOM NUMBER FILE$(C_END)"
 	@$(CC) $(OBJS) -o $(NAME)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE$(C_END)"
 
@@ -72,6 +66,14 @@ endif
 
 vec:
 	make -C Vector/
+
+rand:
+ifneq ($(NUM), )
+	@bash $(HELPER_DIR)/randScript.sh $(NUM) >> rand.txt
+	@echo "\t$(C_PURPLE)GENERATING $(NUM) RANDOM NUMBER FILE$(C_END)"
+else
+	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
+endif
 
 clean:
 	@$(RM) $(OBJS)
