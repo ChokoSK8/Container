@@ -17,9 +17,9 @@ class	ft::map
 		typedef	Key			key_type;
 		typedef T			mapped_type;
 		typedef pair<const Key, T>	value_type;
+		typedef Compare			key_compare;
 		typedef std::size_t		size_type;
 		typedef std::ptrdiff_t		difference_type;
-		typedef Compare			key_compare;
 		typedef Allocator		allocator_type;
 		typedef value_type&		reference;
 		typedef const value_type&	const_reference;
@@ -29,10 +29,10 @@ class	ft::map
 		typedef node<const value_type>*	const_nodePtr;
 
 		// ITERATOR
-		typedef rbrator<value_type>			iterator;
-		typedef rbrator<const value_type>		const_iterator;
-		typedef ft::reverse_rbrator<iterator>		reverse_iterator;
-		typedef ft::reverse_rbrator<const_iterator>	const_reverse_iterator;
+		typedef rbrator<value_type, node<value_type> >		iterator;
+		typedef rbrator<const value_type, node<value_type> >	const_iterator;
+		typedef ft::reverse_rbrator<iterator>			reverse_iterator;
+		typedef ft::reverse_rbrator<const_iterator>		const_reverse_iterator;
 
 	protected:
 		size_type	_size;
@@ -52,7 +52,17 @@ class	ft::map
 		map(const map& x)
 		{
 			_c = x.get_allocator();
-			insert(x.begin(), x.end());
+			_keyComp = x.key_comp();
+			_size = 0;
+			_root = new node<value_type>;
+			const_iterator	it = x.begin();
+			const_iterator	ite = x.end();
+
+			while (it != ite)
+			{
+				insert(make_pair(it->first, it->second));
+				++it;
+			}
 		};
 //		template < class InputItr >
 //		map(InputItr first, InputItr last, const key_compare& comp = key_compare(),
@@ -86,6 +96,9 @@ class	ft::map
 		// MODIFIERS
 		#include "MemberFonctions/modifiers_map.hpp"
 
+		// OBSERVERS
+	//	#include "MemberFonctions/observers_map.hpp"
+
 		// OPERATIONS
 		#include "MemberFonctions/operations_map.hpp"
 
@@ -94,6 +107,9 @@ class	ft::map
 		{
 			return (_c);
 		};
+
+		// VALUE_COMPARE
+	//	#include "value_compare.hpp"
 
 	private:
 		# include "MemberFonctions/private_map.hpp"

@@ -2,8 +2,7 @@
 # ifndef VALUE_COMPARE_HPP
 #  define VALUE_COMPARE_HPP
 
-template < class Key, class T, class Compare, class Alloc >
-class map<Key, T, Compare, Alloc>::value_compare
+class value_compare
 {
 	private:
 		friend class map;

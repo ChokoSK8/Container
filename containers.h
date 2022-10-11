@@ -47,10 +47,8 @@ namespace	ft
 	class	map;
 	template < class T >
 	class	node;
-	template < class T >
+	template < class T, class Node >
 	class	rbrator;
-	template < class T >
-	class	const_rbrator;
 	template < class I >
 	class	reverse_rbrator;
 }
