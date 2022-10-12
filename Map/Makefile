@@ -8,7 +8,7 @@ C_CYAN		=	\e[1;36m
 C_WHITE		=	\e[1;37m
 C_END		=	\e[0m
 
-NAME	= vectorExec
+NAME	= mapExec
 
 HELPER_DIR	= Helpers
 
@@ -24,9 +24,9 @@ HELPER_DIR = Helpers
 
 all:
 ifeq ($(NUM), )
-	@bash $(HELPER_DIR)/randScript.sh 200
+	@bash $(HELPER_DIR)/randScript.sh 200 > rand.txt
 else
-	@bash $(HELPER_DIR)/randScript.sh $(NUM)
+	@bash $(HELPER_DIR)/randScript.sh $(NUM) > rand.txt
 endif
 	@echo "\t$(C_BLUE)GENERATING RANDOM NUMBER FILE$(C_END)"
 	@$(CC) main.cpp -D NAMESPACE=ft -o $(NAME)

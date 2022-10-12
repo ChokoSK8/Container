@@ -36,6 +36,12 @@ namespace	ft
 	struct	is_integral;
 	template < class Iterator1, class Iterator2 >
 	bool	equal(Iterator1 first1, Iterator1 last1, Iterator2 first2);
+	template < class T >
+	class	node;
+	template < class T, class Node >
+	class	rbrator;
+	template < class I >
+	class	reverse_rbrator;
 	template < class Iterator >
 	bool	equal(Iterator first1, Iterator last1, Iterator first2);
 	template < class T1, class T2 >
@@ -45,12 +51,6 @@ namespace	ft
 	template < class Key, class T, class Compare = std::less<Key>,
 		class Allocator = std::allocator<std::pair<const Key, T> > >
 	class	map;
-	template < class T >
-	class	node;
-	template < class T, class Node >
-	class	rbrator;
-	template < class I >
-	class	reverse_rbrator;
 }
 
 #endif

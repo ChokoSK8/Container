@@ -1,20 +1,20 @@
-# include "Stack/stack.hpp"
-# include "Vector/vector.hpp"
-# include "ExtraClass/equal.hpp"
-# include "ExtraClass/pair.hpp"
-# include "Map/map.hpp"
+# include "../Vector/vector.hpp"
+# include "../Stack/stack.hpp"
+# include "../ExtraClass/equal.hpp"
 # include <map>
 # include <list>
 # include <string>
-# include <cstdlib>
+# include <stack>
+# include <algorithm>
 # include <fstream>
 # include <string>
 # include <sstream>
+# define PROG	"STD<container>"
 # include <ctime>
-# define PROG	"FT<container>"
 # define RAND_TXT "rand.txt"
 
-using namespace ft;
+using namespace std;
+
 
 typedef map<int, int>::iterator	map_iterator;
 typedef map<int, int>::const_iterator	map_const_iterator;

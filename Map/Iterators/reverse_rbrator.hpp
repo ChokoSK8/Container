@@ -1,8 +1,7 @@
-#ifdef ITERATOR_HPP
-# ifndef REVERSE_RBRATOR_HPP
-#  define REVERSE_RBRATOR_HPP
-#  include "../../Iterators/iterator_traits.hpp"
-#  include "../../Iterators/iterator.hpp"
+#ifndef REVERSE_RBRATOR_HPP
+# define REVERSE_RBRATOR_HPP
+# include "../../Iterators/iterator_traits.hpp"
+# include "../../Iterators/iterator.hpp"
 
 template < class I >
 class	ft::reverse_rbrator : public ft::iterator<
@@ -185,5 +184,4 @@ template <class I> ft::reverse_rbrator<I> operator-(typename
 	tmp -= n;
 	return (tmp);
 };
-# endif
 #endif
