@@ -84,6 +84,9 @@ class	ft::map
 			freeNodes(_root);
 		};
 
+		// VALUE_COMPARE
+		#include "value_compare.hpp"
+
 		// ITERATOR
 		#include "MemberFonctions/iterator_map.hpp"
 
@@ -97,7 +100,7 @@ class	ft::map
 		#include "MemberFonctions/modifiers_map.hpp"
 
 		// OBSERVERS
-	//	#include "MemberFonctions/observers_map.hpp"
+		#include "MemberFonctions/observers_map.hpp"
 
 		// OPERATIONS
 		#include "MemberFonctions/operations_map.hpp"
@@ -107,9 +110,6 @@ class	ft::map
 		{
 			return (_c);
 		};
-
-		// VALUE_COMPARE
-	//	#include "value_compare.hpp"
 
 	private:
 		# include "MemberFonctions/private_map.hpp"

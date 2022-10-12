@@ -160,10 +160,11 @@ Objects/main.o: main.cpp Stack/stack.hpp Stack/../containers.h \
   Map/Iterators/../../Iterators/iterator.hpp \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/sstream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/sstream.tcc \
-  Map/MemberFonctions/iterator_map.hpp \
+  Map/value_compare.hpp Map/MemberFonctions/iterator_map.hpp \
   Map/MemberFonctions/capacity_map.hpp \
   Map/MemberFonctions/element_access_map.hpp \
   Map/MemberFonctions/modifiers_map.hpp \
+  Map/MemberFonctions/observers_map.hpp \
   Map/MemberFonctions/operations_map.hpp \
   Map/MemberFonctions/private_map.hpp Map/print.hpp \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/map \
@@ -562,6 +563,8 @@ Map/Iterators/../../Iterators/iterator.hpp:
 
 /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/sstream.tcc:
 
+Map/value_compare.hpp:
+
 Map/MemberFonctions/iterator_map.hpp:
 
 Map/MemberFonctions/capacity_map.hpp:
@@ -569,6 +572,8 @@ Map/MemberFonctions/capacity_map.hpp:
 Map/MemberFonctions/element_access_map.hpp:
 
 Map/MemberFonctions/modifiers_map.hpp:
+
+Map/MemberFonctions/observers_map.hpp:
 
 Map/MemberFonctions/operations_map.hpp:
 

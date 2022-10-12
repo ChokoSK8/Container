@@ -33,7 +33,6 @@ ft::pair<iterator, bool>	positionNode(nodePtr newNode, nodePtr from)
 
 iterator	insertFrom(iterator from, const value_type& val)
 {
-//	disp("INSERTED FROM", 1);
 	nodePtr	newNode = new node<value_type>(val);
 	ft::pair<iterator, bool>	ret;
 

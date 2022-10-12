@@ -35,6 +35,12 @@ void	displayPair(const pair<T1, T2> p)
 	std::cout << "FIRST: " << p.first  << " | SECOND: " << p.second << std::endl;
 }
 
+void	displayMapIterator(map_const_iterator p)
+{
+	std::cout << "FIRST: " << p->first  << " | SECOND: "
+			<< p->second << std::endl;
+}
+
 void	displayMapIterator(const map_iterator p)
 {
 	std::cout << "FIRST: " << p->first  << " | SECOND: "
@@ -47,6 +53,26 @@ void	displayMapReverseIterator(const map_reverse_iterator p)
 			<< p->second << std::endl;
 }
 
+void	insertWithIterator(map<int, int> mamap, int c, int div)
+{
+	int	i = c / div;
+	map_iterator	it = mamap.begin();
+
+	while (c > i)
+	{
+		--c;
+		++it;
+	}
+	i = 10;
+	c = it->first + i;
+	while (i > 0)
+	{
+		mamap.insert(it, make_pair(c, c));
+		--c;
+		--i;
+	}
+}
+
 	// MODIFIERS
 
 int	insertTester(void)
@@ -57,8 +83,8 @@ int	insertTester(void)
 	int		i;
 	int		c = 0;
 	std::fstream	file;
-	map_iterator	it;
-	map_iterator	ite;
+	map_const_iterator	it;
+	map_const_iterator	ite;
 	clock_t		t;
 
 	file.open(RAND_TXT, std::ios::in);
@@ -77,24 +103,20 @@ int	insertTester(void)
 	std::cout << PROG << ": INSERTING " << c << " elements took " <<
 		(float)t/CLOCKS_PER_SEC << " seconds" << std::endl;
 	file.close();
-	i = c / 2;
-	it = mamap.begin();
-	while (c > i)
-	{
-		--c;
-		++it;
-	}
 	t = clock();
-	i = 10;
-	c = it->first + i;
-	while (i > 0)
-	{
-		mamap.insert(it, make_pair(c, c));
-		--c;
-		--i;
-	}
+	insertWithIterator(mamap, c, 1);
+	insertWithIterator(mamap, c, 2);
+	insertWithIterator(mamap, c, 3);
+	insertWithIterator(mamap, c, 4);
+	insertWithIterator(mamap, c, 5);
+	insertWithIterator(mamap, c, 6);
+	insertWithIterator(mamap, c, 7);
+	insertWithIterator(mamap, c, 8);
+	insertWithIterator(mamap, c, 9);
+	insertWithIterator(mamap, c, 10);
+	insertWithIterator(mamap, c, 11);
 	t = clock() - t;
-	std::cout << PROG << ": INSERTING WITH ITERATOR " << 10
+	std::cout << PROG << ": INSERTING WITH ITERATOR " << 110
 		<< " elements took " << (float)t/CLOCKS_PER_SEC
 		<< " seconds" << std::endl;
 	it = mamap.begin();
@@ -321,46 +343,45 @@ int	upper_boundTester(void)
 	return (0);
 }
 
-//int	equal_rangeTester(void)
-//{
-//	int	n = 15;
-//	map<int, int>	mamap;
-//	int	i = 0;
-//        srand(time(0));
-//	int	modu = n * 10;
-//	std::map<int, int>	stdMap;
-//	pair<map_const_iterator, map_const_iterator>	ret;
-//	std::pair<std::map<int, int>::const_iterator, 
-//				std::map<int, int>::const_iterator>	ret2;
-//
-//	while (n)
-//	{
-//		i = rand() % modu;
-//		mamap.insert(make_pair(i, i));
-//		stdMap.insert(std::make_pair(i, i));
-//		--n;
-//	}
-//	mamap.print();
-//	ret = mamap.equal_range(50);
-//	ret2 = stdMap.equal_range(50);
-//	disp("equal_range(50).first", ret.first->first);
-//	disp("equal_range(50).second", ret.second->first);
-//	disp("REAL equal_range(50).first", ret2.first->first);
-//	disp("REAL equal_range(50).second", ret2.second->first);
-//	ret = mamap.equal_range(0);
-//	ret2 = stdMap.equal_range(0);
-//	disp("equal_range(0).first", ret.first->first);
-//	disp("equal_range(0).second", ret.second->first);
-//	disp("REAL equal_range(0).first", ret2.first->first);
-//	disp("REAL equal_range(0).second", ret2.second->first);
-//	ret = mamap.equal_range(200);
-//	ret2 = stdMap.equal_range(200);
-//	disp("equal_range(200).first", ret.first == mamap.end());
-//	disp("equal_range(200).second", ret.second == mamap.end());
-//	disp("REAL equal_range(200).first == end()", ret2.first == stdMap.end());
-//	disp("REAL equal_range(200).second == end()", ret2.second == stdMap.end());
-//	return (0);
-//}
+int	equal_rangeTester(void)
+{
+	int	n = 15;
+	map<int, int>	mamap;
+	int	i = 0;
+        srand(time(0));
+	int	modu = n * 10;
+	std::map<int, int>	stdMap;
+	pair<map_const_iterator, map_const_iterator>	ret;
+	std::pair<std::map<int, int>::const_iterator, 
+				std::map<int, int>::const_iterator>	ret2;
+
+	while (n)
+	{
+		i = rand() % modu;
+		mamap.insert(make_pair(i, i));
+		stdMap.insert(std::make_pair(i, i));
+		--n;
+	}
+	ret = mamap.equal_range(50);
+	ret2 = stdMap.equal_range(50);
+	disp("equal_range(50).first", ret.first->first);
+	disp("equal_range(50).second", ret.second->first);
+	disp("REAL equal_range(50).first", ret2.first->first);
+	disp("REAL equal_range(50).second", ret2.second->first);
+	ret = mamap.equal_range(0);
+	ret2 = stdMap.equal_range(0);
+	disp("equal_range(0).first", ret.first->first);
+	disp("equal_range(0).second", ret.second->first);
+	disp("REAL equal_range(0).first", ret2.first->first);
+	disp("REAL equal_range(0).second", ret2.second->first);
+	ret = mamap.equal_range(200);
+	ret2 = stdMap.equal_range(200);
+	disp("equal_range(200).first", ret.first == mamap.end());
+	disp("equal_range(200).second", ret.second == mamap.end());
+	disp("REAL equal_range(200).first == end()", ret2.first == stdMap.end());
+	disp("REAL equal_range(200).second == end()", ret2.second == stdMap.end());
+	return (0);
+}
 
 int	findTester(void)
 {
