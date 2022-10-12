@@ -8,6 +8,6 @@ key_compare	key_comp(void) const
 
 value_compare	value_comp(void) const
 {
-	return (value_comp(_keyComp));
+	return (value_compare(_keyComp));
 };
 #endif

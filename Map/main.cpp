@@ -9,7 +9,6 @@
 # include <string>
 # include <sstream>
 # include <ctime>
-# define PROG	"%s<container>", NAMESPACE
 # define RAND_TXT "rand.txt"
 
 using namespace NAMESPACE;
@@ -49,6 +48,20 @@ void	displayMapReverseIterator(const map_reverse_iterator p)
 {
 	std::cout << "FIRST: " << p->first  << " | SECOND: "
 			<< p->second << std::endl;
+}
+
+template < class T1, class T2 >
+void	displayMap(const map<T1, T2>& mamap)
+{
+	typename map<T1, T2>::const_iterator	it = mamap.begin();
+	typename map<T1, T2>::const_iterator	ite = mamap.end();
+
+	disp("SIZE", mamap.size());
+	while (it != ite)
+	{
+		displayMapIterator(it);
+		++it;
+	}
 }
 
 void	insertWithIterator(map<int, int> mamap, int c, int div)
@@ -98,7 +111,7 @@ int	insertTester(void)
 		ss.clear();
 	}
 	t = clock() - t;
-	std::cout << PROG << ": INSERTING " << c << " elements took " <<
+	std::cout << "INSERTING " << c << " elements took " <<
 		(float)t/CLOCKS_PER_SEC << " seconds" << std::endl;
 	file.close();
 	t = clock();
@@ -114,17 +127,10 @@ int	insertTester(void)
 	insertWithIterator(mamap, c, 10);
 	insertWithIterator(mamap, c, 11);
 	t = clock() - t;
-	std::cout << PROG << ": INSERTING WITH ITERATOR " << 110
+	std::cout << "INSERTING WITH ITERATOR " << 110
 		<< " elements took " << (float)t/CLOCKS_PER_SEC
 		<< " seconds" << std::endl;
-	it = mamap.begin();
-	ite = mamap.end();
-	while (it != ite)
-	{
-		displayMapIterator(it);
-		++it;
-	}
-	disp("SIZE", mamap.size());
+	displayMap(mamap);
 	return (0);
 }
 
@@ -136,14 +142,12 @@ int	eraseTester(void)
 	map<int, int>	mamap;
 	int		i = 0;
 	int		eraseNum = 0;
-	int		beginFile;
 	clock_t		t;
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
 		disp("ERROR: 'RAND_TXT' couldn't open", 0);
 	std::getline(file, line);
-	beginFile = file.tellg();
 	while (std::getline(file, line))
 	{
 		ss << line;
@@ -165,8 +169,52 @@ int	eraseTester(void)
 		ss.clear();
 	}
 	t = clock() - t;
-	std::cout << PROG << ": ERASING " << eraseNum << " elements took " <<
+	std::cout << "ERASING " << eraseNum << " elements took " <<
 		(float)t/CLOCKS_PER_SEC << " seconds" << std::endl;
+	return (0);
+}
+
+int	swapTester(void)
+{
+	std::stringstream	ss;
+	std::fstream	file;
+	std::string	line;
+	map<int, int>	mamap;
+	map<int, int>	mamap2;
+	int	pairVar = 0;
+	int	i = 0;
+	int	eraseNum = 0;
+
+	file.open(RAND_TXT, std::ios::in);
+	if (!file)
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	std::getline(file, line);
+	while (std::getline(file, line))
+	{
+		ss << line;
+		ss >> i;
+		if (pairVar % 2)
+			mamap.insert(make_pair(i, i));
+		else
+			mamap2.insert(make_pair(i, i));
+		++pairVar;
+		ss.clear();
+	}
+	file.close();
+	disp("MAMAP", 1);
+	displayMap(mamap);
+	disp("MAMAP", 2);
+	displayMap(mamap2);
+	mamap.swap(mamap2);
+	disp("MAMAP", 1);
+	displayMap(mamap);
+	disp("MAMAP", 2);
+	displayMap(mamap2);
+	swap(mamap, mamap2);
+	disp("MAMAP", 1);
+	displayMap(mamap);
+	disp("MAMAP", 2);
+	displayMap(mamap2);
 	return (0);
 }
 
@@ -395,7 +443,6 @@ int	findTester(void)
 		mamap.insert(make_pair(i, i));
 		--n;
 	}
-//	mamap.print();
 	n = 20;
 	while (--n)
 	{
@@ -406,6 +453,57 @@ int	findTester(void)
 		else
 			disp("NOT FOUND", i);
 	}
+	return (0);
+};
+
+
+	// RELATIONAL_OPERATORS
+
+int	relational_operatorsTester(void)
+{
+	std::stringstream	ss;
+	map<int, int>	mamap;
+	map<int, int>	mamap2;
+	std::fstream	file;
+	std::string	line;
+	int	pairVar = 0;
+	int	i = 0;
+	int	eraseNum = 0;
+
+	file.open(RAND_TXT, std::ios::in);
+	if (!file)
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	while (std::getline(file, line))
+	{
+		ss << line;
+		ss >> i;
+		if (pairVar % 2)
+			mamap.insert(make_pair(i, i));
+		else
+			mamap2.insert(make_pair(i, i));
+		++pairVar;
+		ss.clear();
+	}
+	file.close();
+	disp("MAMAP", 1);
+	displayMap(mamap);
+	disp("MAMAP", 2);
+	displayMap(mamap2);
+	disp("mamap == mamap2", mamap == mamap2);
+	disp("mamap <= mamap2", mamap <= mamap2);
+	disp("mamap >= mamap2", mamap >= mamap2);
+	disp("mamap != mamap2", mamap != mamap2);
+	disp("mamap < mamap2", mamap < mamap2);
+	disp("mamap > mamap2", mamap > mamap2);
+
+	map<int, int>	mamap3(mamap);
+
+	disp("mamap == mamap3", mamap == mamap3);
+	disp("mamap <= mamap3", mamap <= mamap3);
+	disp("mamap >= mamap3", mamap >= mamap3);
+	disp("mamap != mamap3", mamap != mamap3);
+	disp("mamap < mamap3", mamap < mamap3);
+	disp("mamap > mamap3", mamap > mamap3);
 	return (0);
 };
 
@@ -424,15 +522,17 @@ int	main(int ac, char **av)
 	std::string				str = av[1];
 
 	fcts["insert"] = &insertTester;
+	fcts["erase"] = &eraseTester;
+	fcts["swap"] = &swapTester;
 	fcts["iterator"] = &iteratorTester;
 	fcts["element_access"] = &element_accessTester;
 	fcts["at"] = &atTester;
 	fcts["max_size"] = &max_sizeTester;
 	fcts["lower_bound"] = &lower_boundTester;
 	fcts["upper_bound"] = &upper_boundTester;
-//	fcts["equal_range"] = &equal_rangeTester;
-	fcts["erase"] = &eraseTester;
+	fcts["equal_range"] = &equal_rangeTester;
 	fcts["find"] = &findTester;
+	fcts["relational_operators"] = &relational_operatorsTester;
 	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
 	{
 		if (!str.compare(it->first))
@@ -442,5 +542,5 @@ int	main(int ac, char **av)
 		}
 	}
 	disp("FCT NOT FOUND", 1);
-	return (1);
+	return (0);
 }

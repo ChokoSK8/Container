@@ -48,6 +48,20 @@ class	ft::map
 			_root = new node<value_type>;
 			_keyComp = comp;
 		};
+		template < class InputItr >
+		map(InputItr first, InputItr last, const key_compare& comp = key_compare(),
+				const allocator_type& alloc = allocator_type())
+		{
+			_size = 0;
+			_c = alloc;
+			_root = new node<value_type>;
+			_keyComp = comp;
+			while (first != last)
+			{
+				insert(*first);
+				++first;
+			}
+		};
 		map(const map& x)
 		{
 			_c = x.get_allocator();
@@ -59,25 +73,26 @@ class	ft::map
 
 			while (it != ite)
 			{
-				insert(make_pair(it->first, it->second));
+				insert(*it);
 				++it;
 			}
 		};
-//		template < class InputItr >
-//		map(InputItr first, InputItr last, const key_compare& comp = key_compare(),
-//				const allocator_type& alloc = allocator_type())
-//		{
-//			size_type	length = ft::distance(first, last);
-//
-//			_c.allocate(length);
-//			_size = length;
-//			(void)comp;
-//			(void)alloc;
-//			while (first != last)
-//			{
-//				_c.const
-//			}
-//		};
+		map&	operator=(const map& x)
+		{
+			clear();
+			_c = x.get_allocator();
+			_keyComp = x.key_comp();
+			_size = 0;
+			const_iterator	it = x.begin();
+			const_iterator	ite = x.end();
+
+			while (it != ite)
+			{
+				insert(*it);
+				++it;
+			}
+			return (*this);
+		};
 		~map(void)
 		{
 			freeNodes(_root);
@@ -115,4 +130,10 @@ class	ft::map
 		# include "print.hpp"
 		
 };
+
+	// SWAP
+	# include "NonMemberFonctions/swap_map.hpp"
+
+	// RELATIONAL OPERATORS
+	# include "NonMemberFonctions/relational_operators_map.hpp"
 #endif

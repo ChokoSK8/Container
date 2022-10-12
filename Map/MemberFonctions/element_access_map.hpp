@@ -3,7 +3,7 @@
 
 mapped_type&	operator[](const key_type& k)
 {
-	return (insert(make_pair(k, mapped_type())).first->second);
+	return (insert(ft::make_pair(k, mapped_type())).first->second);
 };
 mapped_type&	at(const key_type& k)
 {

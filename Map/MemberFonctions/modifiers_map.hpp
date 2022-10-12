@@ -22,7 +22,7 @@ ft::pair<iterator, bool>	insert(const value_type& val)
 	}
 	balanceTree(newNode);
 	++_size;
-	return (make_pair(iterator(newNode), true));
+	return (ft::make_pair(iterator(newNode), true));
 };
 
 iterator	insert(iterator position, const value_type& val)
@@ -41,14 +41,19 @@ iterator	insert(iterator position, const value_type& val)
 	return (insert(val).first);
 };
 
-//template < class InputIterator >
-void	insert(iterator first, iterator last)
+template < class InputIterator >
+void	insert(InputIterator first, InputIterator last)
 {
 	while (first != last)
 	{
-		insert(first->getVal());
+		insert(*first);
 		++first;
 	}
+};
+
+void	erase(iterator position)
+{
+	erase(position->first);
 };
 
 size_type	erase(const key_type& k)
@@ -90,5 +95,44 @@ size_type	erase(const key_type& k)
 	}
 	--_size;
 	return (1);
+};
+
+void	erase(iterator first, iterator last)
+{
+	key_type	nextKey;
+	key_type	lastKey = last->first;
+
+	while (first->first != lastKey)
+	{
+		++first;
+		nextKey = first->first;
+		--first;
+		erase(first);
+		first = find(nextKey);
+	}
+};
+
+void	swap(map& x)
+{
+	size_type	sizeTmp = _size;
+	allocator_type	cTmp = _c;
+	nodePtr		rootTmp = _root;
+	key_compare	keyCompTmp = _keyComp;
+
+	_size = x.size();
+	_c = x.get_allocator();
+	_root = x._root;
+	_keyComp = x._keyComp;
+	x._size = sizeTmp;
+	x._c = cTmp;
+	x._root = rootTmp;
+	x._keyComp = keyCompTmp;
+};
+
+void	clear(void)
+{
+	freeNodes(_root);
+	_size = 0;
+	_root = new node<value_type>;
 };
 #endif

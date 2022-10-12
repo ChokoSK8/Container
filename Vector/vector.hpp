@@ -135,5 +135,5 @@ class ft::vector
 };
 
 	// COMPARAISON_OPERATOR
-	# include "NonMemberFonctions/comparaison_operator_vec.hpp"
+	# include "NonMemberFonctions/relational_operators_vec.hpp"
 #endif

@@ -1,5 +1,5 @@
-#ifndef COMPARAISON_OPERATOR_VEC_HPP
-# define COMPARAISON_OPERATOR_VEC_HPP
+#ifndef RELATIONAL_OPERATOR_VEC_HPP
+# define RELATIONAL_OPERATOR_VEC_HPP
 
 template <class T, class Alloc>  bool operator==(const ft::vector<T,Alloc>& lhs,
 		const ft::vector<T,Alloc>& rhs)

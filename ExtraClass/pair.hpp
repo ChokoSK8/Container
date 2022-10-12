@@ -6,11 +6,11 @@ template < class T1, class T2 > struct	ft::pair
 	typedef T1	key_type;
 	typedef T2	content_type;
 
-	T1	first;
-	T2	second;
+	key_type	first;
+	content_type	second;
 
 	// CONSTRUCTORS
-	pair() : first(0), second(0) {};
+	pair() : first(), second() {};
 	pair(const T1& x, const T2& y) : first(x), second(y)  {};
 	template < class U1, class U2 > pair(const pair<U1, U2>& p) :
 			first(p.first), second(p.second) {};

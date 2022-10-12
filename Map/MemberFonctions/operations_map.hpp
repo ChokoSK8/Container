@@ -130,6 +130,6 @@ const_iterator	upper_bound(const key_type& k) const
 
 pair<const_iterator, const_iterator>	equal_range(const key_type& k) const
 {
-	return (make_pair(lower_bound(k), upper_bound(k)));
+	return (ft::make_pair(lower_bound(k), upper_bound(k)));
 };
 #endif

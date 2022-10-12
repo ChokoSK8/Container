@@ -45,6 +45,14 @@ ifneq ($(ARG), )
 else
 	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
 
+rand:
+ifneq ($(NUM), )
+	@bash $(HELPER_DIR)/randScript.sh $(NUM) >> rand.txt
+	@echo "\t$(C_PURPLE)GENERATING $(NUM) RANDOM NUMBER FILE$(C_END)"
+else
+	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
+endif
+
 clean:
 	@$(RM) $(OBJS)
 	@echo "\t$(C_RED)DELEATING OBJECTS$(C_END)"

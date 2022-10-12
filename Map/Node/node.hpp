@@ -19,7 +19,7 @@ class	ft::node
 		char		_side;
 
 	public:
-		node(void) : _left(NULL), _right(NULL), _papa(NULL),
+		node(void) : _val(), _left(NULL), _right(NULL), _papa(NULL),
 				_color('s'), _side('s') {};
 		node(const value_type& val) : _val(val)
 		{
@@ -459,7 +459,7 @@ class	ft::node
 			else
 				substitute = findOnlyChild();
 			copy = buildCopy(substitute->getVal());
-			return (make_pair(copy, substitute));
+			return (ft::make_pair(copy, substitute));
 		};
 		node*	buildCopy(const value_type& val)
 		{

@@ -22,19 +22,23 @@ HELPERS	= $(addprefix $(HELPER_DIR)/, f1 f2)
 
 HELPER_DIR = Helpers
 
-all:	main2.cpp
-	@$(CC) main2.cpp -D NAMESPACE=ft -o $(NAME)
+all:	main.cpp
+	@$(CC) main.cpp -D NAMESPACE=ft -o $(NAME)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=FT$(C_END)"
 
 diff:	all
+ifneq ($(ARG), )
 	@echo "\t$(C_YELLOW)EXECUTING PROGRAM WITH NAMESPACE=FT$(C_END)"
-	@./$(NAME) > $(HELPER_DIR)/f1
+	@./$(NAME) $(ARG) > $(HELPER_DIR)/f1
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=STD$(C_END)"
-	@$(CC) main2.cpp -D NAMESPACE=std -o $(NAME)
+	@$(CC) main.cpp -D NAMESPACE=std -o $(NAME)
 	@echo "\t$(C_YELLOW)EXECUTING PROGRAM WITH NAMESPACE=STD$(C_END)"
-	@./$(NAME) > $(HELPER_DIR)/f2
+	@./$(NAME) $(ARG) > $(HELPER_DIR)/f2
 	@diff $(HELPER_DIR)/f1 $(HELPER_DIR)/f2
 	@echo "\t$(C_BLUE)NO DIFFERENCE$(C_END)"
+else
+	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
+endif
 
 rand:
 ifneq ($(NUM), )
@@ -45,10 +49,14 @@ else
 endif
 
 std:
+ifneq ($(ARG), )
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=STD$(C_END)"
-	@$(CC) main2.cpp -D NAMESPACE=std -o $(NAME)
+	@$(CC) main.cpp -D NAMESPACE=std -o $(NAME)
 	@echo "\t$(C_YELLOW)EXECUTING PROGRAM WITH NAMESPACE=STD$(C_END)"
-	@./$(NAME)
+	@./$(NAME) $(ARG)
+else
+	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
+endif
 
 clean:
 	@echo "\t$(C_RED)DELEATING OBJECTS$(C_END)"

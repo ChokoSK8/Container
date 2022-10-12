@@ -57,18 +57,6 @@ class	ft::reverse_rbrator : public ft::iterator<
 			--p;
 			return (tmp);
 		};
-		ft::reverse_rbrator<I>&	operator+=(difference_type n)
-		{
-			p -= n;
-			return (*this);
-		};
-		ft::reverse_rbrator<I>	operator-(difference_type n) const
-		{
-			ft::reverse_rbrator<I>	tmp(*this);
-
-			tmp -= n;
-			return (tmp);
-		};
 		ft::reverse_rbrator<I>	operator--(void)
 		{
 			++p;
@@ -80,10 +68,12 @@ class	ft::reverse_rbrator : public ft::iterator<
 			++p;
 			return (tmp);
 		};
-		ft::reverse_rbrator<I>&	operator-=(difference_type n)
+		ft::reverse_rbrator<I>	operator-(difference_type n) const
 		{
-			p += n;
-			return (*this);
+			ft::reverse_rbrator<I>	tmp(*this);
+
+			tmp -= n;
+			return (tmp);
 		};
 		pointer	operator->(void) const
 		{
@@ -100,7 +90,8 @@ class	ft::reverse_rbrator : public ft::iterator<
 		};
 };
 
-	// RELATIONAL OPERAIORS
+	// RELATIONAL OPERATORS
+
 template <class I> bool	operator==(const ft::reverse_rbrator<I>& x,
 		const ft::reverse_rbrator<I>& y)
 {
@@ -131,7 +122,9 @@ template <class I> bool	operator>(const ft::reverse_rbrator<I>& x,
 {
 	return (*(x.base()) < *(y.base()));
 };
-//-------LEFI-RIGHI---------
+
+	// RIGHT LEFT
+
 template <class R, class L> bool	operator==(const ft::reverse_rbrator<R>& x,
 		const ft::reverse_rbrator<L>& y)
 {
@@ -163,7 +156,7 @@ template <class R, class L> bool	operator>(const ft::reverse_rbrator<R>& x,
 	return (*(x.base()) < *(y.base()));
 };
 
-	// OPERAIOR +
+	// OPERATOR +
 template <class I> ft::reverse_rbrator<I> operator+(typename
 		ft::reverse_rbrator<I>::difference_type n,
 		const ft::reverse_rbrator<I>& rev_it)
@@ -174,7 +167,7 @@ template <class I> ft::reverse_rbrator<I> operator+(typename
 	return (tmp);
 };
 
-	// OPERAIOR -
+	// OPERATOR -
 template <class I> ft::reverse_rbrator<I> operator-(typename
 		ft::reverse_rbrator<I>::difference_type n,
 		const ft::reverse_rbrator<I>& rev_it)

@@ -103,9 +103,18 @@ void	displayMapReverseIterator(const map_rit p)
 
 int	main()
 {
-	std::map<int, int>	mamap = makeMap(20);
-	map_it	it = mamap.begin();
+	std::map<int, int>	mamap = makeMap(10);
+	std::map<int, int>	mamap2 = makeMap(11);
 
-	disp("MAMAP", it.base());
+	disp("MAMAP", 1);
+	displayMap(mamap);
+	disp("MAMAP", 2);
+	displayMap(mamap2);
+	disp("mamap == mamap2", mamap == mamap2);
+	disp("mamap <= mamap2", mamap <= mamap2);
+	disp("mamap >= mamap2", mamap >= mamap2);
+	disp("mamap != mamap2", mamap != mamap2);
+	disp("mamap < mamap2", mamap < mamap2);
+	disp("mamap > mamap2", mamap > mamap2);
 	return (0);
 }
