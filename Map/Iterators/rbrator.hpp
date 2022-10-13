@@ -58,7 +58,7 @@ class	ft::rbrator
 			}
 			else if (isEnd())
 			{
-				p = p->getRight();
+				p = p->getEnd();
 			}
 			else if (p->getPapa())
 			{
@@ -70,7 +70,7 @@ class	ft::rbrator
 		};
 		rbrator&	operator--(void)
 		{
-			if (p->is_nil())
+			if (p->is_nil() || p == p->getEnd())
 				p = p->getPapa();
 			else if (p->getLeft() && !p->getLeft()->is_nil())
 			{

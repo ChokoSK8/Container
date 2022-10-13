@@ -3,9 +3,12 @@
 
 ft::pair<iterator, bool>	insert(const value_type& val)
 {
-	nodePtr	newNode = new node<value_type>(val);
+	nodePtr	newNode = new node<value_type>(val, _end);
 	ft::pair<iterator, bool>	ret;
+	bool	changeEndPapaCond = false;
 
+	if (_root->is_nil() || _keyComp(_max, val.first))
+		changeEndPapaCond = true;
 	if (!_root->is_nil())
 	{
 		ret = positionNode(newNode, _root);
@@ -22,6 +25,8 @@ ft::pair<iterator, bool>	insert(const value_type& val)
 	}
 	balanceTree(newNode);
 	++_size;
+	if (changeEndPapaCond)
+		changeEndPapa(val.first, newNode);
 	return (ft::make_pair(iterator(newNode), true));
 };
 
@@ -63,7 +68,10 @@ size_type	erase(const key_type& k)
 	nodePtr		child;
 	pair<nodePtr, nodePtr>	pairOfP;
 	char	colorSub;
+	bool	changeEndPapaCond = false;
 
+	if (k == _max)
+		changeEndPapaCond = true;
 	if (toDeleteIt == end())
 		return (0);
 	toDelete = toDeleteIt.base();
@@ -94,6 +102,8 @@ size_type	erase(const key_type& k)
 		_root = new node<value_type>;
 	}
 	--_size;
+	if (changeEndPapaCond)
+		changeEndPapaDelete();
 	return (1);
 };
 
@@ -102,9 +112,14 @@ void	erase(iterator first, iterator last)
 	key_type	nextKey;
 	key_type	lastKey = last->first;
 
-	while (first->first != lastKey)
+//	disp("first->key", first->first);
+//	disp("last->key", last->first);
+	while (_size && first != last)
 	{
+	// ERROR quand first == _root et que size == 1
 		++first;
+		if (first == _end)
+			disp("first == end", 1);
 		nextKey = first->first;
 		--first;
 		erase(first);

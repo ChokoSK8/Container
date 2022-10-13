@@ -105,20 +105,23 @@ int		main(void)
 	ft_erase(mp, mp.begin());
 	ft_erase(mp, --mp.end());
 
-	ft_erase(mp, mp.begin(), ++(++(++(++mp.begin()))));
-//	ft_erase(mp, --(--(--mp.end())), --mp.end());
-//
-//	mp[10] = "Hello";
-//	mp[11] = "Hi there";
-//	printSize(mp);
-//	ft_erase(mp, --(--(--mp.end())), mp.end());
-//
-//	mp[12] = "ONE";
-//	mp[13] = "TWO";
-//	mp[14] = "THREE";
-//	mp[15] = "FOUR";
-//	printSize(mp);
-//	ft_erase(mp, mp.begin(), mp.end());
+	ft_erase(mp, mp.begin(), ++(++(++mp.begin())));
+	disp("ft_erase(mp, --(--(--mp.end())), --mp.end())", 1);
+	ft_erase(mp, --(--(--mp.end())), --mp.end());
+
+	mp[10] = "Hello";
+	mp[11] = "Hi there";
+	printSize(mp);
+	disp("ft_erase(mp, --(--(--mp.end())), mp.end())", 1);
+	ft_erase(mp, --(--(--mp.end())), mp.end());
+
+	mp[12] = "ONE";
+	mp[13] = "TWO";
+	mp[14] = "THREE";
+	mp[15] = "FOUR";
+	printSize(mp);
+	disp("ft_erase(mp, mp.begin(), mp.end())", 1);
+	ft_erase(mp, mp.begin(), mp.end());
 
 	return (0);
 }

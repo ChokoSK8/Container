@@ -38,6 +38,8 @@ class	ft::map
 		allocator_type	_c;
 		nodePtr		_root;
 		key_compare	_keyComp;
+		nodePtr		_end;
+		key_type	_max;
 
 	public:
 		explicit map(const key_compare& comp = key_compare(),
@@ -46,6 +48,7 @@ class	ft::map
 			_c = alloc;
 			_size = 0;
 			_root = new node<value_type>;
+			_end = new node<value_type>;
 			_keyComp = comp;
 		};
 		template < class InputItr >
@@ -55,6 +58,7 @@ class	ft::map
 			_size = 0;
 			_c = alloc;
 			_root = new node<value_type>;
+			_end = new node<value_type>;
 			_keyComp = comp;
 			while (first != last)
 			{
@@ -68,6 +72,7 @@ class	ft::map
 			_keyComp = x.key_comp();
 			_size = 0;
 			_root = new node<value_type>;
+			_end = new node<value_type>;
 			const_iterator	it = x.begin();
 			const_iterator	ite = x.end();
 
@@ -96,6 +101,7 @@ class	ft::map
 		~map(void)
 		{
 			freeNodes(_root);
+			delete _end;
 		};
 
 		// VALUE_COMPARE

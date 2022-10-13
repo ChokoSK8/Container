@@ -17,11 +17,12 @@ class	ft::node
 		node*		_papa;
 		char		_color;
 		char		_side;
+		node*		_end;
 
 	public:
 		node(void) : _val(), _left(NULL), _right(NULL), _papa(NULL),
 				_color('s'), _side('s') {};
-		node(const value_type& val) : _val(val)
+		node(const value_type& val, node* end) : _val(val)
 		{
 			node*	left = new node;
 			node*	right = new node;
@@ -33,6 +34,7 @@ class	ft::node
 			_papa = NULL;
 			_color = 'r';
 			_side = 'c';
+			_end = end;
 		};
 		template < class U > node(const node<U>& mit) : _val(mit.getVal())
 		{
@@ -41,6 +43,7 @@ class	ft::node
 			_papa = mit.getPapa();
 			_color = mit.getColor();
 			_side = mit.getSide();
+			_end = mit._end;
 		};
 		~node(void)
 		{
@@ -132,6 +135,10 @@ class	ft::node
 		node*	getPapa(void) const
 		{
 			return (_papa);
+		};
+		node*	getEnd(void) const
+		{
+			return (_end);
 		};
 		node*	getGrandPa(void) const
 		{
@@ -463,7 +470,7 @@ class	ft::node
 		};
 		node*	buildCopy(const value_type& val)
 		{
-			node*	copy = new node(val);
+			node*	copy = new node(val, _end);
 			node*	papa = getPapa();
 			node*	left = getLeft();
 			node*	right = getRight();
