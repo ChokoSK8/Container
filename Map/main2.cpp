@@ -70,49 +70,22 @@ void	printReverse(NAMESPACE::map<T1, T2> &mp)
 }
 
 #define T1 char
-#define T2 int
-typedef _pair<const T1, T2> T3;
+#define T2 foo<float>
+typedef NAMESPACE::map<T1, T2> _map;
+typedef _map::const_iterator const_it;
 
-template <class MAP>
-void	cmp(const MAP &lhs, const MAP &rhs)
-{
-	static int i = 0;
-
-	std::cout << "############### [" << i++ << "] ###############"  << std::endl;
-	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
-	std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
-	std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
-}
+static unsigned int i = 0;
 
 int		main(void)
 {
-	NAMESPACE::map<T1, T2> mp1;
-	NAMESPACE::map<T1, T2> mp2;
+	_map	mp;
 
-	mp1['a'] = 2; mp1['b'] = 3; mp1['c'] = 4; mp1['d'] = 5;
-	mp2['a'] = 2; mp2['b'] = 3; mp2['c'] = 4; mp2['d'] = 5;
+	mp['a'] = 2.3;
+	mp['b'] = 1.4;
+	mp['c'] = 0.3;
+	mp['d'] = 4.2;
+	printSize(mp);
 
-	cmp(mp1, mp1); // 0
-	cmp(mp1, mp2); // 1
-
-	mp2['e'] = 6; mp2['f'] = 7; mp2['h'] = 8; mp2['h'] = 9;
-
-	cmp(mp1, mp2); // 2
-	cmp(mp2, mp1); // 3
-
-	(++(++mp1.begin()))->second = 42;
-
-	disp("MP1", 1);
-	printSize(mp1);
-	disp("MP2", 2);
-	printSize(mp2);
-	cmp(mp1, mp2); // 4
-	cmp(mp2, mp1); // 5
-
-	swap(mp1, mp2);
-
-	cmp(mp1, mp2); // 6
-	cmp(mp2, mp1); // 7
-
+	const_it it = mp.begin();
 	return (0);
 }

@@ -129,15 +129,21 @@ void	swap(map& x)
 	allocator_type	cTmp = _c;
 	nodePtr		rootTmp = _root;
 	key_compare	keyCompTmp = _keyComp;
+	key_type	maxTmp = _max;
+	nodePtr		endTmp = _end;
 
 	_size = x.size();
 	_c = x.get_allocator();
 	_root = x._root;
 	_keyComp = x._keyComp;
+	_max = x._max;
+	_end = x._end;
 	x._size = sizeTmp;
 	x._c = cTmp;
 	x._root = rootTmp;
 	x._keyComp = keyCompTmp;
+	x._max = maxTmp;
+	x._end = endTmp;
 };
 
 void	clear(void)

@@ -40,6 +40,8 @@ namespace	ft
 	class	node;
 	template < class T, class Node >
 	class	rbrator;
+	template < class T, class Node >
+	class	const_rbrator;
 	template < class I >
 	class	reverse_rbrator;
 	template < class Iterator >
@@ -49,7 +51,7 @@ namespace	ft
 	template < class T1, class T2 >
 	pair<T1, T2>	make_pair(T1 x, T2 y);
 	template < class Key, class T, class Compare = std::less<Key>,
-		class Allocator = std::allocator<pair<const Key, T> > >
+		class Allocator = std::allocator<node<pair<const Key, T> > > >
 	class	map;
 }
 

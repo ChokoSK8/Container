@@ -35,6 +35,7 @@ class	ft::reverse_rbrator : public ft::iterator<
 		reference	operator*(void) const
 		{
 			I	tmp = p;
+
 			--tmp;
 			return (*tmp);
 		};
@@ -77,7 +78,10 @@ class	ft::reverse_rbrator : public ft::iterator<
 		};
 		pointer	operator->(void) const
 		{
-			return (&(*p));
+			reverse_rbrator	tmp(p);
+
+			++tmp;
+			return (&(*(tmp.base())));
 		};
 		reference	operator[](difference_type n)
 		{

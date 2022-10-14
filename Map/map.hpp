@@ -4,6 +4,7 @@
 # include "../ExtraClass/pair.hpp"
 # include "Node/node.hpp"
 # include "Iterators/rbrator.hpp"
+# include "Iterators/const_rbrator.hpp"
 # include "Iterators/reverse_rbrator.hpp"
 
 # include <sstream>
@@ -29,7 +30,7 @@ class	ft::map
 
 		// ITERATOR
 		typedef rbrator<value_type, node<value_type> >		iterator;
-		typedef rbrator<const value_type, node<value_type> >	const_iterator;
+		typedef const_rbrator<value_type, node<value_type> >	const_iterator;
 		typedef ft::reverse_rbrator<iterator>			reverse_iterator;
 		typedef ft::reverse_rbrator<const_iterator>		const_reverse_iterator;
 
