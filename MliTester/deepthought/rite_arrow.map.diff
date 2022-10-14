@@ -1,0 +1,35 @@
+9a10,11
+> key: 2.5 | value: 7
+> key: 2.5 | value: 7
+10a13,17
+> key: -0.5 | value: 28
+> foo::m called [0]
+> foo::m const called [28]
+> key: 2.5 | value: 7
+> key: 2.5 | value: 7
+11a19
+> key: -0.5 | value: 28
+13,17d20
+< key: -1.5 | value: 35
+< foo::m called [7]
+< foo::m const called [35]
+< key: 1.5 | value: 14
+< key: 1.5 | value: 14
+19,23c22,23
+< key: -1.5 | value: 35
+< key: -0.5 | value: 28
+< key: -0.5 | value: 28
+< key: 1.5 | value: 14
+< key: 1.5 | value: 14
+---
+> key: 2.5 | value: 7
+> key: 2.5 | value: 7
+26,27d25
+< key: -0.5 | value: 28
+< key: -0.5 | value: 28
+29c27,29
+< key: 2.5 | value: 7
+---
+> key: 0.5 | value: 21
+> key: 1.5 | value: 14
+> key: 0 | value: 0

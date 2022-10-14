@@ -12,10 +12,7 @@ iterator	find(const key_type& k)
 		else if (_keyComp(toFind->getKey(), k))
 			toFind = toFind->getRight();
 		else
-		{
-			disp("RETURN", toFind->getKey());
 			return (iterator(toFind));
-		}
 	}
 	return (end());
 }

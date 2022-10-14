@@ -94,7 +94,11 @@ class	ft::node
 		void	setSide(const char& side)
 		{
 			_side = side;
-		}
+		};
+		void	setEnd(node* end)
+		{
+			_end = end;
+		};
 		int	setRootColor(void)
 		{
 			_color = 'n';

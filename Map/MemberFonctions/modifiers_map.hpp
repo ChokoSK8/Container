@@ -37,7 +37,7 @@ iterator	insert(iterator position, const value_type& val)
 	if (_keyComp(position->first, val.first))
 	{
 		if (position == end())
-			return (insertFrom(position, val));
+			return (insertFrom(--position, val));
 		++position;
 		if (_keyComp(val.first, position->first))
 			return (insertFrom(--position, val));
@@ -80,6 +80,8 @@ size_type	erase(const key_type& k)
 		pairOfP = toDelete->swipValueCase();
 		if (_root == toDelete)
 			_root = pairOfP.first;
+		if (pairOfP.first->getKey() == _max)
+			_end->setPapa(pairOfP.first);
 		colorSub = pairOfP.second->getColor();
 		child = pairOfP.second->deleteMe();
 		if (colorSub == 'n')
@@ -102,7 +104,7 @@ size_type	erase(const key_type& k)
 		_root = new node<value_type>;
 	}
 	--_size;
-	if (changeEndPapaCond)
+	if (_size && changeEndPapaCond)
 		changeEndPapaDelete();
 	return (1);
 };
@@ -110,16 +112,10 @@ size_type	erase(const key_type& k)
 void	erase(iterator first, iterator last)
 {
 	key_type	nextKey;
-	key_type	lastKey = last->first;
 
-//	disp("first->key", first->first);
-//	disp("last->key", last->first);
 	while (_size && first != last)
 	{
-	// ERROR quand first == _root et que size == 1
 		++first;
-		if (first == _end)
-			disp("first == end", 1);
 		nextKey = first->first;
 		--first;
 		erase(first);

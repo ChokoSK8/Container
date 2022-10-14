@@ -37,19 +37,16 @@ bool	operator<=(const ft::map<Key, T, Compare, Alloc>& lhs,
 	typename ft::map<Key, T, Compare, Alloc>::const_iterator	l_cit = lhs.begin();
 	typename ft::map<Key, T, Compare, Alloc>::const_iterator	l_cite = lhs.end();
 	typename ft::map<Key, T, Compare, Alloc>::const_iterator	r_cit = rhs.begin();
+	typename ft::map<Key, T, Compare, Alloc>::const_iterator	r_cite = rhs.end();
 
-	if (lhs.size() == rhs.size())
+	while (l_cit != l_cite && r_cit != r_cite)
 	{
-		while (l_cit != l_cite)
-		{
-			if (*l_cit != *r_cit)
-				return (*l_cit <= *r_cit);
-			++l_cit;
-			++r_cit;
-		}
-		return (true);
+		if (*l_cit != *r_cit)
+			return (*l_cit <= *r_cit);
+		++l_cit;
+		++r_cit;
 	}
-	return (lhs.size() < rhs.size());
+	return (lhs.size() <= rhs.size());
 };
 template < class Key, class T, class Compare, class Alloc > 
 bool	operator>=(const ft::map<Key, T, Compare, Alloc>& lhs,

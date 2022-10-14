@@ -35,7 +35,10 @@ iterator	insertFrom(iterator from, const value_type& val)
 {
 	nodePtr	newNode = new node<value_type>(val, _end);
 	ft::pair<iterator, bool>	ret;
+	bool	changeEndPapaCond = false;
 
+	if (_root->is_nil() || _keyComp(_max, val.first))
+		changeEndPapaCond = true;
 	if (!_root->is_nil())
 	{
 		ret = positionNode(newNode, from.base());
@@ -52,6 +55,8 @@ iterator	insertFrom(iterator from, const value_type& val)
 	}
 	balanceTree(newNode);
 	++_size;
+	if (changeEndPapaCond)
+		changeEndPapa(val.first, newNode);
 	return (iterator(newNode));
 };
 
@@ -105,7 +110,6 @@ void	changeEndPapaDelete(void)
 
 	while (!newMaxNode->getRight()->is_nil())
 		newMaxNode = newMaxNode->getRight();
-//	disp("NEW PAPA", newMaxNode->getKey());
 	_end->setPapa(newMaxNode);
 	_max = newMaxNode->getKey();
 };

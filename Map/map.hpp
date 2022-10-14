@@ -49,6 +49,7 @@ class	ft::map
 			_size = 0;
 			_root = new node<value_type>;
 			_end = new node<value_type>;
+			_end->setEnd(_end);
 			_keyComp = comp;
 		};
 		template < class InputItr >
@@ -59,6 +60,7 @@ class	ft::map
 			_c = alloc;
 			_root = new node<value_type>;
 			_end = new node<value_type>;
+			_end->setEnd(_end);
 			_keyComp = comp;
 			while (first != last)
 			{
@@ -73,6 +75,7 @@ class	ft::map
 			_size = 0;
 			_root = new node<value_type>;
 			_end = new node<value_type>;
+			_end->setEnd(_end);
 			const_iterator	it = x.begin();
 			const_iterator	ite = x.end();
 
