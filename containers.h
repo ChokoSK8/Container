@@ -23,6 +23,8 @@ namespace	ft
 	template < class Category, class T, class Distance = std::ptrdiff_t, class Pointer = T*, class Reference = T& >
 	class	iterator;
 	template < class T >
+	class	nobe;
+	template < class T >
 	class	random_access_iterator;
 	template < class I >
 	class	reverse_iterator;
@@ -51,7 +53,7 @@ namespace	ft
 	template < class T1, class T2 >
 	pair<T1, T2>	make_pair(T1 x, T2 y);
 	template < class Key, class T, class Compare = std::less<Key>,
-		class Allocator = std::allocator<node<pair<const Key, T> > > >
+		class Allocator = std::allocator<nobe<pair<const Key, T> > > >
 	class	map;
 }
 

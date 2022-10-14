@@ -28,6 +28,10 @@ class	ft::const_rbrator
 			p = mit.base();
 			return (*this);
 		}
+		template < class U > const_rbrator(const ft::rbrator<U, Node>& mit)
+		{
+			p = mit.base();
+		};
 		~const_rbrator() {};
 		nodePtr	base(void) const
 		{

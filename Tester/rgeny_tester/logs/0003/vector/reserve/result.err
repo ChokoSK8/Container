@@ -1,9 +1,0 @@
-srcs/vector/modifiers/reserve.cpp:27:5: error: no member named 'reserve' in 'ft::vector<int>'
-                v.reserve(n);
-                ~ ^
-srcs/vector/modifiers/reserve.cpp:41:2: note: in instantiation of function template specialization '_test<int, ft::vector<int> >' requested here
-        _test<int>      (v, 0);
-        ^
-1 error generated.
-make: *** [Makefile:62: objs/srcs/vector/modifiers/ft_reserve.o] Error 1
-valgrind: ./exe/srcs/vector/modifiers/ft_reserve: No such file or directory

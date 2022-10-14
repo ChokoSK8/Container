@@ -183,7 +183,6 @@ int	swapTester(void)
 	map<int, int>	mamap2;
 	int	pairVar = 0;
 	int	i = 0;
-	int	eraseNum = 0;
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
@@ -468,7 +467,6 @@ int	relational_operatorsTester(void)
 	std::string	line;
 	int	pairVar = 0;
 	int	i = 0;
-	int	eraseNum = 0;
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)

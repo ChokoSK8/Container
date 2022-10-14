@@ -23,16 +23,7 @@ class	ft::rbrator
 		{
 			p = mit.base();
 		};
-		template < class U > rbrator&	operator=(const ft::rbrator<U, Node>& mit)
-		{
-			p = mit.base();
-			return (*this);
-		}
-		template < class U > rbrator(const ft::const_rbrator<U, Node>& mit)
-		{
-			p = mit.base();
-		};
-		template < class U > rbrator&	operator=(const ft::const_rbrator<U, Node>& mit)
+		rbrator&	operator=(const rbrator& mit)
 		{
 			p = mit.base();
 			return (*this);

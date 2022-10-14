@@ -34,6 +34,16 @@ iterator	insert(iterator position, const value_type& val)
 {
 	iterator	next;
 
+	if (position == _end)
+	{
+		if (_size)
+		{
+			--position;
+			if ( _keyComp(position->first, val.first))
+				return (insertFrom(position, val));
+		}
+		return (insert(val).first);
+	}
 	if (_keyComp(position->first, val.first))
 	{
 		if (position == end())

@@ -1,9 +1,0 @@
-srcs/stack/crash_const_reference.cpp:32:7: error: cannot assign to variable 'ref' with const-qualified type 'std::stack<int>::const_reference' (aka 'const int &')
-                ref = 21;
-                ~~~ ^
-srcs/stack/crash_const_reference.cpp:23:42: note: variable 'ref' declared const here
-                NAMESPACE::stack<int>::const_reference  ref = s.top();
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
-1 error generated.
-make: *** [Makefile:62: objs/srcs/stack/std_crash_const_reference.o] Error 1
-valgrind: ./exe/srcs/stack/std_crash_test_const_reference: No such file or directory
