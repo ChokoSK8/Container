@@ -7,7 +7,7 @@ ft::pair<iterator, bool>	insert(const value_type& val)
 	ft::pair<iterator, bool>	ret;
 	bool	changeEndPapaCond = false;
 
-	if (_root->is_nil() || _keyComp(_max, val.first))
+	if (_root->is_nil() || _keyComp(_max->getKey(), val.first))
 		changeEndPapaCond = true;
 	if (!_root->is_nil())
 	{
@@ -26,7 +26,7 @@ ft::pair<iterator, bool>	insert(const value_type& val)
 	balanceTree(newNode);
 	++_size;
 	if (changeEndPapaCond)
-		changeEndPapa(val.first, newNode);
+		changeEndPapa(newNode);
 	return (ft::make_pair(iterator(newNode), true));
 };
 
@@ -80,7 +80,7 @@ size_type	erase(const key_type& k)
 	char	colorSub;
 	bool	changeEndPapaCond = false;
 
-	if (k == _max)
+	if (k == _max->getKey())
 		changeEndPapaCond = true;
 	if (toDeleteIt == end())
 		return (0);
@@ -90,7 +90,7 @@ size_type	erase(const key_type& k)
 		pairOfP = toDelete->swipValueCase();
 		if (_root == toDelete)
 			_root = pairOfP.first;
-		if (pairOfP.first->getKey() == _max)
+		if (pairOfP.first->getKey() == _max->getKey())
 			_end->setPapa(pairOfP.first);
 		colorSub = pairOfP.second->getColor();
 		child = pairOfP.second->deleteMe();
@@ -139,7 +139,7 @@ void	swap(map& x)
 	allocator_type	cTmp = _c;
 	nodePtr		rootTmp = _root;
 	key_compare	keyCompTmp = _keyComp;
-	key_type	maxTmp = _max;
+	nodePtr		maxTmp = _max;
 	nodePtr		endTmp = _end;
 
 	_size = x.size();

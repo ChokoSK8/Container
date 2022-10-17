@@ -8,7 +8,13 @@ C_CYAN		=	\e[1;36m
 C_WHITE		=	\e[1;37m
 C_END		=	\e[0m
 
-NAME	= vectorExec
+NAME	= vecExec
+
+SRCS	= main.cpp
+
+OBJS_DIR	= Objects
+
+OBJS	= $(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS))
 
 HELPER_DIR	= Helpers
 
@@ -20,23 +26,21 @@ RM	= rm -rf
 
 HELPERS	= $(addprefix $(HELPER_DIR)/, f1 f2)
 
-HELPER_DIR = Helpers
+$(OBJS_DIR)/%.o: %.cpp
+	@c++ $(FLAGS) -o $@ -D NAMESPACE=ft -c $?
+	@echo "\t$(C_GREEN)COMPILING $<$(C_END)"
 
-all:
-ifeq ($(NUM), )
-	@bash $(HELPER_DIR)/randScript.sh 200
-else
-	@bash $(HELPER_DIR)/randScript.sh $(NUM)
-endif
-	@echo "\t$(C_BLUE)GENERATING RANDOM NUMBER FILE$(C_END)"
-	@$(CC) main.cpp -D NAMESPACE=ft -o $(NAME)
+all:	$(NAME)
+
+$(NAME):	$(OBJS)
+	@$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=FT$(C_END)"
 
 diff:	all
 ifneq ($(ARG), )
 	@./$(NAME) $(ARG) > $(HELPER_DIR)/f1
 	@echo "\t$(C_YELLOW)EXECUTING PROGRAM WITH NAMESPACE=FT$(C_END)"
-	@$(CC) main.cpp -D NAMESPACE=std -o $(NAME)
+	@$(CC) $(FLAGS) main.cpp -D NAMESPACE=std -o $(NAME)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=STD$(C_END)"
 	@./$(NAME) $(ARG) > $(HELPER_DIR)/f2
 	@echo "\t$(C_YELLOW)EXECUTING PROGRAM WITH NAMESPACE=STD$(C_END)"
@@ -44,26 +48,36 @@ ifneq ($(ARG), )
 	@echo "\t$(C_BLUE)NO DIFFERENCE$(C_END)"
 else
 	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
+endif
 
 rand:
 ifneq ($(NUM), )
 	@bash $(HELPER_DIR)/randScript.sh $(NUM) >> rand.txt
 	@echo "\t$(C_PURPLE)GENERATING $(NUM) RANDOM NUMBER FILE$(C_END)"
 else
+	@echo "\t$(C_RED)HOW TO USE: make rand NUM=<number>$(C_END)"
+endif
+
+std:
+ifneq ($(ARG), )
+	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=STD$(C_END)"
+	@$(CC) $(FLAGS) main.cpp -D NAMESPACE=std -o $(NAME)
+	@echo "\t$(C_YELLOW)EXECUTING PROGRAM WITH NAMESPACE=STD$(C_END)"
+	@./$(NAME) $(ARG)
+else
 	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
 endif
 
 clean:
+	@$(RM) $(HELPERS)
+	@echo "\t$(C_RED)DELEATING HELPERS$(C_END)"
 	@$(RM) $(OBJS)
 	@echo "\t$(C_RED)DELEATING OBJECTS$(C_END)"
 
 fclean:		clean
 	@$(RM) $(NAME)
 	@echo "\t$(C_RED)DELEATING EXECUTABLE$(C_END)"
-	@$(RM) $(HELPERS)
-	@echo "\t$(C_RED)DELEATING HELPERS$(C_END)"
 
 re:	fclean all
 
 .PHONY:		all clean fclean re
-endif

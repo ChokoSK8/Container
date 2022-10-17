@@ -1,15 +1,12 @@
 #ifndef MAP_HPP
 # define MAP_HPP
-# include "../containers.h"
-# include "../ExtraClass/pair.hpp"
-# include "../ExtraClass/node.hpp"
+# include "../../containers.h"
+# include "../../ExtraClass/pair.hpp"
+# include "../../ExtraClass/node.hpp"
 # include "Node/node.hpp"
 # include "Iterators/rbrator.hpp"
 # include "Iterators/const_rbrator.hpp"
 # include "Iterators/reverse_rbrator.hpp"
-
-# include <sstream>
-# include <vector>
 
 template < class Key, class T, class Compare, class Allocator >
 class	ft::map
@@ -41,7 +38,7 @@ class	ft::map
 		nodePtr		_root;
 		key_compare	_keyComp;
 		nodePtr		_end;
-		key_type	_max;
+		nodePtr		_max;
 
 	public:
 		explicit map(const key_compare& comp = key_compare(),
@@ -138,7 +135,6 @@ class	ft::map
 
 	private:
 		# include "MemberFonctions/private_map.hpp"
-		# include "print.hpp"
 		
 };
 

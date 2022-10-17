@@ -10,6 +10,12 @@ C_END		=	\e[0m
 
 NAME	= mapExec
 
+SRCS	= main.cpp
+
+OBJS_DIR	= Objects
+
+OBJS	= $(patsubst %.cpp, $(OBJS_DIR)/%.o, $(SRCS))
+
 HELPER_DIR	= Helpers
 
 FLAGS	= -g -Wall -Werror -Wextra -std=c++98
@@ -20,10 +26,14 @@ RM	= rm -rf
 
 HELPERS	= $(addprefix $(HELPER_DIR)/, f1 f2)
 
-HELPER_DIR = Helpers
+$(OBJS_DIR)/%.o: %.cpp
+	@c++ $(FLAGS) -o $@ -D NAMESPACE=ft -c $?
+	@echo "\t$(C_GREEN)COMPILING $<$(C_END)"
 
-all:	main.cpp
-	@$(CC) $(FLAGS) main.cpp -D NAMESPACE=ft -o $(NAME)
+all:	$(NAME)
+
+$(NAME):	$(OBJS)
+	@$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=FT$(C_END)"
 
 diff:	all
@@ -59,14 +69,14 @@ else
 endif
 
 clean:
+	@echo "\t$(C_RED)DELEATING HELPERS$(C_END)"
+	@$(RM) $(HELPERS)
 	@echo "\t$(C_RED)DELEATING OBJECTS$(C_END)"
 	@$(RM) $(OBJS)
 
 fclean:		clean
 	@echo "\t$(C_RED)DELEATING EXECUTABLE$(C_END)"
 	@$(RM) $(NAME)
-	@echo "\t$(C_RED)DELEATING HELPERS$(C_END)"
-	@$(RM) $(HELPERS)
 
 re:	fclean all
 

@@ -14,6 +14,7 @@ template < class T1, class T2 > struct	ft::pair
 	pair(const T1& x, const T2& y) : first(x), second(y)  {};
 	template < class U1, class U2 > pair(const pair<U1, U2>& p) :
 			first(p.first), second(p.second) {};
+	~pair() {};
 
 	// OPERATOR=	
 	pair&	operator=(const pair& other) {

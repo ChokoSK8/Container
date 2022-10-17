@@ -1,6 +1,6 @@
 #ifndef NODE_HPP
 # define NODE_HPP
-# include "../../containers.h"
+# include "../../../containers.h"
 
 template < class T >
 class	ft::node
@@ -104,12 +104,6 @@ class	ft::node
 			_color = 'n';
 			return (0);
 		};
-	//	void	setNewNode(node* newNode, char side, void (*setter)(node*))
-	//	{
-	//		newNode->setSide(side);
-	//		setter(newNode);
-	//		newNode->setPapa(this);
-	//	};
 		void	setNewNodeRight(node* newNode, char side)
 		{
 			newNode->setSide(side);

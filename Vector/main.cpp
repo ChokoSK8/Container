@@ -1,4 +1,4 @@
-#include "vector.hpp"
+#include "includes/vector.hpp"
 #include <map>
 #include <vector>
 #include <list>
@@ -27,17 +27,6 @@ void	displayVec(vector<T> vec)
 		std::cout << " - " << *it << std::endl;
 		it++;
 	}
-}
-
-template < typename T >
-void	displayStk(stack<T> stk)
-{
-	disp("SIZE", stk.size());
-	while (!stk.empty())
-	{
-		std::cout << " - " << stk.top() << std::endl;
-		stk.pop();
-	}		
 }
 
 vector<int>	makeVec(int start, int range)
@@ -154,13 +143,9 @@ int	atTester(void)
 	vector<int>	v1 = makeVec(1, 5);
 	vector<int>	v2 = makeVec(20, 13);
 
-//	disp("v1[5]", v1.at(5));
 	disp("v1[0]", v1.at(0));
-//	disp("v1[50]", v1.at(50));
 	disp("v1[1]", v1.at(1));
 	disp("v2[5]", v2.at(5));
-//	disp("v2[-10]", v2.at(-10));
-//	disp("v2[13]", v2.at(13));
 
 	return (0);
 }
@@ -171,8 +156,6 @@ int	frontTester(void)
 	vector<int>	v2 = makeVec(0, 0);
 
 	disp("FRONT V1", v1.front());
-//	disp("ADDR BEGIN 2", v2.begin().base());
-//	disp("FRONT V2", v2.front());
 	return (0);
 }
 
@@ -182,8 +165,6 @@ int	backTester(void)
 	vector<int>	v2 = makeVec(0, 0);
 
 	disp("BACK V1", v1.back());
-//	disp("ADDR BEGIN 2", v2.begin().base());
-//	disp("BACK V2", v2.back());
 	return (0);
 }
 
@@ -250,22 +231,16 @@ int	insertTester(void)
 	vector<int>		v1 = makeVec(1, 10);
 	vector<int>		v2 = makeVec(2, 15);
 
-	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
 	v1.insert(v1.begin() + 3, 1, 10);
-	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
 	v1.insert(v1.end(), 5, 9);
-	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
 	v1.insert(v1.begin(), 5, 11);
-	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
 	v1.insert(v1.begin(), v1.begin() + 2, v1.begin() + 5);
-	disp("CAPACITY", v1.capacity());
 	displayVec(v1);
 	v2.insert(v2.begin() + 6, v1.begin() + 2, v1.begin() + 5);
-	disp("CAPACITY", v2.capacity());
 	displayVec(v2);
 
 	return (0);
@@ -360,6 +335,7 @@ int	main(int ac, char **av)
 	fcts["back"] = &backTester;
 	fcts["max_size"] = &max_sizeTester;
 	fcts["resize"] = &resizeTester;
+	fcts["empty"] = &resizeTester;
 	for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
 	{
 		if (!str.compare(it->first))

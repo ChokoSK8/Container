@@ -1,11 +1,11 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
-# include "../containers.h"
-# include "../Iterators/iterator.hpp"
+# include "../../containers.h"
+# include "../../Iterators/iterator.hpp"
 # include "Iterators/random_access_iterator.hpp"
 # include "Iterators/reverse_iterator.hpp"
-# include "../ExtraClass/enable_if.hpp"
-# include "../ExtraClass/is_integral.hpp"
+# include "../../ExtraClass/enable_if.hpp"
+# include "../../ExtraClass/is_integral.hpp"
 
 template < class T, class Alloc >
 class ft::vector
@@ -47,7 +47,8 @@ class ft::vector
 			size_type	c = 0;
 
 			_size = x.size();
-			_capacity = x.capacity();
+		//	_capacity = x.capacity();
+			_capacity = x.size();
 			_c = x.get_allocator();
 			_first = _c.allocate(_capacity);
 			while (it != ite)
@@ -64,7 +65,8 @@ class ft::vector
 			size_type	c = 0;
 
 			_size = x.size();
-			_capacity = x.capacity();
+		//	_capacity = x.capacity();
+			_capacity = x.size();
 			_c = x.get_allocator();
 			_first = _c.allocate(_capacity);
 			while (it != ite)

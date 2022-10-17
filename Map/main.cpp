@@ -1,4 +1,4 @@
-# include "map.hpp"
+# include "includes/map.hpp"
 # include "../ExtraClass/equal.hpp"
 # include "../ExtraClass/pair.hpp"
 # include <map>
@@ -217,94 +217,68 @@ int	swapTester(void)
 	return (0);
 }
 
-	// ITERATOR
-
-int	iteratorTester(void)
-{
-	map<int, int>				mamap;
-	map<int, int>::iterator			it;
-	map<int, int>::iterator			ite;
-	pair<map<int, int>::iterator, bool>	ret;
-	int	n;
-	int	i = 0;
-        srand(time(0));
-
-	while (i < 100)
-	{
-		n = rand() % 2000;
-		ret = mamap.insert(make_pair(n, n));
-		if (!ret.second)
-			disp("KEY ALREADY USED", ret.first->second);
-		++i;
-	}
-	disp("NUMBER OF ELEMENTS", i);
-	return (0);
-}
-
 	// ELEMENT_ACCESS
 
-int	element_accessTester(void)
+int	operatorHookTester(void)
 {
 	map<int, int>	mamap;
-        srand(time(0));
+	std::stringstream	ss;
+	std::fstream	file;
+	std::string	line;
+	int	i;
 
-	for (int i = 0; i < 15; ++i)
-		mamap.insert(make_pair(i, (int)rand() % 100));
-	map<int, int>::iterator	it = mamap.begin();
-	map<int, int>::iterator	ite = mamap.end();
-	int	i = 0;
-	int	n;
-
-	while (it != ite)
+	file.open(RAND_TXT, std::ios::in);
+	if (!file)
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	while (std::getline(file, line))
 	{
-		n = it->first;
-		++it;
-		if (n > it->first && it != ite)
-			disp("--------ERROR--------", 1);
-		++i;
+		ss << line;
+		ss >> i;
+		mamap.insert(make_pair(i, i));
+		ss.clear();
 	}
+	displayMap(mamap);
 	disp("val of -2", mamap[-2]);
 	mamap[-2] = 5;
 	disp("val of -2", mamap[-2]);
 	disp("val of 12", mamap[12]);
-
-	it = mamap.begin();
-	ite = mamap.end();
-	i = 0;
-	while (it != ite)
-	{
-		n = it->first;
-		displayMapIterator(it);
-		++it;
-		if (n > it->first && it != ite)
-			disp("--------ERROR--------", 1);
-		++i;
-	}
+	mamap[12] = 5;
+	mamap[50] = 5;
+	mamap[281] = 5;
+	mamap[999] = 5;
+	mamap[768] = 5;
+	displayMap(mamap);
 	return (0);
 }
 
 int	atTester(void)
 {
 	map<int, int>	mamap;
-        srand(time(0));
+	std::stringstream	ss;
+	std::fstream	file;
+	std::string	line;
+	int	i;
 
-	for (int i = 0; i < 15; ++i)
-		mamap.insert(make_pair(i, (int)rand() % 100));
-	map<int, int>::iterator	it = mamap.begin();
-	map<int, int>::iterator	ite = mamap.end();
-	int	i = 0;
-	int	n;
-
-	while (it != ite)
+	file.open(RAND_TXT, std::ios::in);
+	if (!file)
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	std::getline(file, line);
+	while (std::getline(file, line))
 	{
-		n = it->first;
-		++it;
-		if (n > it->first && it != ite)
-			disp("--------ERROR--------", 1);
-		++i;
+		ss << line;
+		ss >> i;
+		mamap.insert(make_pair(i, i));
+		ss.clear();
 	}
-	disp("at(1)", mamap.at(1));
-	disp("at(4)", mamap.at(4));
+	displayMap(mamap);
+	try
+	{
+		disp("at(1)", mamap.at(1));
+	}
+	catch (std::exception& e)
+	{
+		disp("WHAT", e.what());
+	}
 	try
 	{
 		disp("at(15)", mamap.at(15));
@@ -313,10 +287,6 @@ int	atTester(void)
 	{
 		disp("WHAT", e.what());
 	}
-
-	// CONST
-	const int	conInt = mamap.at(5);
-	disp("at(5) const", conInt);
 	return (0);
 }
 
@@ -340,91 +310,84 @@ int	max_sizeTester(void)
 
 int	lower_boundTester(void)
 {
-	int	n = 15;
 	map<int, int>	mamap;
-	int	i = 0;
-        srand(time(0));
-	int	modu = n * 10;
-	std::map<int, int>	stdMap;
+	std::stringstream	ss;
+	std::fstream	file;
+	std::string	line;
+	int	i;
 
-	while (n)
+	file.open(RAND_TXT, std::ios::in);
+	if (!file)
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	while (std::getline(file, line))
 	{
-		i = rand() % modu;
+		ss << line;
+		ss >> i;
 		mamap.insert(make_pair(i, i));
-		stdMap.insert(std::make_pair(i, i));
-		--n;
+		ss.clear();
 	}
+	file.close();
 	disp("lower_bound(50)", mamap.lower_bound(50)->first);
-	disp("REAL: lower_bound(50)", stdMap.lower_bound(50)->first);
 	disp("lower_bound(0)", mamap.lower_bound(0)->first);
-	disp("REAL: lower_bound(0)", stdMap.lower_bound(0)->first);
 	disp("lower_bound(200) is end", mamap.lower_bound(200) == mamap.end());
-	disp("REAL: lower_bound(200) is end", stdMap.lower_bound(200) == stdMap.end());
 	return (0);
 }
 
 int	upper_boundTester(void)
 {
-	int	n = 15;
 	map<int, int>	mamap;
-	int	i = 0;
-        srand(time(0));
-	int	modu = n * 10;
-	std::map<int, int>	stdMap;
+	std::stringstream	ss;
+	std::fstream	file;
+	std::string	line;
+	int	i;
 
-	while (n)
+	file.open(RAND_TXT, std::ios::in);
+	if (!file)
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	while (std::getline(file, line))
 	{
-		i = rand() % modu;
+		ss << line;
+		ss >> i;
 		mamap.insert(make_pair(i, i));
-		stdMap.insert(std::make_pair(i, i));
-		--n;
+		ss.clear();
 	}
+	file.close();
 	disp("upper_bound(50)", mamap.upper_bound(50)->first);
-	disp("REAL: upper_bound(50)", stdMap.upper_bound(50)->first);
 	disp("upper_bound(0)", mamap.upper_bound(0)->first);
-	disp("REAL: upper_bound(0)", stdMap.upper_bound(0)->first);
 	disp("upper_bound(200) is end", mamap.upper_bound(200) == mamap.end());
-	disp("REAL: upper_bound(200) is end", stdMap.upper_bound(200) == stdMap.end());
 	return (0);
 }
 
 int	equal_rangeTester(void)
 {
-	int	n = 15;
 	map<int, int>	mamap;
-	int	i = 0;
-        srand(time(0));
-	int	modu = n * 10;
-	std::map<int, int>	stdMap;
-	pair<map_const_iterator, map_const_iterator>	ret;
-	std::pair<std::map<int, int>::const_iterator, 
-				std::map<int, int>::const_iterator>	ret2;
+	pair<map<int, int>::const_iterator, 
+				map<int, int>::const_iterator>	ret;
+	std::stringstream	ss;
+	std::fstream	file;
+	std::string	line;
+	int	i;
 
-	while (n)
+	file.open(RAND_TXT, std::ios::in);
+	if (!file)
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	while (std::getline(file, line))
 	{
-		i = rand() % modu;
+		ss << line;
+		ss >> i;
 		mamap.insert(make_pair(i, i));
-		stdMap.insert(std::make_pair(i, i));
-		--n;
+		ss.clear();
 	}
+	file.close();
 	ret = mamap.equal_range(50);
-	ret2 = stdMap.equal_range(50);
 	disp("equal_range(50).first", ret.first->first);
 	disp("equal_range(50).second", ret.second->first);
-	disp("REAL equal_range(50).first", ret2.first->first);
-	disp("REAL equal_range(50).second", ret2.second->first);
 	ret = mamap.equal_range(0);
-	ret2 = stdMap.equal_range(0);
 	disp("equal_range(0).first", ret.first->first);
 	disp("equal_range(0).second", ret.second->first);
-	disp("REAL equal_range(0).first", ret2.first->first);
-	disp("REAL equal_range(0).second", ret2.second->first);
 	ret = mamap.equal_range(200);
-	ret2 = stdMap.equal_range(200);
 	disp("equal_range(200).first", ret.first == mamap.end());
 	disp("equal_range(200).second", ret.second == mamap.end());
-	disp("REAL equal_range(200).first == end()", ret2.first == stdMap.end());
-	disp("REAL equal_range(200).second == end()", ret2.second == stdMap.end());
 	return (0);
 }
 
@@ -432,22 +395,29 @@ int	findTester(void)
 {
 	map<int, int>	mamap;
 	map_iterator	it;
-	int	n = 20;
-	int	i;
-	srand(time(0));
+	map_iterator	ite = mamap.end();
+	std::stringstream	ss;
+	std::fstream	file;
+	std::string	line;
+	int	i = 0;
+	int	n = 200;
 
-	while (n)
+	file.open(RAND_TXT, std::ios::in);
+	if (!file)
+		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+	while (std::getline(file, line))
 	{
-		i = rand() % 50;
+		ss << line;
+		ss >> i;
 		mamap.insert(make_pair(i, i));
-		--n;
+		ss.clear();
 	}
-	n = 20;
+	file.close();
 	while (--n)
 	{
-		i = rand() % 50;
+		i = rand() % 20000;
 		it = mamap.find(i);
-		if (it != mamap.end())
+		if (it != ite)
 			disp("FOUND", i);
 		else
 			disp("NOT FOUND", i);
@@ -522,8 +492,7 @@ int	main(int ac, char **av)
 	fcts["insert"] = &insertTester;
 	fcts["erase"] = &eraseTester;
 	fcts["swap"] = &swapTester;
-	fcts["iterator"] = &iteratorTester;
-	fcts["element_access"] = &element_accessTester;
+	fcts["operator[]"] = &operatorHookTester;
 	fcts["at"] = &atTester;
 	fcts["max_size"] = &max_sizeTester;
 	fcts["lower_bound"] = &lower_boundTester;

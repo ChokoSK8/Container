@@ -1,6 +1,5 @@
 #ifndef CAPACITY_MAP_HPP
 # define CAPACITY_MAP_HPP
-# include <sstream>
 
 bool	empty(void) const
 {

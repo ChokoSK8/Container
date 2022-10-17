@@ -15,7 +15,7 @@ void	resize(size_type n, value_type val = value_type())
 {
 	if (_size < n)
 	{
-		if (_capacity < n)
+		if (n > _capacity)
 			reserve(n);
 		insert(end(), n - _size, val);
 	}
