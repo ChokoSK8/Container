@@ -40,9 +40,9 @@ namespace	ft
 	bool	equal(Iterator1 first1, Iterator1 last1, Iterator2 first2);
 	template < class T >
 	class	node;
-	template < class T, class Node >
+	template < class T >
 	class	rbrator;
-	template < class T, class Node >
+	template < class T >
 	class	const_rbrator;
 	template < class I >
 	class	reverse_rbrator;

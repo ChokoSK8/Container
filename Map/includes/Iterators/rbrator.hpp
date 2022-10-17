@@ -2,7 +2,7 @@
 # define RBRATOR_HPP
 # include "const_rbrator.hpp"
 
-template < class T, class Node >
+template < class T >
 class	ft::rbrator
 {
 	public:
@@ -11,7 +11,7 @@ class	ft::rbrator
 		typedef T*	pointer;
 		typedef T&	reference;
 		typedef T	value_type;
-		typedef Node*	nodePtr;
+		typedef node<T>*	nodePtr;
 
 	protected:
 		nodePtr	p;
@@ -19,7 +19,7 @@ class	ft::rbrator
 	public:
 		rbrator(void) : p(NULL) {};
 		rbrator(nodePtr x) : p(x) {};
-		template < class U > rbrator(const ft::rbrator<U, Node>& mit)
+		template < class U > rbrator(const ft::rbrator<U>& mit)
 		{
 			p = mit.base();
 		};
@@ -33,11 +33,11 @@ class	ft::rbrator
 		{
 			return (p);
 		};
-		bool	operator==(const ft::rbrator<T, Node>& rhs) const
+		bool	operator==(const ft::rbrator<T>& rhs) const
 		{
 			return (p == rhs.base());
 		};
-		bool	operator!=(const ft::rbrator<T, Node>& rhs) const
+		bool	operator!=(const ft::rbrator<T>& rhs) const
 		{
 			return (p != rhs.base());
 		};
@@ -105,7 +105,7 @@ class	ft::rbrator
 			--(*this);
 			return (tmp);
 		};
-		difference_type	operator-(const ft::rbrator<T, Node>& rhs) const
+		difference_type	operator-(const ft::rbrator<T>& rhs) const
 		{
 			difference_type	res = p - rhs.base();
 			return (res);
@@ -139,76 +139,76 @@ class	ft::rbrator
 };
 	// RELATIONAL_OPERATORS
 
-template < class T, class Node >
-bool	operator==(const ft::rbrator<T, Node>& lhs, const ft::rbrator<T, Node>& rhs)
+template < class T >
+bool	operator==(const ft::rbrator<T>& lhs, const ft::rbrator<T>& rhs)
 {
 	return (lhs.base() == rhs.base());
 }
 
-template < class T, class Node >
-bool	operator!=(const ft::rbrator<T, Node>& lhs, const ft::rbrator<T, Node>& rhs)
+template < class T >
+bool	operator!=(const ft::rbrator<T>& lhs, const ft::rbrator<T>& rhs)
 {
 	return (lhs.base() != rhs.base());
 }
 
-template < class T, class Node >
-bool	operator<=(const ft::rbrator<T, Node>& lhs, const ft::rbrator<T, Node>& rhs)
+template < class T >
+bool	operator<=(const ft::rbrator<T>& lhs, const ft::rbrator<T>& rhs)
 {
 	return (lhs.base() <= rhs.base());
 }
 
-template < class T, class Node >
-bool	operator<(const ft::rbrator<T, Node>& lhs, const ft::rbrator<T, Node>& rhs)
+template < class T >
+bool	operator<(const ft::rbrator<T>& lhs, const ft::rbrator<T>& rhs)
 {
 	return (lhs.base() < rhs.base());
 }
 
-template < class T, class Node >
-bool	operator>=(const ft::rbrator<T, Node>& lhs, const ft::rbrator<T, Node>& rhs)
+template < class T >
+bool	operator>=(const ft::rbrator<T>& lhs, const ft::rbrator<T>& rhs)
 {
 	return (lhs.base() >= rhs.base());
 }
 
-template < class T, class Node >
-bool	operator>(const ft::rbrator<T, Node>& lhs, const ft::rbrator<T, Node>& rhs)
+template < class T >
+bool	operator>(const ft::rbrator<T>& lhs, const ft::rbrator<T>& rhs)
 {
 	return (lhs.base() > rhs.base());
 }
 
 	// RIGHT LEFT
 
-template < class R, class L, class Node >
-bool	operator==(const ft::rbrator<L, Node>& lhs, const ft::rbrator<R, Node>& rhs)
+template < class R, class L >
+bool	operator==(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
 {
 	return (lhs.base() == rhs.base());
 }
 
-template < class R, class L, class Node >
-bool	operator!=(const ft::rbrator<L, Node>& lhs, const ft::rbrator<R, Node>& rhs)
+template < class R, class L >
+bool	operator!=(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
 {
 	return (lhs.base() != rhs.base());
 }
 
-template < class R, class L, class Node >
-bool	operator<=(const ft::rbrator<L, Node>& lhs, const ft::rbrator<R, Node>& rhs)
+template < class R, class L >
+bool	operator<=(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
 {
 	return (lhs.base() <= rhs.base());
 }
 
-template < class R, class L, class Node >
-bool	operator<(const ft::rbrator<L, Node>& lhs, const ft::rbrator<R, Node>& rhs)
+template < class R, class L >
+bool	operator<(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
 {
 	return (lhs.base() < rhs.base());
 }
 
-template < class R, class L, class Node >
-bool	operator>=(const ft::rbrator<L, Node>& lhs, const ft::rbrator<R, Node>& rhs)
+template < class R, class L >
+bool	operator>=(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
 {
 	return (lhs.base() >= rhs.base());
 }
 
-template < class R, class L, class Node >
-bool	operator>(const ft::rbrator<L, Node>& lhs, const ft::rbrator<R, Node>& rhs)
+template < class R, class L >
+bool	operator>(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
 {
 	return (lhs.base() > rhs.base());
 }

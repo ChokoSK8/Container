@@ -27,10 +27,10 @@ class	ft::map
 		typedef node<const value_type>*	const_nodePtr;
 
 		// ITERATOR
-		typedef rbrator<value_type, node<value_type> >		iterator;
-		typedef const_rbrator<value_type, node<value_type> >	const_iterator;
-		typedef ft::reverse_rbrator<iterator>			reverse_iterator;
-		typedef ft::reverse_rbrator<const_iterator>		const_reverse_iterator;
+		typedef rbrator<value_type>		iterator;
+		typedef const_rbrator<value_type>	const_iterator;
+		typedef reverse_rbrator<iterator>	reverse_iterator;
+		typedef reverse_rbrator<const_iterator>	const_reverse_iterator;
 
 	protected:
 		size_type	_size;
