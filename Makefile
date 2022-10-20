@@ -8,6 +8,8 @@ C_CYAN		=	\e[1;36m
 C_WHITE		=	\e[1;37m
 C_END		=	\e[0m
 
+HELPER_DIR	= Helpers
+
 all:	vec map stk
 
 vec:
@@ -30,6 +32,14 @@ stk:
 	@echo "\t$(C_YELLOW)LEAVING STACK DIRECTORY$(C_END)"
 	@echo "\t$(C_WHITE)COPING stkExec IN CURRENT DIRECTORY$(C_END)"
 	@cp Stack/stkExec Executables
+
+rand:
+ifneq ($(NUM), )
+	@echo "\t$(C_PURPLE)GENERATING $(NUM) RANDOM NUMBER FILE$(C_END)"
+	@bash $(HELPER_DIR)/randScript.sh $(NUM) >> rand.txt
+else
+	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
+endif
 
 clean:
 	@echo "\t$(C_YELLOW)ENTERING VECTOR DIRECTORY$(C_END)"

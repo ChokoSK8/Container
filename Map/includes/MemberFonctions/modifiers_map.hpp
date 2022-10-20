@@ -78,10 +78,7 @@ size_type	erase(const key_type& k)
 	nodePtr		child;
 	pair<nodePtr, nodePtr>	pairOfP;
 	char	colorSub;
-	bool	changeEndPapaCond = false;
 
-	if (k == _max->getKey())
-		changeEndPapaCond = true;
 	if (toDeleteIt == end())
 		return (0);
 	toDelete = toDeleteIt.base();
@@ -114,7 +111,7 @@ size_type	erase(const key_type& k)
 		_root = new node<value_type>;
 	}
 	--_size;
-	if (_size && changeEndPapaCond)
+	if (_size)
 		changeEndPapaDelete();
 	return (1);
 };
