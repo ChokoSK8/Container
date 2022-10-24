@@ -106,26 +106,6 @@ template <class I> bool	operator!=(const ft::reverse_rbrator<I>& x,
 {
 	return (*(x.base()) != *(y.base()));
 };
-template <class I> bool	operator<=(const ft::reverse_rbrator<I>& x,
-		const ft::reverse_rbrator<I>& y)
-{
-	return (*(x.base()) >= *(y.base()));
-};
-template <class I> bool	operator>=(const ft::reverse_rbrator<I>& x,
-		const ft::reverse_rbrator<I>& y)
-{
-	return (*(x.base()) <= *(y.base()));
-};
-template <class I> bool	operator<(const ft::reverse_rbrator<I>& x,
-		const ft::reverse_rbrator<I>& y)
-{
-	return (*(x.base()) > *(y.base()));
-};
-template <class I> bool	operator>(const ft::reverse_rbrator<I>& x,
-		const ft::reverse_rbrator<I>& y)
-{
-	return (*(x.base()) < *(y.base()));
-};
 
 	// RIGHT LEFT
 
@@ -138,26 +118,6 @@ template <class R, class L> bool	operator!=(const ft::reverse_rbrator<R>& x,
 		const ft::reverse_rbrator<L>& y)
 {
 	return (*(x.base()) != *(y.base()));
-};
-template <class R, class L> bool	operator<=(const ft::reverse_rbrator<R>& x,
-		const ft::reverse_rbrator<L>& y)
-{
-	return (*(x.base()) >= *(y.base()));
-};
-template <class R, class L> bool	operator>=(const ft::reverse_rbrator<R>& x,
-		const ft::reverse_rbrator<L>& y)
-{
-	return (*(x.base()) <= *(y.base()));
-};
-template <class R, class L> bool	operator<(const ft::reverse_rbrator<R>& x,
-		const ft::reverse_rbrator<L>& y)
-{
-	return (*(x.base()) > *(y.base()));
-};
-template <class R, class L> bool	operator>(const ft::reverse_rbrator<R>& x,
-		const ft::reverse_rbrator<L>& y)
-{
-	return (*(x.base()) < *(y.base()));
 };
 
 	// OPERATOR +
