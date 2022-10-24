@@ -137,6 +137,7 @@ class	ft::rbrator
 			return (false);
 		};
 };
+
 	// RELATIONAL_OPERATORS
 
 template < class T >
@@ -151,29 +152,6 @@ bool	operator!=(const ft::rbrator<T>& lhs, const ft::rbrator<T>& rhs)
 	return (lhs.base() != rhs.base());
 }
 
-template < class T >
-bool	operator<=(const ft::rbrator<T>& lhs, const ft::rbrator<T>& rhs)
-{
-	return (lhs.base() <= rhs.base());
-}
-
-template < class T >
-bool	operator<(const ft::rbrator<T>& lhs, const ft::rbrator<T>& rhs)
-{
-	return (lhs.base() < rhs.base());
-}
-
-template < class T >
-bool	operator>=(const ft::rbrator<T>& lhs, const ft::rbrator<T>& rhs)
-{
-	return (lhs.base() >= rhs.base());
-}
-
-template < class T >
-bool	operator>(const ft::rbrator<T>& lhs, const ft::rbrator<T>& rhs)
-{
-	return (lhs.base() > rhs.base());
-}
 
 	// RIGHT LEFT
 
@@ -187,29 +165,5 @@ template < class R, class L >
 bool	operator!=(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
 {
 	return (lhs.base() != rhs.base());
-}
-
-template < class R, class L >
-bool	operator<=(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
-{
-	return (lhs.base() <= rhs.base());
-}
-
-template < class R, class L >
-bool	operator<(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
-{
-	return (lhs.base() < rhs.base());
-}
-
-template < class R, class L >
-bool	operator>=(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
-{
-	return (lhs.base() >= rhs.base());
-}
-
-template < class R, class L >
-bool	operator>(const ft::rbrator<L>& lhs, const ft::rbrator<R>& rhs)
-{
-	return (lhs.base() > rhs.base());
 }
 #endif

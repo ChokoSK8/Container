@@ -141,6 +141,7 @@ class	ft::const_rbrator
 			return (false);
 		};
 };
+
 	// RELATIONAL_OPERATORS
 
 template < class T >
@@ -155,30 +156,6 @@ bool	operator!=(const ft::const_rbrator<T>& lhs, const ft::const_rbrator<T>& rhs
 	return (lhs.base() != rhs.base());
 }
 
-template < class T >
-bool	operator<=(const ft::const_rbrator<T>& lhs, const ft::const_rbrator<T>& rhs)
-{
-	return (lhs.base() <= rhs.base());
-}
-
-template < class T >
-bool	operator<(const ft::const_rbrator<T>& lhs, const ft::const_rbrator<T>& rhs)
-{
-	return (lhs.base() < rhs.base());
-}
-
-template < class T >
-bool	operator>=(const ft::const_rbrator<T>& lhs, const ft::const_rbrator<T>& rhs)
-{
-	return (lhs.base() >= rhs.base());
-}
-
-template < class T >
-bool	operator>(const ft::const_rbrator<T>& lhs, const ft::const_rbrator<T>& rhs)
-{
-	return (lhs.base() > rhs.base());
-}
-
 	// RIGHT LEFT
 
 template < class R, class L >
@@ -191,29 +168,5 @@ template < class R, class L >
 bool	operator!=(const ft::const_rbrator<L>& lhs, const ft::const_rbrator<R>& rhs)
 {
 	return (lhs.base() != rhs.base());
-}
-
-template < class R, class L >
-bool	operator<=(const ft::const_rbrator<L>& lhs, const ft::const_rbrator<R>& rhs)
-{
-	return (lhs.base() <= rhs.base());
-}
-
-template < class R, class L >
-bool	operator<(const ft::const_rbrator<L>& lhs, const ft::const_rbrator<R>& rhs)
-{
-	return (lhs.base() < rhs.base());
-}
-
-template < class R, class L >
-bool	operator>=(const ft::const_rbrator<L>& lhs, const ft::const_rbrator<R>& rhs)
-{
-	return (lhs.base() >= rhs.base());
-}
-
-template < class R, class L >
-bool	operator>(const ft::const_rbrator<L>& lhs, const ft::const_rbrator<R>& rhs)
-{
-	return (lhs.base() > rhs.base());
 }
 #endif
