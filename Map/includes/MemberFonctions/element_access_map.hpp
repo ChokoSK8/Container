@@ -5,6 +5,7 @@ mapped_type&	operator[](const key_type& k)
 {
 	return (insert(ft::make_pair(k, mapped_type())).first->second);
 };
+
 mapped_type&	at(const key_type& k)
 {
 	iterator	found = find(k);
@@ -13,12 +14,13 @@ mapped_type&	at(const key_type& k)
 		throw std::out_of_range("map::at");
 	return (found->second);
 };
-//const mapped_type&	at(const key_type& k) const
-//{
-//	const_iterator	found = find(k);
-//
-//	if (found == end())
-//		throw std::out_of_range("map::at");
-//	return (found->second);
-//};
+
+const mapped_type&	at(const key_type& k) const
+{
+	iterator	found = find(k);
+
+	if (found == end())
+		throw std::out_of_range("map::at");
+	return (found->second);
+};
 #endif

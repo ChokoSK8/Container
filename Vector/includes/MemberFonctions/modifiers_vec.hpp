@@ -76,7 +76,7 @@ void	insert(iterator position, size_type n, const value_type& val)
 {
 	size_type	dist = ft::distance(begin(), position);
 	size_type	i = dist + n;
-	size_type	newCapacity = getNewCapacity(_size + n);
+	size_type	newCapacity = getNewCapacity(n);
 
 	if (!checkPosition(position))
 		return ;
@@ -103,7 +103,7 @@ void	insert(iterator position, InputIterator first, InputIterator last, typename
 	size_type	i = dist + range;
 	pointer		old_first;
 	size_type	old_capacity = _capacity;
-	size_type	newCapacity = getNewCapacity(_size + range);
+	size_type	newCapacity = getNewCapacity(range);
 
 	old_first = copyVecAndIncreaseCapacity(newCapacity);
 	moveContentForward(range, dist + range);

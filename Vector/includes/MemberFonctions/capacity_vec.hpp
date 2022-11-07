@@ -14,11 +14,7 @@ size_type	max_size(void) const
 void	resize(size_type n, value_type val = value_type())
 {
 	if (_size < n)
-	{
-		if (n > _capacity)
-			reserve(n);
 		insert(end(), n - _size, val);
-	}
 	else if (_size > n)
 		erase(begin() + n, end());
 };

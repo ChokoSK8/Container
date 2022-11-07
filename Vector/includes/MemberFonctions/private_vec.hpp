@@ -141,16 +141,25 @@ pointer	copyVecAndIncreaseCapacity(size_type newCapacity)
 	return (old);
 };
 
-size_type	getNewCapacity(size_type n)
+size_type	getNewCapacity(const size_type& n)
 {
-	size_type	newCapacity = _capacity;
-
-	if (!newCapacity && n)
-		++newCapacity;
-	while (newCapacity < n)
-		newCapacity *= 2;
-	return (newCapacity);
-};
+    if (_size == _capacity)
+    {
+        if (n <= _capacity)
+            return (_capacity * 2);
+        else
+            return (_capacity + n);
+    }
+    else
+    {
+        if (_size + n <= _capacity)
+            return (_capacity);
+    ;    if (_size + n <= _size * 2)
+            return (_size * 2);
+        else
+            return (_size + n);
+    };
+}
 
 int	doesBelong(iterator first, iterator last)
 {

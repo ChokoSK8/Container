@@ -10,7 +10,6 @@
 #include <ctime>
 
 using namespace NAMESPACE;
-
 typedef int (*PtrFct)();
 
 	// UTILS
