@@ -18,7 +18,8 @@ void	assign(size_type n, const value_type& val)
 };
 
 template < class InputIterator > 
-void	assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type = 0)
+void	assign(InputIterator first, InputIterator last,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type = 0)
 {
 	size_type	dist = ft::distance(first, last);
 	size_type	i = 0;
@@ -92,8 +93,8 @@ void	insert(iterator position, size_type n, const value_type& val)
 };
 
 template < class InputIterator >
-void	insert(iterator position, InputIterator first, InputIterator last, typename
-		ft::enable_if<!ft::is_integral<InputIterator>::value>::type = 0)
+void	insert(iterator position, InputIterator first, InputIterator last,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type = 0)
 {
 	if (!checkPosition(position) || !checkOrder(first, last))
 		return ;

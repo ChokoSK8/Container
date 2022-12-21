@@ -17,18 +17,21 @@ vec:
 	@make --no-print-directory -C Vector/
 	@echo "\t$(C_YELLOW)LEAVING VECTOR DIRECTORY$(C_END)"
 	@bash $(HELPER_DIR)/copingExec.sh vecExec Vector
+	@bash $(HELPER_DIR)/copingExec.sh stl_vecExec Vector
 
 map:
 	@echo "\t$(C_YELLOW)ENTERING MAP DIRECTORY$(C_END)"
 	@make --no-print-directory -C Map/
 	@echo "\t$(C_YELLOW)LEAVING MAP DIRECTORY$(C_END)"
 	@bash $(HELPER_DIR)/copingExec.sh mapExec Map
+	@bash $(HELPER_DIR)/copingExec.sh stl_mapExec Map
 
 stk:
 	@echo "\t$(C_YELLOW)ENTERING STACK DIRECTORY$(C_END)"
 	@make --no-print-directory -C Stack/
 	@echo "\t$(C_YELLOW)LEAVING STACK DIRECTORY$(C_END)"
 	@bash $(HELPER_DIR)/copingExec.sh stkExec Stack
+	@bash $(HELPER_DIR)/copingExec.sh stl_stkExec Stack
 
 rand:
 ifneq ($(NUM), )

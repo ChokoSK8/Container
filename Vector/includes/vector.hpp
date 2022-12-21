@@ -11,26 +11,26 @@ template < class T, class Alloc >
 class ft::vector
 {
 	public:
-		typedef typename Alloc::value_type	value_type;
-		typedef          Alloc			allocator_type;
-		typedef typename Alloc::reference	reference;
+		typedef typename Alloc::value_type			value_type;
+		typedef          Alloc									allocator_type;
+		typedef typename Alloc::reference				reference;
 		typedef typename Alloc::const_reference	const_reference;
-		typedef typename Alloc::pointer		pointer;
-		typedef typename Alloc::const_pointer	const_pointer;
+		typedef typename Alloc::pointer					pointer;
+		typedef typename Alloc::const_pointer		const_pointer;
 
 		// ITERATOR
-		typedef ft::random_access_iterator<pointer>		iterator;
+		typedef ft::random_access_iterator<pointer>				iterator;
 		typedef ft::random_access_iterator<const_pointer>	const_iterator;
-		typedef ft::reverse_iterator<iterator>			reverse_iterator;
-		typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
+		typedef ft::reverse_iterator<iterator>						reverse_iterator;
+		typedef ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 
 		typedef typename Alloc::difference_type	difference_type;
-		typedef typename Alloc::size_type	size_type;
+		typedef typename Alloc::size_type				size_type;
 	
 	protected:
-		pointer		_first;
-		size_type	_size;
-		size_type	_capacity;
+		pointer					_first;
+		size_type				_size;
+		size_type				_capacity;
 		allocator_type	_c;
 
 	public:
@@ -47,7 +47,6 @@ class ft::vector
 			size_type	c = 0;
 
 			_size = x.size();
-		//	_capacity = x.capacity();
 			_capacity = x.size();
 			_c = x.get_allocator();
 			_first = _c.allocate(_capacity);
@@ -65,7 +64,6 @@ class ft::vector
 			size_type	c = 0;
 
 			_size = x.size();
-		//	_capacity = x.capacity();
 			_capacity = x.size();
 			_c = x.get_allocator();
 			_first = _c.allocate(_capacity);
@@ -127,15 +125,15 @@ class ft::vector
 			# include "MemberFonctions/modifiers_vec.hpp"
 
 		// ALLOCATOR
-		allocator_type	get_allocator() const
-		{
-			return (_c);
-		};
+			allocator_type	get_allocator() const
+			{
+				return (_c);
+			};
 
 	private:
 		# include "MemberFonctions/private_vec.hpp"
 };
 
 	// COMPARAISON_OPERATOR
-	# include "NonMemberFonctions/relational_operators_vec.hpp"
+		# include "NonMemberFonctions/relational_operators_vec.hpp"
 #endif
