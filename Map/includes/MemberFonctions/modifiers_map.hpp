@@ -34,6 +34,8 @@ iterator	insert(iterator position, const value_type& val)
 {
 	iterator	next;
 
+	if (find(position->first) == end())
+		return (insert(val).first);
 	if (position == _end)
 	{
 		if (_size)

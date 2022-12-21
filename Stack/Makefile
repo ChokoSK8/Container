@@ -9,6 +9,7 @@ C_WHITE		=	\e[1;37m
 C_END		=	\e[0m
 
 NAME	= stkExec
+STL_NAME	= stl_stkExec
 
 SRCS	= main.cpp
 
@@ -35,6 +36,8 @@ all:	$(NAME)
 $(NAME):	$(OBJS)
 	@$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=FT$(C_END)"
+	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=STD$(C_END)"
+	@$(CC) $(FLAGS) main.cpp -D NAMESPACE=std -o $(STL_NAME)
 
 diff:	all
 ifneq ($(ARG), )
@@ -76,7 +79,8 @@ clean:
 
 fclean:		clean
 	@$(RM) $(NAME)
-	@echo "\t$(C_RED)DELEATING EXECUTABLE$(C_END)"
+	@$(RM) $(STL_NAME)
+	@echo "\t$(C_RED)DELEATING EXECUTABLES$(C_END)"
 
 re:	fclean all
 

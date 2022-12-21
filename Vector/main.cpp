@@ -343,6 +343,15 @@ int	main(int ac, char **av)
 			return (fct ());
 		}
 	}
+	if (!str.compare("all"))
+	{
+		for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
+		{
+			fct = it->second;
+			fct ();
+		}
+		return (0);
+	}
 	disp("FCT NOT FOUND", 1);
 	return (1);
 }

@@ -15,6 +15,7 @@ namespace ft
 		}
 		return (true);
 	};
+
 	template < class Iterator >
 	bool	equal(Iterator first1, Iterator last1, Iterator first2)
 	{

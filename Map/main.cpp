@@ -13,27 +13,6 @@
 
 using namespace NAMESPACE;
 
-int main()
-{
-	map<int, int> v;
-	for (int i = 0; i < 10; i++)
-		v.insert(pair<int, int>(i * 4, i));
-
-	// for (vector<int>::const_iterator it = v.begin(); it != v.end(); ++it)
-	map<int, int>::const_reverse_iterator it = v.rbegin();
-	map<int, int>::const_reverse_iterator ite = v.rend();
-	std::cout << (*(it)).first << std::endl;
-	std::cout << (*(ite)).first << std::endl;
-	while (it != ite){
-		std::cout << "hello "<< std::endl;
-		std::cout << (*(it)).first << std::endl;
-		it++;
-	}
-    // std::cout << std::endl;
-	return 0;
-}
-
-/*
 typedef map<int, int>::iterator	map_iterator;
 typedef map<int, int>::const_iterator	map_const_iterator;
 typedef map<int, int>::reverse_iterator	map_reverse_iterator;
@@ -85,7 +64,7 @@ void	displayMap(const map<T1, T2>& mamap)
 	}
 }
 
-void	insertWithIterator(map<int, int> mamap, int c, int div)
+map<int, int>	insertWithIterator(map<int, int> mamap, int c, int div)
 {
 	int	i = c / div;
 	map_iterator	it = mamap.begin();
@@ -103,6 +82,7 @@ void	insertWithIterator(map<int, int> mamap, int c, int div)
 		--c;
 		--i;
 	}
+	return (mamap);
 }
 
 	// MODIFIERS
@@ -121,7 +101,10 @@ int	insertTester(void)
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
+	{
 		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+		return (1);
+	}
 	t = clock();
 	while (std::getline(file, line))
 	{
@@ -136,17 +119,17 @@ int	insertTester(void)
 		(float)t/CLOCKS_PER_SEC << " seconds" << std::endl;
 	file.close();
 	t = clock();
-	insertWithIterator(mamap, c, 1);
-	insertWithIterator(mamap, c, 2);
-	insertWithIterator(mamap, c, 3);
-	insertWithIterator(mamap, c, 4);
-	insertWithIterator(mamap, c, 5);
-	insertWithIterator(mamap, c, 6);
-	insertWithIterator(mamap, c, 7);
-	insertWithIterator(mamap, c, 8);
-	insertWithIterator(mamap, c, 9);
-	insertWithIterator(mamap, c, 10);
-	insertWithIterator(mamap, c, 11);
+	mamap = insertWithIterator(mamap, c, 1);
+	mamap = insertWithIterator(mamap, c, 2);
+	mamap = insertWithIterator(mamap, c, 3);
+	mamap = insertWithIterator(mamap, c, 4);
+	mamap = insertWithIterator(mamap, c, 5);
+	mamap = insertWithIterator(mamap, c, 6);
+	mamap = insertWithIterator(mamap, c, 7);
+	mamap = insertWithIterator(mamap, c, 8);
+	mamap = insertWithIterator(mamap, c, 9);
+	mamap = insertWithIterator(mamap, c, 10);
+	mamap = insertWithIterator(mamap, c, 11);
 	t = clock() - t;
 	std::cout << "INSERTING WITH ITERATOR " << 110
 		<< " elements took " << (float)t/CLOCKS_PER_SEC
@@ -167,7 +150,10 @@ int	eraseTester(void)
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
+	{
 		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+		return (1);
+	}
 	std::getline(file, line);
 	while (std::getline(file, line))
 	{
@@ -207,7 +193,10 @@ int	swapTester(void)
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
+	{
 		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+		return (1);
+	}
 	std::getline(file, line);
 	while (std::getline(file, line))
 	{
@@ -250,7 +239,10 @@ int	operatorHookTester(void)
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
+	{
 		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+		return (1);
+	}
 	while (std::getline(file, line))
 	{
 		ss << line;
@@ -282,7 +274,10 @@ int	atTester(void)
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
+	{
 		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+		return (1);
+	}
 	std::getline(file, line);
 	while (std::getline(file, line))
 	{
@@ -339,7 +334,10 @@ int	lower_boundTester(void)
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
+	{
 		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+		return (1);
+	}
 	while (std::getline(file, line))
 	{
 		ss << line;
@@ -364,7 +362,10 @@ int	upper_boundTester(void)
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
+	{
 		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+		return (1);
+	}
 	while (std::getline(file, line))
 	{
 		ss << line;
@@ -391,7 +392,10 @@ int	equal_rangeTester(void)
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
+	{
 		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+		return (1);
+	}
 	while (std::getline(file, line))
 	{
 		ss << line;
@@ -425,7 +429,10 @@ int	findTester(void)
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
+	{
 		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+		return (1);
+	}
 	while (std::getline(file, line))
 	{
 		ss << line;
@@ -461,7 +468,10 @@ int	relational_operatorsTester(void)
 
 	file.open(RAND_TXT, std::ios::in);
 	if (!file)
+	{
 		disp("ERROR: 'RAND_TXT' couldn't open", 0);
+		return (1);
+	}
 	while (std::getline(file, line))
 	{
 		ss << line;
@@ -529,6 +539,15 @@ int	main(int ac, char **av)
 			return (fct ());
 		}
 	}
+	if (!str.compare("all"))
+	{
+		for (it = fcts.begin(), ite = fcts.end(); it != ite; it++)
+		{
+			fct = it->second;
+			fct ();
+		}
+		return (0);
+	}
 	disp("FCT NOT FOUND", 1);
 	return (0);
-}*/
+}

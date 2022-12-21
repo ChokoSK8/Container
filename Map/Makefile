@@ -10,6 +10,8 @@ C_END		=	\e[0m
 
 NAME	= mapExec
 
+STL_NAME	= stl_mapExec
+
 SRCS	= main.cpp
 
 OBJS_DIR	= Objects
@@ -33,17 +35,17 @@ $(OBJS_DIR)/%.o: %.cpp
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
-	@$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=FT$(C_END)"
+	@$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=STD$(C_END)"
+	@$(CC) $(FLAGS) main.cpp -D NAMESPACE=std -o $(STL_NAME)
 
 diff:	all
 ifneq ($(ARG), )
 	@echo "\t$(C_YELLOW)EXECUTING PROGRAM WITH NAMESPACE=FT$(C_END)"
 	@./$(NAME) $(ARG) > $(HELPER_DIR)/f1
-	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=STD$(C_END)"
-	@$(CC) $(FLAGS) main.cpp -D NAMESPACE=std -o $(NAME)
 	@echo "\t$(C_YELLOW)EXECUTING PROGRAM WITH NAMESPACE=STD$(C_END)"
-	@./$(NAME) $(ARG) > $(HELPER_DIR)/f2
+	@./$(STL_NAME) $(ARG) > $(HELPER_DIR)/f2
 	@diff $(HELPER_DIR)/f1 $(HELPER_DIR)/f2
 	@echo "\t$(C_BLUE)NO DIFFERENCE$(C_END)"
 else
@@ -61,9 +63,9 @@ endif
 std:
 ifneq ($(ARG), )
 	@echo "\t$(C_PURPLE)BUILDING EXECUTABLE WITH NAMESPACE=STD$(C_END)"
-	@$(CC) $(FLAGS) main.cpp -D NAMESPACE=std -o $(NAME)
+	@$(CC) $(FLAGS) main.cpp -D NAMESPACE=std -o $(STL_NAME)
 	@echo "\t$(C_YELLOW)EXECUTING PROGRAM WITH NAMESPACE=STD$(C_END)"
-	@./$(NAME) $(ARG)
+	@./$(STL_NAME) $(ARG)
 else
 	@echo "\t$(C_RED)NO ARG PASSED$(C_END)"
 endif
@@ -75,8 +77,9 @@ clean:
 	@$(RM) $(OBJS)
 
 fclean:		clean
-	@echo "\t$(C_RED)DELEATING EXECUTABLE$(C_END)"
+	@echo "\t$(C_RED)DELEATING EXECUTABLES$(C_END)"
 	@$(RM) $(NAME)
+	@$(RM) $(STL_NAME)
 
 re:	fclean all
 
